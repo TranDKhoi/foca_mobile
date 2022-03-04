@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.foca_mobile">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Foca_mobile">
+        <activity
+            android:name=".activity.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.authen.forgotpass.SuccessSetPassScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.forgotpass.SetNewPassScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.forgotpass.VerifiPassScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.forgotpass.ForgotPassScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.signup.success.SuccessCreateAccountScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.signup.bio.BioScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.signup.VerifiAccountScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.signup.SignupScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.login.LoginScreen"
+            android:exported="false" />
         <activity
             android:name=".activity.user.notifi.user_notifi"
             android:exported="false" />
@@ -23,13 +61,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

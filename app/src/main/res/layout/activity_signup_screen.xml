@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".activity.authen.signup.SignupScreen"
+    android:scrollbars="none">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/image_login_background" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="175dp"
+                android:layout_height="140dp"
+                android:src="@drawable/image_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/viga"
+                android:lineHeight="54px"
+                android:text="Foca"
+                android:textColor="#15BE77"
+                android:textFontWeight="400"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:lineHeight="15px"
+                android:text="Deliver Favorite Food"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textFontWeight="600"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_marginTop="75dp"
+                android:fontFamily="@font/bentonsans_bold"
+                android:lineHeight="26px"
+                android:text="Sign up for FREE"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textFontWeight="400"
+                android:textSize="20sp" />
+
+
+            <!--SignUp FORM-->
+            <EditText
+                android:layout_width="325dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:hint="Student ID"
+                android:inputType="number"
+                android:paddingLeft="10dp" />
+
+            <EditText
+                android:layout_width="325dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawableLeft="@drawable/ic_pass"
+                android:drawablePadding="10dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp" />
+
+            <EditText
+                android:layout_width="325dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawableLeft="@drawable/ic_pass"
+                android:drawablePadding="10dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="141dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/bentonsans_bold"
+                android:onClick="toVerifiScreen"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/bentonsans_medium"
+                android:onClick="toLoginScreen"
+                android:paddingBottom="50dp"
+                android:text="already have an account?"
+                android:textColor="#15BE77" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </RelativeLayout>
+
+</ScrollView>
