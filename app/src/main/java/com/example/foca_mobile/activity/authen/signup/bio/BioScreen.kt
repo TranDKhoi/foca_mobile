@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,8 +28,36 @@ class BioScreen : AppCompatActivity() {
         this.finish();
     }
 
-    public fun toSuccessScreen(view : View){
-        val it : Intent = Intent(this, SuccessCreateAccountScreen::class.java);
+    public fun toSuccessScreen(view: View) {
+
+
+        val fname: EditText = findViewById(R.id.firstname);
+        val lname: EditText = findViewById(R.id.lastname);
+        val phone: EditText = findViewById(R.id.phonenum);
+
+        if (fname.text.toString().isNullOrEmpty()) {
+            fname.setBackgroundResource(R.drawable.rounded_edittext_error);
+        } else
+            fname.setBackgroundResource(R.drawable.rounded_edittext_normal);
+
+        if (lname.text.toString().isNullOrEmpty()) {
+            lname.setBackgroundResource(R.drawable.rounded_edittext_error);
+        } else
+            lname.setBackgroundResource(R.drawable.rounded_edittext_normal);
+
+        if (phone.text.toString().isNullOrEmpty()) {
+            phone.setBackgroundResource(R.drawable.rounded_edittext_error);
+        } else
+            phone.setBackgroundResource(R.drawable.rounded_edittext_normal);
+
+        if (fname.text.toString().isNullOrEmpty() ||
+            lname.text.toString().isNullOrEmpty() ||
+            phone.text.toString().isNullOrEmpty()
+        )
+            return;
+
+
+        val it: Intent = Intent(this, SuccessCreateAccountScreen::class.java);
         finishAffinity();
         startActivity(it);
         this.finish();

@@ -57,28 +57,31 @@
                 android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/firstname"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="First Name"
                 android:inputType="textPersonName"
                 android:paddingLeft="10dp" />
 
             <EditText
+                android:id="@+id/lastname"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="Last Name"
                 android:inputType="textPersonName"
                 android:paddingLeft="10dp" />
 
             <EditText
+                android:id="@+id/phonenum"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="Phone Number"
                 android:inputType="phone"
                 android:paddingLeft="10dp" />

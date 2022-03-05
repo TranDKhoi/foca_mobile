@@ -58,10 +58,11 @@
 
 
             <EditText
+                android:id="@+id/idfield"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:cursorVisible="false"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"

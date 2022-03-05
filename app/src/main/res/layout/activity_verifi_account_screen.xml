@@ -46,22 +46,23 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/subText"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/bentonsans_book"
                 android:lineHeight="26px"
-                android:text="Code send to 20520xx@gm.uit.edu.vn..."
                 android:textColor="@color/black"
                 android:textFontWeight="400"
                 android:textSize="15sp" />
 
 
             <EditText
+                android:id="@+id/codefield"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:cursorVisible="false"
                 android:inputType="number"
                 android:letterSpacing="2.5"

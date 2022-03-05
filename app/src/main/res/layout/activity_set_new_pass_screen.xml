@@ -57,19 +57,21 @@
                 android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/newpass"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="New Password"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp" />
 
             <EditText
+                android:id="@+id/repass"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp" />
