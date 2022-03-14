@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        app:cnb_iconColor="@color/icon_menu"/>
+
+    <item
+        android:id="@+id/person"
+        android:icon="@drawable/ic_person"
+        android:title="Person"
+        app:cnb_iconColor="@color/icon_menu"/>
+
+    <item
+        android:id="@+id/shopping"
+        android:icon="@drawable/ic_shopping"
+        android:title="Shopping"
+        app:cnb_iconColor="@color/icon_menu"/>
+    <item
+        android:id="@+id/message"
+        android:icon="@drawable/ic_message"
+        android:title="Message"
+        app:cnb_iconColor="@color/icon_menu"/>
+</menu>

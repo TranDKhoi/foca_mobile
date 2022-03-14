@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    tools:context=".activity.MainActivity"
+    android:background="#F6F1F1"
+    android:clipToPadding="false">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/wrapper"/>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/white"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="10dp"
+    android:elevation="30dp">
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/bottom_navigation"
+        android:layout_alignParentBottom="true"
+        app:cnb_menuResource="@menu/custom_menu"
+        app:cnb_iconSize="30sp"
+        android:elevation="30dp"
+        app:cnb_radius="10dp"
+        app:cnb_unselectedColor="@android:color/black"
+        tools:ignore="MissingConstraints" />
+</androidx.cardview.widget.CardView>
+</RelativeLayout>
