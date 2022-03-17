@@ -19,9 +19,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val homeFragment = HomeFragment()
-
         binding.bottomNavigation.setItemSelected(R.id.home)
-        binding.bottomNavigation.showBadge(R.id.message,2)
+        binding.bottomNavigation.showBadge(R.id.message, 2)
         setCurrentFragment(homeFragment)
 
 
