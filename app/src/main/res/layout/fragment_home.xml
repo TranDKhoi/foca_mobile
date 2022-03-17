@@ -4,16 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.user.home.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"        >
+        android:layout_height="match_parent">
     <TextView
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello_home_fragment"
+        android:text="Lê Hải Phong"
+        android:id="@+id/txt_view"
         android:textSize="30sp"/>
     </RelativeLayout>
 </FrameLayout>

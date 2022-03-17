@@ -7,21 +7,25 @@ import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.home.HomeFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.foca_mobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val homeFragment = HomeFragment()
 
-        bottom_navigation.setItemSelected(R.id.home)
-        bottom_navigation.showBadge(R.id.message,2)
+        binding.bottomNavigation.setItemSelected(R.id.home)
+        binding.bottomNavigation.showBadge(R.id.message,2)
         setCurrentFragment(homeFragment)
 
 
-        bottom_navigation.setOnItemSelectedListener{ id ->
+        binding.bottomNavigation.setOnItemSelectedListener{ id ->
             when (id) {
                 R.id.home -> setCurrentFragment(homeFragment)
             }
