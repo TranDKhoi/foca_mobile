@@ -10,6 +10,8 @@ import com.example.foca_mobile.activity.user.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -17,11 +19,11 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
 
         bottom_navigation.setItemSelected(R.id.home)
-        bottom_navigation.showBadge(R.id.message,2)
+        bottom_navigation.showBadge(R.id.message, 2)
         setCurrentFragment(homeFragment)
 
 
-        bottom_navigation.setOnItemSelectedListener{ id ->
+        bottom_navigation.setOnItemSelectedListener { id ->
             when (id) {
                 R.id.home -> setCurrentFragment(homeFragment)
             }

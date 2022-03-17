@@ -6,22 +6,24 @@
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="Home"
-        app:cnb_iconColor="@color/icon_menu"/>
-
-    <item
-        android:id="@+id/person"
-        android:icon="@drawable/ic_person"
-        android:title="Person"
-        app:cnb_iconColor="@color/icon_menu"/>
-
-    <item
-        android:id="@+id/shopping"
-        android:icon="@drawable/ic_shopping"
-        android:title="Shopping"
-        app:cnb_iconColor="@color/icon_menu"/>
+        app:cnb_backgroundColor="#1A00FF60"
+        app:cnb_iconColor="@color/icon_menu" />
     <item
         android:id="@+id/message"
         android:icon="@drawable/ic_message"
         android:title="Message"
-        app:cnb_iconColor="@color/icon_menu"/>
+        app:cnb_backgroundColor="#1A00FF60"
+        app:cnb_iconColor="@color/icon_menu" />
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/ic_cart"
+        android:title="Cart"
+        app:cnb_backgroundColor="#1A00FF60"
+        app:cnb_iconColor="@color/icon_menu" />
+    <item
+        android:id="@+id/user"
+        android:icon="@drawable/ic_user"
+        android:title="Profile"
+        app:cnb_backgroundColor="#1A00FF60"
+        app:cnb_iconColor="@color/icon_menu" />
 </menu>

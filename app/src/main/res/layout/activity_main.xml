@@ -28,7 +28,8 @@
         app:cnb_iconSize="30sp"
         android:elevation="30dp"
         app:cnb_radius="10dp"
-        app:cnb_unselectedColor="@android:color/black"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        app:cnb_unselectedColor="#53E88B"
+        />
 </androidx.cardview.widget.CardView>
 </RelativeLayout>
