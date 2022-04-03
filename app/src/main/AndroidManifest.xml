@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Foca_mobile">
         <activity
+            android:name=".activity.user.home.OrderFood_Activity"
+            android:exported="false" />
+        <activity
             android:name=".activity.user.home.abc"
             android:exported="false" />
         <activity

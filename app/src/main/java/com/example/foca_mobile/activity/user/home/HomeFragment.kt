@@ -1,16 +1,17 @@
 package com.example.foca_mobile.activity.user.home
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.adapterClass.FoodPriceAdapter
+import com.example.foca_mobile.adapterClass.AddFoodAdapter
 import com.example.foca_mobile.adapterClass.RestaurantNearestAdapter
 import com.example.foca_mobile.databinding.FragmentHomeBinding
-import com.example.foca_mobile.model.FoodPrice
+import com.example.foca_mobile.model.AddFood
 import com.example.foca_mobile.model.RestaurantNearest
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -18,7 +19,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var newArrayRestaurantList: ArrayList<RestaurantNearest>
-    private lateinit var newArrayFoodList: ArrayList<FoodPrice>
+    private lateinit var newArrayFoodList: ArrayList<AddFood>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +33,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
         createRestaurantRecyclerView()
         createFoodRecyclerView()
+        var resAdapter =  RestaurantNearestAdapter(newArrayRestaurantList)
+        binding.restaurantRecyclerView.adapter = resAdapter
+//        resAdapter.setOnItemClickListener(object : RestaurantNearestAdapter.ItemClickListener{
+//            override fun onItemClick(position: Int) {
+////                Toast.makeText(context, newArrayRestaurantList[position].txtName + newArrayRestaurantList[position].txtNumber, Toast.LENGTH_SHORT).show()
+//                val intent = Intent(context,OrderFood_Activity::class.java)
+//                startActivity(intent)
+//            }
+//        })
+        binding.txtViewmorePopularmenu.setOnClickListener {
+            val intent = Intent(context,OrderFood_Activity::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 
@@ -76,44 +90,43 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 "35" + " mins"
             )
         )
-        binding.restaurantRecyclerView.adapter = RestaurantNearestAdapter(newArrayRestaurantList)
     }
     private fun createFoodRecyclerView() {
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.foodRecyclerView.setHasFixedSize(true)
-        newArrayFoodList = arrayListOf<FoodPrice>()
+        newArrayFoodList = arrayListOf<AddFood>()
         newArrayFoodList.add(
-            FoodPrice(
-                R.drawable.image_food,
+            AddFood(
+                R.drawable.restaurant_image1,
                 "Lê Hải Phong",
-                "Nhung",
-                "$" + "20"
+                20,
+                R.drawable.ic_add
             )
         )
         newArrayFoodList.add(
-            FoodPrice(
-                R.drawable.image_food,
+            AddFood(
+                R.drawable.restaurant_image1,
                 "Lê Hải Phong",
-                "Nhung",
-                "$" + "20"
+                20,
+                R.drawable.ic_add
             )
         )
         newArrayFoodList.add(
-            FoodPrice(
-                R.drawable.image_food,
+            AddFood(
+                R.drawable.restaurant_image1,
                 "Lê Hải Phong",
-                "Nhung",
-                "$" + "20"
+                20,
+                R.drawable.ic_add
             )
         )
         newArrayFoodList.add(
-            FoodPrice(
-                R.drawable.image_food,
+            AddFood(
+                R.drawable.restaurant_image1,
                 "Lê Hải Phong",
-                "Nhung",
-                "$" + "20"
+                20,
+                R.drawable.ic_add
             )
         )
-        binding.foodRecyclerView.adapter = FoodPriceAdapter(newArrayFoodList)
+        binding.foodRecyclerView.adapter = AddFoodAdapter(newArrayFoodList)
     }
 }

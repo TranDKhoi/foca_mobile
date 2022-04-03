@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="90dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="10dp"
     android:layout_marginHorizontal="20dp"
     android:layout_marginBottom="10dp"
+    tools:context=".activity.user.home.OrderFood_Activity"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp">
     <ImageView
@@ -13,29 +15,29 @@
         android:layout_height="73dp"
         android:id="@+id/imageFood"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nameFood"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginStart="120dp"
         android:textSize="18sp"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/typeFood"
-        android:layout_marginTop="45dp"
-        android:layout_marginLeft="120dp"
-        android:textSize="17sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/price"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="120dp"
+        android:textSize="17sp"/>
+    <ImageButton
+        android:background="@drawable/custom_imagebutton_circular"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/iconButton"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="300dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="#FFCE1A"/>
+        android:layout_marginStart="300dp"
+        />
 </androidx.cardview.widget.CardView>
