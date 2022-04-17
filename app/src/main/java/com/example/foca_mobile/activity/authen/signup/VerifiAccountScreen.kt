@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.authen.signup.bio.BioScreen
 
 class VerifiAccountScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

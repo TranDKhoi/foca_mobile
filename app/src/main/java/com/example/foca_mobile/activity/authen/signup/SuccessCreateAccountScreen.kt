@@ -1,4 +1,4 @@
-package com.example.foca_mobile.activity.authen.signup.success
+package com.example.foca_mobile.activity.authen.signup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

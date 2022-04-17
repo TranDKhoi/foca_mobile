@@ -1,4 +1,4 @@
-package com.example.foca_mobile.activity.authen.signup.bio
+package com.example.foca_mobile.activity.authen.signup
 
 import android.app.Activity
 import android.content.Intent
@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.authen.login.LoginScreen
-import com.example.foca_mobile.activity.authen.signup.success.SuccessCreateAccountScreen
 
 
 class BioScreen : AppCompatActivity() {
