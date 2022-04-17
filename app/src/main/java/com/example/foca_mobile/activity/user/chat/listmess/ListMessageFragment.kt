@@ -58,15 +58,7 @@ class ListMessageFragment : Fragment() {
         messArrayList.add(tempMess);
         messArrayList.add(tempMess);
         messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
+
 
         //SET ADAPTER CHO RCV
         var adapter = ListMessageAdapter(messArrayList)

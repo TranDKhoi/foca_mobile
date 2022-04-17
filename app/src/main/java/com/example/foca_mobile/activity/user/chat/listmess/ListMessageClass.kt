@@ -4,7 +4,12 @@ import android.os.Parcel
 import android.os.Parcelable
 
 
-class ListMessageClass(val image: Int, val name: String, val lastMess: String, val lastTime: String): Parcelable {
+class ListMessageClass(
+    val image: Int,
+    val name: String,
+    val lastMess: String,
+    val lastTime: String
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,

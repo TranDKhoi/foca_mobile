@@ -1,24 +1,25 @@
 package com.example.foca_mobile.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
-import com.example.foca_mobile.activity.user.home.HomeFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import com.example.foca_mobile.R
 import com.example.foca_mobile.Utils.LoginPrefs
 import com.example.foca_mobile.activity.authen.login.LoginScreen
+import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
+import com.example.foca_mobile.activity.user.home.HomeFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
+        //FRAGMENT
         val homeFragment = HomeFragment()
         val messageFragment = ListMessageFragment()
 
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
             when (id) {
                 R.id.home -> setCurrentFragment(homeFragment)
                 R.id.message -> setCurrentFragment(messageFragment);
+                R.id.cart -> Handler().postDelayed({
+                    //createNotificationChannel();
+                }, 2000)
                 R.id.user -> toLoginScreen();//sign out
             }
         }
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
 
-    public fun toLoginScreen() {
+    private fun toLoginScreen() {
 
         LoginPrefs.removeID();
         val it: Intent = Intent(this, LoginScreen::class.java);

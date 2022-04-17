@@ -1,7 +1,5 @@
 package com.example.foca_mobile.Utils
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 

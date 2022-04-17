@@ -34,13 +34,13 @@ class LoginScreen : AppCompatActivity() {
 
 
     public fun toSignupScreen(view: View) {
-        val intent: Intent = Intent(this, SignupScreen::class.java);
+        val intent = Intent(this, SignupScreen::class.java);
 
         startActivity(intent);
     }
 
     public fun toForgotPassScreen(view: View) {
-        val intent: Intent = Intent(this, ForgotPassScreen::class.java);
+        val intent = Intent(this, ForgotPassScreen::class.java);
 
         startActivity(intent);
     }
@@ -64,13 +64,13 @@ class LoginScreen : AppCompatActivity() {
 
         LoginPrefs.setUserID("123");
 
-        val it: Intent = Intent(this, MainActivity::class.java);
+        val it = Intent(this, MainActivity::class.java);
         startActivity(it);
         this.finish();
     }
 
     public fun directLogin() {
-        val it: Intent = Intent(this, MainActivity::class.java);
+        val it = Intent(this, MainActivity::class.java);
         startActivity(it);
         this.finish();
     }
