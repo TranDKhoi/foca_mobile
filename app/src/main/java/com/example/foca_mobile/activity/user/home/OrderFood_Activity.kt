@@ -4,14 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.adapterClass.AddFoodAdapter
+import com.example.foca_mobile.adapterClass.FoodAdapter
 import com.example.foca_mobile.databinding.ActivityOrderFoodBinding
-import com.example.foca_mobile.model.AddFood
+import com.example.foca_mobile.model.Food
 
 class OrderFood_Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOrderFoodBinding
-    private lateinit var newArrayAddFoodList : ArrayList<AddFood>
+    private lateinit var newArrayAddFoodList : ArrayList<Food>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +24,9 @@ class OrderFood_Activity : AppCompatActivity() {
         binding.addFoodRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.addFoodRecyclerView.setHasFixedSize(true)
 
-        newArrayAddFoodList = arrayListOf<AddFood>()
+        newArrayAddFoodList = arrayListOf<Food>()
         newArrayAddFoodList.add(
-            AddFood(
+            Food(
                 R.drawable.restaurant_image1,
                 "Lê Hải Phong",
                 20,
@@ -34,7 +34,7 @@ class OrderFood_Activity : AppCompatActivity() {
             )
         )
         newArrayAddFoodList.add(
-            AddFood(
+            Food(
                 R.drawable.restaurant_image1,
                 "Lê Hải Phong",
                 20,
@@ -42,7 +42,7 @@ class OrderFood_Activity : AppCompatActivity() {
             )
         )
         newArrayAddFoodList.add(
-            AddFood(
+            Food(
                 R.drawable.restaurant_image1,
                 "Lê Hải Phong",
                 20,
@@ -50,13 +50,13 @@ class OrderFood_Activity : AppCompatActivity() {
             )
         )
         newArrayAddFoodList.add(
-            AddFood(
+            Food(
                 R.drawable.restaurant_image1,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add
             )
         )
-        binding.addFoodRecyclerView.adapter = AddFoodAdapter(newArrayAddFoodList)
+        binding.addFoodRecyclerView.adapter = FoodAdapter(newArrayAddFoodList)
     }
 }

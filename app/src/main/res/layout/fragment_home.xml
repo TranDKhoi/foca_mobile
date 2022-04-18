@@ -43,16 +43,17 @@
                             android:layout_width="270dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/custom_textfield"
+                            android:alpha="0.5"
                             android:textColorHint="#DA6317"
                             android:textSize="30sp"
                             app:boxStrokeWidth="0dp"
                             app:boxStrokeWidthFocused="0dp"
-                            app:hintTextColor="#DA6317">
-
+                            app:hintEnabled="false">
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:drawableLeft="@drawable/ic_search"
+                                    android:textColorHint="#DA6317"
                                     android:hint="What do you want to order?"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,6 +61,7 @@
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:alpha="0.5"
                             android:background="@drawable/custom_textfield"
                             android:src="@drawable/filter_icon" />
                 </LinearLayout>

@@ -7,19 +7,18 @@
     android:layout_marginTop="10dp"
     android:layout_marginHorizontal="20dp"
     android:layout_marginBottom="10dp"
-    tools:context=".activity.user.home.OrderFood_Activity"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp">
     <ImageView
         android:layout_width="96dp"
         android:layout_height="73dp"
-        android:id="@+id/imageFood"
+        android:id="@+id/avatarPerson"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/nameFood"
+        android:id="@+id/namePerson"
         android:layout_marginTop="20dp"
         android:layout_marginStart="120dp"
         android:textSize="18sp"
@@ -27,17 +26,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/price"
+        android:id="@+id/date"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="120dp"
+        android:textSize="15sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/evaluate"
         android:layout_marginTop="45dp"
         android:layout_marginStart="120dp"
         android:textSize="17sp"/>
-    <ImageButton
-        android:background="@drawable/custom_imagebutton_circular"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:scaleType="fitCenter"
-        android:id="@+id/iconButton"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="300dp"
-        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:alpha="0.1"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgStar"
+            android:src="@drawable/icon_star"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/numberStar"
+            android:text="5"/>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
