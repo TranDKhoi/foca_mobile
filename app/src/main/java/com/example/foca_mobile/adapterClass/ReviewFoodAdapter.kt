@@ -8,10 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.R
 import com.example.foca_mobile.model.ReviewFood
+import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
 
 class ReviewFoodAdapter(private val arrayList: ArrayList<ReviewFood>) :
     RecyclerView.Adapter<ReviewFoodAdapter.ViewHolder> (){
+
+    private var formatter :DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
     class ViewHolder (item : View) : RecyclerView.ViewHolder(item) {
         val imageAvatar : ImageView = item.findViewById(R.id.avatarPerson)
@@ -29,7 +32,7 @@ class ReviewFoodAdapter(private val arrayList: ArrayList<ReviewFood>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.imageAvatar.setImageResource(arrayList[position].imageAvatar)
         holder.txtName.text = arrayList[position].namePerson
-        holder.date.text = arrayList[position].date.toString()
+        holder.date.text = arrayList[position].date.format(formatter)
         holder.txtEvaluate.text = arrayList[position].evaluate
         holder.numberStar.text = arrayList[position].numberStar.toString()
     }
