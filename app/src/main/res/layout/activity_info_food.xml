@@ -21,7 +21,8 @@
                 android:fitsSystemWindows="true"
                 app:expandedTitleMarginStart="15dp"
                 app:expandedTitleMarginBottom="20dp"
-                app:contentScrim="@color/design_default_color_primary"
+                app:contentScrim="#15BE77"
+                app:title="Review Food"
                 app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
                 <ImageView
                     android:layout_width="match_parent"
@@ -72,7 +73,6 @@
                         android:layout_height="34dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="50dp"
-                        android:background="@drawable/custom_button"
                         android:src="@drawable/love_icon" />
                 </LinearLayout>
 
@@ -130,22 +130,15 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="30dp"
-        app:cardBackgroundColor="#53E88B"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:text="Add to cart"
+            android:background="@drawable/rounded_button"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="30dp"
             android:textColor="@color/white"
             android:textSize="16sp" />
-    </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -25,6 +25,9 @@ class InfoFood_Activity : AppCompatActivity() {
         binding = ActivityInfoFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initToolBar()
+        binding.toolbar.setNavigationOnClickListener{
+            this.finish()
+        }
         creatReviewRecycleview()
         binding.reviewRecycleview.adapter = ReviewFoodAdapter(newArrayReviewFoodList)
     }
@@ -33,6 +36,8 @@ class InfoFood_Activity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowTitleEnabled(false);
+            supportActionBar?.setDisplayShowHomeEnabled(true);
         }
     }
 

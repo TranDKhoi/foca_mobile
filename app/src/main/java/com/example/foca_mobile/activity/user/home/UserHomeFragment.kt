@@ -6,18 +6,17 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
 import com.example.foca_mobile.adapterClass.FoodAdapter
 import com.example.foca_mobile.adapterClass.RestaurantNearestAdapter
-import com.example.foca_mobile.databinding.FragmentHomeBinding
+import com.example.foca_mobile.databinding.FragmentUserHomeBinding
 import com.example.foca_mobile.model.Food
 import com.example.foca_mobile.model.RestaurantNearest
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
 
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding: FragmentUserHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var newArrayRestaurantList: ArrayList<RestaurantNearest>
     private lateinit var newArrayFoodList: ArrayList<Food>
@@ -27,7 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(
+        _binding = FragmentUserHomeBinding.inflate(
             inflater,
             container,
             false

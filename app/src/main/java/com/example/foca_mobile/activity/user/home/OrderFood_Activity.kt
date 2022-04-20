@@ -19,6 +19,10 @@ class OrderFood_Activity : AppCompatActivity() {
         binding = ActivityOrderFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
         createAddFoodRecyclerView()
+
+        binding.buttonBack.setOnClickListener {
+            this.finish()
+        }
     }
     private fun createAddFoodRecyclerView() {
         binding.addFoodRecyclerView.layoutManager = LinearLayoutManager(this)
