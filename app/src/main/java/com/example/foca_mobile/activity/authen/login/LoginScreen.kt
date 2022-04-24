@@ -2,30 +2,28 @@ package com.example.foca_mobile.activity.authen.login
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import androidx.core.text.isDigitsOnly
+import androidx.appcompat.app.AppCompatActivity
 import com.example.foca_mobile.R
-import com.example.foca_mobile.Utils.LoginPrefs
 import com.example.foca_mobile.activity.MainActivity
 import com.example.foca_mobile.activity.authen.forgotpass.ForgotPassScreen
 import com.example.foca_mobile.activity.authen.signup.SignupScreen
+import com.example.foca_mobile.utils.LoginPrefs
 
 
 class LoginScreen : AppCompatActivity() {
 
     companion object {
-        lateinit var appContext: Context;
+        lateinit var appContext: Context
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
 
-        appContext = this;
+        appContext = this
 
         val id = LoginPrefs.getUserID();
         if (id != "")

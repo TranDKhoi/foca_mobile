@@ -3,14 +3,22 @@ package com.example.foca_mobile.activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
-import com.example.foca_mobile.Utils.LoginPrefs
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
 import com.example.foca_mobile.activity.user.home.HomeFragment
+import com.example.foca_mobile.models.Post
+import com.example.foca_mobile.retrofit.PostService
+import com.example.foca_mobile.retrofit.ServiceGenerator
+import com.example.foca_mobile.utils.LoginPrefs
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setItemSelected(R.id.home)
         bottom_navigation.showBadge(R.id.message, 1)
         setCurrentFragment(homeFragment)
+
+
+
 
 
         bottom_navigation.setOnItemSelectedListener { id ->

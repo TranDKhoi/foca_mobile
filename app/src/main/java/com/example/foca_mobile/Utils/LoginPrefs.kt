@@ -1,4 +1,4 @@
-package com.example.foca_mobile.Utils
+package com.example.foca_mobile.utils
 
 import androidx.preference.PreferenceManager
 import com.example.foca_mobile.activity.authen.login.LoginScreen
