@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:scrollbars="none"
-    tools:context=".activity.user.home.HomeFragment">
+    tools:context=".activity.user.home.UserHomeFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

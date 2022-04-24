@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.home.UserHomeFragment
+import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,14 +17,16 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val userhomeFragment = UserHomeFragment()
+        val userHomeFragment = UserHomeFragment()
+        val userProfileFragment = UserProfileFragment()
         binding.bottomNavigation.setItemSelected(R.id.home)
         binding.bottomNavigation.showBadge(R.id.message, 2)
-        setCurrentFragment(userhomeFragment)
+        setCurrentFragment(userHomeFragment)
 
         binding.bottomNavigation.setOnItemSelectedListener{ id ->
             when (id) {
-                R.id.home -> setCurrentFragment(userhomeFragment)
+                R.id.home -> setCurrentFragment(userHomeFragment)
+                R.id.user -> setCurrentFragment(userProfileFragment)
             }
         }
     }
