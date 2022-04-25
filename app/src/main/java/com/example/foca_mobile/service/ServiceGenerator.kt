@@ -1,14 +1,11 @@
-package com.example.foca_mobile.retrofit
+package com.example.foca_mobile.service
 
-import android.content.Context
 //import com.example.foca_mobile.utils.LoginPrefs
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
 
 import retrofit2.Retrofit
-import java.io.File
 
 
 object ServiceGenerator {

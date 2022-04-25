@@ -1,6 +1,7 @@
-package com.example.foca_mobile.models
+package com.example.foca_mobile.model
 
-data class Post(
+
+data class Product(
     val name: String?,
     val price: Int = 0,
     val image: String?,
