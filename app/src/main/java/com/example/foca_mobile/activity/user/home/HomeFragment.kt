@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Product
+import com.example.foca_mobile.model.User
+import com.example.foca_mobile.service.AuthService
 import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
@@ -56,6 +58,30 @@ class HomeFragment : Fragment() {
         var progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
 
         fetchPostBtn.setOnClickListener {
+            var loginCall = ServiceGenerator.buildService(AuthService::class.java).login(User(username = "20521161", password = "123456"));
+
+            loginCall?.enqueue(object : Callback<ApiResponse<User>>{
+                override fun onResponse(
+                    call: Call<ApiResponse<User>>,
+                    response: Response<ApiResponse<User>>
+                ) {
+                    if(response.isSuccessful){
+                        val res: ApiResponse<User> = response.body()!!
+                        val user = res.data
+                        Log.d("Access Token", user.accessToken!! )
+                    }
+                    else{
+                        val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+                        Log.d("Error From Api", errorRes.message )
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse<User>>, t: Throwable) {
+                }
+
+            })
+
+
             var getPostCall = ServiceGenerator.buildService(ProductService::class.java).getProductList();
             progressBar.visibility = ProgressBar.VISIBLE
 
@@ -67,7 +93,7 @@ class HomeFragment : Fragment() {
                 ) {
                     if(response.isSuccessful){
                         val res: ApiResponse<MutableList<Product>> = response.body()!!
-                        Log.d("Logg message", res.data.toString() )
+
                         val listProduct = res.data as List<Product>
                         listProduct.forEach {
                             Log.d("Name: ", it.name!!)
@@ -76,7 +102,7 @@ class HomeFragment : Fragment() {
                     }
                     else{
                         val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
-                        Log.d("Error", errorRes.message )
+                        Log.d("Error From Api", errorRes.message )
                     }
                     progressBar.visibility = ProgressBar.GONE
                 }

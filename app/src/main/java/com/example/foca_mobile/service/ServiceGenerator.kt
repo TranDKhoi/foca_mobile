@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 
 
 object ServiceGenerator {
-    private val BASE_URL = "http://10.0.2.2:5000/"
+    private const val BASE_URL = "https://foca-backend.herokuapp.com/"
     private val cacheSize = 5 * 1024 * 1024
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private val okHttpClient = OkHttpClient.Builder().addInterceptor(logger).build()

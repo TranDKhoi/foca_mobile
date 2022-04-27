@@ -13,6 +13,4 @@ interface ProductService {
 
     @POST("/api/products")
     fun createProduct(@Body user: Product?): Call<Product?>?
-//    @POST("/api/posts")
-//    fun createPost(): Call<MutableList<Post>>
 }
