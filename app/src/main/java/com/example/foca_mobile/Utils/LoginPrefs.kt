@@ -8,21 +8,20 @@ object LoginPrefs {
     public var sharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(LoginScreen.appContext)
 
-    const val USER_ID = "userid";
+    const val USER_TOKEN = "usertoken";
 
-
-    fun getUserID(): String {
-        return sharedPreferences.getString(USER_ID, "").toString();
+    fun getUserToken(): String {
+        return sharedPreferences.getString(USER_TOKEN, "").toString();
     }
 
-    fun setUserID(id: String) {
+    fun setUserToken(token: String) {
 
         var editor = sharedPreferences.edit();
-        editor.putString(USER_ID, id);
+        editor.putString(USER_TOKEN, token);
         editor.apply();
     }
 
-    fun removeID() {
+    fun removeToken() {
         sharedPreferences.edit().clear().apply();
     }
 }

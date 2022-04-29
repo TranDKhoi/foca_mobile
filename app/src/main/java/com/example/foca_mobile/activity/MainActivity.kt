@@ -3,38 +3,45 @@ package com.example.foca_mobile.activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
 import com.example.foca_mobile.activity.user.home.HomeFragment
+import com.example.foca_mobile.databinding.ActivityMainBinding
+import com.example.foca_mobile.model.User
 import com.example.foca_mobile.utils.LoginPrefs
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var currentUser: User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater);
+        setContentView(binding.root)
+
+        currentUser = intent.getSerializableExtra("currentUser") as User;
 
         //FRAGMENT
-        val homeFragment = HomeFragment()
+        val userhomeFragment = HomeFragment()
         val messageFragment = ListMessageFragment()
 
-        bottom_navigation.setItemSelected(R.id.home)
-        bottom_navigation.showBadge(R.id.message, 1)
-        setCurrentFragment(homeFragment)
+        binding.bottomNavigation.setItemSelected(R.id.home)
+        binding.bottomNavigation.showBadge(R.id.message, 1)
+        setCurrentFragment(userhomeFragment)
 
 
-        bottom_navigation.setOnItemSelectedListener { id ->
+        binding.bottomNavigation.setOnItemSelectedListener { id ->
             when (id) {
-                R.id.home -> setCurrentFragment(homeFragment)
+                R.id.home -> setCurrentFragment(userhomeFragment)
                 R.id.message -> setCurrentFragment(messageFragment);
-                R.id.cart -> Handler().postDelayed({
-                    //createNotificationChannel();
-                }, 2000)
+                R.id.cart -> Toast.makeText(this, currentUser.fullName, Toast.LENGTH_LONG).show()
                 R.id.user -> toLoginScreen();//sign out
             }
         }
@@ -49,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun toLoginScreen() {
 
-        LoginPrefs.removeID();
+        LoginPrefs.removeToken();
         val it: Intent = Intent(this, LoginScreen::class.java);
         finishAffinity();
 

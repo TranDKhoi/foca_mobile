@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".activity.authen.signup.SignupScreen"
-    android:scrollbars="none">
+    android:scrollbars="none"
+    tools:context=".activity.authen.signup.SignupScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                 android:background="@drawable/rounded_edittext_normal"
                 android:drawableLeft="@drawable/ic_pass"
                 android:drawablePadding="10dp"
-                android:hint="Password"
+                android:hint="Password (at least 6 characters)"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp" />
 
@@ -101,10 +101,18 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp" />
 
+            <ProgressBar
+                android:id="@+id/bar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="141dp"
                 android:layout_height="57dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_button"
                 android:fontFamily="@font/bentonsans_bold"
                 android:onClick="toVerifiScreen"
