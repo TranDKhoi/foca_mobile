@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
 import com.example.foca_mobile.activity.user.home.HomeFragment
@@ -50,7 +51,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } else if (currentUser.role == "ADMIN") {
+            //ADMIN FRAGMENT
+            val adminHomeFragment = AdminHomeFragment()
 
+            binding.bottomNavigation.setItemSelected(R.id.home)
+            binding.bottomNavigation.showBadge(R.id.message, 1)
+            setCurrentFragment(adminHomeFragment)
+
+            binding.bottomNavigation.setOnItemSelectedListener { id ->
+                when (id) {
+                    R.id.home -> setCurrentFragment(adminHomeFragment)
+                    R.id.cart -> Toast.makeText(this, currentUser.role, Toast.LENGTH_LONG)
+                        .show()
+                    R.id.user -> toLoginScreen();//sign out
+                }
+            }
         }
     }
 
