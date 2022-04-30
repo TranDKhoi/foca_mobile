@@ -23,10 +23,6 @@ import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -66,7 +62,7 @@ class BioScreen : AppCompatActivity() {
         this.finish()
     }
 
-    public fun confirmRegister () = runBlocking  {
+    public fun confirmRegister() {
 
         val fname: EditText = binding.firstname
         val lname: EditText = binding.lastname
@@ -92,16 +88,7 @@ class BioScreen : AppCompatActivity() {
             lname.text.toString().isEmpty() ||
             phone.text.toString().isEmpty()
         )
-        {
-            return@runBlocking;
-        }
-
-
-        //UPLOAD IMAGE TO FIREBASE
-//        val userPhoto = GlobalScope.launch { val p = uploadToFirebase() }
-        val one = async { uploadToFirebase() }
-
-//        runBlocking { userPhoto.join() }
+            return;
 
         // Create JSON using JSONObject
         val jsonObject = JSONObject()
@@ -206,22 +193,22 @@ class BioScreen : AppCompatActivity() {
             val circleavatar: ImageButton = findViewById(R.id.circleavatar) as ImageButton;
             imagePath = data?.data!!
             circleavatar.setImageURI(imagePath);
+            uploadToFirebase()
         }
     }
 
 
     //FIREBASE IMAGE AREA
-    private suspend fun uploadToFirebase() {
+    private fun uploadToFirebase() {
 
         var imageRef: StorageReference =
             FirebaseStorage.getInstance().reference.child("profile_images/$UserName.png")
 
         imageRef.putFile(imagePath)
             .addOnSuccessListener {
-//                uri =
-//                    "https://firebasestorage.googleapis.com/v0/b/foca-mobile.appspot.com/o/profile_images%2F$UserName.png"
                 imageRef.downloadUrl.addOnSuccessListener {
-                    Log.d("Login", it.toString())
+                    uri = it.toString()
+                    Log.d("URIII", uri)
                 }
             }
             .addOnFailureListener {
