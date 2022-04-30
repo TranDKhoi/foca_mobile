@@ -7,6 +7,7 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.user.profile.settings.UserProfileActivity
 import com.example.foca_mobile.databinding.FragmentUserProfileScreenBinding
 
 class UserProfileScreenFragment : Fragment(R.layout.fragment_user_profile_screen) {
@@ -17,16 +18,14 @@ class UserProfileScreenFragment : Fragment(R.layout.fragment_user_profile_screen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUserProfileScreenBinding.inflate(
             inflater,
             container,
             false
         )
-        binding.generalSettings.setOnClickListener {}
         binding.profileSettings.setOnClickListener {
-            Log.d("abc","ok")
-            val intent = Intent(context, UserProfile_Activity::class.java)
+            val intent = Intent(context, UserProfileActivity::class.java)
             startActivity(intent)
         }
         return binding.root

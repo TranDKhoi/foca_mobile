@@ -1,4 +1,4 @@
-package com.example.foca_mobile.activity.user.profile.profilesetting
+package com.example.foca_mobile.activity.user.profile.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
