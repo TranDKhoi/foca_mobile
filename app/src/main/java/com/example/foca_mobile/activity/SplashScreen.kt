@@ -15,12 +15,11 @@ class SplashScreen : AppCompatActivity() {
         var mainlogo: LinearLayoutCompat = findViewById(R.id.mainlogo);
 
         mainlogo.alpha = 0f;
-        mainlogo.animate().setDuration(1500).alpha(1f).withEndAction({
-
-            val it: Intent = Intent(this, LoginScreen::class.java);
+        mainlogo.animate().setDuration(1500).alpha(1f).withEndAction {
+            val it = Intent(this, LoginScreen::class.java);
             startActivity(it);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             this.finish();
-        });
+        };
     }
 }

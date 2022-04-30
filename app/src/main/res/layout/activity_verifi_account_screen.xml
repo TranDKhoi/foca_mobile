@@ -82,7 +82,8 @@
                     android:clickable="true"
                     android:fontFamily="@font/bentonsans_medium"
                     android:text="Resend Code"
-                    android:textColor="#15BE77" />
+                    android:textColor="#15BE77"
+                    android:onClick="reSendCode"/>
 
                 <View
                     android:layout_width="0dp"
@@ -90,15 +91,23 @@
                     android:layout_weight="1" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/confirmBtn"
                     android:layout_width="141dp"
                     android:layout_height="57dp"
                     android:background="@drawable/rounded_button"
                     android:fontFamily="@font/bentonsans_bold"
-                    android:onClick="toUploadBioScreen"
                     android:text="Confirm"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
             </LinearLayout>
+
+            <ProgressBar
+                android:layout_gravity="center_horizontal"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:id="@+id/bar"/>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
