@@ -1,4 +1,4 @@
-package com.example.foca_mobile.adapterClass
+package com.example.foca_mobile.activity.user.home.infofood
 
 import android.view.LayoutInflater
 import android.view.View

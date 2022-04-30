@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.home.UserHomeFragment
-import com.example.foca_mobile.activity.user.profile.UserProfileFragment
+import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
+import com.example.foca_mobile.activity.user.profile.UserProfileScreenFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val userHomeFragment = UserHomeFragment()
-        val userProfileFragment = UserProfileFragment()
+        val userProfileScreenFragment = UserProfileScreenFragment()
         binding.bottomNavigation.setItemSelected(R.id.home)
         binding.bottomNavigation.showBadge(R.id.message, 2)
         setCurrentFragment(userHomeFragment)
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener{ id ->
             when (id) {
                 R.id.home -> setCurrentFragment(userHomeFragment)
-                R.id.user -> setCurrentFragment(userProfileFragment)
+                R.id.user -> setCurrentFragment(userProfileScreenFragment)
             }
         }
     }
