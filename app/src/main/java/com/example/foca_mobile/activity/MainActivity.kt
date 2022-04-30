@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var currentUser: User
 
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -65,10 +69,19 @@ class MainActivity : AppCompatActivity() {
                         .show()
                     R.id.user -> toLoginScreen();//sign out
                 }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val userhomeFragment = UserHomeFragment()
+        binding.bottomNavigation.setItemSelected(R.id.home)
+        binding.bottomNavigation.showBadge(R.id.message, 2)
+        setCurrentFragment(userhomeFragment)
+
+        binding.bottomNavigation.setOnItemSelectedListener{ id ->
+            when (id) {
+                R.id.home -> setCurrentFragment(userhomeFragment)
             }
         }
     }
-
 
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
