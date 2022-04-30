@@ -29,24 +29,28 @@ class MainActivity : AppCompatActivity() {
 
         currentUser = intent.getSerializableExtra("currentUser") as User;
 
-        //FRAGMENT
-        val userHomeFragment = HomeFragment()
-        val messageFragment = ListMessageFragment()
 
-        binding.bottomNavigation.setItemSelected(R.id.home)
-        binding.bottomNavigation.showBadge(R.id.message, 1)
-        setCurrentFragment(userHomeFragment)
+        //THIS IS WHERE WE DECIDE WHO IS LOGIN
+        if (currentUser.role == "USER") {
+            //USER FRAGMENT
+            val userHomeFragment = HomeFragment()
+            val messageFragment = ListMessageFragment()
 
+            binding.bottomNavigation.setItemSelected(R.id.home)
+            binding.bottomNavigation.showBadge(R.id.message, 1)
+            setCurrentFragment(userHomeFragment)
 
-        val user = LoginPrefs.getUser()
-        Log.d("User Check: ", user.toString())
-        binding.bottomNavigation.setOnItemSelectedListener { id ->
-            when (id) {
-                R.id.home -> setCurrentFragment(userHomeFragment)
-                R.id.message -> setCurrentFragment(messageFragment);
-                R.id.cart -> Toast.makeText(this, currentUser.fullName, Toast.LENGTH_LONG).show()
-                R.id.user -> toLoginScreen();//sign out
+            binding.bottomNavigation.setOnItemSelectedListener { id ->
+                when (id) {
+                    R.id.home -> setCurrentFragment(userHomeFragment)
+                    R.id.message -> setCurrentFragment(messageFragment);
+                    R.id.cart -> Toast.makeText(this, currentUser.fullName, Toast.LENGTH_LONG)
+                        .show()
+                    R.id.user -> toLoginScreen();//sign out
+                }
             }
+        } else if (currentUser.role == "ADMIN") {
+
         }
     }
 
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun toLoginScreen() {
         LoginPrefs.removeToken();
-        val it: Intent = Intent(this, LoginScreen::class.java);
+        val it = Intent(this, LoginScreen::class.java);
         finishAffinity();
 
         startActivity(it);
