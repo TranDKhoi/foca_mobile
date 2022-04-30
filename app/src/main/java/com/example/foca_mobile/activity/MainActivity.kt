@@ -9,6 +9,7 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
 import com.example.foca_mobile.activity.user.home.HomeFragment
+import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.LoginPrefs
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
+        SocketHandler.initSocket("123");
 
         //FRAGMENT
         val homeFragment = HomeFragment()

@@ -3,6 +3,7 @@ package com.example.foca_mobile.activity.user.chat.listmess
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.chat.conversation.ChatScreen
+import com.example.foca_mobile.socket.SocketHandler
+import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -38,15 +42,15 @@ class ListMessageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_list_message_fragment, container, false)
         //ÁNH XẠ RCV VÀ  SET LAYOUT CHO NÓ
-        messRecyclerView = view.findViewById(R.id.messRcV);
-        messRecyclerView.layoutManager = LinearLayoutManager(activity);
-        messRecyclerView.setHasFixedSize(true);
+        messRecyclerView = view.findViewById(R.id.messRcV)
+        messRecyclerView.layoutManager = LinearLayoutManager(activity)
+        messRecyclerView.setHasFixedSize(true)
 
         //KHỞI TẠO  LIST TIN NHẮN
-        messArrayList = arrayListOf<ListMessageClass>();
+        messArrayList = arrayListOf()
 
         val tempMess = ListMessageClass(
             R.drawable.ic_user,
@@ -54,24 +58,29 @@ class ListMessageFragment : Fragment() {
             "hello khoi oi",
             LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
         )
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
-        messArrayList.add(tempMess);
+        messArrayList.add(tempMess)
+        messArrayList.add(tempMess)
+        messArrayList.add(tempMess)
+        messArrayList.add(tempMess)
 
 
         //SET ADAPTER CHO RCV
-        var adapter = ListMessageAdapter(messArrayList)
+        val adapter = ListMessageAdapter(messArrayList)
         messRecyclerView.adapter = adapter
 
         adapter.onItemClick = {
-            val intent: Intent = Intent(activity, ChatScreen::class.java)
+            val intent = Intent(activity, ChatScreen::class.java)
             intent.putExtra("mess", it)
             startActivity(intent)
+            val obj = JSONObject()
+            obj.put("message", "Alo ALo")
+            SocketHandler.getSocket().emit("join_room", obj)
         }
-
+        SocketHandler.getSocket().on("send_message") { args ->
+            Log.d("send_message event: ", args[0].toString())
+        }
         // Inflate the layout for this fragment
-        return view;
+        return view
     }
 
     companion object {
