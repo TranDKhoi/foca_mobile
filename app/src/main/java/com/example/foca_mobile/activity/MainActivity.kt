@@ -9,7 +9,6 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
-import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 import com.example.foca_mobile.model.User
 import com.example.foca_mobile.utils.LoginPrefs
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
             binding.bottomNavigation.setOnItemSelectedListener { id ->
                 when (id) {
-                    R.id.home -> setCurrentFragment(userHomeFragment)
+                    R.id.home -> setCurrentFragment(AdminHomeFragment())
                     R.id.message -> setCurrentFragment(messageFragment);
                     R.id.cart -> Toast.makeText(this, currentUser.fullName, Toast.LENGTH_LONG)
                         .show()
