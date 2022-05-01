@@ -20,9 +20,9 @@
             android:exported="true">
 
         </activity>
-        <activity
-            android:name=".activity.user.cart_order.UserMyCart"
-            android:exported="true" />
+        <activity android:name=".activity.user.cart_order.UserRateScreen"
+            android:exported="false"/>
+
         <activity
             android:name=".activity.authen.signup.success.SuccessScreen"
             android:exported="false" />
