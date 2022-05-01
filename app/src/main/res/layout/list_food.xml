@@ -30,13 +30,13 @@
         android:layout_marginTop="45dp"
         android:layout_marginStart="120dp"
         android:textSize="17sp"/>
+
     <ImageButton
-        android:background="@drawable/custom_imagebutton_circular"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:scaleType="fitCenter"
         android:id="@+id/iconButton"
-        android:layout_marginTop="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="300dp"
-        />
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/custom_imagebutton_circular"
+        android:scaleType="fitCenter" />
 </androidx.cardview.widget.CardView>
