@@ -12,13 +12,13 @@ import com.example.foca_mobile.activity.user.home.orderfood.OrderFood_Activity
 import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
 import com.example.foca_mobile.databinding.FragmentUserHomeBinding
 import com.example.foca_mobile.model.Food
-import com.example.foca_mobile.model.RestaurantNearest
+import com.example.foca_mobile.model.RecentFood
 
 class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
 
     private var _binding: FragmentUserHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var newArrayRestaurantList: ArrayList<RestaurantNearest>
+    private lateinit var newArrayRecentFoodList: ArrayList<RecentFood>
     private lateinit var newArrayFoodList: ArrayList<Food>
 
     override fun onCreateView(
@@ -33,8 +33,8 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         createRestaurantRecyclerView()
         createFoodRecyclerView()
-        val resAdapter =  RestaurantNearestAdapter(newArrayRestaurantList)
-        binding.restaurantRecyclerView.adapter = resAdapter
+        val recentAdapter =  RecentFoodAdapter(newArrayRecentFoodList)
+        binding.restaurantRecyclerView.adapter = recentAdapter
         val foodAdapter = this.context?.let { FoodAdapter(it,newArrayFoodList) }
         binding.foodRecyclerView.adapter = foodAdapter
         binding.txtViewmorePopularmenu.setOnClickListener {
@@ -56,33 +56,33 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         binding.restaurantRecyclerView.setHasFixedSize(true)
 
-        newArrayRestaurantList = arrayListOf()
-        newArrayRestaurantList.add(
-            RestaurantNearest(
+        newArrayRecentFoodList = arrayListOf()
+        newArrayRecentFoodList.add(
+            RecentFood(
                 R.drawable.restaurant_image1,
                 "Lê Hải Phong",
-                "20" + " mins"
+                20
             )
         )
-        newArrayRestaurantList.add(
-            RestaurantNearest(
+        newArrayRecentFoodList.add(
+            RecentFood(
                 R.drawable.resturant_image2,
                 "Trần Thị Nhu",
-                "35" + " mins"
+                20
             )
         )
-        newArrayRestaurantList.add(
-            RestaurantNearest(
+        newArrayRecentFoodList.add(
+            RecentFood(
                 R.drawable.restaurant_image1,
                 "Lê Hải Phong",
-                "20" + " mins"
+                20
             )
         )
-        newArrayRestaurantList.add(
-            RestaurantNearest(
+        newArrayRecentFoodList.add(
+            RecentFood(
                 R.drawable.resturant_image2,
                 "Trần Thị Nhu",
-                "35" + " mins"
+                20
             )
         )
     }
