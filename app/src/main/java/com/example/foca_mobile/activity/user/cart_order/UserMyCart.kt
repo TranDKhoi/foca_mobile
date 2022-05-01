@@ -43,13 +43,5 @@ class UserMyCart : Fragment() {
         }.attach()
     }
 
-    fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        val myFragment: UserMyCart? =
-            requireFragmentManager().findFragmentByTag("MY_FRAGMENT_TAG") as UserMyCart?
-        if (myFragment != null) {
-            myFragment.dispatchTouchEvent(ev)
-        }
-        return super.dispatchTouchEvent(ev)
-    }
 
 }

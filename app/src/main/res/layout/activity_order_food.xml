@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".activity.user.home.orderfood.OrderFood_Activity">
+    tools:context=".activity.user.home.orderfood.PopularMenu">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

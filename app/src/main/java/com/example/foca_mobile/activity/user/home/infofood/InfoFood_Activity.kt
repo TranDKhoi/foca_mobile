@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityInfoFoodBinding
-import com.example.foca_mobile.model.ReviewFood
 import java.time.LocalDate
 import kotlin.collections.ArrayList
 

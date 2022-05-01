@@ -1,4 +1,4 @@
-package com.example.foca_mobile.model
+package com.example.foca_mobile.activity.user.home.infofood
 
 import java.time.LocalDate
 

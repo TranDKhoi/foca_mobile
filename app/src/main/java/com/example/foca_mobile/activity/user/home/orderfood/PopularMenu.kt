@@ -5,9 +5,8 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityOrderFoodBinding
-import com.example.foca_mobile.model.Food
 
-class OrderFood_Activity : AppCompatActivity() {
+class PopularMenu : AppCompatActivity() {
 
     private lateinit var binding: ActivityOrderFoodBinding
     private lateinit var newArrayAddFoodList : ArrayList<Food>

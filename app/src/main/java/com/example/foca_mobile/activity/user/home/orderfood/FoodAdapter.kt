@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.activity.user.home.infofood.InfoFood_Activity
-import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
 import com.example.foca_mobile.databinding.ListFoodBinding
-import com.example.foca_mobile.model.Food
 
 
 class FoodAdapter(private var c: Context, private val arrayList: ArrayList<Food>) :

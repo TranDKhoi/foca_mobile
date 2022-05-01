@@ -47,7 +47,7 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar." />
         <activity
-            android:name=".activity.user.home.orderfood.OrderFood_Activity"
+            android:name=".activity.user.home.orderfood.PopularMenu"
             android:exported="false" />
         <activity
             android:name=".activity.SplashScreen"

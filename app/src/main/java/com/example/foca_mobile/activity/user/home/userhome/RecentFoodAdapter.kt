@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.databinding.ListRecentFoodBinding
-import com.example.foca_mobile.model.RecentFood
 
 class RecentFoodAdapter(private val arrList: ArrayList<RecentFood>) :
     RecyclerView.Adapter<RecentFoodAdapter.ViewHolder>() {

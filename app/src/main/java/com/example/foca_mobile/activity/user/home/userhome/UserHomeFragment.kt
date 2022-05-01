@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.home.orderfood.OrderFood_Activity
+import com.example.foca_mobile.activity.user.home.orderfood.PopularMenu
 import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
 import com.example.foca_mobile.databinding.FragmentUserHomeBinding
-import com.example.foca_mobile.model.Food
-import com.example.foca_mobile.model.RecentFood
+import com.example.foca_mobile.activity.user.home.orderfood.Food
 
 class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
 
@@ -38,7 +37,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         val foodAdapter = this.context?.let { FoodAdapter(it,newArrayFoodList) }
         binding.foodRecyclerView.adapter = foodAdapter
         binding.txtViewmorePopularmenu.setOnClickListener {
-            val intent = Intent(context, OrderFood_Activity::class.java)
+            val intent = Intent(context, PopularMenu::class.java)
             startActivity(intent)
         }
         return binding.root
