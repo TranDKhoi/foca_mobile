@@ -19,9 +19,6 @@
             android:name=".activity.user.cart_order.UserDetailOrder"
             android:exported="true"/>
         <activity
-            android:name=".activity.user.cart_order.UserMyCart"
-            android:exported="true" />
-        <activity
             android:name=".activity.authen.signup.success.SuccessScreen"
             android:exported="false" />
         <activity
