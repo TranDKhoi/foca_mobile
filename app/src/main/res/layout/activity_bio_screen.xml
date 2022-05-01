@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:scrollbars="none"
-    tools:context=".activity.authen.signup.bio.BioScreen">
+    tools:context=".activity.authen.signup.BioScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -50,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:lineHeight="20dp"
                 android:fontFamily="@font/bentonsans_book"
                 android:text="Let's choose a cool name \nand profile picture to show everyone"
                 android:textColor="@color/black"
@@ -57,30 +58,33 @@
                 android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/firstname"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="First Name"
                 android:inputType="textPersonName"
                 android:paddingLeft="10dp" />
 
             <EditText
+                android:id="@+id/lastname"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="Last Name"
                 android:inputType="textPersonName"
                 android:paddingLeft="10dp" />
 
             <EditText
+                android:id="@+id/phonenum"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edittext"
+                android:background="@drawable/rounded_edittext_normal"
                 android:hint="Phone Number"
-                android:inputType="phone"
+                android:inputType="number"
                 android:paddingLeft="10dp" />
 
             <androidx.cardview.widget.CardView
@@ -88,6 +92,7 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
                 app:cardCornerRadius="300dp"
                 app:cardElevation="0dp">
 
@@ -100,7 +105,16 @@
                     android:src="@drawable/ic_gallery" />
             </androidx.cardview.widget.CardView>
 
+            <ProgressBar
+                android:id="@+id/bar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="-10dp"
+                android:visibility="gone" />
+
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/finishbtn"
                 android:layout_width="141dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center_horizontal"
@@ -110,8 +124,7 @@
                 android:fontFamily="@font/bentonsans_bold"
                 android:text="Finish"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:onClick="toSuccessScreen"/>
+                android:textColor="@color/white" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

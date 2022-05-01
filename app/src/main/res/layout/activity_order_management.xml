@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.admin.admin_home">
+    android:background="@drawable/gradient_background"
+    tools:context=".activity.admin.order.OrderManagement">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
