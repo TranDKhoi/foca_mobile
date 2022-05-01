@@ -1,4 +1,4 @@
-package com.example.foca_mobile.activity.user.home
+package com.example.foca_mobile.activity.user.home.userhome
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.adapterClass.FoodAdapter
-import com.example.foca_mobile.adapterClass.RestaurantNearestAdapter
+import com.example.foca_mobile.activity.user.home.orderfood.OrderFood_Activity
+import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
 import com.example.foca_mobile.databinding.FragmentUserHomeBinding
 import com.example.foca_mobile.model.Food
 import com.example.foca_mobile.model.RestaurantNearest
@@ -24,7 +24,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentUserHomeBinding.inflate(
             inflater,
@@ -33,18 +33,12 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         createRestaurantRecyclerView()
         createFoodRecyclerView()
-        var resAdapter =  RestaurantNearestAdapter(newArrayRestaurantList)
+        val resAdapter =  RestaurantNearestAdapter(newArrayRestaurantList)
         binding.restaurantRecyclerView.adapter = resAdapter
-        var foodAdapter =  FoodAdapter(newArrayFoodList)
+        val foodAdapter = this.context?.let { FoodAdapter(it,newArrayFoodList) }
         binding.foodRecyclerView.adapter = foodAdapter
-        foodAdapter.setOnItemClickListener(object : FoodAdapter.ItemClickListener{
-            override fun onItemClick(position: Int) {
-                val intent = Intent(context,InfoFood_Activity::class.java)
-                startActivity(intent)
-            }
-        })
         binding.txtViewmorePopularmenu.setOnClickListener {
-            val intent = Intent(context,OrderFood_Activity::class.java)
+            val intent = Intent(context, OrderFood_Activity::class.java)
             startActivity(intent)
         }
         return binding.root
@@ -62,7 +56,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         binding.restaurantRecyclerView.setHasFixedSize(true)
 
-        newArrayRestaurantList = arrayListOf<RestaurantNearest>()
+        newArrayRestaurantList = arrayListOf()
         newArrayRestaurantList.add(
             RestaurantNearest(
                 R.drawable.restaurant_image1,
@@ -95,7 +89,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
     private fun createFoodRecyclerView() {
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.foodRecyclerView.setHasFixedSize(true)
-        newArrayFoodList = arrayListOf<Food>()
+        newArrayFoodList = arrayListOf()
         newArrayFoodList.add(
             Food(
                 R.drawable.restaurant_image1,

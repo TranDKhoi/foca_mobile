@@ -4,8 +4,8 @@
     android:layout_height="184dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
-    android:layout_marginLeft="30dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="10dp"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp">
@@ -19,16 +19,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nameNearest"
-        android:layout_marginTop="116dp"
-        android:layout_marginHorizontal="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:textSize="16sp"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/numberNearest"
-        android:layout_marginTop="141dp"
-        android:layout_marginHorizontal="45dp"
-        android:textSize="13sp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="20dp"
+        android:textSize="13sp"/>
 </androidx.cardview.widget.CardView>

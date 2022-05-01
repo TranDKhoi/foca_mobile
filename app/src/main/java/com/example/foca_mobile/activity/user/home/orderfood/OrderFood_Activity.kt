@@ -1,10 +1,9 @@
-package com.example.foca_mobile.activity.user.home
+package com.example.foca_mobile.activity.user.home.orderfood
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.adapterClass.FoodAdapter
 import com.example.foca_mobile.databinding.ActivityOrderFoodBinding
 import com.example.foca_mobile.model.Food
 
@@ -61,6 +60,6 @@ class OrderFood_Activity : AppCompatActivity() {
                 R.drawable.ic_add
             )
         )
-        binding.addFoodRecyclerView.adapter = FoodAdapter(newArrayAddFoodList)
+        binding.addFoodRecyclerView.adapter = FoodAdapter(this,newArrayAddFoodList)
     }
 }

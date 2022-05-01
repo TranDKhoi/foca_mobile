@@ -1,18 +1,12 @@
-package com.example.foca_mobile.activity.user.home
+package com.example.foca_mobile.activity.user.home.infofood
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.View
-import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.adapterClass.ReviewFoodAdapter
 import com.example.foca_mobile.databinding.ActivityInfoFoodBinding
 import com.example.foca_mobile.model.ReviewFood
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.collections.ArrayList
 
 class InfoFood_Activity : AppCompatActivity() {

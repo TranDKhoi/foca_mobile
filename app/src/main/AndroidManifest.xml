@@ -14,16 +14,24 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Foca_mobile" >
         <activity
-
             android:name=".activity.user.home.InfoFood_Activity"
             android:theme="@style/Theme.AppCompat.NoActionBar."
             android:exported="false"/>
         <activity android:name=".activity.user.home.OrderFood_Activity"
             android:exported="false"/>
+   android:name=".activity.user.profile.settings.UserProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar."/>
+
         <activity
-            android:name=".activity.user.notifi.user_notifi"
+            android:name=".activity.user.home.infofood.InfoFood_Activity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar." />
+        <activity
+            android:name=".activity.user.home.orderfood.OrderFood_Activity"
             android:exported="false" />
         <activity
+
             android:name=".activity.SplashScreen"
             android:exported="true" >
             <intent-filter>
@@ -60,6 +68,7 @@
             android:name=".activity.authen.login.LoginScreen"
             android:exported="false" />
         <activity
+
             android:name=".activity.user.notifi.user_notifi"
             android:exported="false" />
         <activity
