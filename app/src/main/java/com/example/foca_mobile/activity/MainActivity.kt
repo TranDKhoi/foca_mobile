@@ -11,6 +11,8 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.admin.order.OrderManagement
 import com.example.foca_mobile.activity.authen.login.LoginScreen
+import com.example.foca_mobile.activity.user.cart_order.UserMyCart
+import com.example.foca_mobile.activity.user.cart_order.fragment.MyCartFragment
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
 import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             //USER FRAGMENT
             val userHomeFragment = UserHomeFragment()
             val messageFragment = ListMessageFragment()
+            val cartFragment = UserMyCart()
 
             binding.bottomNavigation.setMenuResource(R.menu.user_menu)
             binding.bottomNavigation.setItemSelected(R.id.home)
@@ -46,7 +49,10 @@ class MainActivity : AppCompatActivity() {
                 when (id) {
                     R.id.home -> setCurrentFragment(AdminHomeFragment())
                     R.id.message -> setCurrentFragment(messageFragment);
-                    R.id.cart -> toOrderManagementScreen()
+                    R.id.cart -> {
+                        val it = Intent(this, cartFragment::class.java)
+                        startActivity(it)
+                    }
                     R.id.user -> toLoginScreen();//sign out
                 }
             }
