@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.foca_mobile">
+    package="com.example.foca_mobile" >
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,6 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Foca_mobile"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.user.cart_order.UserDetailOrder"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".activity.user.cart_order.UserMyCart"
+            android:exported="true" />
+        <activity
+            android:name=".activity.authen.signup.success.SuccessScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.signup.bio.BioScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.signup.VerifiScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.signup.SignupScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.admin.order.OrderManagement"
             android:exported="false" />
@@ -30,6 +55,15 @@
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true">
+	<activity>
+            android:name=".activity.admin.notifi.admin_notifi"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.admin_home"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.login.LoginScreen"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
