@@ -58,28 +58,28 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         newArrayRecentFoodList = arrayListOf()
         newArrayRecentFoodList.add(
             RecentFood(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20
             )
         )
         newArrayRecentFoodList.add(
             RecentFood(
-                R.drawable.resturant_image2,
+                R.drawable.favorite_9,
                 "Trần Thị Nhu",
                 20
             )
         )
         newArrayRecentFoodList.add(
             RecentFood(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20
             )
         )
         newArrayRecentFoodList.add(
             RecentFood(
-                R.drawable.resturant_image2,
+                R.drawable.favorite_9,
                 "Trần Thị Nhu",
                 20
             )
@@ -91,7 +91,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         newArrayFoodList = arrayListOf()
         newArrayFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add
@@ -99,7 +99,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         newArrayFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add
@@ -107,7 +107,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         newArrayFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add
@@ -115,7 +115,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         newArrayFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add

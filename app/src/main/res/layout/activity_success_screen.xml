@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/graygradient_background"
     tools:context=".activity.authen.signup.success.SuccessScreen">
 
     <RelativeLayout
@@ -55,7 +55,7 @@
                 android:layout_width="141dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/light_green_gradient"
                 android:fontFamily="@font/bentonsans_bold"
                 android:text="Let's Eat"
                 android:textAllCaps="false"

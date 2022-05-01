@@ -29,7 +29,7 @@
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/photo_menu"
+                    android:src="@drawable/favorite_4"
                     app:layout_collapseMode="parallax" />
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="-53dp"
+            android:layout_marginTop="-60dp"
             android:background="@drawable/layout_info_food"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -73,7 +73,7 @@
                         android:layout_height="34dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="50dp"
-                        android:src="@drawable/love_icon" />
+                        android:src="@drawable/ic_love" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -84,7 +84,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_star" />
+                        android:src="@drawable/ic_star" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -97,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="150dp"
-                        android:src="@drawable/shopping_bag" />
+                        android:src="@drawable/ic_bag" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -135,7 +135,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:text="Add to cart"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/light_green_gradient"
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="30dp"

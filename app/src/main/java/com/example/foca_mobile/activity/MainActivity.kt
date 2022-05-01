@@ -2,9 +2,6 @@ package com.example.foca_mobile.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
@@ -14,6 +11,7 @@ import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.cart_order.UserMyCart
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
 import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
+import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 import com.example.foca_mobile.model.User
 import com.example.foca_mobile.utils.LoginPrefs
@@ -36,8 +34,9 @@ class MainActivity : AppCompatActivity() {
         if (currentUser.role == "USER") {
             //USER FRAGMENT
             val userHomeFragment = UserHomeFragment()
-            val messageFragment = ListMessageFragment()
+            val messageFragment = ListMessageFragment() // sửa lại
             val cartFragment = UserMyCart()
+            val profileFragment = UserProfileFragment()
 
             binding.bottomNavigation.setMenuResource(R.menu.user_menu)
             binding.bottomNavigation.setItemSelected(R.id.home)
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.home -> setCurrentFragment(AdminHomeFragment())
                     R.id.message -> setCurrentFragment(messageFragment);
                     R.id.cart -> setCurrentFragment(cartFragment)
-                    R.id.user -> toLoginScreen();//sign out
+                    R.id.user -> setCurrentFragment(profileFragment)
                 }
             }
         } else if (currentUser.role == "ADMIN") {

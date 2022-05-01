@@ -52,7 +52,7 @@ class AdminHomeFragment : Fragment(R.layout.fragment_admin_home) {
         for (i in 0..4) {
             myMenuList.add(
                 MyMenuClass(
-                    R.drawable.restaurant_image1,
+                    R.drawable.favorite_8,
                     "Lê Hải Phong",
                     20,
                     R.drawable.ic_edit
@@ -68,28 +68,28 @@ class AdminHomeFragment : Fragment(R.layout.fragment_admin_home) {
         recentOrderList = arrayListOf()
         recentOrderList.add(
             RecentOrderClass(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20
             )
         )
         recentOrderList.add(
             RecentOrderClass(
-                R.drawable.resturant_image2,
+                R.drawable.favorite_9,
                 "Trần Thị Nhu",
                 20
             )
         )
         recentOrderList.add(
             RecentOrderClass(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20
             )
         )
         recentOrderList.add(
             RecentOrderClass(
-                R.drawable.resturant_image2,
+                R.drawable.favorite_9,
                 "Trần Thị Nhu",
                 20
             )

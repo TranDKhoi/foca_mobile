@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/graygradient_background"
     tools:context=".activity.authen.forgotpass.VerifiPassScreen">
 
     <RelativeLayout
@@ -93,7 +93,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="141dp"
                     android:layout_height="57dp"
-                    android:background="@drawable/rounded_button"
+                    android:background="@drawable/light_green_gradient"
                     android:fontFamily="@font/bentonsans_bold"
                     android:onClick="toSetNewPassScreen"
                     android:text="Confirm"

@@ -40,7 +40,7 @@
         android:layout_marginStart="100dp"
         android:textSize="17sp"/>
     <androidx.appcompat.widget.AppCompatButton
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/light_green_gradient"
         android:layout_width="85dp"
         android:layout_height="30dp"
         android:text="Buy again"

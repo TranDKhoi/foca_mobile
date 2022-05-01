@@ -20,7 +20,7 @@ class RecyclerViewAdapterOrderDetail(private val listFood: ArrayList<Food>) : Re
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_food_item, parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_order_food_item, parent,false)
         return ViewHolder(view)
     }
 

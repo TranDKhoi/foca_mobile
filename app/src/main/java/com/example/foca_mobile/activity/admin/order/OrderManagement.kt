@@ -7,6 +7,6 @@ import com.example.foca_mobile.R
 class OrderManagement : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_order_management)
+        setContentView(R.layout.activity_admin_order_management)
     }
 }

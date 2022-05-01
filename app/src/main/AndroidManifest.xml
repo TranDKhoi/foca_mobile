@@ -17,9 +17,10 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activity.user.cart_order.UserDetailOrder"
-            android:exported="true"/>
-        <activity android:name=".activity.user.cart_order.UserRateScreen"
-            android:exported="false"/>
+            android:exported="true" />
+        <activity
+            android:name=".activity.user.cart_order.UserRateScreen"
+            android:exported="false" />
         <activity
             android:name=".activity.authen.signup.success.SuccessScreen"
             android:exported="false" />
@@ -39,7 +40,7 @@
             android:name=".activity.admin.order.OrderManagement"
             android:exported="false" />
         <activity
-            android:name=".activity.user.profile.settings.UserProfileActivity"
+            android:name=".activity.user.profile.profilesetting.UserProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar." />
         <activity
@@ -58,9 +59,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.admin.notifi.admin_notifi"
-            android:exported="false" />
         <activity
             android:name=".activity.authen.login.LoginScreen"
             android:exported="true" />

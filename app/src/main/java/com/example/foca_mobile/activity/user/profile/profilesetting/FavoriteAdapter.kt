@@ -1,19 +1,18 @@
-package com.example.foca_mobile.activity.user.profile.settings
+package com.example.foca_mobile.activity.user.profile.profilesetting
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foca_mobile.databinding.ListFavoriteBinding
-import com.example.foca_mobile.model.Favorite
+import com.example.foca_mobile.databinding.ListFavoriteItemBinding
 
 class FavoriteAdapter(private val arrayList:List<Favorite>):
     RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>()
 {
-    inner class FavoriteViewHolder(val binding:ListFavoriteBinding):RecyclerView.ViewHolder(binding.root)
+    inner class FavoriteViewHolder(val binding:ListFavoriteItemBinding):RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        val v = ListFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val v = ListFavoriteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteViewHolder(v)
     }
 

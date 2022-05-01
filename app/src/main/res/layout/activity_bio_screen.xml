@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/graygradient_background"
     android:scrollbars="none"
     tools:context=".activity.authen.signup.BioScreen">
 
@@ -120,7 +120,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/light_green_gradient"
                 android:fontFamily="@font/bentonsans_bold"
                 android:text="Finish"
                 android:textAllCaps="false"

@@ -4,17 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.databinding.ActivityOrderFoodBinding
+import com.example.foca_mobile.databinding.ActivityUserPopularMenuBinding
 
 class PopularMenu : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOrderFoodBinding
+    private lateinit var binding: ActivityUserPopularMenuBinding
     private lateinit var newArrayAddFoodList : ArrayList<Food>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        binding = ActivityOrderFoodBinding.inflate(layoutInflater)
+        binding = ActivityUserPopularMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         createAddFoodRecyclerView()
 
@@ -29,7 +29,7 @@ class PopularMenu : AppCompatActivity() {
         newArrayAddFoodList = arrayListOf<Food>()
         newArrayAddFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add
@@ -37,7 +37,7 @@ class PopularMenu : AppCompatActivity() {
         )
         newArrayAddFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add
@@ -45,7 +45,7 @@ class PopularMenu : AppCompatActivity() {
         )
         newArrayAddFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add
@@ -53,7 +53,7 @@ class PopularMenu : AppCompatActivity() {
         )
         newArrayAddFoodList.add(
             Food(
-                R.drawable.restaurant_image1,
+                R.drawable.favorite_8,
                 "Lê Hải Phong",
                 20,
                 R.drawable.ic_add

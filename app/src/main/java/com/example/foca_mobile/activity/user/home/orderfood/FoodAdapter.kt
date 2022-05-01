@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.activity.user.home.infofood.InfoFood_Activity
-import com.example.foca_mobile.databinding.ListFoodBinding
+import com.example.foca_mobile.databinding.ListFoodItemBinding
 
 
 class FoodAdapter(private var c: Context, private val arrayList: ArrayList<Food>) :
     RecyclerView.Adapter<FoodAdapter.FoodViewHolder> (){
 
-    inner class FoodViewHolder(val binding: ListFoodBinding):RecyclerView.ViewHolder(binding.root)
+    inner class FoodViewHolder(val binding: ListFoodItemBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
-        val v = ListFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val v = ListFoodItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FoodViewHolder(v)
     }
 
@@ -23,7 +23,7 @@ class FoodAdapter(private var c: Context, private val arrayList: ArrayList<Food>
         holder.binding.imageFood.setImageResource(arrayList[position].imageFood)
         holder.binding.nameFood.text = arrayList[position].nameFood
         holder.binding.price.text = arrayList[position].price.toString() + "$"
-        holder.binding.iconButton.setImageResource(arrayList[position].iconButton)
+        holder.binding.iconButton.setBackgroundResource(arrayList[position].iconButton)
         holder.binding.root.setOnClickListener {
             var intent = Intent(c,InfoFood_Activity::class.java)
             c.startActivity(intent)

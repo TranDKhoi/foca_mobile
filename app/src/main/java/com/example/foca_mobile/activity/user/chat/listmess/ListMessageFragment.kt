@@ -43,7 +43,7 @@ class ListMessageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_list_message, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_admin_list_message, container, false)
         //ÁNH XẠ RCV VÀ  SET LAYOUT CHO NÓ
         messRecyclerView = view.findViewById(R.id.messRcV)
         messRecyclerView.layoutManager = LinearLayoutManager(activity)

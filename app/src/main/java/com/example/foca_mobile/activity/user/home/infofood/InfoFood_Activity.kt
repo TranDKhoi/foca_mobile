@@ -4,18 +4,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.databinding.ActivityInfoFoodBinding
+import com.example.foca_mobile.databinding.ActivityUserInfoFoodBinding
 import java.time.LocalDate
 import kotlin.collections.ArrayList
 
 class InfoFood_Activity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityInfoFoodBinding
+    private lateinit var binding: ActivityUserInfoFoodBinding
     private lateinit var newArrayReviewFoodList: ArrayList<ReviewFood>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityInfoFoodBinding.inflate(layoutInflater)
+        binding = ActivityUserInfoFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initToolBar()
         binding.toolbar.setNavigationOnClickListener{
@@ -41,7 +41,7 @@ class InfoFood_Activity : AppCompatActivity() {
         for (i in 0..5) {
             newArrayReviewFoodList.add(
                 ReviewFood(
-                    R.drawable.photo_profile_1,
+                    R.drawable.favorite_6,
                     "Dianne Russell",
                     LocalDate.parse("2022-04-18"),
                     "This Is great, So delicious! You Must Here, With Your family . . ",
@@ -50,7 +50,7 @@ class InfoFood_Activity : AppCompatActivity() {
             )
             newArrayReviewFoodList.add(
                 ReviewFood(
-                    R.drawable.photo_profile_2,
+                    R.drawable.favorite_7,
                     "Dianne Russell",
                     LocalDate.parse("2022-04-18"),
                     "This Is great, So delicious! You Must Here, With Your family . . ",

@@ -3,15 +3,15 @@ package com.example.foca_mobile.activity.user.home.userhome
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foca_mobile.databinding.ListRecentFoodBinding
+import com.example.foca_mobile.databinding.ListRecentFoodItemBinding
 
 class RecentFoodAdapter(private val arrList: ArrayList<RecentFood>) :
     RecyclerView.Adapter<RecentFoodAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ListRecentFoodBinding):RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ListRecentFoodItemBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentFoodAdapter.ViewHolder {
-        val v = ListRecentFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val v = ListRecentFoodItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(v)
     }
 

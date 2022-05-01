@@ -2,24 +2,27 @@ package com.example.foca_mobile.activity.user.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.profile.settings.UserProfileActivity
-import com.example.foca_mobile.databinding.FragmentUserProfileScreenBinding
+import com.example.foca_mobile.activity.authen.login.LoginScreen
+import com.example.foca_mobile.activity.user.profile.profilesetting.UserProfileActivity
+import com.example.foca_mobile.databinding.FragmentUserProfileBinding
+import com.example.foca_mobile.utils.LoginPrefs
 
-class UserProfileScreenFragment : Fragment(R.layout.fragment_user_profile_screen) {
+class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
-    private var _binding: FragmentUserProfileScreenBinding? = null
+    private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUserProfileScreenBinding.inflate(
+        _binding = FragmentUserProfileBinding.inflate(
             inflater,
             container,
             false
@@ -27,6 +30,12 @@ class UserProfileScreenFragment : Fragment(R.layout.fragment_user_profile_screen
         binding.profileSettings.setOnClickListener {
             val intent = Intent(context, UserProfileActivity::class.java)
             startActivity(intent)
+        }
+        binding.logout.setOnClickListener {
+            LoginPrefs.removeToken();
+            val it = Intent(context, LoginScreen::class.java);
+            activity?.finishAffinity()
+            startActivity(it);
         }
         return binding.root
     }
