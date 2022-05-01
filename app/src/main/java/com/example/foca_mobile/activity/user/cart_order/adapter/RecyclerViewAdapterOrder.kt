@@ -18,8 +18,11 @@ class RecyclerViewAdapterOrder(private val listOrder: ArrayList<Order>) : Recycl
     {
         var img : ImageView = itemView.findViewById(R.id.orderItemImage)
         var name : TextView = itemView.findViewById(R.id.orderItemName)
-        var totalPrice: TextView = itemView.findViewById(R.id.orderItemPrice)
+        var price: TextView = itemView.findViewById(R.id.orderItemPrice)
         var status : Button = itemView.findViewById(R.id.orderItemStatus)
+        var quantity : TextView = itemView.findViewById(R.id.orderQuantity)
+        var totalPrice : TextView = itemView.findViewById(R.id.orderTotalPrice)
+        var itemQuantity : TextView = itemView.findViewById(R.id.orderItemQuantity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,9 +33,12 @@ class RecyclerViewAdapterOrder(private val listOrder: ArrayList<Order>) : Recycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listOrder[position]
         var total: Int = 0
-        holder.img.setImageResource(item.imgSrc)
+        holder.img.setImageResource(item.listFood[0].imgSrc)
         holder.name.text = item.name
         holder.status.text = item.status
+        holder.quantity.text = item.listFood.size.toString() + " sản phẩm"
+        holder.price.text = item.listFood[0].price.toString()
+        holder.itemQuantity.text = "x"+item.listFood[0].quantity.toString()
 
         val listFood: ArrayList<Food> = item.listFood
         for(everyItem in listFood){

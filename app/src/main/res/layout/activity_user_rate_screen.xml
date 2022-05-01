@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_background">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/image_login_background"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/avatar_image_border"
+            app:backgroundTint="@null"
+            android:src="@drawable/image_logo"
+            android:layout_gravity="center_horizontal">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thank you!"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/bentonsans_bold"
+            android:textSize="25sp"
+            android:layout_marginTop="40dp"
+            android:textColor="#09051C"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please rate your order"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/bentonsans_regular"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#483B3B3B"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:id="@+id/ratingBar"
+            android:progressDrawable="@drawable/rating_order"
+            />
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="109dp"
+        android:drawableStart="@drawable/ic_edit"
+        android:drawablePadding="14dp"
+        android:paddingHorizontal="20dp"
+        android:hint="Leave feedback"
+        android:textColorHint="#483B3B3B"
+        android:fontFamily="@font/bentonsans_regular"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:background="@drawable/rate_input"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="250dp"
+        android:layout_height="57dp"
+        android:background="@drawable/light_green_gradient"
+        app:backgroundTint="@null"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/bentonsans_bold"
+        android:text="Submit"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:textColor="#FEFEFF"
+        android:layout_gravity="start|bottom"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="100dp"
+        android:layout_height="57dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/white_background"
+        android:fontFamily="@font/bentonsans_bold"
+        android:text="Skip"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:textColor="@color/green"
+        app:cornerRadius="15dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/btnSkip"/>
+
+
+
+</FrameLayout>
