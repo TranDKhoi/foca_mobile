@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         //THIS IS WHERE WE DECIDE WHO IS LOGIN
         if (currentUser.role == "USER") {
             //USER FRAGMENT
-            val userHomeFragment = UserHomeFragment()
+            val userHomeFragment = AdminHomeFragment()
             val messageFragment = ListMessageFragment()
 
             binding.bottomNavigation.setItemSelected(R.id.home)
