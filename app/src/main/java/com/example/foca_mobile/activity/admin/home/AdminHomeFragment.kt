@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity.admin.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.admin.home.RecentOrderAdapter
-import com.example.foca_mobile.activity.admin.home.RecentOrderClass
+import com.example.foca_mobile.activity.admin.order.OrderManagement
 import com.example.foca_mobile.databinding.FragmentAdminHomeBinding
-import com.example.foca_mobile.model.Food
 
 
 class AdminHomeFragment : Fragment(R.layout.fragment_admin_home) {
@@ -33,6 +32,14 @@ class AdminHomeFragment : Fragment(R.layout.fragment_admin_home) {
 
         createMyMenuRCV()
         binding.myMenuRCV.adapter = MyMenuAdapter(myMenuList)
+
+        binding.viewMoreOrder.setOnClickListener {
+            val intent = Intent(context, OrderManagement::class.java)
+            startActivity(intent);
+        }
+
+
+
 
         return binding.root
     }

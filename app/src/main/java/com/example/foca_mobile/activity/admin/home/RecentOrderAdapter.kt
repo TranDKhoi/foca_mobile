@@ -8,6 +8,7 @@ import com.example.foca_mobile.databinding.ListRecentFoodBinding
 class RecentOrderAdapter(private val orderList: ArrayList<RecentOrderClass>) :
     RecyclerView.Adapter<RecentOrderAdapter.MyViewHolder>() {
 
+    var onItemClick: ((RecentOrderClass) -> Unit)? = null
 
     class MyViewHolder(val binding: ListRecentFoodBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -19,8 +20,11 @@ class RecentOrderAdapter(private val orderList: ArrayList<RecentOrderClass>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding.imageRecentFood.setImageResource(orderList[position].image)
-        holder.binding.nameRecentFood.text  = orderList[position].txtName
+        holder.binding.nameRecentFood.text = orderList[position].txtName
         holder.binding.priceRecentFood.text = orderList[position].price.toString() + "$"
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(orderList[position])
+        }
     }
 
     override fun getItemCount(): Int {
