@@ -36,9 +36,9 @@ class MyCartFragment : Fragment() {
 
         binding.rvCart.layoutManager = LinearLayoutManager(activity)
         binding.rvCart.adapter = adapter
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing=false
-        }
+//        binding.swipeRefreshLayout.setOnRefreshListener {
+//            binding.swipeRefreshLayout.isRefreshing = false
+//        }
         setItemTouchHelper()
     }
 

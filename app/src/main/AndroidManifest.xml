@@ -86,7 +86,6 @@
         <activity
             android:name=".activity.authen.signup.VerifiAccountScreen"
             android:exported="false" />
-
     </application>
 
 </manifest>

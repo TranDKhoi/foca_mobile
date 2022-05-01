@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity.user.cart_order
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,10 @@ class UserDetailOrder : AppCompatActivity() {
         binding.rvFood.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.orderDetailBack.setOnClickListener { finish() }
+        binding.orderDetailButton.setOnClickListener{
+            val intent = Intent(this, UserRateScreen::class.java)
+            startActivity(intent)
+        }
     }
 
 }

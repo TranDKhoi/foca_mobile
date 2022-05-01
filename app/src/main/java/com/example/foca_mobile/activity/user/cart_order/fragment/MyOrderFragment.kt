@@ -53,12 +53,12 @@ class MyOrderFragment : Fragment() {
         listFood.add(Food("Mỳ tôm hảo hảo","Waroenk kita",20000,1,R.drawable.image_logo))
         listFood.add(Food("Bánh hỏi heo quay","Waroenk kita",30000,1,R.drawable.image_logo))
 
-        list.add(Order(R.drawable.image_logo, name = "Spacy fresh crab", totalPrice = 100000, status = "Process", listFood))
-        list.add(Order(R.drawable.image_logo, name = "Order 1", totalPrice = 25000, status = "Process",listFood))
-        list.add(Order(R.drawable.image_logo, name = "Order 2", totalPrice = 12000, status = "Process",listFood))
-        list.add(Order(R.drawable.image_logo, name = "Order 3", totalPrice = 15000, status = "Process",listFood))
-        list.add(Order(R.drawable.image_logo, name = "Order 4", totalPrice = 20000, status = "Process",listFood))
-        list.add(Order(R.drawable.image_logo, name = "Order 5", totalPrice = 30000, status = "Process",listFood))
+        list.add(Order( name = "Spacy fresh crab", totalPrice = 100000, status = "Process", listFood))
+        list.add(Order( name = "Order 1", totalPrice = 25000, status = "Process",listFood))
+        list.add(Order( name = "Order 2", totalPrice = 12000, status = "Process",listFood))
+        list.add(Order( name = "Order 3", totalPrice = 15000, status = "Process",listFood))
+        list.add(Order( name = "Order 4", totalPrice = 20000, status = "Process",listFood))
+        list.add(Order( name = "Order 5", totalPrice = 30000, status = "Process",listFood))
 
         adapter.notifyDataSetChanged()
 
