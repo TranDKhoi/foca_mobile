@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.foca_mobile" >
+    package="com.example.foca_mobile">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -55,21 +55,18 @@
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true">
-	<activity>
-            android:name=".activity.admin.notifi.admin_notifi"
-            android:exported="false" />
-        <activity
-            android:name=".activity.admin.admin_home"
-            android:exported="false" />
-        <activity
-            android:name=".activity.authen.login.LoginScreen"
-            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.admin.notifi.admin_notifi"
+            android:exported="false" />
+        <activity
+            android:name=".activity.authen.login.LoginScreen"
+            android:exported="true" />
         <activity
             android:name=".activity.authen.forgotpass.SuccessSetPassScreen"
             android:exported="false" />
@@ -90,21 +87,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.authen.signup.VerifiAccountScreen"
-            android:exported="false" />
-        <activity
-            android:name=".activity.authen.signup.SignupScreen"
-            android:exported="false" />
-        <activity
-            android:name=".activity.authen.login.LoginScreen"
-            android:exported="false" />
-        <activity
-            android:name=".activity.user.notifi.user_notifi"
-            android:exported="false" />
-        <activity
-            android:name=".activity.admin.notifi.admin_notifi"
-            android:exported="false" />
-        <activity
-            android:name=".activity.MainActivity"
             android:exported="false" />
     </application>
 
