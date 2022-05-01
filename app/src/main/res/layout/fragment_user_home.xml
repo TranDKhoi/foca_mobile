@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -7,14 +7,17 @@
     android:fillViewport="true"
     android:scrollbars="none"
     tools:context=".activity.user.home.userhome.UserHomeFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp">
+
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -32,29 +35,32 @@
                 android:src="@drawable/icon_notifiaction"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="30dp"
             android:paddingVertical="15dp">
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_textfield"
                 android:alpha="0.5"
+                android:background="@drawable/custom_textfield"
                 android:textColorHint="#DA6317"
                 android:textSize="30sp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:hintEnabled="false">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/ic_search"
-                    android:textColorHint="#DA6317"
-                    android:hint="What do you want to order?"/>
+                    android:hint="What do you want to order?"
+                    android:textColorHint="#DA6317" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageButton
@@ -65,17 +71,20 @@
                 android:background="@drawable/custom_textfield"
                 android:src="@drawable/filter_icon" />
         </LinearLayout>
+
         <ImageButton
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/advertising" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -95,14 +104,17 @@
                 android:textColor="#FF7C32"
                 android:textSize="15dp" />
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/restaurantRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -110,20 +122,23 @@
                 android:text="Popular Menu"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/txtViewmorePopularmenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:id="@+id/txtViewmorePopularmenu"
                 android:background="@android:color/transparent"
                 android:text="View more"
                 android:textAllCaps="false"
                 android:textColor="#FF7C32"
                 android:textSize="15dp" />
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/foodRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp" />
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

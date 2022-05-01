@@ -9,12 +9,10 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
-import com.example.foca_mobile.activity.user.home.HomeFragment
-import com.example.foca_mobile.activity.user.home.UserHomeFragment
+import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 import com.example.foca_mobile.model.User
 import com.example.foca_mobile.utils.LoginPrefs
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         //THIS IS WHERE WE DECIDE WHO IS LOGIN
         if (currentUser.role == "USER") {
             //USER FRAGMENT
-            val userHomeFragment = AdminHomeFragment()
+            val userHomeFragment = UserHomeFragment()
             val messageFragment = ListMessageFragment()
 
             binding.bottomNavigation.setItemSelected(R.id.home)
