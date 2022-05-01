@@ -1,14 +1,14 @@
 package com.example.foca_mobile.activity.user.cart_order
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.cart_order.adapter.CartOrderAdapter
-import com.example.foca_mobile.databinding.FragmentMyCartBinding
 import com.example.foca_mobile.databinding.FragmentUserMyCartBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -41,6 +41,15 @@ class UserMyCart : Fragment() {
             tab.text = tabTitle[position]
 
         }.attach()
+    }
+
+    fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val myFragment: UserMyCart? =
+            requireFragmentManager().findFragmentByTag("MY_FRAGMENT_TAG") as UserMyCart?
+        if (myFragment != null) {
+            myFragment.dispatchTouchEvent(ev)
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
 }
