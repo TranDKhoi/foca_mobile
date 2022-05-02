@@ -1,10 +1,12 @@
 package com.example.foca_mobile.activity.user.cart_order
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.foca_mobile.databinding.ActivityUserRateScreenBinding
 
 class UserRateScreen : AppCompatActivity() {
@@ -20,7 +22,6 @@ class UserRateScreen : AppCompatActivity() {
         binding.btnSkip.setOnClickListener {
             finish()
         }
-
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

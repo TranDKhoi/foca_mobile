@@ -20,7 +20,8 @@
             android:exported="true" />
         <activity
             android:name=".activity.user.cart_order.UserRateScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".activity.authen.signup.success.SuccessScreen"
             android:exported="false" />
@@ -37,7 +38,7 @@
             android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.admin.order.OrderManagement"
+            android:name=".activity.admin.order.AdminOrderManagement"
             android:exported="false" />
         <activity
             android:name=".activity.user.profile.profilesetting.UserProfileActivity"
@@ -83,6 +84,8 @@
         <activity
             android:name=".activity.authen.signup.VerifiAccountScreen"
             android:exported="false" />
+        <activity android:name=".activity.user.chat.conversation.ChatScreen"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -2,11 +2,9 @@ package com.example.foca_mobile.activity.user.cart_order
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.cart_order.adapter.CartOrderAdapter
 import com.example.foca_mobile.databinding.FragmentUserMyCartBinding
@@ -14,8 +12,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class UserMyCart : Fragment() {
 
-    private var tabTitle = arrayOf("My cart","My orders")
-    private  lateinit var  binding: FragmentUserMyCartBinding
+    private var tabTitle = arrayOf("My cart", "My orders")
+    private lateinit var binding: FragmentUserMyCartBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +29,13 @@ class UserMyCart : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragmentManager = (activity as FragmentActivity).supportFragmentManager
+        val fragmentManager = getChildFragmentManager();
         binding = FragmentUserMyCartBinding.bind(view)
         binding.myCartViewPager.adapter = CartOrderAdapter(fragmentManager, lifecycle)
-        binding.myCartViewPager.isUserInputEnabled=false
+        binding.myCartViewPager.isUserInputEnabled = false
+        binding.myCartViewPager.isSaveEnabled = false
 
-        TabLayoutMediator(binding.myCartTabLayout, binding.myCartViewPager){
-                tab, position ->
+        TabLayoutMediator(binding.myCartTabLayout, binding.myCartViewPager) { tab, position ->
             tab.text = tabTitle[position]
 
         }.attach()

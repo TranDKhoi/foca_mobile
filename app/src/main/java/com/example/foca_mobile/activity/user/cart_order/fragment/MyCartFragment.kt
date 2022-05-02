@@ -26,7 +26,7 @@ class MyCartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-        return inflater.inflate(R.layout.fragment_my_cart, container, false)
+        return inflater.inflate(R.layout.fragment_my_cart, container, true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

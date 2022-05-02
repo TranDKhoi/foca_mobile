@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.admin.order.OrderManagement
+import com.example.foca_mobile.activity.admin.order.AdminOrderManagement
 import com.example.foca_mobile.databinding.FragmentAdminHomeBinding
 
 
@@ -34,7 +34,7 @@ class AdminHomeFragment : Fragment(R.layout.fragment_admin_home) {
         binding.myMenuRCV.adapter = MyMenuAdapter(myMenuList)
 
         binding.viewMoreOrder.setOnClickListener {
-            val intent = Intent(context, OrderManagement::class.java)
+            val intent = Intent(context, AdminOrderManagement::class.java)
             startActivity(intent);
         }
 
