@@ -1,5 +1,6 @@
-package com.example.foca_mobile.activity.admin.chat.listmess
+package com.example.foca_mobile.activity.admin.chat.listconversation
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -15,9 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.chat.conversation.AdminChatScreen
 import com.example.foca_mobile.databinding.FragmentAdminListConversationBinding
+import com.example.foca_mobile.model.Message
 import com.example.foca_mobile.socket.SocketHandler
+import com.example.foca_mobile.utils.GlobalObject
 import com.google.gson.Gson
 import io.socket.client.Ack
+import io.socket.client.Socket
 import org.json.JSONObject
 
 
@@ -27,11 +31,9 @@ class ListConversationFragment : Fragment() {
     private lateinit var conversationListAdapter: ListConversationAdapter
 
     private lateinit var binding: FragmentAdminListConversationBinding
+    private lateinit var socket: Socket
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +42,7 @@ class ListConversationFragment : Fragment() {
         val view: View =
             inflater.inflate(R.layout.fragment_admin_list_conversation, container, false)
         binding = FragmentAdminListConversationBinding.bind(view)
+        socket = SocketHandler.getSocket()
 
         //ÁNH XẠ RCV VÀ  SET LAYOUT CHO NÓ
         messRecyclerView = view.findViewById(R.id.messRcV)
@@ -49,10 +52,28 @@ class ListConversationFragment : Fragment() {
         conversationList = ArrayList()
 
         getRooms()
-
         //SET ADAPTER CHO RCV
         conversationListAdapter = ListConversationAdapter(conversationList)
         messRecyclerView.adapter = conversationListAdapter
+
+        socket.on("received_message") {
+            val messageJson = it[0] as JSONObject
+            val message = Gson().fromJson(messageJson.toString(), Message::class.java)
+
+            GlobalObject.updateNotSeenConversationAdmin(requireActivity(), message.roomId!!)
+            socket.emit("get_rooms", Ack { ack ->
+                val dataJson = ack[0] as JSONObject
+                val dataConversation =
+                    Gson().fromJson(dataJson.toString(), ConversationListObj::class.java)
+                if (dataConversation.error == null) {
+                    activity?.runOnUiThread {
+                        conversationList.clear()
+                        conversationList.addAll(dataConversation.data ?: ArrayList())
+                        conversationListAdapter.notifyDataSetChanged()
+                    }
+                }
+            })
+        }
 
         conversationListAdapter.onItemClick = {
             val intent = Intent(activity, AdminChatScreen::class.java)
@@ -73,22 +94,21 @@ class ListConversationFragment : Fragment() {
         getRooms()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun getRooms() {
         binding.progressBar.visibility = ProgressBar.VISIBLE
-        val socket = SocketHandler.getSocket()
         socket.emit("get_rooms", Ack {
             val dataJson = it[0] as JSONObject
             val dataConversation =
                 Gson().fromJson(dataJson.toString(), ConversationListObj::class.java)
             if (dataConversation.error == null) {
-                activity?.runOnUiThread(Runnable {
+                activity?.runOnUiThread {
                     conversationList.clear()
                     conversationList.addAll(dataConversation.data ?: ArrayList())
                     conversationListAdapter.notifyDataSetChanged()
                     binding.progressBar.visibility = ProgressBar.GONE
-                })
+                }
             }
         })
-
     }
 }

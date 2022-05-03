@@ -1,4 +1,4 @@
-package com.example.foca_mobile.activity.admin.chat.listmess
+package com.example.foca_mobile.activity.admin.chat.listconversation
 
 data class ConversationListObj (
     val error: String? = null,

@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         app:cardCornerRadius="16dp">
@@ -23,7 +23,6 @@
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:text="This is the my message"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

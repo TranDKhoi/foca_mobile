@@ -3,7 +3,6 @@
     package="com.example.foca_mobile">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,29 +15,29 @@
         android:theme="@style/Theme.Foca_mobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.user.profile.generalsetting.GeneralSetting"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.menu.productdetail.AdminProductDetail"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.order.orderdetail.AdminOrderDetail"
+            android:exported="false" />
+        <activity
             android:name=".activity.user.cart_order.UserDetailOrder"
             android:exported="true" />
         <activity
             android:name=".activity.user.cart_order.UserRateScreen"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity
-            android:name=".activity.authen.signup.success.SuccessScreen"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activity.authen.signup.bio.BioScreen"
-            android:exported="false" />
-        <activity
-            android:name=".activity.authen.signup.VerifiScreen"
             android:exported="false" />
         <activity
             android:name=".activity.authen.signup.SignupScreen"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.admin.order.AdminOrderManagement"
             android:exported="false" />
         <activity
             android:name=".activity.user.profile.profilesetting.UserProfileActivity"
@@ -84,10 +83,13 @@
         <activity
             android:name=".activity.authen.signup.VerifiAccountScreen"
             android:exported="false" />
-        <activity android:name=".activity.user.chat.UserChatScreen"
-            android:exported="false"/>
-        <activity android:name=".activity.admin.chat.conversation.AdminChatScreen"
-            android:exported="false"/>
+        <activity
+            android:name=".activity.user.chat.UserChatScreen"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activity.admin.chat.conversation.AdminChatScreen"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,11 +1,13 @@
 package com.example.foca_mobile.service
 
-import com.example.foca_mobile.model.Product
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.User
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
 
 
 interface AuthService {

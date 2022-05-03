@@ -1,10 +1,12 @@
 package com.example.foca_mobile.activity.user.profile.profilesetting
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityUserProfileBinding
+import com.example.foca_mobile.utils.GlobalObject
 
 class UserProfileActivity : AppCompatActivity() {
 
@@ -16,11 +18,17 @@ class UserProfileActivity : AppCompatActivity() {
         binding = ActivityUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initToolBar()
-        binding.toolbar.setNavigationOnClickListener{
+        binding.toolbar.setNavigationOnClickListener {
             this.finish()
         }
         creatReviewRecycleview()
         binding.favoriteRecycleview.adapter = FavoriteAdapter(newArrayFavoriteFoodList)
+
+        Glide.with(applicationContext)
+            .load(GlobalObject.CurrentUser.photoUrl)
+            .into(binding.userImage)
+        binding.nameProfile.text = GlobalObject.CurrentUser.fullName
+        binding.emailProfile.text = GlobalObject.CurrentUser.email
     }
 
     private fun initToolBar() {

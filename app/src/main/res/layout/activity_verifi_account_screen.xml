@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,9 +13,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:alpha="0.5"
             android:scaleType="fitXY"
             android:src="@drawable/image_login_background"
-            android:alpha="0.5"/>
+            tools:ignore="ContentDescription" />
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -31,18 +31,16 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/back_button"
-                android:onClick="toSignupScreen"
-                android:src="@drawable/ic_back" />
+               android:id="@+id/backBtn"
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bentonsans_bold"
-                android:lineHeight="30dp"
-                android:text="Enter 4-digit \nVerification code"
+                android:text="@string/Enter4digit"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textFontWeight="400"
                 android:textSize="25sp" />
 
             <TextView
@@ -50,12 +48,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:layout_marginTop="50dp"
-                android:fontFamily="@font/bentonsans_book"
-                android:lineHeight="26px"
                 android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="15sp" />
-
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/codefield"
@@ -64,10 +59,12 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
                 android:cursorVisible="false"
+                android:importantForAutofill="no"
                 android:inputType="number"
                 android:letterSpacing="2.5"
                 android:maxLength="4"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                tools:ignore="LabelFor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,15 +72,14 @@
                 android:layout_marginTop="50dp">
 
                 <TextView
-                    android:id="@+id/signup"
+                    android:id="@+id/reSendCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:clickable="true"
                     android:fontFamily="@font/bentonsans_medium"
-                    android:text="Resend Code"
-                    android:textColor="#15BE77"
-                    android:onClick="reSendCode"/>
+                    android:text="@string/Resendcode"
+                    android:textColor="#15BE77" />
 
                 <View
                     android:layout_width="0dp"
@@ -95,19 +91,18 @@
                     android:layout_width="141dp"
                     android:layout_height="57dp"
                     android:background="@drawable/light_green_gradient"
-                    android:fontFamily="@font/bentonsans_bold"
-                    android:text="Confirm"
+                    android:text="@string/Confirm"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
             </LinearLayout>
 
             <ProgressBar
-                android:layout_gravity="center_horizontal"
+                android:id="@+id/bar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:visibility="gone"
-                android:id="@+id/bar"/>
+                android:visibility="gone" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

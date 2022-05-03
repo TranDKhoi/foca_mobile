@@ -117,7 +117,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="21dp"
-                    android:fontFamily="@font/bentonsans_bold"
                     android:text="Total"
                     android:textColor="@color/lightWhite"
                     android:textSize="18sp" />
@@ -170,7 +169,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginTop="21dp"
-                    android:fontFamily="@font/bentonsans_bold"
                     android:text="150$"
                     android:textColor="@color/lightWhite"
                     android:textSize="18sp" />

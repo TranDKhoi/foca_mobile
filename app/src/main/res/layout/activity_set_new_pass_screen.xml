@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +15,8 @@
             android:layout_height="wrap_content"
             android:alpha="0.5"
             android:scaleType="fitXY"
-            android:src="@drawable/image_login_background" />
+            android:src="@drawable/image_login_background"
+            tools:ignore="ContentDescription" />
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -27,34 +27,34 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/backBtn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/back_button"
-                android:onClick="toVerifiPassScreen"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bentonsans_bold"
-                android:lineHeight="30dp"
-                android:text="Reset your password \nhere"
+                android:text="@string/Resetyourpasswordhere"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textStyle="bold
+" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/bentonsans_book"
-                android:lineHeight="20dp"
-                android:text="One more step to finish and don't \nforget your account :)"
+
+                android:text="@string/Onemorestep"
                 android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/newpass"
@@ -62,9 +62,10 @@
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
-                android:hint="New Password"
+                android:hint="@string/NewPassword"
+                android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:paddingLeft="10dp" />
+                android:paddingHorizontal="10dp" />
 
             <EditText
                 android:id="@+id/repass"
@@ -72,9 +73,10 @@
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
-                android:hint="Confirm Password"
+                android:hint="@string/ConfirmPassword"
+                android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:paddingLeft="10dp" />
+                android:paddingHorizontal="10dp" />
 
             <View
                 android:layout_width="0dp"
@@ -82,16 +84,16 @@
                 android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/finishbtn"
                 android:layout_width="141dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/light_green_gradient"
-                android:fontFamily="@font/bentonsans_bold"
-                android:onClick="toSuccessScreen"
-                android:text="Finish"
+                android:text="@string/Finish"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </RelativeLayout>

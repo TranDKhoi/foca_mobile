@@ -1,13 +1,20 @@
 package com.example.foca_mobile.activity.user.chat
 
+import android.R
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Rect
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +24,7 @@ import com.example.foca_mobile.model.Message
 import com.example.foca_mobile.model.Room
 import com.example.foca_mobile.model.User
 import com.example.foca_mobile.socket.SocketHandler
+import com.example.foca_mobile.utils.GlobalObject
 import com.example.foca_mobile.utils.LoginPrefs
 import com.google.gson.Gson
 import io.socket.client.Ack
@@ -24,7 +32,12 @@ import io.socket.client.Socket
 import kotlinx.android.synthetic.main.activity_chat_screen.*
 import org.json.JSONObject
 
-class UserChatScreen : AppCompatActivity() {
+
+interface OnKeyboardVisibilityListener {
+    fun onVisibilityChanged(visible: Boolean)
+}
+
+class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
     private lateinit var binding: ActivityChatScreenBinding
 
     private lateinit var conversationAdapter: ConversationAdapter
@@ -40,11 +53,13 @@ class UserChatScreen : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityChatScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setKeyboardVisibilityListener(this)
 
         user = LoginPrefs.getUser()
         messName.text = "Admin"
         messStatus.text = "Online"
         messImage.setImageURI(null)
+        GlobalObject.isOpenActivity = true
 
         //CHANGE SEND BTN VISIBILITY
         inputText.doOnTextChanged { text, _, _, _ ->
@@ -96,6 +111,7 @@ class UserChatScreen : AppCompatActivity() {
             runOnUiThread {
                 listMessage.add(message)
                 conversationAdapter.notifyDataSetChanged()
+                conversationRCV.scrollToPosition(listMessage.size - 1)
             }
         }
     }
@@ -112,7 +128,7 @@ class UserChatScreen : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     fun sendMessageFunc(view: View) {
         if (!inputText.text.isNullOrEmpty()) {
-
+            binding.txtSending.visibility = TextView.VISIBLE
             val message = Message(inputText.text.toString().trim(), user.id, roomId = room.id)
             val messageJson = Gson().toJson(message)
             listMessage.add(message)
@@ -123,6 +139,9 @@ class UserChatScreen : AppCompatActivity() {
                 if (error == null) {
                     val createdMessage =
                         Gson().fromJson(dataJson["data"].toString(), Message::class.java)
+                    runOnUiThread {
+                        binding.txtSending.visibility = TextView.GONE
+                    }
                 } else {
                     Log.d("Error get_room_with_admin", error)
                 }
@@ -131,5 +150,39 @@ class UserChatScreen : AppCompatActivity() {
             binding.inputText.text.clear()
             binding.inputText.onEditorAction(EditorInfo.IME_ACTION_DONE)
         }
+    }
+
+    override fun onVisibilityChanged(visible: Boolean) {
+        if (visible)
+            if (listMessage.size != 0)
+                conversationRCV.smoothScrollToPosition(conversationAdapter.itemCount - 1)
+    }
+
+    private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
+        val parentView = (findViewById<View>(R.id.content) as ViewGroup).getChildAt(0)
+        parentView.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+            private var alreadyOpen = false
+            private val defaultKeyboardHeightDP = 100
+            private val EstimatedKeyboardDP =
+                defaultKeyboardHeightDP + if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) 48 else 0
+            private val rect: Rect = Rect()
+            override fun onGlobalLayout() {
+                val estimatedKeyboardHeight = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    EstimatedKeyboardDP.toFloat(),
+                    parentView.resources.displayMetrics
+                )
+                    .toInt()
+                parentView.getWindowVisibleDisplayFrame(rect)
+                val heightDiff: Int = parentView.rootView.height - (rect.bottom - rect.top)
+                val isShown = heightDiff >= estimatedKeyboardHeight
+                onKeyboardVisibilityListener.onVisibilityChanged(isShown)
+            }
+        })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        GlobalObject.isOpenActivity = false
     }
 }

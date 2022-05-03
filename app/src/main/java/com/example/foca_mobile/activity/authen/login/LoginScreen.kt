@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -22,6 +21,7 @@ import com.example.foca_mobile.service.AuthService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
+import com.example.foca_mobile.utils.GlobalObject
 import com.example.foca_mobile.utils.LoginPrefs
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,50 +45,53 @@ class LoginScreen : AppCompatActivity() {
         val token = LoginPrefs.getUserToken()
         if (token != "")
             verifyAccessTokenFunc("Bearer $token")
+
+        binding.signup.setOnClickListener { toSignupScreen() }
+        binding.forgotpass.setOnClickListener { toForgotPassScreen() }
+        binding.loginBtn.setOnClickListener { loginFunc() }
     }
 
     //HIDE KEYBOARD WHEN LOST FOCUS
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (currentFocus != null) {
-            val imm = this!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(this!!.currentFocus!!.windowToken, 0)
+            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
         }
         return super.dispatchTouchEvent(ev)
     }
-    public fun toSignupScreen(view: View) {
-        val intent = Intent(this, SignupScreen::class.java);
 
-        startActivity(intent);
+    private fun toSignupScreen() {
+        val intent = Intent(this, SignupScreen::class.java)
+        startActivity(intent)
     }
 
-    public fun toForgotPassScreen(view: View) {
-        val intent = Intent(this, ForgotPassScreen::class.java);
-
-        startActivity(intent);
+    private fun toForgotPassScreen() {
+        val intent = Intent(this, ForgotPassScreen::class.java)
+        startActivity(intent)
     }
 
-    public fun loginFunc(view: View) {
-        val id: EditText = binding.idfield;
-        val pas: EditText = binding.passfield;
+    private fun loginFunc() {
+        val id: EditText = binding.idfield
+        val pas: EditText = binding.passfield
 
         //CHECK DATA
         if (id.text.toString().isEmpty()) {
-            id.setBackgroundResource(R.drawable.rounded_edittext_error);
+            id.setBackgroundResource(R.drawable.rounded_edittext_error)
         } else
-            id.setBackgroundResource(R.drawable.rounded_edittext_normal);
+            id.setBackgroundResource(R.drawable.rounded_edittext_normal)
 
         if (pas.text.toString().isEmpty()) {
-            pas.setBackgroundResource(R.drawable.rounded_edittext_error);
+            pas.setBackgroundResource(R.drawable.rounded_edittext_error)
         } else
-            pas.setBackgroundResource(R.drawable.rounded_edittext_normal);
+            pas.setBackgroundResource(R.drawable.rounded_edittext_normal)
 
         if (id.text.toString().isEmpty() || pas.text.toString().isEmpty())
-            return;
+            return
 
         binding.progressBar.visibility = ProgressBar.VISIBLE
         //CALL API
         val loginCall = ServiceGenerator.buildService(AuthService::class.java)
-            .login(User(username = id.text.toString(), password = pas.text.toString()));
+            .login(User(username = id.text.toString(), password = pas.text.toString()))
 
         loginCall?.enqueue(object : Callback<ApiResponse<User>> {
             override fun onResponse(
@@ -104,9 +107,8 @@ class LoginScreen : AppCompatActivity() {
                     SocketHandler.initSocket(user.id!!)
                     directLogin(user)
                 } else {
-                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
-                    Log.d("Error From Api", errorRes.message)
-                    Toast.makeText(applicationContext, errorRes.message, Toast.LENGTH_LONG).show();
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                    Toast.makeText(applicationContext, errorRes.message, Toast.LENGTH_LONG).show()
                 }
                 binding.progressBar.visibility = ProgressBar.GONE
             }
@@ -116,18 +118,18 @@ class LoginScreen : AppCompatActivity() {
         })
     }
 
-    public fun directLogin(user: User) {
-        val it = Intent(this, MainActivity::class.java);
-        it.putExtra("currentUser", user);
-        startActivity(it);
-        this.finish();
+    fun directLogin(user: User) {
+        val it = Intent(this, MainActivity::class.java)
+        GlobalObject.CurrentUser = user
+        startActivity(it)
+        this.finish()
     }
 
     private fun verifyAccessTokenFunc(token: String) {
 
         //CALL API
         val verifyCall = ServiceGenerator.buildService(AuthService::class.java)
-            .verifyAccessToken(token);
+            .verifyAccessToken(token)
 
         binding.progressBar.visibility = ProgressBar.VISIBLE
         verifyCall?.enqueue(object : Callback<ApiResponse<User>> {
@@ -143,9 +145,9 @@ class LoginScreen : AppCompatActivity() {
                     LoginPrefs.setUser(user)
                     directLogin(user)
                 } else {
-                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                     Log.d("Error From Api", errorRes.message)
-                    Toast.makeText(applicationContext, errorRes.message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(applicationContext, errorRes.message, Toast.LENGTH_LONG).show()
                 }
                 binding.progressBar.visibility = ProgressBar.GONE
             }

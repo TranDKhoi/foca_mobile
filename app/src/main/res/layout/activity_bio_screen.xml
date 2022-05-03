@@ -10,14 +10,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.5"
             android:scaleType="fitXY"
-            android:src="@drawable/image_login_background" />
+            android:src="@drawable/image_login_background"
+            tools:ignore="ContentDescription" />
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -28,23 +29,24 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/backBtn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/back_button"
-                android:onClick="toLoginScreen"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bentonsans_bold"
                 android:lineHeight="30dp"
-                android:text="Fill in your bio to get \nstarted"
+                android:text="@string/Fillinyourbiotogetstarted"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:targetApi="p" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,10 +54,10 @@
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/bentonsans_book"
                 android:lineHeight="20dp"
-                android:text="Let's choose a cool name \nand profile picture to show everyone"
+                android:text="@string/Letchooseacoolname"
                 android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:targetApi="p" />
 
             <EditText
                 android:id="@+id/firstname"
@@ -63,9 +65,10 @@
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
-                android:hint="First Name"
+                android:hint="@string/FirstName"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp" />
+                android:paddingHorizontal="10dp" />
 
             <EditText
                 android:id="@+id/lastname"
@@ -73,9 +76,10 @@
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
-                android:hint="Last Name"
+                android:hint="@string/LastName"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp" />
+                android:paddingHorizontal="10dp" />
 
             <EditText
                 android:id="@+id/phonenum"
@@ -83,9 +87,10 @@
                 android:layout_height="57dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
-                android:hint="Phone Number"
-                android:inputType="number"
-                android:paddingLeft="10dp" />
+                android:hint="@string/PhoneNumber"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:paddingHorizontal="10dp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="200dp"
@@ -100,9 +105,9 @@
                     android:id="@+id/circleavatar"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:background="@color/white"
-                    android:onClick="checkPermission"
-                    android:src="@drawable/ic_gallery" />
+                    android:background="#00FFFFFF"
+                    android:src="@drawable/ic_gallery"
+                    tools:ignore="ContentDescription" />
             </androidx.cardview.widget.CardView>
 
             <ProgressBar
@@ -121,8 +126,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/light_green_gradient"
-                android:fontFamily="@font/bentonsans_bold"
-                android:text="Finish"
+                android:text="@string/Finish"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

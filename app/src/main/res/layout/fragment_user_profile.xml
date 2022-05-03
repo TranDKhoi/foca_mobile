@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -37,26 +37,28 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/userImage"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:layout_gravity="center|top"
-                    android:src="@drawable/favorite_11" />
+                    android:scaleType="fitXY"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:text="christoppher Howell"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/userRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:text="(Student)"
                     android:textColor="#F2A902"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -75,20 +77,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp">
+                android:paddingHorizontal="20dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="left|center"
-                    android:src="@drawable/general_settings" />
+                    android:layout_gravity="start|center"
+                    android:src="@drawable/ic_setting"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|center"
+                    android:layout_gravity="start|center"
                     android:layout_marginStart="20dp"
-                    android:text="General Settings"
+                    android:text="@string/GeneralSettings"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -107,20 +111,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp">
+                android:paddingHorizontal="20dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="left|center"
-                    android:src="@drawable/ic_user" />
+                    android:layout_gravity="start|center"
+                    android:src="@drawable/ic_user"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|center"
+                    android:layout_gravity="start|center"
                     android:layout_marginStart="20dp"
-                    android:text="Profile Settings"
+                    android:text="@string/ProfileSettings"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -139,18 +145,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp">
+                android:paddingHorizontal="20dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="left|center"
-                    android:src="@drawable/ic_location" />
+                    android:layout_gravity="start|center"
+                    android:src="@drawable/ic_location"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|center"
+                    android:layout_gravity="start|center"
                     android:layout_marginStart="20dp"
                     android:text="Shipping Details"
                     android:textColor="@color/black"
@@ -171,18 +179,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp">
+                android:paddingHorizontal="20dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="left|center"
-                    android:src="@drawable/payment_details" />
+                    android:layout_gravity="start|center"
+                    android:src="@drawable/payment_details"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|center"
+                    android:layout_gravity="start|center"
                     android:layout_marginStart="20dp"
                     android:text="Payment Details"
                     android:textColor="@color/black"
@@ -203,20 +213,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp">
+                android:paddingHorizontal="20dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="left|center"
-                    android:src="@drawable/payment_details" />
+                    android:layout_gravity="start|center"
+                    android:src="@drawable/ic_logout"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|center"
+                    android:layout_gravity="start|center"
                     android:layout_marginStart="20dp"
-                    android:text="Log out"
+                    android:text="@string/LogOut"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>

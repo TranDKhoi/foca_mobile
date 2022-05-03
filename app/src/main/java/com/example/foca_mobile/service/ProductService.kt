@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface ProductService {
     @GET("/api/products")
-    fun getProductList(): Call<ApiResponse<MutableList<Product>>>
+    fun getProductList(): Call<ApiResponse<MutableList<Product>>>?
 
     @POST("/api/products")
     fun createProduct(@Body user: Product?): Call<Product?>?

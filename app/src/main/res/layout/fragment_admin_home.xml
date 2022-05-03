@@ -17,7 +17,8 @@
             android:layout_height="120dp"
             android:alpha="0.7"
             android:scaleType="centerCrop"
-            android:src="@drawable/image_login_background" />
+            android:src="@drawable/image_login_background"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +34,7 @@
                     android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:text="Manage Your Foods &amp; Orders"
+                    android:text="@string/ManageYourFoodsOrders"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -46,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginEnd="50dp"
                     android:background="@null"
                     android:src="@drawable/ic_notifiaction"
                     tools:ignore="ContentDescription" />
@@ -65,8 +66,8 @@
                     android:alpha="0.5"
                     android:background="@drawable/orange_textfield"
                     android:drawableStart="@drawable/ic_search"
-                    android:hint="What do you want to find?"
-                    android:paddingStart="10dp"
+                    android:hint="@string/Whatdoyouwanttofind"
+                    android:paddingHorizontal="10dp"
                     android:scaleY="1"
                     android:textColor="#DA6317"
                     android:textColorHint="#DA6317" />
@@ -74,10 +75,11 @@
                 <ImageButton
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:alpha="0.5"
                     android:background="@drawable/orange_textfield"
-                    android:src="@drawable/filter_icon" />
+                    android:src="@drawable/filter_icon"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <LinearLayout
@@ -89,8 +91,8 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:text="Recent Orders"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/PendingOrders"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -98,20 +100,35 @@
                     android:id="@+id/viewMoreOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginStart="40dp"
                     android:background="@android:color/transparent"
-                    android:text="View more"
+                    android:text="@string/Viewmore"
                     android:textAllCaps="false"
                     android:textColor="#FF7C32"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recentOrderRCV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="200dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/pendingOrderRCV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <ImageView
+                    android:id="@+id/logo_done"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_nicely_done"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -121,8 +138,8 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:text="My Menu"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/NewestFoods"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -130,19 +147,20 @@
                     android:id="@+id/viewMoreMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginStart="40dp"
                     android:background="@android:color/transparent"
-                    android:text="View more"
+                    android:text="@string/Viewmore"
                     android:textAllCaps="false"
                     android:textColor="#FF7C32"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myMenuRCV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp" />
+                android:layout_marginBottom="80dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </LinearLayout>
     </FrameLayout>
 </androidx.core.widget.NestedScrollView>

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -24,8 +23,11 @@ import com.example.foca_mobile.model.User
 import com.example.foca_mobile.service.AuthService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
+import com.example.foca_mobile.utils.GlobalObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -37,42 +39,41 @@ import retrofit2.Response
 class BioScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityBioScreenBinding
-    private lateinit var UserName: String
-    private lateinit var Password: String
+    private lateinit var userName: String
+    private lateinit var password: String
     private lateinit var imagePath: Uri
-    var uri = "";
+    private var uri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBioScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        UserName = intent.getStringExtra("id").toString()
-        Password = intent.getStringExtra("pass").toString()
+        userName = intent.getStringExtra("id").toString()
+        password = intent.getStringExtra("pass").toString()
 
-        binding.finishbtn.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(p0: View?) {
-                confirmRegister()
-            }
-
-        })
+        binding.finishbtn.setOnClickListener {
+            confirmRegister()
+        }
+        binding.backBtn.setOnClickListener { toLoginScreen() }
+        binding.circleavatar.setOnClickListener { checkPermission() }
     }
+
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (currentFocus != null) {
-            val imm = this!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(this!!.currentFocus!!.windowToken, 0)
+            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
         }
         return super.dispatchTouchEvent(ev)
     }
 
-    public fun toLoginScreen(view: View) {
-
-        val it: Intent = Intent(this, LoginScreen::class.java)
+    private fun toLoginScreen() {
+        val it = Intent(this, LoginScreen::class.java)
         startActivity(it)
         this.finish()
     }
 
-    public fun confirmRegister() {
+    private fun confirmRegister() {
 
         val fname: EditText = binding.firstname
         val lname: EditText = binding.lastname
@@ -98,87 +99,96 @@ class BioScreen : AppCompatActivity() {
             lname.text.toString().isEmpty() ||
             phone.text.toString().isEmpty()
         )
-            return;
+            return
 
-        // Create JSON using JSONObject
-        val jsonObject = JSONObject()
-        jsonObject.put("username", UserName)
-        jsonObject.put("password", Password)
-        jsonObject.put("confirmPassword", Password)
-        jsonObject.put("firstName", fname.text.toString())
-        jsonObject.put("lastName", lname.text.toString())
-        jsonObject.put("phoneNumber", phone.text.toString())
-        jsonObject.put("photoUrl", Uri.parse(uri))
-        // Convert JSONObject to String
-        val jsonObjectString = jsonObject.toString()
+        GlobalScope.launch(Dispatchers.IO) {
+            uri = uploadToFirebase()
+            withContext(Dispatchers.Main) {
+                // Create JSON using JSONObject
+                val jsonObject = JSONObject()
+                jsonObject.put("username", userName)
+                jsonObject.put("password", password)
+                jsonObject.put("confirmPassword", password)
+                jsonObject.put("firstName", fname.text.toString())
+                jsonObject.put("lastName", lname.text.toString())
+                jsonObject.put("phoneNumber", phone.text.toString())
+                if (uri != null)
+                    jsonObject.put("photoUrl", uri)
+                Log.d("Import image success", uri.toString())
 
-        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+                // Convert JSONObject to String
+                val jsonObjectString = jsonObject.toString()
 
-        //CALL API
-        val bioCall =
-            ServiceGenerator.buildService(AuthService::class.java).registerUser(requestBody);
+                val requestBody =
+                    jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
-        binding.bar.visibility = ProgressBar.VISIBLE
-        bioCall?.enqueue(object : Callback<ApiResponse<User>> {
-            override fun onResponse(
-                call: Call<ApiResponse<User>>,
-                response: Response<ApiResponse<User>>
-            ) {
-                if (response.isSuccessful) {
-                    binding.bar.visibility = ProgressBar.GONE
-                    val responseBody = response.body()
-                    val currentUser = responseBody!!.data;
-                    toSuccessScreen(currentUser)
-                } else {
-                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
-                    Log.d("Error From Api", errorRes.message)
-                    Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG)
-                        .show()
-                }
-                binding.bar.visibility = ProgressBar.GONE
+                //CALL API
+                val bioCall =
+                    ServiceGenerator.buildService(AuthService::class.java).registerUser(requestBody)
+
+                binding.bar.visibility = ProgressBar.VISIBLE
+                bioCall?.enqueue(object : Callback<ApiResponse<User>> {
+                    override fun onResponse(
+                        call: Call<ApiResponse<User>>,
+                        response: Response<ApiResponse<User>>
+                    ) {
+                        if (response.isSuccessful) {
+                            binding.bar.visibility = ProgressBar.GONE
+                            val responseBody = response.body()
+                            val currentUser = responseBody!!.data
+                            toSuccessScreen(currentUser)
+                        } else {
+                            val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                            Log.d("Error From Api", errorRes.message)
+                            Toast.makeText(
+                                applicationContext,
+                                response.message(),
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                        }
+                        binding.bar.visibility = ProgressBar.GONE
+                    }
+
+                    override fun onFailure(call: Call<ApiResponse<User>>, t: Throwable) {
+                    }
+                })
             }
-
-            override fun onFailure(call: Call<ApiResponse<User>>, t: Throwable) {
-            }
-        })
-
+        }
     }
 
     private fun toSuccessScreen(user: User) {
-        val it = Intent(this, SuccessCreateAccountScreen::class.java);
-        it.putExtra("currentUser", user);
-        finishAffinity();
-        startActivity(it);
-        this.finish();
+        val it = Intent(this, SuccessCreateAccountScreen::class.java)
+        GlobalObject.CurrentUser = user
+        finishAffinity()
+        startActivity(it)
+        this.finish()
     }
 
 
     // IMAGE LOGIC AREA
+    @Suppress("DEPRECATION")
     private fun chooseImage() {
-        val it: Intent = Intent(Intent.ACTION_PICK);
-        it.type = "image/*";
+        val it = Intent(Intent.ACTION_PICK)
+        it.type = "image/*"
         startActivityForResult(it, IMAGE_PICK_CODE)
     }
 
-    public fun checkPermission(view: View) {
+    private fun checkPermission() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) ==
-                PackageManager.PERMISSION_DENIED
-            ) {
-                val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE);
-                requestPermissions(permissions, PERMISSION_CODE);
-            } else {
-                chooseImage();
-            }
+        if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) ==
+            PackageManager.PERMISSION_DENIED
+        ) {
+            val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            requestPermissions(permissions, PERMISSION_CODE)
         } else {
-            chooseImage();
+            chooseImage()
         }
     }
 
     companion object {
-        private val IMAGE_PICK_CODE = 1000;
-        private val PERMISSION_CODE = 1001;
+        private const val IMAGE_PICK_CODE = 1000
+        private const val PERMISSION_CODE = 1001
     }
 
     override fun onRequestPermissionsResult(
@@ -188,41 +198,37 @@ class BioScreen : AppCompatActivity() {
         when (requestCode) {
             PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    chooseImage();
+                    chooseImage()
                 } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
 
-            val circleavatar: ImageButton = findViewById(R.id.circleavatar) as ImageButton;
+            val circleavatar: ImageButton = findViewById(R.id.circleavatar)
             imagePath = data?.data!!
-            circleavatar.setImageURI(imagePath);
-            uploadToFirebase()
+            circleavatar.setImageURI(imagePath)
         }
     }
 
-
     //FIREBASE IMAGE AREA
-    private fun uploadToFirebase() {
+    private suspend fun uploadToFirebase(): Uri {
+        val imageRef: StorageReference =
+            FirebaseStorage.getInstance().reference.child("profile_images/$userName.png")
 
-        var imageRef: StorageReference =
-            FirebaseStorage.getInstance().reference.child("profile_images/$UserName.png")
-
-        imageRef.putFile(imagePath)
-            .addOnSuccessListener {
-                imageRef.downloadUrl.addOnSuccessListener {
-                    uri = it.toString()
-                    Log.d("URIII", uri)
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to upload Image", Toast.LENGTH_LONG).show()
-            }
+        return withContext(Dispatchers.IO) {
+            imageRef.putFile(imagePath)
+                .await()
+                .storage
+                .downloadUrl
+                .await() // await the url
+        }
     }
 }
