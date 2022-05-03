@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity.user.chat.conversation
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -37,11 +38,12 @@ class ChatScreen : AppCompatActivity() {
     private lateinit var socket: Socket
     private lateinit var room: Room
 
-
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_chat_screen)
+
         user = LoginPrefs.getUser()
         receiveObject = intent.getParcelableExtra<ListMessageClass>("mess")!!;
         if (receiveObject != null) {
@@ -57,26 +59,32 @@ class ChatScreen : AppCompatActivity() {
             } else
                 sendBtn.visibility = View.VISIBLE
         }
+
         listMessage = ArrayList()
+
+        conversationAdapter = ConversationAdapter(this, listMessage);
+        conversationRCV.layoutManager = LinearLayoutManager(this)
+        conversationRCV.adapter = conversationAdapter
+        conversationRCV.scrollToPosition(listMessage.size - 1)
 
         //Socket
         socket = SocketHandler.getSocket()
-
-
         socket.emit("get_room_with_admin", Ack {
             val dataJson = it[0] as JSONObject
             val error = Gson().fromJson(dataJson["error"].toString(), String::class.java)
             if (error == null) {
                 room = Gson().fromJson(dataJson["data"].toString(), Room::class.java)
-                Log.d("get_room_with_admin object", room.toString())
+                Log.d("get_room_with_admin object array", room.messages.toString())
                 runOnUiThread {
-                    listMessage = ArrayList(room.messages)
+                    listMessage.clear()
+                    listMessage.addAll(room.messages!!)
                     conversationAdapter.notifyDataSetChanged()
+                    conversationRCV.scrollToPosition(listMessage.size - 1)
+
                 }
             } else {
                 Log.d("Error get_room_with_admin", error!!)
             }
-
         })
 
         socket.on("received_message") {
@@ -88,13 +96,6 @@ class ChatScreen : AppCompatActivity() {
                 conversationAdapter.notifyDataSetChanged()
             }
         }
-        //SET ADAPTER
-//        listMessage.add(ConversationClass("Tôi nhận", "1"))
-
-        conversationAdapter = ConversationAdapter(this, 1, 1, listMessage);
-        conversationRCV.layoutManager = LinearLayoutManager(this)
-        conversationRCV.adapter = conversationAdapter
-        conversationRCV.scrollToPosition(listMessage.size - 1)
     }
 
     fun toListMessScreen(view: View) {
@@ -102,7 +103,6 @@ class ChatScreen : AppCompatActivity() {
     }
 
     fun callUserFunc(view: View) {
-
         val it = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "0968717777"))
         startActivity(it)
     }
@@ -113,6 +113,8 @@ class ChatScreen : AppCompatActivity() {
             Log.d("Check text message: ", inputText.text.toString())
             val message = Message(inputText.text.toString(), user.id, roomId = room.id)
             val messageJson = Gson().toJson(message)
+            listMessage.add(message)
+            conversationAdapter.notifyDataSetChanged()
             socket.emit("send_message", messageJson, Ack {
                 val dataJson = it[0] as JSONObject
                 val error = Gson().fromJson(dataJson["error"].toString(), String::class.java)
@@ -120,9 +122,10 @@ class ChatScreen : AppCompatActivity() {
                     val createdMessage =
                         Gson().fromJson(dataJson["data"].toString(), Message::class.java)
                     Log.d("send_message object", createdMessage.toString())
-                    runOnUiThread {
-                        listMessage.add(createdMessage)
-                    }
+//                    runOnUiThread {
+//                        listMessage.add(createdMessage)
+//                        conversationAdapter.notifyDataSetChanged()
+//                    }
                 } else {
                     Log.d("Error get_room_with_admin", error!!)
                 }
