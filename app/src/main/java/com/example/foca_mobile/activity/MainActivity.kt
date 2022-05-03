@@ -1,20 +1,23 @@
 package com.example.foca_mobile.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
-import android.widget.Toast
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
+import com.example.foca_mobile.activity.admin.order.AdminOrderManagement
 import com.example.foca_mobile.activity.authen.login.LoginScreen
+import com.example.foca_mobile.activity.user.cart_order.UserMyCart
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
-import com.example.foca_mobile.activity.user.home.HomeFragment
+import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
+import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 import com.example.foca_mobile.model.User
 import com.example.foca_mobile.utils.LoginPrefs
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,9 +36,12 @@ class MainActivity : AppCompatActivity() {
         //THIS IS WHERE WE DECIDE WHO IS LOGIN
         if (currentUser.role == "USER") {
             //USER FRAGMENT
-            val userHomeFragment = HomeFragment()
-            val messageFragment = ListMessageFragment()
+            val userHomeFragment = UserHomeFragment()
+            val messageFragment = ListMessageFragment() // sửa lại
+            val cartFragment = UserMyCart()
+            val profileFragment = UserProfileFragment()
 
+            binding.bottomNavigation.setMenuResource(R.menu.user_menu)
             binding.bottomNavigation.setItemSelected(R.id.home)
             binding.bottomNavigation.showBadge(R.id.message, 1)
             setCurrentFragment(userHomeFragment)
@@ -44,16 +50,39 @@ class MainActivity : AppCompatActivity() {
                 when (id) {
                     R.id.home -> setCurrentFragment(userHomeFragment)
                     R.id.message -> setCurrentFragment(messageFragment);
-                    R.id.cart -> Toast.makeText(this, currentUser.fullName, Toast.LENGTH_LONG)
-                        .show()
-                    R.id.user -> toLoginScreen();//sign out
+                    R.id.cart -> setCurrentFragment(cartFragment)
+                    R.id.user -> setCurrentFragment(profileFragment)
                 }
             }
         } else if (currentUser.role == "ADMIN") {
+            //ADMIN FRAGMENT
+            val adminHomeFragment = AdminHomeFragment()
+            val messageFragment = ListMessageFragment()
+            val orderManage = AdminOrderManagement()
+            val profileFragment = UserProfileFragment()
 
+            binding.bottomNavigation.setMenuResource(R.menu.admin_menu)
+            binding.bottomNavigation.setItemSelected(R.id.home)
+            binding.bottomNavigation.showBadge(R.id.message, 1)
+            setCurrentFragment(adminHomeFragment)
+
+            binding.bottomNavigation.setOnItemSelectedListener { id ->
+                when (id) {
+                    R.id.home -> setCurrentFragment(adminHomeFragment)
+                    R.id.message -> setCurrentFragment(messageFragment)
+                    R.id.cart -> toOrderManagementScreen()
+                    R.id.user -> setCurrentFragment(profileFragment)
+                }
+            }
         }
     }
 
+    private fun toOrderManagementScreen() {
+
+        binding.bottomNavigation.setItemSelected(R.id.cart)
+        val it = Intent(this, AdminOrderManagement::class.java)
+        startActivity(it)
+    }
 
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
@@ -70,4 +99,12 @@ class MainActivity : AppCompatActivity() {
         this.finish();
     }
 
+    //HIDE KEYBOARD WHEN LOST FOCUS
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (currentFocus != null) {
+            val imm = this!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(this!!.currentFocus!!.windowToken, 0)
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 }

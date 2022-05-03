@@ -16,7 +16,7 @@
             android:id="@+id/sendItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/light_green_gradient"
             android:maxWidth="320dp"
             android:minWidth="20dp"
             android:paddingLeft="20dp"

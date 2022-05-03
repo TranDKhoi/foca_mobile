@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    tools:context=".activity.user.chat.ListMessageFragment">
+    android:background="@drawable/graygradient_background"
+    tools:context=".activity.user.chat.listmess.ListMessageFragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/graygradient_background"
         android:orientation="vertical">
 
         <TextView

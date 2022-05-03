@@ -29,7 +29,6 @@
             android:layout_alignParentBottom="true"
             android:elevation="30dp"
             app:cnb_iconSize="30sp"
-            app:cnb_menuResource="@menu/custom_menu"
             app:cnb_radius="10dp"
             app:cnb_unselectedColor="#53E88B"
             tools:ignore="MissingConstraints" />

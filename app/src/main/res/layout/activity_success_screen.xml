@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/graygradient_background"
+    tools:context=".activity.authen.signup.success.SuccessScreen">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/image_login_background" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="172dp"
+                android:layout_height="162dp"
+                android:layout_marginTop="160dp"
+                android:src="@drawable/image_success" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/bentonsans_bold"
+                android:text="Congrat!"
+                android:textColor="#15BE77"
+                android:textFontWeight="400"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/bentonsans_bold"
+                android:text="Your Profile Is Ready To Use"
+                android:textColor="@color/black"
+                android:textFontWeight="400"
+                android:textSize="23sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="141dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/light_green_gradient"
+                android:fontFamily="@font/bentonsans_bold"
+                android:text="Let's Eat"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
