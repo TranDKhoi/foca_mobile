@@ -8,7 +8,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.admin.chat.listmess.Conversation
 import com.example.foca_mobile.activity.admin.chat.listmess.ListConversationFragment
 import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.admin.order.AdminOrderManagement
@@ -18,10 +17,6 @@ import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
 import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 import com.example.foca_mobile.model.User
-import com.example.foca_mobile.socket.SocketHandler
-import org.json.JSONObject
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
 

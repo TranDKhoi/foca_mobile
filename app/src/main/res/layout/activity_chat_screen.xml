@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.user.chat.conversation.ChatScreen">
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
@@ -72,7 +70,8 @@
                         <ImageView
                             android:id="@+id/messImage"
                             android:layout_width="62dp"
-                            android:layout_height="60dp" />
+                            android:layout_height="60dp"
+                            android:scaleType="fitXY" />
                     </androidx.cardview.widget.CardView>
 
                     <!--NAME-->
@@ -82,7 +81,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="15dp"
+                        android:ellipsize="end"
                         android:fontFamily="@font/bentonsans_medium"
+                        android:maxWidth="140dp"
+                        android:maxHeight="30dp"
+                        android:maxLines="2"
                         android:text=""
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -175,5 +178,12 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </FrameLayout>

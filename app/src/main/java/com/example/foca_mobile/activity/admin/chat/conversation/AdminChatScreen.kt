@@ -8,15 +8,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.foca_mobile.activity.admin.chat.listmess.Conversation
-import com.example.foca_mobile.activity.admin.chat.listmess.ListConversationFragment
 import com.example.foca_mobile.databinding.ActivityChatScreenBinding
 import com.example.foca_mobile.model.Message
-import com.example.foca_mobile.model.Room
 import com.example.foca_mobile.model.User
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.LoginPrefs
@@ -50,10 +49,10 @@ class AdminChatScreen : AppCompatActivity() {
 
 
         if (conversation != null) {
-            partner = conversation.members?.find{
+            partner = conversation.members?.find {
                 it.id != user.id
             }!!
-            messName.text =  partner.fullName
+            messName.text = partner.fullName
             messStatus.text = "Online"
             Glide.with(applicationContext).load(partner?.photoUrl!!).into(messImage);
         }
@@ -74,17 +73,19 @@ class AdminChatScreen : AppCompatActivity() {
         binding.conversationRCV.scrollToPosition(listMessage.size - 1)
 
         //Socket
+        binding.progressBar.visibility = ProgressBar.VISIBLE
         socket = SocketHandler.getSocket()
-        socket.emit("get_messages",conversation.id, Ack {
+        socket.emit("get_messages", conversation.id, Ack {
             val dataJson = it[0] as JSONObject
             val messageListObj = Gson().fromJson(dataJson.toString(), MessageListObj::class.java)
-            Log.d("Test Data get_messages: ",messageListObj.toString())
+            Log.d("Test Data get_messages: ", messageListObj.toString())
             if (messageListObj.error == null) {
                 runOnUiThread {
                     listMessage.clear()
                     listMessage.addAll(messageListObj.data ?: ArrayList())
                     conversationAdapter.notifyDataSetChanged()
                     binding.conversationRCV.scrollToPosition(listMessage.size - 1)
+                    binding.progressBar.visibility = ProgressBar.GONE
                 }
             } else {
                 Log.d("Error get_room_with_admin", messageListObj.error)
@@ -107,14 +108,15 @@ class AdminChatScreen : AppCompatActivity() {
     }
 
     fun callUserFunc(view: View) {
-        val it = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "0968717777"))
+        val it = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + partner.phoneNumber))
         startActivity(it)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun sendMessageFunc(view: View) {
         if (!inputText.text.isNullOrEmpty()) {
-            Log.d("Check text message: ", inputText.text.toString())
-            val message = Message(inputText.text.toString(), user.id, roomId = conversation.id)
+            val message =
+                Message(inputText.text.toString().trim(), user.id, roomId = conversation.id)
             val messageJson = Gson().toJson(message)
             listMessage.add(message)
             conversationAdapter.notifyDataSetChanged()
@@ -124,11 +126,8 @@ class AdminChatScreen : AppCompatActivity() {
                 if (error == null) {
                     val createdMessage =
                         Gson().fromJson(dataJson["data"].toString(), Message::class.java)
-                    Log.d("send_message object", createdMessage.toString())
-//                    runOnUiThread {
-//                        listMessage.add(createdMessage)
-//                        conversationAdapter.notifyDataSetChanged()
-//                    }
+                    runOnUiThread {
+                    }
                 } else {
                     Log.d("Error get_room_with_admin", error!!)
                 }
