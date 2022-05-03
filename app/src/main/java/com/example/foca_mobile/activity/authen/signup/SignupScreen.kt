@@ -1,22 +1,23 @@
 package com.example.foca_mobile.activity.authen.signup
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivitySignupScreenBinding
 import com.example.foca_mobile.model.ApiResponse
-import com.example.foca_mobile.model.User
 import com.example.foca_mobile.service.AuthService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -31,6 +32,13 @@ class SignupScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (currentFocus != null) {
+            val imm = this!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(this!!.currentFocus!!.windowToken, 0)
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     public fun toLoginScreen(view: View) {
