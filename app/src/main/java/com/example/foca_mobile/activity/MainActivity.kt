@@ -8,12 +8,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.admin.chat.listmess.Conversation
+import com.example.foca_mobile.activity.admin.chat.listmess.ListConversationFragment
 import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.admin.order.AdminOrderManagement
 import com.example.foca_mobile.activity.user.cart_order.UserMyCart
-import com.example.foca_mobile.activity.user.chat.conversation.ChatScreen
-import com.example.foca_mobile.activity.user.chat.listmess.ListMessageClass
-import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
+import com.example.foca_mobile.activity.user.chat.UserChatScreen
 import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
 import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         } else if (currentUser.role == "ADMIN") {
             //ADMIN FRAGMENT
             val adminHomeFragment = AdminHomeFragment()
-            val messageFragment = ListMessageFragment()
+            val messageFragment = ListConversationFragment()
             val profileFragment = UserProfileFragment()
 
             binding.bottomNavigation.setMenuResource(R.menu.admin_menu)
@@ -105,20 +105,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun userToAdminChat() {
-
-        val adminRoom = ListMessageClass(
-            R.drawable.ic_user,
-            "Admin",
-            "hello khoi oi",
-            LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-        )
-
-        val intent = Intent(this, ChatScreen::class.java)
-        intent.putExtra("mess", adminRoom)
+        val intent = Intent(this, UserChatScreen::class.java)
         startActivity(intent)
-        val obj = JSONObject()
-        obj.put("message", "Alo ALo")
-        SocketHandler.getSocket().emit("join_room", obj)
     }
 
     private fun toOrderManagementScreen() {

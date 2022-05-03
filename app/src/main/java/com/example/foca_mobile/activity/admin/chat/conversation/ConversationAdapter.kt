@@ -1,4 +1,5 @@
-package com.example.foca_mobile.activity.user.chat.conversation
+package com.example.foca_mobile.activity.admin.chat.conversation
+
 
 import android.content.Context
 import android.util.Log

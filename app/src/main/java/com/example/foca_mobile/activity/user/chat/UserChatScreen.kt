@@ -1,4 +1,4 @@
-package com.example.foca_mobile.activity.user.chat.conversation
+package com.example.foca_mobile.activity.user.chat
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,7 +10,8 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foca_mobile.activity.user.chat.listmess.ListMessageClass
+import com.bumptech.glide.Glide
+import com.example.foca_mobile.activity.admin.chat.listmess.Conversation
 import com.example.foca_mobile.databinding.ActivityChatScreenBinding
 import com.example.foca_mobile.model.Message
 import com.example.foca_mobile.model.Room
@@ -23,21 +24,15 @@ import io.socket.client.Socket
 import kotlinx.android.synthetic.main.activity_chat_screen.*
 import org.json.JSONObject
 
-class ChatScreen : AppCompatActivity() {
-
-    data class ListMessageResponse(
-        val error: String,
-        val data: List<Message>
-    )
-
+class UserChatScreen : AppCompatActivity() {
     private lateinit var binding: ActivityChatScreenBinding
-    private lateinit var receiveObject: ListMessageClass
 
     private lateinit var conversationAdapter: ConversationAdapter
     private lateinit var listMessage: ArrayList<Message>
     private lateinit var user: User
     private lateinit var socket: Socket
     private lateinit var room: Room
+    private lateinit var partner: User
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +42,9 @@ class ChatScreen : AppCompatActivity() {
         setContentView(binding.root)
 
         user = LoginPrefs.getUser()
-        receiveObject = intent.getParcelableExtra<ListMessageClass>("mess")!!;
-        if (receiveObject != null) {
-            messName.text = receiveObject.name
-            messStatus.text = "Online"
-            messImage.setImageResource(receiveObject.image)
-        }
+        messName.text =  "Admin"
+        messStatus.text = "Online"
+        messImage.setImageURI(null)
 
         //CHANGE SEND BTN VISIBILITY
         inputText.doOnTextChanged { text, start, before, count ->
@@ -76,14 +68,22 @@ class ChatScreen : AppCompatActivity() {
             val error = Gson().fromJson(dataJson["error"].toString(), String::class.java)
             if (error == null) {
                 room = Gson().fromJson(dataJson["data"].toString(), Room::class.java)
-                Log.d("get_room_with_admin object array", room.messages.toString())
-                runOnUiThread {
-                    listMessage.clear()
-                    listMessage.addAll(room.messages!!)
-                    conversationAdapter.notifyDataSetChanged()
-                    binding.conversationRCV.scrollToPosition(listMessage.size - 1)
+                Log.d("get_room_with_admin object array", room.toString())
+               if(room != null){
+                   partner = room?.members?.find{
+                       it.id != user.id
+                   }!!
 
-                }
+                   runOnUiThread {
+                       messName.text =  partner.fullName
+                       messStatus.text = "Online"
+                       Glide.with(applicationContext).load(partner.photoUrl!!).into(messImage)
+                       listMessage.clear()
+                       listMessage.addAll(room.messages!!)
+                       conversationAdapter.notifyDataSetChanged()
+                       binding.conversationRCV.scrollToPosition(listMessage.size - 1)
+                   }
+               }
             } else {
                 Log.d("Error get_room_with_admin", error!!)
             }
@@ -123,10 +123,6 @@ class ChatScreen : AppCompatActivity() {
                     val createdMessage =
                         Gson().fromJson(dataJson["data"].toString(), Message::class.java)
                     Log.d("send_message object", createdMessage.toString())
-//                    runOnUiThread {
-//                        listMessage.add(createdMessage)
-//                        conversationAdapter.notifyDataSetChanged()
-//                    }
                 } else {
                     Log.d("Error get_room_with_admin", error!!)
                 }

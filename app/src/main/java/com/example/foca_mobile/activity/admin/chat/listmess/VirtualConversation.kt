@@ -1,10 +1,10 @@
-package com.example.foca_mobile.activity.user.chat.listmess
+package com.example.foca_mobile.activity.admin.chat.listmess
 
 import android.os.Parcel
 import android.os.Parcelable
 
 
-class ListMessageClass(
+class VirtualConversation(
     val image: Int,
     val name: String,
     val lastMess: String,
@@ -29,12 +29,12 @@ class ListMessageClass(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<ListMessageClass> {
-        override fun createFromParcel(parcel: Parcel): ListMessageClass {
-            return ListMessageClass(parcel)
+    companion object CREATOR : Parcelable.Creator<VirtualConversation> {
+        override fun createFromParcel(parcel: Parcel): VirtualConversation {
+            return VirtualConversation(parcel)
         }
 
-        override fun newArray(size: Int): Array<ListMessageClass?> {
+        override fun newArray(size: Int): Array<VirtualConversation?> {
             return arrayOfNulls(size)
         }
     }

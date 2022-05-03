@@ -84,7 +84,9 @@
         <activity
             android:name=".activity.authen.signup.VerifiAccountScreen"
             android:exported="false" />
-        <activity android:name=".activity.user.chat.conversation.ChatScreen"
+        <activity android:name=".activity.user.chat.UserChatScreen"
+            android:exported="false"/>
+        <activity android:name=".activity.admin.chat.conversation.AdminChatScreen"
             android:exported="false"/>
     </application>
 
