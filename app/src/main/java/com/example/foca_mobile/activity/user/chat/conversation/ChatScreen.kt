@@ -10,8 +10,8 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageClass
+import com.example.foca_mobile.databinding.ActivityChatScreenBinding
 import com.example.foca_mobile.model.Message
 import com.example.foca_mobile.model.Room
 import com.example.foca_mobile.model.User
@@ -30,6 +30,7 @@ class ChatScreen : AppCompatActivity() {
         val data: List<Message>
     )
 
+    private lateinit var binding: ActivityChatScreenBinding
     private lateinit var receiveObject: ListMessageClass
 
     private lateinit var conversationAdapter: ConversationAdapter
@@ -42,7 +43,8 @@ class ChatScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_chat_screen)
+        binding = ActivityChatScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         user = LoginPrefs.getUser()
         receiveObject = intent.getParcelableExtra<ListMessageClass>("mess")!!;
@@ -63,9 +65,9 @@ class ChatScreen : AppCompatActivity() {
         listMessage = ArrayList()
 
         conversationAdapter = ConversationAdapter(this, listMessage);
-        conversationRCV.layoutManager = LinearLayoutManager(this)
-        conversationRCV.adapter = conversationAdapter
-        conversationRCV.scrollToPosition(listMessage.size - 1)
+        binding.conversationRCV.layoutManager = LinearLayoutManager(this)
+        binding.conversationRCV.adapter = conversationAdapter
+        binding.conversationRCV.scrollToPosition(listMessage.size - 1)
 
         //Socket
         socket = SocketHandler.getSocket()
@@ -79,7 +81,7 @@ class ChatScreen : AppCompatActivity() {
                     listMessage.clear()
                     listMessage.addAll(room.messages!!)
                     conversationAdapter.notifyDataSetChanged()
-                    conversationRCV.scrollToPosition(listMessage.size - 1)
+                    binding.conversationRCV.scrollToPosition(listMessage.size - 1)
 
                 }
             } else {
@@ -109,7 +111,6 @@ class ChatScreen : AppCompatActivity() {
 
     fun sendMessageFunc(view: View) {
         if (!inputText.text.isNullOrEmpty()) {
-//            conversation.add(Message(text: inputText.text.toString(), "2"));
             Log.d("Check text message: ", inputText.text.toString())
             val message = Message(inputText.text.toString(), user.id, roomId = room.id)
             val messageJson = Gson().toJson(message)
@@ -131,8 +132,8 @@ class ChatScreen : AppCompatActivity() {
                 }
             })
             conversationRCV.scrollToPosition(listMessage.size - 1)
-            inputText.text.clear();
-            inputText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            binding.inputText.text.clear();
+            binding.inputText.onEditorAction(EditorInfo.IME_ACTION_DONE);
         }
     }
 }

@@ -10,19 +10,24 @@ import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.admin.order.AdminOrderManagement
-import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.activity.user.cart_order.UserMyCart
+import com.example.foca_mobile.activity.user.chat.conversation.ChatScreen
+import com.example.foca_mobile.activity.user.chat.listmess.ListMessageClass
 import com.example.foca_mobile.activity.user.chat.listmess.ListMessageFragment
 import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
 import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 import com.example.foca_mobile.model.User
-import com.example.foca_mobile.utils.LoginPrefs
+import com.example.foca_mobile.socket.SocketHandler
+import org.json.JSONObject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var currentUser: User
+    private var currentSelectedPage = R.id.home
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         if (currentUser.role == "USER") {
             //USER FRAGMENT
             val userHomeFragment = UserHomeFragment()
-            val messageFragment = ListMessageFragment() // sửa lại
             val cartFragment = UserMyCart()
             val profileFragment = UserProfileFragment()
 
@@ -48,17 +52,28 @@ class MainActivity : AppCompatActivity() {
 
             binding.bottomNavigation.setOnItemSelectedListener { id ->
                 when (id) {
-                    R.id.home -> setCurrentFragment(userHomeFragment)
-                    R.id.message -> setCurrentFragment(messageFragment);
-                    R.id.cart -> setCurrentFragment(cartFragment)
-                    R.id.user -> setCurrentFragment(profileFragment)
+                    R.id.home -> {
+                        setCurrentFragment(userHomeFragment)
+                        currentSelectedPage = R.id.home
+                    }
+                    R.id.message -> {
+                        userToAdminChat()
+                        binding.bottomNavigation.setItemSelected(currentSelectedPage)
+                    }
+                    R.id.cart -> {
+                        setCurrentFragment(cartFragment)
+                        currentSelectedPage = R.id.cart
+                    }
+                    R.id.user -> {
+                        setCurrentFragment(profileFragment)
+                        currentSelectedPage = R.id.user
+                    }
                 }
             }
         } else if (currentUser.role == "ADMIN") {
             //ADMIN FRAGMENT
             val adminHomeFragment = AdminHomeFragment()
             val messageFragment = ListMessageFragment()
-            val orderManage = AdminOrderManagement()
             val profileFragment = UserProfileFragment()
 
             binding.bottomNavigation.setMenuResource(R.menu.admin_menu)
@@ -68,18 +83,45 @@ class MainActivity : AppCompatActivity() {
 
             binding.bottomNavigation.setOnItemSelectedListener { id ->
                 when (id) {
-                    R.id.home -> setCurrentFragment(adminHomeFragment)
-                    R.id.message -> setCurrentFragment(messageFragment)
-                    R.id.cart -> toOrderManagementScreen()
-                    R.id.user -> setCurrentFragment(profileFragment)
+                    R.id.home -> {
+                        setCurrentFragment(adminHomeFragment)
+                        currentSelectedPage = R.id.home
+                    }
+                    R.id.message -> {
+                        setCurrentFragment(messageFragment)
+                        currentSelectedPage = R.id.message
+                    }
+                    R.id.cart -> {
+                        toOrderManagementScreen()
+                        binding.bottomNavigation.setItemSelected(currentSelectedPage)
+                    }
+                    R.id.user -> {
+                        setCurrentFragment(profileFragment)
+                        currentSelectedPage = R.id.user
+                    }
                 }
             }
         }
     }
 
-    private fun toOrderManagementScreen() {
+    private fun userToAdminChat() {
 
-        binding.bottomNavigation.setItemSelected(R.id.cart)
+        val adminRoom = ListMessageClass(
+            R.drawable.ic_user,
+            "Admin",
+            "hello khoi oi",
+            LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
+        )
+
+        val intent = Intent(this, ChatScreen::class.java)
+        intent.putExtra("mess", adminRoom)
+        startActivity(intent)
+        val obj = JSONObject()
+        obj.put("message", "Alo ALo")
+        SocketHandler.getSocket().emit("join_room", obj)
+    }
+
+    private fun toOrderManagementScreen() {
         val it = Intent(this, AdminOrderManagement::class.java)
         startActivity(it)
     }
@@ -89,15 +131,6 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.wrapper, fragment)
             commit()
         }
-
-    private fun toLoginScreen() {
-        LoginPrefs.removeToken();
-        val it = Intent(this, LoginScreen::class.java);
-        finishAffinity();
-
-        startActivity(it);
-        this.finish();
-    }
 
     //HIDE KEYBOARD WHEN LOST FOCUS
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
