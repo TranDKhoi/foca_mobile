@@ -18,7 +18,7 @@ object SocketHandler {
             val options = IO.Options.builder()
                 .setAuth(singletonMap("token", token.toString()))
                 .build()
-            mSocket = IO.socket("http://10.0.2.2:5000", options)
+            mSocket = IO.socket("https://foca-backend.herokuapp.com", options)
             Log.d("mSocket.connect()", "RUNNING")
             mSocket.connect()
 
