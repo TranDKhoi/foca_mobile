@@ -1,14 +1,15 @@
 package com.example.foca_mobile.activity.user.chat.conversation
 
-class ConversationClass {
+import com.example.foca_mobile.model.User
+import java.util.*
 
-    var message: String? = null
-    var senderId: String? = null
+class Message {
 
-    constructor() {};
-
-    constructor(mess: String?, id: String?) {
-        this.message = mess;
-        this.senderId = id;
-    }
+    var text: String? = null
+    var senderId: User? = null
+    var id: String? = null
+    var createdAt: Date? = null
+    val updatedAt: Date? = null
+    val roomId: Int? = null
+    val sender: User? = null
 }

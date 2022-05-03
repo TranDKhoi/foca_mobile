@@ -12,11 +12,11 @@ object SocketHandler {
     private lateinit var mSocket: Socket
 
     @Synchronized
-    fun initSocket(token: String) {
+    fun initSocket(token: Int) {
         try {
 
             val options = IO.Options.builder()
-                .setAuth(singletonMap("token", token))
+                .setAuth(singletonMap("token", token.toString()))
                 .build()
             mSocket = IO.socket("http://10.0.2.2:5000", options)
             Log.d("mSocket.connect()", "RUNNING")
