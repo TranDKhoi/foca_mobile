@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/graygradient_background"
+    tools:context=".activity.authen.forgotpass.ForgotPassScreen">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:scaleType="fitXY"
+            android:src="@drawable/image_login_background"
+            tools:ignore="ContentDescription" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/back_button"
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineHeight="30dp"
+                android:text="@string/Forgotpassword"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:targetApi="p" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/bentonsans_book"
+                android:text="@string/EnteryourstudentIDtoresetyourpassword"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <EditText
+                android:id="@+id/idfield"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_edittext_normal"
+                android:cursorVisible="false"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:hint="@string/StudentID"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/sendBtn"
+                android:layout_width="141dp"
+                android:layout_height="57dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/light_green_gradient"
+                android:text="@string/Sendcode"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
