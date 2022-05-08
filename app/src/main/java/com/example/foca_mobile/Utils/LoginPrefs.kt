@@ -1,5 +1,6 @@
 package com.example.foca_mobile.utils
 
+import android.util.Log
 import androidx.preference.PreferenceManager
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.model.User
@@ -21,6 +22,7 @@ object LoginPrefs {
     }
     fun getUser(): User {
         val jsonUser = sharedPreferences.getString(USER, "").toString();
+        if(jsonUser == "") return User("",)
         val gson = Gson()
         val user: User = gson.fromJson(jsonUser, User::class.java)
         return user
