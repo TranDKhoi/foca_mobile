@@ -129,11 +129,11 @@
                 android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginBtn"
                 android:layout_width="141dp"
                 android:layout_height="57dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/light_green_gradient"
-                android:id="@+id/loginBtn"
                 android:text="@string/Login"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.FragmentAdminOrderBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
@@ -51,7 +52,14 @@ class AdminOrderManagement : Fragment() {
             builder.setTitle("Filter the orders")
 
             // add a list
-            val status = arrayOf("ALL", "PENDING", "PROCESSED", "COMPLETED", "CANCELLED")
+            val status = arrayOf(
+                resources.getString(R.string.ALL),
+                resources.getString(R.string.ARRIVED),
+                resources.getString(R.string.PENDING),
+                resources.getString(R.string.PROCESSED),
+                resources.getString(R.string.COMPLETED),
+                resources.getString(R.string.CANCELLED)
+            )
             builder.setItems(status) { _, which ->
                 when (which) {
                     0 -> {
@@ -59,18 +67,22 @@ class AdminOrderManagement : Fragment() {
                         currentFilter = ""
                     }
                     1 -> {
+                        getOrderByStatus("ARRIVED")
+                        currentFilter = "ARRIVED"
+                    }
+                    2 -> {
                         getOrderByStatus("PENDING")
                         currentFilter = "PENDING"
                     }
-                    2 -> {
+                    3 -> {
                         getOrderByStatus("PROCESSED")
                         currentFilter = "PROCESSED"
                     }
-                    3 -> {
+                    4 -> {
                         getOrderByStatus("COMPLETED")
                         currentFilter = "COMPLETED"
                     }
-                    4 -> {
+                    5 -> {
                         getOrderByStatus("CANCELLED")
                         currentFilter = "CANCELLED"
                     }
@@ -97,7 +109,7 @@ class AdminOrderManagement : Fragment() {
     private fun getOrder() {
         //CALL API
         val allOrderCall = ServiceGenerator.buildService(OrderService::class.java)
-            .getAllOrder()
+            .getAllOrder(1000)
         binding.bar.visibility = ProgressBar.VISIBLE
         allOrderCall?.enqueue(object : Callback<ApiResponse<MutableList<Order>>> {
             @SuppressLint("NotifyDataSetChanged")

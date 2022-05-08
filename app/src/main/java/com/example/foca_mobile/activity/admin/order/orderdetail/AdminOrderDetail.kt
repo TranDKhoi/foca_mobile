@@ -1,10 +1,16 @@
 package com.example.foca_mobile.activity.admin.order.orderdetail
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.MutableLiveData
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityAdminOrderDetailBinding
 import com.example.foca_mobile.model.ApiResponse
@@ -27,6 +33,7 @@ class AdminOrderDetail : AppCompatActivity() {
     private lateinit var binding: ActivityAdminOrderDetailBinding
     private lateinit var order: Order
     private lateinit var orderDetailList: MutableList<OrderDetails>
+    private var selectedStatus: MutableLiveData<String> = MutableLiveData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,22 +43,46 @@ class AdminOrderDetail : AppCompatActivity() {
         val orderDetailString = intent.getStringExtra("order")
         order = Gson().fromJson(orderDetailString, Order::class.java)
         orderDetailList = order.orderDetails!!
+        selectedStatus.value = order.status!!
 
         binding.orderDetailRCV.adapter =
             AdminOrderDetailAdapter(orderDetailList)
         binding.orderDetailBack.setOnClickListener {
             this.finish()
         }
+        binding.subTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
         binding.priceTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
 
         //INIT SPINNER
         initSpinner()
 
+        binding.updateBtn.setOnClickListener {
+            updateOrderStatus(selectedStatus.value.toString())
+        }
+        selectedStatus.observeForever {
+            if (it == "PENDING") {
+                binding.surcharge.visibility = EditText.VISIBLE
+                binding.surchargeTxt.visibility = TextView.VISIBLE
+            } else {
+                binding.surcharge.visibility = EditText.GONE
+                binding.surchargeTxt.visibility = TextView.GONE
+                binding.priceTotal.text = order.totalPrice.toString()
+            }
+
+        }
+        binding.surcharge.addTextChangedListener {
+            if (!it.isNullOrEmpty())
+                binding.priceTotal.text =
+                    NumberFormat.getCurrencyInstance()
+                        .format((order.totalPrice!! + it.toString().toInt()))
+
+        }
 
     }
 
     private fun initSpinner() {
         when (order.status) {
+            "ARRIVED" -> binding.spinner.text = resources.getString(R.string.ARRIVED)
             "PENDING" -> binding.spinner.text = resources.getString(R.string.PENDING)
             "PROCESSED" -> binding.spinner.text = resources.getString(R.string.PROCESSED)
             "COMPLETED" -> binding.spinner.text = resources.getString(R.string.COMPLETED)
@@ -65,6 +96,7 @@ class AdminOrderDetail : AppCompatActivity() {
 
             // add a list
             val status = arrayOf(
+                resources.getString(R.string.ARRIVED),
                 resources.getString(R.string.PENDING),
                 resources.getString(R.string.PROCESSED),
                 resources.getString(R.string.COMPLETED),
@@ -73,19 +105,23 @@ class AdminOrderDetail : AppCompatActivity() {
             builder.setItems(status) { _, which ->
                 when (which) {
                     0 -> {
-                        updateOrderStatus("PENDING")
-                        binding.spinner.text = resources.getString(R.string.PENDING)
+                        selectedStatus.value = "ARRIVED"
+                        binding.spinner.text = resources.getString(R.string.ARRIVED)
                     }
                     1 -> {
-                        updateOrderStatus("PROCESSED")
-                        binding.spinner.text = resources.getString(R.string.PROCESSED)
+                        selectedStatus.value = "PENDING"
+                        binding.spinner.text = resources.getString(R.string.PENDING)
                     }
                     2 -> {
-                        updateOrderStatus("COMPLETED")
-                        binding.spinner.text = resources.getString(R.string.COMPLETED)
+                        selectedStatus.value = "PROCESSED"
+                        binding.spinner.text = resources.getString(R.string.PROCESSED)
                     }
                     3 -> {
-                        updateOrderStatus("CANCELLED")
+                        selectedStatus.value = "COMPLETED"
+                        binding.spinner.text = resources.getString(R.string.COMPLETED)
+                    }
+                    4 -> {
+                        selectedStatus.value = "CANCELLED"
                         binding.spinner.text = resources.getString(R.string.CANCELLED)
                     }
                 }
@@ -99,9 +135,20 @@ class AdminOrderDetail : AppCompatActivity() {
 
     private fun updateOrderStatus(status: String) {
 
+        if (selectedStatus.value == "PENDING" && binding.surcharge.text.isEmpty()) {
+            Toast.makeText(this, "Surcharge can not be empty!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // Create JSON using JSONObject
         val jsonObject = JSONObject()
-        jsonObject.put("status", status)
+        if (selectedStatus.value == "PENDING") {
+            jsonObject.put("status", status)
+            jsonObject.put("surcharge", binding.surcharge.text)
+        } else
+            jsonObject.put("status", status)
+
+
         // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
 
@@ -111,25 +158,48 @@ class AdminOrderDetail : AppCompatActivity() {
         val updateOrderCall = ServiceGenerator.buildService(OrderService::class.java)
             .updateOrderStatus(order.id.toString(), requestBody)
 
-        updateOrderCall?.enqueue(object : Callback<ApiResponse<Int>> {
+        updateOrderCall?.enqueue(object : Callback<ApiResponse<String>> {
 
             override fun onResponse(
-                call: Call<ApiResponse<Int>>,
-                response: Response<ApiResponse<Int>>
+                call: Call<ApiResponse<String>>,
+                response: Response<ApiResponse<String>>
             ) {
-                if (response.isSuccessful) {
-                    runOnUiThread {
-                        //RUN TOAST HERE
+                if (!response.isSuccessful) {
+                    kotlin.runCatching {
+                        Toast.makeText(
+                            applicationContext,
+                            "Update Successfully!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
-                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
-                    Log.d("Error From Api", errorRes.message)
+                    kotlin.runCatching {
+                        val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                        Toast.makeText(
+                            applicationContext,
+                            errorRes.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<Int>>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<String>>, t: Throwable) {
+                Toast.makeText(
+                    applicationContext,
+                    "Update Successfully!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
-        Toast.makeText(applicationContext, "Update Successfully!", Toast.LENGTH_SHORT).show()
+    }
+
+    //HIDE KEYBOARD WHEN LOST FOCUS
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (currentFocus != null) {
+            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
+        }
+        return super.dispatchTouchEvent(ev)
     }
 }

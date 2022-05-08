@@ -30,9 +30,9 @@ class AdminHomeFragment : Fragment() {
     private var _binding: FragmentAdminHomeBinding? = null
     private val binding get() = _binding!!
 
-    private var pendingOrderList: MutableList<Order>? = null
+    private var arrivedOrderList: MutableList<Order>? = null
     private lateinit var myMenuList: MutableList<Product>
-    private lateinit var pendingAdapter: PendingOrderAdapter
+    private lateinit var arrivedAdapter: ArrivedOrderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +41,9 @@ class AdminHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAdminHomeBinding.inflate(layoutInflater)
 
-        pendingOrderList = mutableListOf()
-        pendingAdapter = PendingOrderAdapter(pendingOrderList!!)
-        getPendingOrder()
+        arrivedOrderList = mutableListOf()
+        arrivedAdapter = ArrivedOrderAdapter(arrivedOrderList!!)
+        getArrivedOrder()
 
         getMyMenu()
 
@@ -70,7 +70,7 @@ class AdminHomeFragment : Fragment() {
     private fun getMyMenu() {
         //CALL API
         val myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
-            .getProductList()
+            .getProductList("",1000)
 
         myMenuCall?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
             override fun onResponse(
@@ -96,10 +96,10 @@ class AdminHomeFragment : Fragment() {
         })
     }
 
-    private fun getPendingOrder() {
+    private fun getArrivedOrder() {
         //CALL API
         val pendingOrderCall = ServiceGenerator.buildService(OrderService::class.java)
-            .getOrderByStatus("PENDING")
+            .getOrderByStatus("ARRIVED")
 
         pendingOrderCall?.enqueue(object : Callback<ApiResponse<MutableList<Order>>> {
             override fun onResponse(
@@ -108,10 +108,10 @@ class AdminHomeFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val res: ApiResponse<MutableList<Order>> = response.body()!!
-                    pendingOrderList = res.data
-                    binding.pendingOrderRCV.adapter =
-                        PendingOrderAdapter(pendingOrderList!!)
-                    if (pendingOrderList!!.count() == 0)
+                    arrivedOrderList = res.data
+                    binding.arrivedOrderRCV.adapter =
+                        ArrivedOrderAdapter(arrivedOrderList!!)
+                    if (arrivedOrderList!!.count() == 0)
                         binding.logoDone.visibility = ImageView.VISIBLE
                 } else {
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
@@ -122,6 +122,12 @@ class AdminHomeFragment : Fragment() {
             override fun onFailure(call: Call<ApiResponse<MutableList<Order>>>, t: Throwable) {
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMyMenu()
+        getArrivedOrder()
     }
 
 }

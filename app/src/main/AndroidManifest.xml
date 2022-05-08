@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Foca_mobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.admin.menu.AdminCreateProduct"
+            android:exported="false" />
+        <activity
             android:name=".activity.user.profile.generalsetting.GeneralSetting"
             android:exported="false" />
         <activity

@@ -1,12 +1,15 @@
 package com.example.foca_mobile.activity.admin.menu
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.FragmentAdminMenuBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Product
@@ -25,6 +28,7 @@ class AdminMenu : Fragment() {
 
     private lateinit var myMenuList: MutableList<Product>
     private lateinit var myMenuAdapter: MyMenuAdapter
+    private var selectedStatus: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,16 +42,64 @@ class AdminMenu : Fragment() {
         myMenuAdapter = MyMenuAdapter(myMenuList)
         binding.menuRCV.adapter = myMenuAdapter
 
-        getMyMenu()
+        getMyMenu(selectedStatus)
+
+        binding.createNewBtn.setOnClickListener {
+            val intent = Intent(context, AdminCreateProduct::class.java)
+            intent.putExtra("product", "")
+            startActivity(intent)
+        }
+
+        //INIT SPINNER
+        initSpinner()
 
 
         return binding.root
     }
 
-    private fun getMyMenu() {
+    private fun initSpinner() {
+        binding.spinner.text = resources.getString(R.string.ALL)
+        binding.spinner.setOnClickListener {
+            // setup the alert builder
+            val builder = AlertDialog.Builder(binding.root.context)
+            builder.setTitle(resources.getString(R.string.Filterthemenu))
+
+            // add a list
+            val status = arrayOf(
+                resources.getString(R.string.ALL),
+                resources.getString(R.string.FOOD),
+                resources.getString(R.string.DRINK)
+            )
+            builder.setItems(status) { _, which ->
+                when (which) {
+                    0 -> {
+                        selectedStatus = ""
+                        binding.spinner.text = resources.getString(R.string.ALL)
+                        getMyMenu(selectedStatus)
+                    }
+                    1 -> {
+                        selectedStatus = "FOOD"
+                        binding.spinner.text = resources.getString(R.string.FOOD)
+                        getMyMenu(selectedStatus)
+                    }
+                    2 -> {
+                        selectedStatus = "DRINK"
+                        binding.spinner.text = resources.getString(R.string.DRINK)
+                        getMyMenu(selectedStatus)
+                    }
+                }
+            }
+
+            // create and show the alert dialog
+            val dialog = builder.create()
+            dialog.show()
+        }
+    }
+
+    private fun getMyMenu(type: String) {
         //CALL API
         val myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
-            .getProductList()
+            .getProductList(type, 1000)
         binding.bar.visibility = ProgressBar.VISIBLE
         myMenuCall?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
             override fun onResponse(

@@ -2,9 +2,7 @@ package com.example.foca_mobile.utils
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.profile.generalsetting.GeneralSetting
 import com.example.foca_mobile.model.User
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import java.util.*
@@ -20,7 +18,11 @@ object GlobalObject {
 
     lateinit var CurrentUser: User
 
-    fun updateNotSeenConversationAdmin(activity: Activity, roomId: Int, isRemove: Boolean = false) {
+    fun updateNotSeenConversationAdmin(
+        activity: Activity,
+        roomId: Int,
+        isRemove: Boolean = false
+    ) {
         val found = notSeenConversationListIdsAdmin.find { item -> item == roomId } != null
         if (!found && !isRemove) {
             notSeenConversationListIdsAdmin.add(roomId!!)
