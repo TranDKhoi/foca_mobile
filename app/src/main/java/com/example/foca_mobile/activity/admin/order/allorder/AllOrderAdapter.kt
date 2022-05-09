@@ -43,18 +43,31 @@ class AllOrderAdapter(private val listOrder: MutableList<Order>) :
         holder.binding.orderItemPrice.text = formattedDate
 
         when (item.status) {
-            "PENDING" ->
+            "ARRIVED" -> {
+                holder.binding.orderItemStatus.text =
+                    holder.binding.root.resources.getString(R.string.ARRIVED)
+                holder.binding.orderItemStatus.setBackgroundResource(R.drawable.light_red_gradient)
+            }
+            "PENDING" -> {
                 holder.binding.orderItemStatus.text =
                     holder.binding.root.resources.getString(R.string.PENDING)
-            "PROCESSED" ->
+                holder.binding.orderItemStatus.setBackgroundResource(R.drawable.light_yellow_gradient)
+            }
+            "PROCESSED" -> {
                 holder.binding.orderItemStatus.text =
                     holder.binding.root.resources.getString(R.string.PROCESSED)
-            "COMPLETED" ->
+                holder.binding.orderItemStatus.setBackgroundResource(R.drawable.light_green_gradient)
+            }
+            "COMPLETED" -> {
                 holder.binding.orderItemStatus.text =
                     holder.binding.root.resources.getString(R.string.COMPLETED)
-            "CANCELLED" ->
+                holder.binding.orderItemStatus.setBackgroundResource(R.drawable.light_green_gradient)
+            }
+            "CANCELLED" -> {
                 holder.binding.orderItemStatus.text =
                     holder.binding.root.resources.getString(R.string.CANCELLED)
+                holder.binding.orderItemStatus.setBackgroundResource(R.drawable.light_gray_gradient)
+            }
         }
         holder.binding.orderQuantity.text =
             "${item.orderDetails?.size} ${holder.binding.root.context.resources.getString(R.string.item)}"

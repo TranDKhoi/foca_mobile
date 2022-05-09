@@ -12,12 +12,12 @@ interface OrderService {
     fun getOrderByStatus(@Query("status") status: String): Call<ApiResponse<MutableList<Order>>>?
 
     @GET("/api/admin/orders")
-    fun getAllOrder(): Call<ApiResponse<MutableList<Order>>>?
+    fun getAllOrder(@Query("limit") limit: Int): Call<ApiResponse<MutableList<Order>>>?
 
     @PUT("/api/admin/orders/{id}")
     fun updateOrderStatus(
         @Path("id") id: String,
         @Body requestBody: RequestBody
-    ): Call<ApiResponse<Int>>?
+    ): Call<ApiResponse<String>>?
 
 }

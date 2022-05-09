@@ -13,8 +13,8 @@ import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class PendingOrderAdapter(private val orderList: MutableList<Order>) :
-    RecyclerView.Adapter<PendingOrderAdapter.MyViewHolder>() {
+class ArrivedOrderAdapter(private val orderList: MutableList<Order>) :
+    RecyclerView.Adapter<ArrivedOrderAdapter.MyViewHolder>() {
 
     class MyViewHolder(val binding: ListRecentFoodItemBinding) :
         RecyclerView.ViewHolder(binding.root)

@@ -36,9 +36,6 @@ class AdminOrderDetailAdapter(
         val numberCurrency = NumberFormat.getCurrencyInstance()
         holder.binding.foodItemPrice.text = numberCurrency.format(item.product?.price)
         holder.binding.foodItemQuantity.text = holder.binding.root.resources.getString(R.string.Qty).plus(item.quantity)
-        holder.itemView.setOnClickListener {
-            holder.binding.checkBox.isChecked = !holder.binding.checkBox.isChecked
-        }
     }
 
     override fun getItemCount(): Int {

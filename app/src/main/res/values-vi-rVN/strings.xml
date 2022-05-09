@@ -37,7 +37,7 @@
     <string name="MyOrders">Đơn hàng</string>
     <string name="NewestFoods">Món mới</string>
     <string name="NewPassword">Mật khẩu mới</string>
-    <string name="Onemorestep">Sắp xong rồi và đừng quên \n tài khoản của bạn nhé :)</string>
+    <string name="Onemorestep">Sắp xong rồi và đừng quên \n mật khẩu của bạn nhé :)</string>
     <string name="Order">Đơn hàng</string>
     <string name="Orderdetails">Chi tiết đặt hàng</string>
     <string name="Password">Mật khẩu</string>
@@ -69,5 +69,23 @@
     <string name="Qty">SL: </string>
     <string name="Codesendto">Mã được gửi đến</string>
     <string name="gm.uit.edu.vn">gm.uit.edu.vn</string>
+    <string name="Extra">Thu thêm</string>
+    <string name="AddNew">Thêm mới</string>
+    <string name="Update">Cập nhật</string>
+    <string name="FOOD">ĐỒ ĂN</string>
+    <string name="DRINK">THỨC UỐNG</string>
+    <string name="CreateProduct">TẠO MỚI SẢN PHẨM</string>
+    <string name="UpdateProduct">CHỈNH SỬA SẢN PHẨM</string>
+    <string name="Warning">Cảnh báo</string>
+    <string name="Areyousure">Bạn có chắc muốn xóa món này không?</string>
+    <string name="YES">CÓ</string>
+    <string name="NO">KHÔNG</string>
+    <string name="ProductName">Tên món</string>
+    <string name="Price">Giá tiền</string>
+    <string name="Type">Loại</string>
+    <string name="Description">Mô tả</string>
+    <string name="ARRIVED">VỪA ĐẾN</string>
+    <string name="Filterthemenu">Lọc thực đơn</string>
+    <string name="ALL">TOÀN BỘ</string>
 
 </resources>

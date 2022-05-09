@@ -1,16 +1,25 @@
 package com.example.foca_mobile.service
-import com.example.foca_mobile.model.Product
+
 import com.example.foca_mobile.model.ApiResponse
+import com.example.foca_mobile.model.Product
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface ProductService {
-    @GET("/api/products")
-    fun getProductList(): Call<ApiResponse<MutableList<Product>>>?
+    @GET("/api/admin/products")
+    fun getProductList(
+        @Query("type") type: String,
+        @Query("limit") limit: Int
+    ): Call<ApiResponse<MutableList<Product>>>?
 
-    @POST("/api/products")
-    fun createProduct(@Body user: Product?): Call<Product?>?
+    @POST("/api/admin/products")
+    fun createProduct(@Body requestBody: RequestBody): Call<ApiResponse<Product>>?
+
+    @PUT("/api/admin/products/{id}")
+    fun updateProduct(@Path("id") id: String, @Body body: RequestBody): Call<ApiResponse<Product>>?
+
+    @DELETE("/api/admin/products/{id}")
+    fun softDeleteProduct(@Path("id") id: String): Call<ApiResponse<String>>?
 }
