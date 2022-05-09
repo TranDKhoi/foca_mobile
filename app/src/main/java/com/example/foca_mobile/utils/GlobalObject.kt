@@ -12,6 +12,8 @@ object GlobalObject {
     lateinit var notSeenConversationListIdsUser: ArrayList<Int>
 
     lateinit var bottomNavigation: ChipNavigationBar
+    var currentSelectedPage = R.id.home
+
     var isOpenActivity: Boolean = false
 
     lateinit var locale: Locale
@@ -25,10 +27,10 @@ object GlobalObject {
     ) {
         val found = notSeenConversationListIdsAdmin.find { item -> item == roomId } != null
         if (!found && !isRemove) {
-            notSeenConversationListIdsAdmin.add(roomId!!)
+            notSeenConversationListIdsAdmin.add(roomId)
         }
         if (found && isRemove) {
-            notSeenConversationListIdsAdmin.remove(roomId!!)
+            notSeenConversationListIdsAdmin.remove(roomId)
         }
         val badgeNum = notSeenConversationListIdsAdmin.size
         if (badgeNum > 0)

@@ -75,7 +75,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="18dp"
-                        android:textColor="@color/blackTitle"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -84,7 +83,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@color/lightGrey"
                         android:textSize="14sp" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -92,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/green"
+                        android:textColor="#26FF00"
                         android:textSize="19sp" />
 
                 </LinearLayout>
@@ -114,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/lightWhite"
+                    android:backgroundTint="@color/textColorButtonWhite"
                     android:padding="8dp"
                     app:cardCornerRadius="8dp">
 
@@ -123,7 +121,7 @@
                         android:layout_height="20dp"
                         android:background="#1653E88B"
                         android:src="@drawable/ic_minus"
-                        app:tint="@color/green"
+                        app:tint="#36FF00"
                         tools:ignore="ContentDescription" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -133,7 +131,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:textColor="@color/lightBlack"
                     android:textSize="16sp" />
 
                 <com.google.android.material.card.MaterialCardView
@@ -141,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/green"
+                    android:backgroundTint="#11FF00"
                     android:padding="8dp"
                     app:cardCornerRadius="8dp">
 

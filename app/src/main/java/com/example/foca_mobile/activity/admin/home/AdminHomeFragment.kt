@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity.admin.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.menu.AdminMenu
 import com.example.foca_mobile.activity.admin.menu.MyMenuAdapter
 import com.example.foca_mobile.activity.admin.order.allorder.AdminOrderManagement
+import com.example.foca_mobile.activity.user.notifi.UserNotification
 import com.example.foca_mobile.databinding.FragmentAdminHomeBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
@@ -63,6 +65,11 @@ class AdminHomeFragment : Fragment() {
             }
         }
 
+        binding.notifyBtn.setOnClickListener {
+            val intent = Intent(context, UserNotification::class.java)
+            startActivity(intent)
+        }
+
 
         return binding.root
     }
@@ -70,7 +77,7 @@ class AdminHomeFragment : Fragment() {
     private fun getMyMenu() {
         //CALL API
         val myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
-            .getProductList("",1000)
+            .getProductList("", 1000)
 
         myMenuCall?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
             override fun onResponse(

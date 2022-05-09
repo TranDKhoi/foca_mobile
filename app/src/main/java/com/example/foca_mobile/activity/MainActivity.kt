@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var socket: Socket
-    private var currentSelectedPage = R.id.home
     private lateinit var message: Message
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,9 +57,11 @@ class MainActivity : AppCompatActivity() {
             val profileFragment = UserProfileFragment()
 
             binding.bottomNavigation.setMenuResource(R.menu.user_menu)
-            binding.bottomNavigation.setItemSelected(R.id.home)
-            setCurrentFragment(userHomeFragment)
-
+            binding.bottomNavigation.setItemSelected(GlobalObject.currentSelectedPage)
+            if (GlobalObject.currentSelectedPage == R.id.home)
+                setCurrentFragment(userHomeFragment)
+            else
+                setCurrentFragment(profileFragment)
 
             socket.emit("get_not_seen_conversations", Ack {
                 val listRoomJsonIds = it[0] as JSONArray
@@ -87,19 +88,20 @@ class MainActivity : AppCompatActivity() {
                 when (id) {
                     R.id.home -> {
                         setCurrentFragment(userHomeFragment)
-                        currentSelectedPage = R.id.home
+
+                        GlobalObject.currentSelectedPage = R.id.home
                     }
                     R.id.message -> {
                         userToAdminChat()
-                        binding.bottomNavigation.setItemSelected(currentSelectedPage)
+                        binding.bottomNavigation.setItemSelected(GlobalObject.currentSelectedPage)
                     }
                     R.id.cart -> {
                         setCurrentFragment(cartFragment)
-                        currentSelectedPage = R.id.cart
+                        GlobalObject.currentSelectedPage = R.id.cart
                     }
                     R.id.user -> {
                         setCurrentFragment(profileFragment)
-                        currentSelectedPage = R.id.user
+                        GlobalObject.currentSelectedPage = R.id.user
                     }
                 }
             }
@@ -112,8 +114,11 @@ class MainActivity : AppCompatActivity() {
             val profileFragment = UserProfileFragment()
 
             binding.bottomNavigation.setMenuResource(R.menu.admin_menu)
-            binding.bottomNavigation.setItemSelected(R.id.home)
-            setCurrentFragment(adminHomeFragment)
+            binding.bottomNavigation.setItemSelected(GlobalObject.currentSelectedPage)
+            if (GlobalObject.currentSelectedPage == R.id.home)
+                setCurrentFragment(adminHomeFragment)
+            else
+                setCurrentFragment(profileFragment)
 
 
             socket.emit("get_not_seen_conversations", Ack {
@@ -146,23 +151,23 @@ class MainActivity : AppCompatActivity() {
                 when (id) {
                     R.id.home -> {
                         setCurrentFragment(adminHomeFragment)
-                        currentSelectedPage = R.id.home
+                        GlobalObject.currentSelectedPage = R.id.home
                     }
                     R.id.message -> {
                         setCurrentFragment(messageFragment)
-                        currentSelectedPage = R.id.message
+                        GlobalObject.currentSelectedPage = R.id.message
                     }
                     R.id.order -> {
                         setCurrentFragment(orderFragment)
-                        currentSelectedPage = R.id.order
+                        GlobalObject.currentSelectedPage = R.id.order
                     }
                     R.id.menu -> {
                         setCurrentFragment(menuFragment)
-                        currentSelectedPage = R.id.menu
+                        GlobalObject.currentSelectedPage = R.id.menu
                     }
                     R.id.user -> {
                         setCurrentFragment(profileFragment)
-                        currentSelectedPage = R.id.user
+                        GlobalObject.currentSelectedPage = R.id.user
                     }
                 }
             }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     tools:context=".activity.authen.signup.VerifiAccountScreen">
 
     <RelativeLayout
@@ -27,11 +27,11 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/backBtn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/back_button"
-               android:id="@+id/backBtn"
                 android:src="@drawable/ic_back"
                 tools:ignore="ContentDescription" />
 
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Enter4digit"
                 android:textAlignment="textStart"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="25sp" />
 
             <TextView
@@ -48,7 +48,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:layout_marginTop="50dp"
-                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -59,6 +58,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
                 android:cursorVisible="false"
+                android:textColor="@color/primaryTextColor"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:letterSpacing="2.5"
@@ -93,7 +93,7 @@
                     android:background="@drawable/light_green_gradient"
                     android:text="@string/Confirm"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/textColorButtonWhite" />
             </LinearLayout>
 
             <ProgressBar

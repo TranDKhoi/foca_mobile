@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background">
+    android:background="@color/backgroundColor">
 
     <ImageView
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/bentonsans_regular"
                     android:text="Please rate your order"
-                    android:textColor="#483B3B3B"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="14sp" />
 
                 <RatingBar
@@ -85,10 +85,7 @@
                 android:hint="Leave feedback"
                 android:inputType="textMultiLine"
                 android:minHeight="55dp"
-
                 android:paddingHorizontal="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="#483B3B3B"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -106,7 +103,7 @@
                     android:fontFamily="@font/bentonsans_bold"
                     android:text="Submit"
                     android:textAllCaps="false"
-                    android:textColor="#FEFEFF"
+                    android:textColor="@color/textColorButtonWhite"
                     android:textSize="14sp"
                     app:backgroundTint="@null" />
 
@@ -125,7 +122,7 @@
                     android:fontFamily="@font/bentonsans_bold"
                     android:text="Skip"
                     android:textAllCaps="false"
-                    android:textColor="@color/green"
+                    android:textColor="@color/textColorButtonGreen"
                     android:textSize="14sp"
                     app:backgroundTint="@null"
                     app:cornerRadius="15dp" />

@@ -69,17 +69,17 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="400"
-                        android:textColor="@color/black"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
-<!--                    <ImageButton-->
-<!--                        android:layout_width="34dp"-->
-<!--                        android:layout_height="34dp"-->
-<!--                        android:layout_gravity="center|end"-->
-<!--                        android:layout_marginStart="50dp"-->
-<!--                        android:src="@drawable/ic_love"-->
-<!--                        tools:ignore="ContentDescription" />-->
+                    <!--                    <ImageButton-->
+                    <!--                        android:layout_width="34dp"-->
+                    <!--                        android:layout_height="34dp"-->
+                    <!--                        android:layout_gravity="center|end"-->
+                    <!--                        android:layout_marginStart="50dp"-->
+                    <!--                        android:src="@drawable/ic_love"-->
+                    <!--                        tools:ignore="ContentDescription" />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -97,8 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="4.8 Rating"
-                        android:textColor="@color/black" />
+                        android:text="4.8 Rating" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -111,8 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="2000+ Order"
-                        android:textColor="@color/black" />
+                        android:text="2000+ Order" />
                 </LinearLayout>
 
                 <TextView
@@ -120,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="15sp" />
 
                 <TextView
@@ -128,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Reviews"
-                    android:textColor="@color/black"
+
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -146,7 +144,8 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/reviewRecycleview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@color/backgroundColor" />
                 </FrameLayout>
 
             </LinearLayout>
@@ -162,7 +161,7 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/light_green_gradient"
         android:text="Edit"
-        android:textColor="@color/white"
+        android:textColor="@color/textColorButtonWhite"
         android:textSize="16sp" />
 
 </RelativeLayout>

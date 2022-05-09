@@ -35,7 +35,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         )
         binding.generalSettings.setOnClickListener {
             val intent = Intent(context, GeneralSetting::class.java)
-            startActivityForResult(intent,1)
+            startActivityForResult(intent, 1)
         }
         binding.profileSettings.setOnClickListener {
             val intent = Intent(context, UserProfileActivity::class.java)
@@ -43,9 +43,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
         binding.logout.setOnClickListener {
             LoginPrefs.removeToken()
-            val iten = Intent(context, LoginScreen::class.java)
             activity?.finishAffinity()
-            startActivity(iten)
+            GlobalObject.currentSelectedPage = R.id.home
+            val intent = Intent(context, LoginScreen::class.java)
+            startActivity(intent)
         }
         Glide.with(requireContext())
             .load(GlobalObject.CurrentUser.photoUrl)

@@ -1,17 +1,33 @@
 package com.example.foca_mobile.activity
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.authen.login.LoginScreen
+import com.example.foca_mobile.utils.NightModePrefs
 
 class SplashScreen : AppCompatActivity() {
+
+    companion object {
+        lateinit var appContext: Context
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        appContext = this
 
+        val night = NightModePrefs.getNightMode()
+        if (night != "")
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+
+        setContentView(R.layout.activity_splash_screen)
         val mainlogo: LinearLayoutCompat = findViewById(R.id.mainlogo)
 
         mainlogo.alpha = 0f

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     android:scrollbars="none"
     tools:context=".activity.authen.login.LoginScreen">
 
@@ -45,7 +45,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/DeliverFavoriteFood"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="13sp" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_marginTop="75dp"
                 android:text="@string/LoginToYourAccount"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -136,7 +136,7 @@
                 android:background="@drawable/light_green_gradient"
                 android:text="@string/Login"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/textColorButtonWhite" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

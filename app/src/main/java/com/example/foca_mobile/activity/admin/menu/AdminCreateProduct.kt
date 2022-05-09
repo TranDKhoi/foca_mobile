@@ -233,19 +233,19 @@ class AdminCreateProduct : AppCompatActivity() {
     private fun isValidData(isUpdate: Boolean): Boolean {
         //IS VALID DATA
         if (binding.productName.text.isEmpty()) {
-            binding.productName.backgroundTintList = ColorStateList.valueOf(Color.RED)
+            binding.productName.setBackgroundResource(R.drawable.rounded_edittext_error)
         } else
-            binding.productName.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+            binding.productName.setBackgroundResource(R.drawable.rounded_edittext_normal)
 
         if (binding.productPrice.text.isEmpty()) {
-            binding.productPrice.backgroundTintList = ColorStateList.valueOf(Color.RED)
+            binding.productPrice.setBackgroundResource(R.drawable.rounded_edittext_error)
         } else
-            binding.productPrice.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+            binding.productPrice.setBackgroundResource(R.drawable.rounded_edittext_normal)
 
         if (binding.productDes.text.isEmpty()) {
-            binding.productDes.backgroundTintList = ColorStateList.valueOf(Color.RED)
+            binding.productDes.setBackgroundResource(R.drawable.rounded_edittext_error)
         } else
-            binding.productDes.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+            binding.productDes.setBackgroundResource(R.drawable.rounded_edittext_normal)
         if (!isUpdate)
             if (imagePath.toString().isEmpty())
                 Toast.makeText(this, "Image can not be null", Toast.LENGTH_SHORT).show()

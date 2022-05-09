@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     android:scrollbars="none"
     tools:context=".activity.authen.signup.SignupScreen">
 
@@ -46,7 +46,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/DeliverFavoriteFood"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -56,7 +56,7 @@
                 android:layout_marginTop="75dp"
                 android:text="@string/SignupforFREE"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -116,14 +116,14 @@
                 android:background="@drawable/light_green_gradient"
                 android:text="@string/CreateAccount"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/textColorButtonWhite" />
 
             <TextView
+                android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/bentonsans_medium"
-                android:id="@+id/backBtn"
                 android:paddingBottom="50dp"
                 android:text="@string/alreadyhaveanaccount"
                 android:textColor="#15BE77" />

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     tools:context=".activity.admin.home.AdminHomeFragment">
 
     <FrameLayout
@@ -35,6 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:text="@string/ManageYourFoodsOrders"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -44,43 +45,44 @@
                     android:layout_weight="1" />
 
                 <ImageButton
+                    android:id="@+id/notifyBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="50dp"
                     android:background="@null"
-                    android:src="@drawable/ic_notifiaction"
+                    android:src="@drawable/ic_notifiaction_badge"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp"
-                android:paddingVertical="15dp">
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:paddingHorizontal="30dp"-->
+            <!--                android:paddingVertical="15dp">-->
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:layout_width="270dp"
-                    android:layout_height="50dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/orange_textfield"
-                    android:drawableStart="@drawable/ic_search"
-                    android:hint="@string/Whatdoyouwanttofind"
-                    android:paddingHorizontal="10dp"
-                    android:scaleY="1"
-                    android:textColor="#DA6317"
-                    android:textColorHint="#DA6317" />
+            <!--                <androidx.appcompat.widget.AppCompatEditText-->
+            <!--                    android:layout_width="270dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:alpha="0.5"-->
+            <!--                    android:background="@drawable/orange_textfield"-->
+            <!--                    android:drawableStart="@drawable/ic_search"-->
+            <!--                    android:hint="@string/Whatdoyouwanttofind"-->
+            <!--                    android:paddingHorizontal="10dp"-->
+            <!--                    android:scaleY="1"-->
+            <!--                    android:textColor="#DA6317"-->
+            <!--                    android:textColorHint="#DA6317" />-->
 
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/orange_textfield"
-                    android:src="@drawable/filter_icon"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
+            <!--                <ImageButton-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="10dp"-->
+            <!--                    android:alpha="0.5"-->
+            <!--                    android:background="@drawable/orange_textfield"-->
+            <!--                    android:src="@drawable/filter_icon"-->
+            <!--                    tools:ignore="ContentDescription" />-->
+            <!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -93,6 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:text="@string/PendingOrders"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -140,6 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:text="@string/NewestFoods"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 

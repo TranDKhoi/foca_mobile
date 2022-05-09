@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     tools:context=".activity.admin.order.allorder.AdminOrderManagement">
 
     <ImageView
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textColor="@color/primaryTextColor"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginStart="20dp"

@@ -5,7 +5,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     tools:context=".activity.admin.chat.conversation.AdminChatScreen">
 
     <ImageView
@@ -89,7 +89,7 @@
                     android:maxHeight="30dp"
                     android:maxLines="2"
                     android:text=""
-                    android:textColor="@color/black"
+
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/cardView"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -103,8 +103,6 @@
                     android:layout_marginTop="5dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text=""
-                    android:textColor="#80000000"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/cardView"
                     app:layout_constraintTop_toBottomOf="@+id/messName" />
@@ -170,7 +168,7 @@
             <EditText
                 android:id="@+id/inputText"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="60dp"
                 android:background="@drawable/rounded_edittext_normal"
                 android:hint="@string/Entermessage"
                 android:importantForAutofill="no"

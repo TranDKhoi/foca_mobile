@@ -87,5 +87,8 @@
     <string name="ARRIVED">ARRIVED</string>
     <string name="Filterthemenu">Filter the menu</string>
     <string name="ALL">ALL</string>
+    <string name="Notification">Notification</string>
+    <string name="Selectone">Select one</string>
+    <string name="Nightmode">Night mode</string>
 
 </resources>
