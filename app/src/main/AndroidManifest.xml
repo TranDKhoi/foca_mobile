@@ -8,9 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Foca_mobile"
         android:usesCleartextTraffic="true">
@@ -34,9 +32,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".activity.authen.signup.bio.BioScreen"
-            android:exported="false" />
-        <activity
             android:name=".activity.authen.signup.SignupScreen"
             android:exported="false" />
         <activity
@@ -45,11 +40,11 @@
         <activity
             android:name=".activity.user.profile.profilesetting.UserProfileActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar." />
+            android:theme="@style/Theme.Foca_mobile" />
         <activity
             android:name=".activity.user.home.infofood.InfoFood_Activity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar." />
+            android:theme="@style/Theme.Foca_mobile" />
         <activity
             android:name=".activity.user.home.orderfood.PopularMenu"
             android:exported="false" />
@@ -92,6 +87,9 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activity.admin.chat.conversation.AdminChatScreen"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.notifi.UserNotification"
             android:exported="false" />
     </application>
 

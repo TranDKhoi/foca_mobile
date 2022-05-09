@@ -1,6 +1,5 @@
 package com.example.foca_mobile.utils
 
-import android.util.Log
 import androidx.preference.PreferenceManager
 import com.example.foca_mobile.activity.authen.login.LoginScreen
 import com.example.foca_mobile.model.User
@@ -14,35 +13,35 @@ object LoginPrefs {
     var sharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(LoginScreen.appContext)
 
-    const val USER_TOKEN = "usertoken";
-    const val USER = "user";
+    const val USER_TOKEN = "usertoken"
+    const val USER = "user"
 
     fun getUserToken(): String {
-        return sharedPreferences.getString(USER_TOKEN, "").toString();
+        return sharedPreferences.getString(USER_TOKEN, "").toString()
     }
     fun getUser(): User {
-        val jsonUser = sharedPreferences.getString(USER, "").toString();
-        if(jsonUser == "") return User("",)
+        val jsonUser = sharedPreferences.getString(USER, "").toString()
+        if (jsonUser == "") return User("",)
         val gson = Gson()
-        val user: User = gson.fromJson(jsonUser, User::class.java)
-        return user
+        return gson.fromJson(jsonUser, User::class.java)
     }
 
     fun setUser(user:User) {
-        var editor = sharedPreferences.edit();
+        val editor = sharedPreferences.edit()
         val gson = Gson()
         val userJson = gson.toJson(user)
-        editor.putString(USER, userJson);
-        editor.apply();
+        editor.putString(USER, userJson)
+        editor.apply()
     }
 
     fun setUserToken(token: String) {
-        var editor = sharedPreferences.edit();
-        editor.putString(USER_TOKEN, token);
-        editor.apply();
+        val editor = sharedPreferences.edit()
+        editor.putString(USER_TOKEN, token)
+        editor.apply()
     }
 
     fun removeToken() {
-        sharedPreferences.edit().clear().apply();
+        sharedPreferences.edit().remove("user").apply()
+        sharedPreferences.edit().remove("usertoken").apply()
     }
 }

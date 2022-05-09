@@ -3,15 +3,16 @@ package com.example.foca_mobile.activity.user.home.userhome
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.home.orderfood.PopularMenu
-import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
-import com.example.foca_mobile.databinding.FragmentUserHomeBinding
 import com.example.foca_mobile.activity.user.home.orderfood.Food
+import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
+import com.example.foca_mobile.activity.user.home.orderfood.PopularMenu
+import com.example.foca_mobile.activity.user.notifi.UserNotification
+import com.example.foca_mobile.databinding.FragmentUserHomeBinding
 
 class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
 
@@ -32,12 +33,16 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         createRestaurantRecyclerView()
         createFoodRecyclerView()
-        val recentAdapter =  RecentFoodAdapter(newArrayRecentFoodList)
+        val recentAdapter = RecentFoodAdapter(newArrayRecentFoodList)
         binding.restaurantRecyclerView.adapter = recentAdapter
-        val foodAdapter = this.context?.let { FoodAdapter(it,newArrayFoodList) }
+        val foodAdapter = this.context?.let { FoodAdapter(it, newArrayFoodList) }
         binding.foodRecyclerView.adapter = foodAdapter
         binding.txtViewmorePopularmenu.setOnClickListener {
             val intent = Intent(context, PopularMenu::class.java)
+            startActivity(intent)
+        }
+        binding.notifyBtn.setOnClickListener {
+            val intent = Intent(context, UserNotification::class.java)
             startActivity(intent)
         }
         return binding.root
@@ -47,6 +52,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         super.onDestroyView()
         _binding = null
     }
+
     private fun createRestaurantRecyclerView() {
         binding.restaurantRecyclerView.layoutManager = LinearLayoutManager(
             activity,
@@ -85,6 +91,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
             )
         )
     }
+
     private fun createFoodRecyclerView() {
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.foodRecyclerView.setHasFixedSize(true)

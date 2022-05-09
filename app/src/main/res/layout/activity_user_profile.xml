@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="400"
                     android:text="Anam Wusono"
-                    android:textColor="@color/black"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -88,8 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
-                android:text="anamwp66@gmail.com"
-                android:textColor="@color/black" />
+                android:textColor="@color/primaryTextColor"
+                android:text="anamwp66@gmail.com" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,8 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center"
                     android:layout_marginStart="20dp"
-                    android:text="You Have 3 Voucher"
-                    android:textColor="@color/black" />
+                    android:text="You Have 3 Voucher" />
             </LinearLayout>
 
             <TextView
@@ -117,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Favorite"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -125,7 +124,7 @@
                 android:id="@+id/favoriteRecycleview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" />
+            />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

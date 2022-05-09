@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     tools:context=".activity.authen.forgotpass.ForgotPassScreen">
 
     <RelativeLayout
@@ -41,7 +41,8 @@
                 android:lineHeight="30dp"
                 android:text="@string/Forgotpassword"
                 android:textAlignment="textStart"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
+
                 android:textSize="25sp"
                 android:textStyle="bold"
                 tools:targetApi="p" />
@@ -52,7 +53,7 @@
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/bentonsans_book"
                 android:text="@string/EnteryourstudentIDtoresetyourpassword"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="15sp" />
 
 
@@ -85,7 +86,7 @@
                 android:background="@drawable/light_green_gradient"
                 android:text="@string/Sendcode"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/textColorButtonWhite" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

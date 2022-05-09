@@ -63,9 +63,9 @@
                         android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="400"
+                        android:textColor="@color/primaryTextColor"
                         android:text="Rainbow Sandwich Sugarless"
                         android:textSize="30sp"
-                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <ImageButton
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="4.8 Rating"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/primaryTextColor"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -103,24 +103,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/black"
-                        android:text="2000+ Order" />
+                        android:text="2000+ Order"
+                        android:textColor="@color/primaryTextColor"/>
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Reviews"
-                    android:textColor="@color/black"
                     android:layout_marginTop="20dp"
                     android:textStyle="bold"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="18sp"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -138,6 +137,6 @@
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="30dp"
-            android:textColor="@color/white"
+            android:textColor="@color/textColorButtonWhite"
             android:textSize="16sp" />
 </RelativeLayout>

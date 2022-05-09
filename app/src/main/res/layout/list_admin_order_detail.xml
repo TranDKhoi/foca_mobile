@@ -41,7 +41,6 @@
                     android:id="@+id/foodItemName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textColor="@color/blackTitle"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -50,7 +49,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/lightGrey"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -59,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/green"
+                    android:textColor="#11FF00"
                     android:textSize="19sp" />
 
             </LinearLayout>
@@ -74,7 +72,6 @@
                     android:id="@+id/foodItemQuantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/lightBlack"
                     android:textSize="16sp" />
 
         </LinearLayout>

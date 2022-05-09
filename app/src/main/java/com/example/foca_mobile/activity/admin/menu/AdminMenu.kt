@@ -58,7 +58,6 @@ class AdminMenu : Fragment() {
     }
 
     private fun initSpinner() {
-        binding.spinner.text = resources.getString(R.string.ALL)
         binding.spinner.setOnClickListener {
             // setup the alert builder
             val builder = AlertDialog.Builder(binding.root.context)
@@ -74,17 +73,14 @@ class AdminMenu : Fragment() {
                 when (which) {
                     0 -> {
                         selectedStatus = ""
-                        binding.spinner.text = resources.getString(R.string.ALL)
                         getMyMenu(selectedStatus)
                     }
                     1 -> {
                         selectedStatus = "FOOD"
-                        binding.spinner.text = resources.getString(R.string.FOOD)
                         getMyMenu(selectedStatus)
                     }
                     2 -> {
                         selectedStatus = "DRINK"
-                        binding.spinner.text = resources.getString(R.string.DRINK)
                         getMyMenu(selectedStatus)
                     }
                 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graygradient_background"
+    android:background="@color/backgroundColor"
     tools:context=".activity.SplashScreen">
 
     <RelativeLayout
@@ -46,7 +46,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/DeliverFavoriteFood"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 

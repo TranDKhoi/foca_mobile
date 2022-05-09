@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context=".activity.admin.menu.AdminCreateProduct">
 
     <RelativeLayout
@@ -78,16 +79,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="@string/ProductName"
-                android:textColor="@color/blackTitle"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/productName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
+                android:background="@drawable/rounded_edittext_normal"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
+                android:minHeight="50dp"
                 android:paddingHorizontal="10dp"
                 tools:ignore="LabelFor" />
 
@@ -104,18 +105,18 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/Price"
-                        android:textColor="@color/blackTitle"
                         android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/productPrice"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/black"
+                        android:background="@drawable/rounded_edittext_normal"
                         android:importantForAutofill="no"
                         android:inputType="number"
+                        android:maxLength="9"
+                        android:minHeight="50dp"
                         android:paddingHorizontal="10dp"
                         tools:ignore="LabelFor" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -134,7 +135,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Type"
-                        android:textColor="@color/blackTitle"
                         android:textSize="20sp" />
 
                     <TextView
@@ -142,12 +142,13 @@
                         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/black"
+                        android:background="@drawable/rounded_edittext_normal"
+                        android:gravity="center"
+                        android:hint="@string/Selectone"
                         android:importantForAutofill="no"
                         android:minWidth="110dp"
-                        android:paddingHorizontal="10dp"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="50dp"
+                        android:minHeight="50dp"
+                        android:paddingHorizontal="20dp"
                         android:textSize="18sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -158,16 +159,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="@string/Description"
-                android:textColor="@color/blackTitle"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/productDes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
+                android:background="@drawable/rounded_edittext_normal"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
+                android:minHeight="50dp"
                 android:paddingHorizontal="10dp"
                 tools:ignore="LabelFor" />
 
@@ -175,9 +176,9 @@
                 android:id="@+id/imageCard"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="30dp"
                 android:clickable="true"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="2dp">
 
                 <ImageButton
@@ -207,7 +208,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/light_green_gradient"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/textColorButtonWhite" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
