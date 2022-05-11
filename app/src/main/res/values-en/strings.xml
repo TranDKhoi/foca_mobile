@@ -91,4 +91,14 @@
     <string name="Selectone">Select one</string>
     <string name="Nightmode">Night mode</string>
 
+    <string name="YourOrder">Your order: #</string>
+    <string name="UPendingNoti">needs to be confirmed because of the extra cost</string>
+    <string name="UCancelledNoti">has been cancelled</string>
+    <string name="UProcessedNoti">is in progress and will be delivered in a few minutes</string>
+    <string name="UCompletedNoti">is successful!</string>
+
+    <string name="ArrivedNoti">Great! You have a new order! Order: #</string>
+    <string name="ConfirmPendingNoti">Customer has confirmed the order: #</string>
+    <string name="CancelPendingNoti">Customer has cancelled the order: #</string>
+
 </resources>

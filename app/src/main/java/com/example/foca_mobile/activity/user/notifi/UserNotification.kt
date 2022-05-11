@@ -6,12 +6,18 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.foca_mobile.databinding.ActivityUserNotificationBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Notification
+import com.example.foca_mobile.model.Room
 import com.example.foca_mobile.service.NotificationService
 import com.example.foca_mobile.service.ServiceGenerator
+import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_chat_screen.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +40,15 @@ class UserNotification : AppCompatActivity() {
 
         //CALL API
         getNotify()
+
+        SocketHandler.getSocket().on("received_notification") {
+            val dataJson = it[0] as JSONObject
+            val noti = Gson().fromJson(dataJson.toString(), Notification::class.java)
+            runOnUiThread {
+                notifyList.add(noti)
+                notifyAdapter.notifyDataSetChanged()
+            }
+        }
 
         binding.backBtn.setOnClickListener { this.finish() }
 

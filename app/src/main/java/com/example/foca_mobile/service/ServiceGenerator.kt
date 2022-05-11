@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 import retrofit2.Retrofit
 
-
 object ServiceGenerator {
     private const val BASE_URL = "https://foca-backend.herokuapp.com/"
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

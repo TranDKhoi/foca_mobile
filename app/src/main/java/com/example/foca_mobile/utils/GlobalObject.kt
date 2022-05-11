@@ -10,6 +10,7 @@ import java.util.*
 object GlobalObject {
     lateinit var notSeenConversationListIdsAdmin: ArrayList<Int>
     lateinit var notSeenConversationListIdsUser: ArrayList<Int>
+    lateinit var notSeenNotificationList: ArrayList<Int>
 
     lateinit var bottomNavigation: ChipNavigationBar
     var currentSelectedPage = R.id.home

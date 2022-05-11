@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -9,6 +10,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -21,16 +24,25 @@ import com.example.foca_mobile.activity.admin.order.allorder.AdminOrderManagemen
 import com.example.foca_mobile.activity.user.cart_order.UserMyCart
 import com.example.foca_mobile.activity.user.chat.UserChatScreen
 import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
+import com.example.foca_mobile.activity.user.notifi.UserNotificationAdapter
 import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
+import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Message
+import com.example.foca_mobile.model.Notification
+import com.example.foca_mobile.service.NotificationService
+import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.socket.SocketHandler
+import com.example.foca_mobile.utils.ErrorUtils
 import com.example.foca_mobile.utils.GlobalObject
 import com.google.gson.Gson
 import io.socket.client.Ack
 import io.socket.client.Socket
 import org.json.JSONArray
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         //SAVE IT TO GLOBAL OBJECT
         GlobalObject.bottomNavigation = binding.bottomNavigation
+        GlobalObject.notSeenNotificationList = ArrayList<Int>()
 
         socket = SocketHandler.getSocket()
 
@@ -84,6 +97,15 @@ class MainActivity : AppCompatActivity() {
                     sendNotification(message.sender!!.fullName, message.text!!)
             }
 
+            //get not seen notify
+            getUnseenNotify()
+
+            //notification
+            socket.on("received_notification") {
+                val dataJson = it[0] as JSONObject
+                val noti = Gson().fromJson(dataJson.toString(), Notification::class.java)
+               GlobalObject.notSeenNotificationList.add(noti.id!!)
+            }
             binding.bottomNavigation.setOnItemSelectedListener { id ->
                 when (id) {
                     R.id.home -> {
@@ -224,7 +246,39 @@ class MainActivity : AppCompatActivity() {
             notify(intNOTIFY_ID, builder.build())
         }
     }
+    private fun getUnseenNotify() {
+        //CALL API
+        var getNotificationCall = ServiceGenerator.buildService(NotificationService::class.java)
+            .getUserNotify("false")
 
+        getNotificationCall?.enqueue(object : Callback<ApiResponse<MutableList<Notification>>> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<ApiResponse<MutableList<Notification>>>,
+                response: Response<ApiResponse<MutableList<Notification>>>
+            ) {
+                if (response.isSuccessful) {
+                    val res: ApiResponse<MutableList<Notification>> = response.body()!!
+
+                    val listNotification =  GlobalObject.notSeenNotificationList
+                        for (i in 0 until res.data.size){
+                            listNotification.add(res.data[i].id!!)
+                        }
+                    Log.d("Check list noti", GlobalObject.notSeenNotificationList.toString())
+                } else {
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+                    Log.d("Error From Api getNotificationCall: ", errorRes.message)
+                    Toast.makeText(applicationContext, errorRes.message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            override fun onFailure(
+                call: Call<ApiResponse<MutableList<Notification>>>,
+                t: Throwable
+            ) {
+            }
+        })
+    }
     companion object {
         private const val intNOTIFY_ID = 1
         private const val strCHANNEL_ID = "Channel 1"

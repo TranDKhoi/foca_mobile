@@ -2,6 +2,7 @@ package com.example.foca_mobile.activity.admin.order.orderdetail
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -14,12 +15,15 @@ import androidx.lifecycle.MutableLiveData
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityAdminOrderDetailBinding
 import com.example.foca_mobile.model.ApiResponse
+import com.example.foca_mobile.model.Notification
 import com.example.foca_mobile.model.Order
 import com.example.foca_mobile.model.OrderDetails
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
+import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
 import com.google.gson.Gson
+import io.socket.client.Ack
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -158,13 +162,13 @@ class AdminOrderDetail : AppCompatActivity() {
         val updateOrderCall = ServiceGenerator.buildService(OrderService::class.java)
             .updateOrderStatus(order.id.toString(), requestBody)
 
-        updateOrderCall?.enqueue(object : Callback<ApiResponse<String>> {
-
+        updateOrderCall?.enqueue(object : Callback<ApiResponse<OrderDetails>> {
             override fun onResponse(
-                call: Call<ApiResponse<String>>,
-                response: Response<ApiResponse<String>>
+                call: Call<ApiResponse<OrderDetails>>,
+                response: Response<ApiResponse<OrderDetails>>
             ) {
-                if (!response.isSuccessful) {
+                Log.d("response.isSuccessful", response.isSuccessful.toString())
+                if (response.isSuccessful) {
                     kotlin.runCatching {
                         Toast.makeText(
                             applicationContext,
@@ -172,6 +176,32 @@ class AdminOrderDetail : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+                    val noti =  Notification(userId = order.buyerId, )
+
+                    val yourOrderStr = resources.getString(R.string.YourOrder)
+                    when(status){
+                        "PENDING" ->{
+                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UPendingNoti)
+                            noti.iconType = "MONEY"
+                        }
+                        "COMPLETED" ->{
+                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UCompletedNoti)
+                            noti.iconType = "SUCCESS"
+                        }
+                        "CANCELLED" ->{
+                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UCancelledNoti)
+                            noti.iconType = "CANCELLED"
+                        }
+                        "PROCESSED" ->{
+                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UProcessedNoti)
+                            noti.iconType = "SUCCESS"
+                        }
+                        else -> {
+                            return
+                        }
+                    }
+
+                    SocketHandler.getSocket().emit("send_notification", Gson().toJson(noti))
                 } else {
                     kotlin.runCatching {
                         val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
@@ -184,10 +214,10 @@ class AdminOrderDetail : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<String>>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<OrderDetails>>, t: Throwable) {
                 Toast.makeText(
                     applicationContext,
-                    "Update Successfully!",
+                    "Error Network!",
                     Toast.LENGTH_SHORT
                 ).show()
             }
