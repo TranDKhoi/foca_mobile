@@ -3,6 +3,7 @@ package com.example.foca_mobile.activity.user.notifi
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ListNotifyItemBinding
@@ -33,7 +34,7 @@ class UserNotificationAdapter(private val notifyList: MutableList<Notification>)
         when (currentItem.iconType) {
             "SUCCESS" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_success)
             "ERROR" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_cancel)
-            "MONEY" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_cancel)
+            "MONEY" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_pending)
         }
         holder.binding.root.notifyTitle.text = currentItem.message
 
@@ -43,6 +44,9 @@ class UserNotificationAdapter(private val notifyList: MutableList<Notification>)
             0L,
             DateUtils.FORMAT_ABBREV_ALL
         ) ?: ""
+
+        holder.binding.isNew.visibility =
+            if (currentItem.isSeen!!) CardView.GONE else CardView.VISIBLE
 
         holder.binding.root.setOnClickListener {
         }

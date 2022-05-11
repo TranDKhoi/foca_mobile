@@ -52,11 +52,44 @@ class UserNotification : AppCompatActivity() {
 
         binding.backBtn.setOnClickListener { this.finish() }
 
+        //SEEN ALL NOTIFICATION
+        seenAll()
+
+    }
+
+    private fun seenAll() {
+        //CALL API
+        val seenCall = ServiceGenerator.buildService(NotificationService::class.java)
+            .markAllSeen()
+
+        seenCall?.enqueue(object : Callback<ApiResponse<MutableList<Int>>> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<ApiResponse<MutableList<Int>>>,
+                response: Response<ApiResponse<MutableList<Int>>>
+            ) {
+                if (response.isSuccessful) {
+                    val res: ApiResponse<MutableList<Int>> = response.body()!!
+                    notifyAdapter.notifyDataSetChanged()
+                } else {
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+
+                    Toast.makeText(applicationContext, errorRes.message, Toast.LENGTH_LONG).show();
+                }
+                binding.bar.visibility = ProgressBar.GONE
+            }
+
+            override fun onFailure(
+                call: Call<ApiResponse<MutableList<Int>>>,
+                t: Throwable
+            ) {
+            }
+        })
     }
 
     private fun getNotify() {
         //CALL API
-        var getNotificationCall = ServiceGenerator.buildService(NotificationService::class.java)
+        val getNotificationCall = ServiceGenerator.buildService(NotificationService::class.java)
             .getUserNotify()
 
         binding.bar.visibility = ProgressBar.VISIBLE

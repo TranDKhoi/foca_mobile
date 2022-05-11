@@ -8,10 +8,10 @@ import retrofit2.http.Query
 
 interface NotificationService {
 
-    @GET("/api/buyer/notifications")
+    @GET("/api/notifications")
     fun getUserNotify(@Query("isSeen") isSeen: String? = null): Call<ApiResponse<MutableList<Notification>>>?
 
-    @GET("/api/buyer/notifications/mark-all-seen")
-    fun markAllSeen()
+    @GET("/api/notifications/mark-all-seen")
+    fun markAllSeen(): Call<ApiResponse<MutableList<Int>>>?
 
 }

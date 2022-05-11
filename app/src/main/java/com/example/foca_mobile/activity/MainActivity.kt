@@ -1,8 +1,9 @@
 package com.example.foca_mobile.activity
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -10,8 +11,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -24,25 +23,18 @@ import com.example.foca_mobile.activity.admin.order.allorder.AdminOrderManagemen
 import com.example.foca_mobile.activity.user.cart_order.UserMyCart
 import com.example.foca_mobile.activity.user.chat.UserChatScreen
 import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
-import com.example.foca_mobile.activity.user.notifi.UserNotificationAdapter
+import com.example.foca_mobile.activity.user.notifi.UserNotification
 import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
-import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Message
 import com.example.foca_mobile.model.Notification
-import com.example.foca_mobile.service.NotificationService
-import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.socket.SocketHandler
-import com.example.foca_mobile.utils.ErrorUtils
 import com.example.foca_mobile.utils.GlobalObject
 import com.google.gson.Gson
 import io.socket.client.Ack
 import io.socket.client.Socket
 import org.json.JSONArray
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,9 +50,15 @@ class MainActivity : AppCompatActivity() {
 
         //SAVE IT TO GLOBAL OBJECT
         GlobalObject.bottomNavigation = binding.bottomNavigation
-        GlobalObject.notSeenNotificationList = ArrayList<Int>()
 
         socket = SocketHandler.getSocket()
+
+        //notification
+        socket.on("received_notification") {
+            val dataJson = it[0] as JSONObject
+            val noti = Gson().fromJson(dataJson.toString(), Notification::class.java)
+            sendOrderNotification(noti.iconType, noti.message!!)
+        }
 
         //THIS IS WHERE WE DECIDE WHO IS LOGIN
         if (GlobalObject.CurrentUser.role == "USER") {
@@ -94,23 +92,12 @@ class MainActivity : AppCompatActivity() {
                 val message = Gson().fromJson(messageJson.toString(), Message::class.java)
                 binding.bottomNavigation.showBadge(R.id.message)
                 if (!GlobalObject.isOpenActivity)
-                    sendNotification(message.sender!!.fullName, message.text!!)
-            }
-
-            //get not seen notify
-            getUnseenNotify()
-
-            //notification
-            socket.on("received_notification") {
-                val dataJson = it[0] as JSONObject
-                val noti = Gson().fromJson(dataJson.toString(), Notification::class.java)
-               GlobalObject.notSeenNotificationList.add(noti.id!!)
+                    sendMessageNotification(message.sender!!.fullName, message.text!!)
             }
             binding.bottomNavigation.setOnItemSelectedListener { id ->
                 when (id) {
                     R.id.home -> {
                         setCurrentFragment(userHomeFragment)
-
                         GlobalObject.currentSelectedPage = R.id.home
                     }
                     R.id.message -> {
@@ -127,7 +114,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        } else if (GlobalObject.CurrentUser.role == "ADMIN") {
+        }
+        else if (GlobalObject.CurrentUser.role == "ADMIN") {
             //ADMIN FRAGMENT
             val adminHomeFragment = AdminHomeFragment()
             val messageFragment = ListConversationFragment()
@@ -145,7 +133,6 @@ class MainActivity : AppCompatActivity() {
 
             socket.emit("get_not_seen_conversations", Ack {
                 val listRoomJsonIds = it[0] as JSONArray
-                Log.d("get_not_seen_conversations", listRoomJsonIds.toString())
 
                 val listRoomIds =
                     Gson().fromJson(listRoomJsonIds.toString(), ArrayList<Int>()::class.java)
@@ -166,7 +153,7 @@ class MainActivity : AppCompatActivity() {
                     message.roomId!!
                 )
                 if (!GlobalObject.isOpenActivity)
-                    sendNotification(message.sender!!.fullName, message.text!!)
+                    sendMessageNotification(message.sender!!.fullName, message.text!!)
             }
 
             binding.bottomNavigation.setOnItemSelectedListener { id ->
@@ -218,14 +205,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //NOTIFY MESSAGE AREA
-    private fun sendNotification(sender: String?, mess: String) {
+    private fun sendMessageNotification(sender: String?, mess: String) {
 
         val bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_message)
 
         val name = "New Message Notification"
         val descriptionText = "This channel is defined in Main Admin"
         val importance = NotificationManager.IMPORTANCE_HIGH
-        val notifyChannel = NotificationChannel(strCHANNEL_ID, name, importance).apply {
+        val notifyChannel = NotificationChannel(strCHANNEL_ID1, name, importance).apply {
             description = descriptionText
         }
         // Register the channel with the system
@@ -233,54 +220,72 @@ class MainActivity : AppCompatActivity() {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notifyChannel)
 
-        val builder = NotificationCompat.Builder(this, strCHANNEL_ID)
+        val builder = NotificationCompat.Builder(this, strCHANNEL_ID1)
             .setSmallIcon(R.drawable.ic_message)
             .setLargeIcon(bmLargeIcon)
             .setContentTitle(sender ?: "You have a new message!")
             .setContentText(mess)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
 
         with(NotificationManagerCompat.from(this)) {
             // notificationId is a unique int for each notification that you must define
-            notify(intNOTIFY_ID, builder.build())
+            notify(intNOTIFY_ID1, builder.build())
         }
     }
-    private fun getUnseenNotify() {
-        //CALL API
-        var getNotificationCall = ServiceGenerator.buildService(NotificationService::class.java)
-            .getUserNotify("false")
 
-        getNotificationCall?.enqueue(object : Callback<ApiResponse<MutableList<Notification>>> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(
-                call: Call<ApiResponse<MutableList<Notification>>>,
-                response: Response<ApiResponse<MutableList<Notification>>>
-            ) {
-                if (response.isSuccessful) {
-                    val res: ApiResponse<MutableList<Notification>> = response.body()!!
+    //NOTIFY NOTIFY AREA
+    private fun sendOrderNotification(status: String?, mess: String) {
 
-                    val listNotification =  GlobalObject.notSeenNotificationList
-                        for (i in 0 until res.data.size){
-                            listNotification.add(res.data[i].id!!)
-                        }
-                    Log.d("Check list noti", GlobalObject.notSeenNotificationList.toString())
-                } else {
-                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
-                    Log.d("Error From Api getNotificationCall: ", errorRes.message)
-                    Toast.makeText(applicationContext, errorRes.message, Toast.LENGTH_LONG).show();
-                }
-            }
+        var bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_order)
 
-            override fun onFailure(
-                call: Call<ApiResponse<MutableList<Notification>>>,
-                t: Throwable
-            ) {
-            }
-        })
+        when(status){
+            "PENDING" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
+            "CANCELLED" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_cancel)
+            "COMPLETED" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_success)
+            "PROCESSED" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_success)
+        }
+
+
+
+        val name = "Order Notification"
+        val descriptionText = "This channel is defined in Main Admin"
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val notifyChannel = NotificationChannel(strCHANNEL_ID2, name, importance).apply {
+            description = descriptionText
+        }
+        // Register the channel with the system
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(notifyChannel)
+
+
+        // Create an Intent for the activity you want to start
+        val resultIntent = Intent(this, UserNotification::class.java)
+        val resultPendingIntent = PendingIntent.getActivity(
+            applicationContext, 0,
+            resultIntent, 0
+        )
+
+        val builder = NotificationCompat.Builder(this, strCHANNEL_ID2)
+            .setSmallIcon(R.drawable.ic_order)
+            .setLargeIcon(bmLargeIcon)
+            .setContentTitle(status ?: "You just got news about your order!")
+            .setContentText(mess)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(resultPendingIntent)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(this)) {
+            // notificationId is a unique int for each notification that you must define
+            notify(intNOTIFY_ID2, builder.build())
+        }
     }
+
     companion object {
-        private const val intNOTIFY_ID = 1
-        private const val strCHANNEL_ID = "Channel 1"
+        private const val intNOTIFY_ID1 = 1
+        private const val intNOTIFY_ID2 = 1
+        private const val strCHANNEL_ID1 = "Message channel"
+        private const val strCHANNEL_ID2 = "Order channel"
     }
 }

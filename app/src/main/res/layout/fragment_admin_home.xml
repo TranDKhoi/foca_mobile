@@ -51,7 +51,7 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="50dp"
                     android:background="@null"
-                    android:src="@drawable/ic_notifiaction_badge"
+                    android:src="@drawable/ic_notification_non"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
