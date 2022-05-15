@@ -20,10 +20,8 @@ import com.example.foca_mobile.model.Order
 import com.example.foca_mobile.model.OrderDetails
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
-import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
 import com.google.gson.Gson
-import io.socket.client.Ack
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -79,7 +77,6 @@ class AdminOrderDetail : AppCompatActivity() {
                 binding.priceTotal.text =
                     NumberFormat.getCurrencyInstance()
                         .format((order.totalPrice!! + it.toString().toInt()))
-
         }
 
     }
@@ -148,14 +145,13 @@ class AdminOrderDetail : AppCompatActivity() {
         val jsonObject = JSONObject()
         if (selectedStatus.value == "PENDING") {
             jsonObject.put("status", status)
-            jsonObject.put("surcharge", binding.surcharge.text)
+            jsonObject.put("surcharge", binding.surcharge.text.toString().toInt())
         } else
             jsonObject.put("status", status)
 
 
         // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
-
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
         //CALL API
@@ -176,24 +172,28 @@ class AdminOrderDetail : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    val noti =  Notification(userId = order.buyerId, )
+                    val noti = Notification(userId = order.buyerId)
 
                     val yourOrderStr = resources.getString(R.string.YourOrder)
-                    when(status){
-                        "PENDING" ->{
-                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UPendingNoti)
+                    when (status) {
+                        "PENDING" -> {
+                            noti.message =
+                                yourOrderStr + order.id + resources.getString(R.string.UPendingNoti)
                             noti.iconType = "MONEY"
                         }
-                        "COMPLETED" ->{
-                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UCompletedNoti)
+                        "COMPLETED" -> {
+                            noti.message =
+                                yourOrderStr + order.id + resources.getString(R.string.UCompletedNoti)
                             noti.iconType = "SUCCESS"
                         }
-                        "CANCELLED" ->{
-                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UCancelledNoti)
+                        "CANCELLED" -> {
+                            noti.message =
+                                yourOrderStr + order.id + resources.getString(R.string.UCancelledNoti)
                             noti.iconType = "CANCELLED"
                         }
-                        "PROCESSED" ->{
-                            noti.message = yourOrderStr + order.id +resources.getString(R.string.UProcessedNoti)
+                        "PROCESSED" -> {
+                            noti.message =
+                                yourOrderStr + order.id + resources.getString(R.string.UProcessedNoti)
                             noti.iconType = "SUCCESS"
                         }
                         else -> {
@@ -201,7 +201,7 @@ class AdminOrderDetail : AppCompatActivity() {
                         }
                     }
 
-                    SocketHandler.getSocket().emit("send_notification", Gson().toJson(noti))
+//                    SocketHandler.getSocket().emit("send_notification", Gson().toJson(noti))
                 } else {
                     kotlin.runCatching {
                         val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)

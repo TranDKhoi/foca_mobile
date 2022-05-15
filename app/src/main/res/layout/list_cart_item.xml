@@ -77,7 +77,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="18dp"
-                        android:textColor="@color/blackTitle"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -86,7 +85,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@color/lightGrey"
                         android:textSize="14sp" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -94,7 +92,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/green"
                         android:textSize="19sp" />
 
                 </LinearLayout>
@@ -116,7 +113,6 @@
                     android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/lightWhite"
                     android:background="#1653E88B"
                     android:padding="8dp"
                     app:cardCornerRadius="8dp"
@@ -126,9 +122,8 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_gravity="center"
-
                         android:src="@drawable/ic_minus"
-                        app:tint="@color/green"
+                        app:tint="@color/textColorButtonGreen"
                         tools:ignore="ContentDescription" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -138,7 +133,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:textColor="@color/lightBlack"
                     android:textSize="16sp" />
 
                 <com.google.android.material.card.MaterialCardView
@@ -146,7 +140,7 @@
                     android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/green"
+                    android:backgroundTint="@color/textColorButtonGreen"
                     android:padding="8dp"
                     app:cardCornerRadius="8dp"
                     android:id="@+id/addQuantityCard"

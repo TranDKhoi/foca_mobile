@@ -4,14 +4,6 @@
     <color name="textColorButtonWhite">#FFFFFFFF</color>
     <color name="textColorButtonGreen">#15BE77</color>
     <color name="icon_menu">#15BE77</color>
-    <color name="green">#53E88B</color>
-    <color name="lightWhite">#FEFEFF</color>
-    <color name="blackTitle">#09051C</color>
-    <color name="lightGrey">#3B3B3B</color>
-    <color name="lightBlack">#181818</color>
-    <color name="whiteLinear">#15BE77</color>
-    <color name="whiteGrey">#f6f1f1</color>
-
     <color name="primaryTextColor">#000000</color>
     <color name="editTextColor">#F4F4F4</color>
 </resources>

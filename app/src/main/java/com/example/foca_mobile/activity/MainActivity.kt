@@ -3,7 +3,6 @@ package com.example.foca_mobile.activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -56,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         socket.on("received_notification") {
             val dataJson = it[0] as JSONObject
             val noti = Gson().fromJson(dataJson.toString(), Notification::class.java)
+            Log.d("Check received_notification", noti.toString())
             sendOrderNotification(noti.iconType, noti.message!!)
         }
 
@@ -269,7 +269,8 @@ class MainActivity : AppCompatActivity() {
         val builder = NotificationCompat.Builder(this, strCHANNEL_ID2)
             .setSmallIcon(R.drawable.ic_order)
             .setLargeIcon(bmLargeIcon)
-            .setContentTitle(status ?: "You just got news about your order!")
+//            .setContentTitle(status ?: "You just got news about your order!")
+            .setContentTitle("You just got news about your order!")
             .setContentText(mess)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(resultPendingIntent)

@@ -8,31 +8,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.home.orderfood.Food
 import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
 import com.example.foca_mobile.activity.user.home.orderfood.PopularMenu
+import com.example.foca_mobile.activity.user.home.recentfood.AllRecentFood_activity
 import com.example.foca_mobile.activity.user.notifi.UserNotification
 import com.example.foca_mobile.databinding.FragmentUserHomeBinding
-import com.example.foca_mobile.model.ApiResponse
-import com.example.foca_mobile.model.Notification
+import com.example.foca_mobile.model.*
 import com.example.foca_mobile.service.NotificationService
+import com.example.foca_mobile.service.OrderService
+import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
+import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
 
     private var _binding: FragmentUserHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var newArrayRecentFoodList: ArrayList<RecentFood>
-    private lateinit var newArrayFoodList: ArrayList<Food>
 
-    private var isHaveNewNoti: MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    private lateinit var newArrayRecentFoodList: MutableList<Product?>
+    private lateinit var newArrayFoodList: MutableList<Product>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,114 +45,86 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
             container,
             false
         )
-        createRestaurantRecyclerView()
+        createRecentFoodRecyclerView()
         createFoodRecyclerView()
-        val recentAdapter = RecentFoodAdapter(newArrayRecentFoodList)
-        binding.restaurantRecyclerView.adapter = recentAdapter
-        val foodAdapter = this.context?.let { FoodAdapter(it, newArrayFoodList) }
-        binding.foodRecyclerView.adapter = foodAdapter
+        getUnseenNotify()
+
+        binding.txtviewmoreRecentFood.setOnClickListener {
+            val intent = Intent(context, AllRecentFood_activity::class.java)
+            startActivity(intent)
+        }
         binding.txtViewmorePopularmenu.setOnClickListener {
             val intent = Intent(context, PopularMenu::class.java)
             startActivity(intent)
         }
+
         binding.notifyBtn.setOnClickListener {
             val intent = Intent(context, UserNotification::class.java)
             startActivity(intent)
         }
 
-        //get not seen notify
-        getUnseenNotify()
+        //update badge notification
+        val socket = SocketHandler.getSocket()
+        socket.on("received_notification") {
+            activity?.runOnUiThread {
+                binding.notifyBtn.setImageResource(R.drawable.ic_notification_badge)
+            }
+        }
 
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getUnseenNotify()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun createRestaurantRecyclerView() {
-        binding.restaurantRecyclerView.layoutManager = LinearLayoutManager(
+    private fun createRecentFoodRecyclerView() {
+        binding.recentFoodRecyclerView.layoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.HORIZONTAL,
             false
         )
-        binding.restaurantRecyclerView.setHasFixedSize(true)
+        binding.recentFoodRecyclerView.setHasFixedSize(true)
+        newArrayRecentFoodList = mutableListOf()
+        val recentFoodApi = ServiceGenerator.buildService(OrderService::class.java).getRecentOrderList()
+        recentFoodApi?.enqueue(object : Callback<ApiResponse<MutableList<Order>>> {
+            override fun onResponse(
+                call: Call<ApiResponse<MutableList<Order>>>,
+                response: Response<ApiResponse<MutableList<Order>>>
+            ) {
+                val res = response.body()!!
+                val tempOrderDetailsList1 : MutableList<OrderDetails> = mutableListOf()
+                res.data.forEach {
+                    it.orderDetails?.let { it1 -> tempOrderDetailsList1.addAll(it1) }
+                }
+                for (it in tempOrderDetailsList1) {
+                    if(newArrayRecentFoodList.size == 5) break
+                    if (!newArrayRecentFoodList.any { pd -> pd?.id == it.productId }) newArrayRecentFoodList.add(it.product)
+                }
+                binding.recentFoodRecyclerView.adapter = context?.let { RecentFoodAdapter(it,newArrayRecentFoodList) }
+            }
 
-        newArrayRecentFoodList = arrayListOf()
-        newArrayRecentFoodList.add(
-            RecentFood(
-                R.drawable.favorite_8,
-                "Lê Hải Phong",
-                20
-            )
-        )
-        newArrayRecentFoodList.add(
-            RecentFood(
-                R.drawable.favorite_9,
-                "Trần Thị Nhu",
-                20
-            )
-        )
-        newArrayRecentFoodList.add(
-            RecentFood(
-                R.drawable.favorite_8,
-                "Lê Hải Phong",
-                20
-            )
-        )
-        newArrayRecentFoodList.add(
-            RecentFood(
-                R.drawable.favorite_9,
-                "Trần Thị Nhu",
-                20
-            )
-        )
+            override fun onFailure(call: Call<ApiResponse<MutableList<Order>>>, t: Throwable) {}
+        })
     }
-
     private fun createFoodRecyclerView() {
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.foodRecyclerView.setHasFixedSize(true)
-        newArrayFoodList = arrayListOf()
-        newArrayFoodList.add(
-            Food(
-                R.drawable.favorite_8,
-                "Lê Hải Phong",
-                20,
-                R.drawable.ic_add
-            )
-        )
-        newArrayFoodList.add(
-            Food(
-                R.drawable.favorite_8,
-                "Lê Hải Phong",
-                20,
-                R.drawable.ic_add
-            )
-        )
-        newArrayFoodList.add(
-            Food(
-                R.drawable.favorite_8,
-                "Lê Hải Phong",
-                20,
-                R.drawable.ic_add
-            )
-        )
-        newArrayFoodList.add(
-            Food(
-                R.drawable.favorite_8,
-                "Lê Hải Phong",
-                20,
-                R.drawable.ic_add
-            )
-        )
-    }
+        newArrayFoodList = mutableListOf()
+        val productApi = ServiceGenerator.buildService(ProductService::class.java).getUserProduct()
+        productApi?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
+            override fun onResponse(
+                call: Call<ApiResponse<MutableList<Product>>>,
+                response: Response<ApiResponse<MutableList<Product>>>
+            ) {
+                val res = response.body()!!
+                newArrayFoodList = res.data
+                binding.foodRecyclerView.adapter = activity?.let { FoodAdapter(it,newArrayFoodList) }
+            }
 
+            override fun onFailure(call: Call<ApiResponse<MutableList<Product>>>, t: Throwable) {}
+        })
+    }
     private fun getUnseenNotify() {
         //CALL API
         val getNotificationCall = ServiceGenerator.buildService(NotificationService::class.java)
@@ -170,7 +143,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
                     for (i in 0 until res.data.size) {
                         res.data[i].id?.let { listNotification.add(it) }
                     }
-                    if(listNotification.size > 0 )
+                    if (listNotification.size > 0)
                         binding.notifyBtn.setImageResource(R.drawable.ic_notification_badge)
                     else
                         binding.notifyBtn.setImageResource(R.drawable.ic_notification_non)

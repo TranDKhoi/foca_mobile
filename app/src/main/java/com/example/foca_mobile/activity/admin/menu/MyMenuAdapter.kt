@@ -32,6 +32,7 @@ class MyMenuAdapter(private val productList: MutableList<Product>) :
         holder.binding.nameFood.text = productList[position].name
         holder.binding.price.text =
             NumberFormat.getCurrencyInstance().format(productList[position].price)
+        holder.binding.description.text = productList[position].description
         holder.binding.iconButton.setBackgroundResource(R.drawable.ic_edit)
         holder.binding.iconButton.scaleX = 0.5f
         holder.binding.iconButton.scaleY = 0.5f

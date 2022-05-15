@@ -96,9 +96,5 @@
     <string name="UProcessedNoti">is in progress and will be delivered in a few minutes</string>
     <string name="UCompletedNoti">is successful!</string>
 
-    <string name="ArrivedNoti">Great! You have a new order! Order: #</string>
-    <string name="ConfirmPendingNoti">Customer has confirmed the order: #</string>
-    <string name="CancelPendingNoti">Customer has cancelled the order: #</string>
-
 
 </resources>

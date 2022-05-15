@@ -5,7 +5,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'com.google.gms.google-services'
 }
-
 android {
 
     compileSdk 32
@@ -76,7 +75,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:1.1.1'
 
@@ -85,4 +83,3 @@ dependencies {
     
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.1"
 }
-

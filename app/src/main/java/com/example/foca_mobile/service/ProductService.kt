@@ -22,4 +22,7 @@ interface ProductService {
 
     @DELETE("/api/admin/products/{id}")
     fun softDeleteProduct(@Path("id") id: String): Call<ApiResponse<String>>?
+
+    @GET("/api/products")
+    fun getUserProduct() : Call<ApiResponse<MutableList<Product>>>?
 }

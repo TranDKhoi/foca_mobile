@@ -24,6 +24,7 @@ import com.example.foca_mobile.service.NotificationService
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
+import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
 import com.example.foca_mobile.utils.GlobalObject
 import retrofit2.Call
@@ -75,6 +76,13 @@ class AdminHomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        //update badge notification
+        val socket = SocketHandler.getSocket()
+        socket.on("received_notification") {
+            activity?.runOnUiThread {
+                binding.notifyBtn.setImageResource(R.drawable.ic_notification_badge)
+            }
+        }
 
         return binding.root
     }
@@ -82,7 +90,7 @@ class AdminHomeFragment : Fragment() {
     private fun getMyMenu() {
         //CALL API
         val myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
-            .getProductList("", 1000)
+            .getProductList("", 10)
 
         myMenuCall?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
             override fun onResponse(
@@ -161,7 +169,7 @@ class AdminHomeFragment : Fragment() {
                     for (i in 0 until res.data.size) {
                         res.data[i].id?.let { listNotification.add(it) }
                     }
-                    if(listNotification.size > 0 )
+                    if (listNotification.size > 0)
                         binding.notifyBtn.setImageResource(R.drawable.ic_notification_badge)
                     else
                         binding.notifyBtn.setImageResource(R.drawable.ic_notification_non)
@@ -179,5 +187,4 @@ class AdminHomeFragment : Fragment() {
             }
         })
     }
-
 }

@@ -25,6 +25,7 @@
                 app:title="Review Food"
                 app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
                 <ImageView
+                    android:id="@+id/imageFood"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
@@ -60,6 +61,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/nameFood"
                         android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="400"
@@ -108,6 +110,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -129,6 +132,7 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addFood"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"

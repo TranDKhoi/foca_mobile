@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Foca_mobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.user.home.recentfood.AllRecentFood_activity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.menu.AdminCreateProduct"
             android:exported="false" />
         <activity

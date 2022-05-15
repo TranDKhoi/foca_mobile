@@ -28,4 +28,6 @@ interface OrderService {
     @POST("/api/buyer/orders/{orderId}/reviews")
     fun createReview(@Body requestBody: RequestBody, @Path("orderId") orderId: Int ) : Call<ApiResponse<MutableList<Review>>>
 
+    @GET("/api/buyer/orders/recent")
+    fun getRecentOrderList(): Call<ApiResponse<MutableList<Order>>>?
 }

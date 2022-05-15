@@ -1,11 +1,11 @@
 package com.example.foca_mobile.activity.user.profile.profilesetting
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityUserProfileBinding
+import com.bumptech.glide.Glide
 import com.example.foca_mobile.utils.GlobalObject
 
 class UserProfileActivity : AppCompatActivity() {
