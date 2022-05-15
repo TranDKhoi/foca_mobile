@@ -1,25 +1,38 @@
 package com.example.foca_mobile.activity.user.cart_order.fragment
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.cart_order.`object`.Food
 import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterCart
 import com.example.foca_mobile.databinding.FragmentMyCartBinding
+import com.example.foca_mobile.model.ApiResponse
+import com.example.foca_mobile.model.Cart
+import com.example.foca_mobile.model.Order
+import com.example.foca_mobile.service.CartService
+import com.example.foca_mobile.service.ServiceGenerator
+import com.example.foca_mobile.utils.ErrorUtils
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MyCartFragment : Fragment() {
     private lateinit var binding: FragmentMyCartBinding
-    private val listFood = ArrayList<Food>()
-    private val adapter : RecyclerViewAdapterCart = RecyclerViewAdapterCart(listFood)
+    private var listCart: MutableList<Cart>? = null
+    private var adapter: RecyclerViewAdapterCart? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,27 +45,110 @@ class MyCartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentMyCartBinding.bind(view)
-        val adapter = RecyclerViewAdapterCart(listFood)
 
-        binding.rvCart.layoutManager = LinearLayoutManager(activity)
-        binding.rvCart.adapter = adapter
+
+//        val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
+//
+//        binding.rvCart.layoutManager = LinearLayoutManager(activity)
+//        binding.rvCart.adapter = adapter
 //        binding.swipeRefreshLayout.setOnRefreshListener {
 //            binding.swipeRefreshLayout.isRefreshing = false
 //        }
+        binding.cartButton.setOnClickListener {
+            makeOrder()
+
+
+        }
         setItemTouchHelper()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listFood.add(Food("Spacy fresh crab","Waroenk kita",100000,1,R.drawable.image_logo))
-        listFood.add(Food("Sushi","Waroenk kita",25000,1,R.drawable.image_logo))
-        listFood.add(Food("Beef steak","Waroenk kita",12000,1,R.drawable.image_logo))
-        listFood.add(Food("Udon noodles","Waroenk kita",15000,1,R.drawable.image_logo))
-        listFood.add(Food("Mỳ tôm hảo hảo","Waroenk kita",20000,1,R.drawable.image_logo))
-        listFood.add(Food("Bánh hỏi heo quay","Waroenk kita",30000,1,R.drawable.image_logo))
-        adapter.notifyDataSetChanged()
 
+        createCart()
+
+
+        getListCart(this.context)
+    }
+
+    private fun createCart() {
+        val jsonObject = JSONObject()
+        jsonObject.put("productId", 3)
+        jsonObject.put("quantity", 3)
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val createCartCall = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
+        createCartCall.enqueue(object: Callback<ApiResponse<Cart>>{
+            override fun onResponse(
+                call: Call<ApiResponse<Cart>>,
+                response: Response<ApiResponse<Cart>>
+            ) {
+                if(response.isSuccessful){
+                Log.d("SUCCESS create cart", "YOLOOOOOOOOOOOOOOOOO")
+                }
+                else{
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                    Log.d("Error From Api", errorRes.message)
+                }
+            }
+            override fun onFailure(call: Call<ApiResponse<Cart>>, t: Throwable) {
+                Log.d("onFailure","Call API failure")
+            }
+        })
+    }
+
+    private fun makeOrder() {
+        val jsonObject = JSONObject()
+        jsonObject.put("notes", binding.cartNote.text)
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val createOrderCall = ServiceGenerator.buildService(CartService::class.java).createOrder(
+            requestBody = requestBody)
+        createOrderCall.enqueue(object : Callback<ApiResponse<Order>>{
+            override fun onResponse(
+                call: Call<ApiResponse<Order>>,
+                response: Response<ApiResponse<Order>>
+            ) {
+                if(response.isSuccessful){
+                    Log.d("SUCCESS create order", "YOLOOOOOOOOOOOOOOOOO")
+                }
+                else{
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                    Log.d("Error From Api", errorRes.message)
+                }
+            }
+            override fun onFailure(call: Call<ApiResponse<Order>>, t: Throwable) {
+                Log.d("onFailure","Call API failure")
+            }
+        })
+    }
+
+    private fun getListCart(context: Context?) {
+        val listCartCall = ServiceGenerator.buildService(CartService::class.java).getUserCart()
+        listCartCall.enqueue(object : Callback<ApiResponse<MutableList<Cart>>> {
+            override fun onResponse(
+                call: Call<ApiResponse<MutableList<Cart>>>,
+                response: Response<ApiResponse<MutableList<Cart>>>
+            ) {
+                if (response.isSuccessful) {
+                    val res: ApiResponse<MutableList<Cart>> = response.body()!!
+                    listCart = res.data
+                    adapter = RecyclerViewAdapterCart(listCart!!)
+                    binding.rvCart.adapter = adapter
+                    binding.rvCart.layoutManager = LinearLayoutManager(activity)
+
+                } else {
+                    Toast.makeText(context, "Call api else error", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<MutableList<Cart>>>, t: Throwable) {
+                Toast.makeText(context, "Call api else error", Toast.LENGTH_LONG).show()
+            }
+
+        })
     }
 
     private fun setItemTouchHelper(){
@@ -60,7 +156,7 @@ class MyCartFragment : Fragment() {
 
             private val limitScrollX = dipToPx(60f, this@MyCartFragment)
             private var currentScrollX = 0
-            private var currentSrollWhenActive = 0
+            private var currentScrollWhenActive = 0
             private var initXWhenActive = 0f
             private var firstInActive = false
 
@@ -120,12 +216,12 @@ class MyCartFragment : Fragment() {
                     else{
                         if (firstInActive){
                             firstInActive = false
-                            currentSrollWhenActive = viewHolder.itemView.scrollX
+                            currentScrollWhenActive = viewHolder.itemView.scrollX
                             initXWhenActive = dX
                         }
 
                         if(viewHolder.itemView.scrollX<limitScrollX){
-                            viewHolder.itemView.scrollTo((currentSrollWhenActive*dX/initXWhenActive).toInt(), 0)
+                            viewHolder.itemView.scrollTo((currentScrollWhenActive*dX/initXWhenActive).toInt(), 0)
                         }
                     }
                 }

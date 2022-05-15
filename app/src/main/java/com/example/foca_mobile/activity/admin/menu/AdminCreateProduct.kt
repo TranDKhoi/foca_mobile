@@ -3,7 +3,6 @@ package com.example.foca_mobile.activity.admin.menu
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -60,7 +59,7 @@ class AdminCreateProduct : AppCompatActivity() {
             binding.productDes.setText(product!!.description)
             binding.productType.text = product!!.type
             selectedType = product!!.type.toString()
-            tempName = product!!.id
+            tempName = product!!.id.toString()
             Glide.with(applicationContext)
                 .load(product!!.image)
                 .into(binding.productImage)
@@ -199,7 +198,7 @@ class AdminCreateProduct : AppCompatActivity() {
                             if (response.isSuccessful) {
                                 val responseBody = response.body()
                                 val product = responseBody!!.data
-                                tempName = product.id
+                                tempName = product.id.toString()
                                 runOnUiThread {
                                     Toast.makeText(
                                         applicationContext,

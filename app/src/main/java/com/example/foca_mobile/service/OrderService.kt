@@ -2,6 +2,7 @@ package com.example.foca_mobile.service
 
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
+import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.model.OrderDetails
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -20,5 +21,11 @@ interface OrderService {
         @Path("id") id: String,
         @Body requestBody: RequestBody
     ): Call<ApiResponse<OrderDetails>>?
+
+    @GET("/api/buyer/orders")
+    fun getUserOrder(): Call<ApiResponse<MutableList<Order>>>
+
+    @POST("/api/buyer/orders/{orderId}/reviews")
+    fun createReview(@Body requestBody: RequestBody, @Path("orderId") orderId: Int ) : Call<ApiResponse<MutableList<Review>>>
 
 }

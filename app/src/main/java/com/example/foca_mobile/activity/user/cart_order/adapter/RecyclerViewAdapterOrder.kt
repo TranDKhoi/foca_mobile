@@ -1,53 +1,39 @@
 package com.example.foca_mobile.activity.user.cart_order.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.cart_order.`object`.Food
-import com.example.foca_mobile.activity.user.cart_order.`object`.Order
+import com.bumptech.glide.Glide
+import com.example.foca_mobile.databinding.ListOrderItemBinding
+import com.example.foca_mobile.model.Order
+import com.example.foca_mobile.model.OrderDetails
 
-class RecyclerViewAdapterOrder(private val listOrder: ArrayList<Order>) : RecyclerView.Adapter<RecyclerViewAdapterOrder.ViewHolder>() {
+class RecyclerViewAdapterOrder(private val listOrder: MutableList<Order>) : RecyclerView.Adapter<RecyclerViewAdapterOrder.OrderViewHolder>() {
 
-    var onItemClick : ((ArrayList<Food>)-> Unit)? = null
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
-        var img : ImageView = itemView.findViewById(R.id.orderItemImage)
-        var name : TextView = itemView.findViewById(R.id.orderItemName)
-        var price: TextView = itemView.findViewById(R.id.orderItemPrice)
-        var status : Button = itemView.findViewById(R.id.orderItemStatus)
-        var quantity : TextView = itemView.findViewById(R.id.orderQuantity)
-        var totalPrice : TextView = itemView.findViewById(R.id.orderTotalPrice)
-        var itemQuantity : TextView = itemView.findViewById(R.id.orderItemQuantity)
+    var onItemClick : ((MutableList<OrderDetails>, Order)-> Unit)? = null
+    inner class OrderViewHolder(val binding: ListOrderItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+        val view = ListOrderItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return OrderViewHolder(view)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_order_item, parent,false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val item = listOrder[position]
-        var total: Int = 0
-        holder.img.setImageResource(item.listFood[0].imgSrc)
-        holder.name.text = item.name
-        holder.status.text = item.status
-        holder.quantity.text = item.listFood.size.toString() + " sản phẩm"
-        holder.price.text = item.listFood[0].price.toString()
-        holder.itemQuantity.text = "x"+item.listFood[0].quantity.toString()
+        Glide.with(holder.itemView.context)
+            .load(item.orderDetails?.get(0)?.product?.image)
+            .into(holder.binding.orderItemImage)
+        holder.binding.orderItemName.text = item.orderDetails?.get(0)?.product?.name
+        holder.binding.orderItemStatus.text = item.status
+        holder.binding.orderQuantity.text = item.orderDetails?.size.toString() + " sản phẩm"
+        holder.binding.orderItemPrice.text = item.orderDetails?.get(0)?.product?.price.toString()
+        holder.binding.orderItemQuantity.text = "x"+ item.orderDetails?.get(0)?.quantity.toString()
 
-        val listFood: ArrayList<Food> = item.listFood
-        for(everyItem in listFood){
-            total += everyItem.price
-        }
-        holder.totalPrice.text = total.toString()
+        holder.binding.orderTotalPrice.text = item.totalPrice.toString()
 
         holder.itemView.setOnClickListener{
-            onItemClick?.invoke(item.listFood)
+            onItemClick?.invoke(item.orderDetails!!, item)
         }
     }
 
@@ -55,3 +41,4 @@ class RecyclerViewAdapterOrder(private val listOrder: ArrayList<Order>) : Recycl
         return listOrder.size
     }
 }
+

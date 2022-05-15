@@ -41,12 +41,12 @@
                     android:id="@+id/foodItemImage"
                     android:layout_width="62dp"
                     android:layout_height="62dp"
-                    android:layout_marginLeft="11dp"
+                    android:layout_marginStart="20dp"
                     android:layout_gravity="center_vertical"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="21dp"
+                    android:layout_marginStart="21dp"
                     android:orientation="vertical"
                     android:layout_gravity="center_vertical">
                     <com.google.android.material.textview.MaterialTextView
@@ -55,6 +55,7 @@
                         android:text="Spacy fresh crab"
                         android:fontFamily="@font/bentonsans_medium"
                         android:textSize="15sp"
+                        android:textColor="@color/blackTitle"
                         android:id="@+id/foodItemName"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
@@ -62,6 +63,7 @@
                         android:text="Waroenk kita"
                         android:fontFamily="@font/bentonsans_regular"
                         android:textSize="14sp"
+                        android:textColor="@color/lightGrey"
                         android:layout_marginTop="5dp"
                         android:id="@+id/foodItemTitle"/>
                     <com.google.android.material.textview.MaterialTextView
@@ -69,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:text="$ 35"
                         android:textSize="19sp"
-                        android:textColor="#08FF00"
+                        android:textColor="@color/green"
                         android:layout_marginTop="8dp"
                         android:id="@+id/foodItemPrice"/>
 
@@ -79,7 +81,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
@@ -88,63 +90,23 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/textColorButtonWhite"
-                    android:padding="8dp"
-                    android:layout_gravity="center_vertical"
-                    app:cardCornerRadius="8px"
-                    app:layout_constraintBottom_toBottomOf="parent"
-
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="#1653E88B"
-                        android:src="@drawable/ic_minus"
-                        app:tint="#08FF00" />
-                </com.google.android.material.card.MaterialCardView>
-
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
                     android:textSize="16sp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
+                    android:textColor="@color/lightBlack"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
                     android:id="@+id/foodItemQuantity"/>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:backgroundTint="#08FF00"
-                    android:padding="8dp"
-                    android:layout_marginLeft="16dp"
-                    app:cardCornerRadius="8px"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_add" />
-                </com.google.android.material.card.MaterialCardView>
 
 
 
 
-            </LinearLayout>
+
+            </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

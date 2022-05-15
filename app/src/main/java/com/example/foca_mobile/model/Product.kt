@@ -1,11 +1,16 @@
 package com.example.foca_mobile.model
 
+import java.io.Serializable
+
 
 data class Product(
-    val id: String? = null,
-    val name: String?,
-    val price: Int = 0,
-    val image: String?,
-    val description: String?,
-    val type: String?
-)
+    var id: Int? = null,
+    var name: String?,
+    var price: Int = 0,
+    var image: String?,
+    var description: String?,
+    var type: String?,
+//    var createdAt : String?,
+//    var updatedAt : String?,
+//    var deletedAt : String?
+) : Serializable

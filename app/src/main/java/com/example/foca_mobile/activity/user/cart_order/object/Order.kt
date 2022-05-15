@@ -5,4 +5,4 @@ data class Order(
     var totalPrice: Int,
     var status: String,
     var listFood: ArrayList<Food>
-    )
+)
