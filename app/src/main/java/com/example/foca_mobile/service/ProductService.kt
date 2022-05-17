@@ -10,8 +10,11 @@ import retrofit2.http.*
 interface ProductService {
     @GET("/api/admin/products")
     fun getProductList(
-        @Query("type") type: String,
-        @Query("limit") limit: Int
+        @Query("type") type: String?= null,
+        @Query("limit") limit: Int? = null,
+        @Query("price[gte]") price1: Float? = null,
+        @Query("price[lte]") price2: Float?= null,
+        @Query("sort") sort: Float?= null,
     ): Call<ApiResponse<MutableList<Product>>>?
 
     @POST("/api/admin/products")
@@ -24,5 +27,5 @@ interface ProductService {
     fun softDeleteProduct(@Path("id") id: String): Call<ApiResponse<String>>?
 
     @GET("/api/products")
-    fun getUserProduct() : Call<ApiResponse<MutableList<Product>>>?
+    fun getUserProduct(): Call<ApiResponse<MutableList<Product>>>?
 }

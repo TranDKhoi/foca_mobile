@@ -82,7 +82,7 @@
     <string name="NO">KHÔNG</string>
     <string name="ProductName">Tên món</string>
     <string name="Price">Giá tiền</string>
-    <string name="Type">Loại</string>
+    <string name="Category">Danh mục</string>
     <string name="Description">Mô tả</string>
     <string name="ARRIVED">VỪA ĐẾN</string>
     <string name="Filterthemenu">Lọc thực đơn</string>
@@ -96,5 +96,9 @@
     <string name="UCancelledNoti">đã bị hủy</string>
     <string name="UProcessedNoti">đang được làm và sẽ giao trong ít phút</string>
     <string name="UCompletedNoti">đã thành công!</string>
+    <string name="filter">Bộ lọc</string>
+    <string name="Rating">Đánh giá</string>
+    <string name="PriceRange">Khoảng giá</string>
+    <string name="Sortby">Lọc theo</string>
 
 </resources>

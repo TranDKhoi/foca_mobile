@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        appContext = this
 
         //SAVE IT TO GLOBAL OBJECT
         GlobalObject.bottomNavigation = binding.bottomNavigation
@@ -113,8 +114,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
-        else if (GlobalObject.CurrentUser.role == "ADMIN") {
+        } else if (GlobalObject.CurrentUser.role == "ADMIN") {
             //ADMIN FRAGMENT
             val adminHomeFragment = AdminHomeFragment()
             val messageFragment = ListConversationFragment()
@@ -182,6 +182,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onRestart() {
+        super.onRestart()
+
+        if (GlobalObject.isChangeLanguage) {
+            when (GlobalObject.CurrentUser.role) {
+                "USER" -> {
+                    GlobalObject.bottomNavigation.setMenuResource(R.menu.user_menu)
+                    GlobalObject.bottomNavigation.setItemSelected(R.id.user)
+                }
+                "ADMIN" -> {
+                    GlobalObject.bottomNavigation.setMenuResource(R.menu.admin_menu)
+                    GlobalObject.bottomNavigation.setItemSelected(R.id.user)
+                }
+            }
+            GlobalObject.isChangeLanguage = false
+        }
+    }
+
     private fun userToAdminChat() {
         val intent = Intent(this, UserChatScreen::class.java)
         startActivity(intent)
@@ -238,13 +256,16 @@ class MainActivity : AppCompatActivity() {
 
         var bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_order)
 
-        when(status){
-            "PENDING" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
-            "CANCELLED" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_cancel)
-            "COMPLETED" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_success)
-            "PROCESSED" -> bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_success)
+        when (status) {
+            "PENDING" -> bmLargeIcon =
+                BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
+            "CANCELLED" -> bmLargeIcon =
+                BitmapFactory.decodeResource(resources, R.drawable.ic_cancel)
+            "COMPLETED" -> bmLargeIcon =
+                BitmapFactory.decodeResource(resources, R.drawable.ic_success)
+            "PROCESSED" -> bmLargeIcon =
+                BitmapFactory.decodeResource(resources, R.drawable.ic_success)
         }
-
 
 
         val name = "Order Notification"
@@ -287,5 +308,6 @@ class MainActivity : AppCompatActivity() {
         private const val intNOTIFY_ID2 = 1
         private const val strCHANNEL_ID1 = "Message channel"
         private const val strCHANNEL_ID2 = "Order channel"
+        lateinit var appContext: Context
     }
 }

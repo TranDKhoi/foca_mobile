@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity.admin.menu
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,15 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.appcompat.app.AlertDialog
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.FragmentAdminMenuBinding
 import com.example.foca_mobile.model.ApiResponse
+import com.example.foca_mobile.model.Filter
 import com.example.foca_mobile.model.Product
 import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
+import com.example.foca_mobile.utils.GlobalObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,10 +28,10 @@ class AdminMenu : Fragment() {
 
     private var _binding: FragmentAdminMenuBinding? = null
     private val binding get() = _binding!!
+    private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
     private lateinit var myMenuList: MutableList<Product>
     private lateinit var myMenuAdapter: MyMenuAdapter
-    private var selectedStatus: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +45,7 @@ class AdminMenu : Fragment() {
         myMenuAdapter = MyMenuAdapter(myMenuList)
         binding.menuRCV.adapter = myMenuAdapter
 
-        getMyMenu(selectedStatus)
+        getMyMenu()
 
         binding.createNewBtn.setOnClickListener {
             val intent = Intent(context, AdminCreateProduct::class.java)
@@ -50,52 +53,24 @@ class AdminMenu : Fragment() {
             startActivity(intent)
         }
 
-        //INIT SPINNER
-        initSpinner()
-
+        binding.filterBtn.setOnClickListener {
+            val intent = Intent(context, FilterScreen::class.java)
+            activityResultLauncher.launch(intent)
+        }
+        activityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it!!.resultCode == Activity.RESULT_OK) {
+                    Log.d("CHECK DATA", GlobalObject.filterData.toString())
+                }
+            }
 
         return binding.root
     }
 
-    private fun initSpinner() {
-        binding.spinner.setOnClickListener {
-            // setup the alert builder
-            val builder = AlertDialog.Builder(binding.root.context)
-            builder.setTitle(resources.getString(R.string.Filterthemenu))
-
-            // add a list
-            val status = arrayOf(
-                resources.getString(R.string.ALL),
-                resources.getString(R.string.FOOD),
-                resources.getString(R.string.DRINK)
-            )
-            builder.setItems(status) { _, which ->
-                when (which) {
-                    0 -> {
-                        selectedStatus = ""
-                        getMyMenu(selectedStatus)
-                    }
-                    1 -> {
-                        selectedStatus = "FOOD"
-                        getMyMenu(selectedStatus)
-                    }
-                    2 -> {
-                        selectedStatus = "DRINK"
-                        getMyMenu(selectedStatus)
-                    }
-                }
-            }
-
-            // create and show the alert dialog
-            val dialog = builder.create()
-            dialog.show()
-        }
-    }
-
-    private fun getMyMenu(type: String) {
+    private fun getMyMenu(type: Filter? = null) {
         //CALL API
         val myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
-            .getProductList(type, 1000)
+            .getProductList(limit = 1000)
         binding.bar.visibility = ProgressBar.VISIBLE
         myMenuCall?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
             override fun onResponse(
