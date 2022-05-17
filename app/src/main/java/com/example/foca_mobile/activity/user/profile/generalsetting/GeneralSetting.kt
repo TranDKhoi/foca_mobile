@@ -1,14 +1,14 @@
 package com.example.foca_mobile.activity.user.profile.generalsetting
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.authen.login.LoginScreen
+import com.example.foca_mobile.activity.SplashScreen
 import com.example.foca_mobile.databinding.ActivityGeneralSettingBinding
 import com.example.foca_mobile.utils.GlobalObject
+import com.example.foca_mobile.utils.LanguagePrefs
 import com.example.foca_mobile.utils.NightModePrefs
 
 class GeneralSetting : AppCompatActivity() {
@@ -33,7 +33,7 @@ class GeneralSetting : AppCompatActivity() {
         if (night != "")
             binding.switchBtn.isChecked = true
 
-        binding.switchBtn.setOnCheckedChangeListener { compoundButton, b ->
+        binding.switchBtn.setOnCheckedChangeListener { _, b ->
             if (b) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 recreate()
@@ -57,18 +57,17 @@ class GeneralSetting : AppCompatActivity() {
         builder.setItems(status) { _, which ->
             when (which) {
                 0 -> {
-                    GlobalObject.setLocale(LoginScreen.appContext, "en")
-                    finish()
-                    startActivity(intent)
+                    GlobalObject.setLocale(SplashScreen.appContext, "en")
+                    LanguagePrefs.setLang("en")
+                    recreate()
                 }
-
                 1 -> {
-                    GlobalObject.setLocale(LoginScreen.appContext, "vi")
-                    finish()
-                    startActivity(intent)
+                    GlobalObject.setLocale(SplashScreen.appContext, "vi")
+                    LanguagePrefs.setLang("vi")
+                    recreate()
                 }
-
             }
+            GlobalObject.isChangeLanguage = true
         }
 
         // create and show the alert dialog
@@ -76,4 +75,6 @@ class GeneralSetting : AppCompatActivity() {
         dialog.show()
 
     }
+
+
 }

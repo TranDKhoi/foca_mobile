@@ -23,12 +23,12 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:textColor="@color/primaryTextColor"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/MyOrders"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -37,15 +37,17 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <ImageButton
+            <TextView
                 android:id="@+id/filterBtn"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom"
                 android:layout_marginEnd="20dp"
-                android:alpha="0.5"
-                android:background="@drawable/orange_textfield"
+                android:paddingVertical="0dp"
                 android:src="@drawable/filter_icon"
+                android:text="Pending"
+                android:textSize="20sp"
                 tools:ignore="ContentDescription" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 

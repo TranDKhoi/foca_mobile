@@ -81,7 +81,7 @@
     <string name="NO">NO</string>
     <string name="ProductName">Product Name</string>
     <string name="Price">Price</string>
-    <string name="Type">Type</string>
+    <string name="Category">Category</string>
     <string name="Description">Description</string>
     <string name="ARRIVED">ARRIVED</string>
     <string name="Filterthemenu">Filter the menu</string>
@@ -95,6 +95,10 @@
     <string name="UCancelledNoti">has been cancelled</string>
     <string name="UProcessedNoti">is in progress and will be delivered in a few minutes</string>
     <string name="UCompletedNoti">is successful!</string>
+    <string name="filter">Filter</string>
+    <string name="Rating">Rating</string>
+    <string name="PriceRange">Price range</string>
+    <string name="Sortby">Sort by</string>
 
 
 </resources>

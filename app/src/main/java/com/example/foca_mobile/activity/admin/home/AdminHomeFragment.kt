@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.foca_mobile.R
@@ -88,6 +89,7 @@ class AdminHomeFragment : Fragment() {
     }
 
     private fun getMyMenu() {
+        binding.bar.visibility = ProgressBar.VISIBLE
         //CALL API
         val myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
             .getProductList("", 10)
@@ -106,6 +108,7 @@ class AdminHomeFragment : Fragment() {
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                     Log.d("Error From Api", errorRes.message)
                 }
+                binding.bar.visibility = ProgressBar.GONE
             }
 
             override fun onFailure(
@@ -118,6 +121,7 @@ class AdminHomeFragment : Fragment() {
 
     private fun getArrivedOrder() {
         //CALL API
+        binding.bar.visibility = ProgressBar.VISIBLE
         val pendingOrderCall = ServiceGenerator.buildService(OrderService::class.java)
             .getOrderByStatus("ARRIVED")
 
@@ -137,6 +141,7 @@ class AdminHomeFragment : Fragment() {
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                     Log.d("Error From Api", errorRes.message)
                 }
+                binding.bar.visibility = ProgressBar.GONE
             }
 
             override fun onFailure(call: Call<ApiResponse<MutableList<Order>>>, t: Throwable) {
