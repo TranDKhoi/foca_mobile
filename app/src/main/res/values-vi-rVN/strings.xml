@@ -100,5 +100,15 @@
     <string name="Rating">Đánh giá</string>
     <string name="PriceRange">Khoảng giá</string>
     <string name="Sortby">Lọc theo</string>
+    <string name="Restartapp">Ứng dụng cần phải khởi động lại để cập nhật giao diện</string>
+    <string name="Skip">Bỏ qua</string>
+    <string name="Back">Trở về</string>
+    <string name="Next">Tiếp</string>
+    <string name="FRESHFOOD">TƯƠI NGON</string>
+    <string name="FAST">NHANH CHÓNG</string>
+    <string name="COMFY">TIỆN LỢI</string>
+    <string name="Weprideourselves">Chúng tôi tự hào về chất lượng dịch vụ</string>
+    <string name="Asnatureteachesus">Như tài năng thiên bẩm</string>
+    <string name="experienceityourself">Trải nghiệm bởi chính bạn</string>
 
 </resources>

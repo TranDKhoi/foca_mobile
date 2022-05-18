@@ -99,6 +99,18 @@
     <string name="Rating">Rating</string>
     <string name="PriceRange">Price range</string>
     <string name="Sortby">Sort by</string>
+    <string name="Restartapp">Your app needs to be restarted for this change to take effect</string>
+    <string name="Skip">Skip</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Back">Back</string>
+    <string name="Next">Next</string>
+    <string name="FRESHFOOD">FRESH FOOD</string>
+    <string name="FAST">FAST DELIVERY</string>
+    <string name="COMFY">COMFY</string>
+    <string name="Weprideourselves">We pride ourselves on quality service</string>
+    <string name="Asnatureteachesus">As nature teaches us</string>
+    <string name="experienceityourself">Experience it yourself</string>
 
 
 </resources>

@@ -49,7 +49,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:fontFamily="@font/bentonsans_book"
                 android:text="@string/Onemorestep"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="15sp"

@@ -29,6 +29,7 @@ import com.example.foca_mobile.model.Message
 import com.example.foca_mobile.model.Notification
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.GlobalObject
+import com.example.foca_mobile.utils.OnboardingPrefs
 import com.google.gson.Gson
 import io.socket.client.Ack
 import io.socket.client.Socket
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         appContext = this
+
+        OnboardingPrefs.setFirsttime("firsttime")
 
         //SAVE IT TO GLOBAL OBJECT
         GlobalObject.bottomNavigation = binding.bottomNavigation
