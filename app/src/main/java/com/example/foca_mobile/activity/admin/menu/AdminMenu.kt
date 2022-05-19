@@ -19,6 +19,7 @@ import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
 import com.example.foca_mobile.utils.GlobalObject
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,12 +56,14 @@ class AdminMenu : Fragment() {
 
         binding.filterBtn.setOnClickListener {
             val intent = Intent(context, FilterScreen::class.java)
+            intent.putExtra("filterdata", Gson().toJson(GlobalObject.filterData))
             activityResultLauncher.launch(intent)
         }
         activityResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it!!.resultCode == Activity.RESULT_OK) {
-                    Log.d("CHECK DATA", GlobalObject.filterData.toString())
+                    val filterData = it.data!!.dataString
+                    getMyMenu(GlobalObject.filterData)
                 }
             }
 
@@ -69,8 +72,29 @@ class AdminMenu : Fragment() {
 
     private fun getMyMenu(type: Filter? = null) {
         //CALL API
-        val myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
+        var myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
             .getProductList(limit = 1000)
+
+        if (type != null) {
+            if (!type.wayUp!!) {
+                if (type.sort!![0] != '-')
+                    type.sort = "-" + type.sort
+            }
+            if (type.wayUp!!) {
+                if (type.sort!![0] == '-')
+                    type.sort!!.removePrefix("-")
+            }
+
+            myMenuCall = ServiceGenerator.buildService(ProductService::class.java)
+                .getProductList(
+                    limit = 1000,
+                    price1 = type.range[0].toInt(),
+                    price2 = type.range[1].toInt(),
+                    type = type.type,
+                    sort = type.sort
+                )
+        }
+
         binding.bar.visibility = ProgressBar.VISIBLE
         myMenuCall?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
             override fun onResponse(

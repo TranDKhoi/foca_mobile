@@ -6,7 +6,7 @@
     <string name="Cart">Giỏ hàng</string>
     <string name="Confirm">Xác nhận</string>
     <string name="ConfirmPassword">Nhập lại</string>
-    <string name="Congrats">Congrats!</string>
+    <string name="Congrats">Chúc mừng!</string>
     <string name="CreateAccount">Tạo tài khoản</string>
     <string name="Chat">Tin nhắn</string>
     <string name="Chooseyourlanguage">Chọn ngôn ngữ</string>
@@ -67,7 +67,7 @@
     <string name="CANCELLED">ĐÃ HỦY</string>
     <string name="Filtertheorders">Lọc đơn hàng</string>
     <string name="Qty">SL: </string>
-    <string name="Codesendto">Mã được gửi đến</string>
+    <string name="Codesendto">Mã được gửi đến </string>
     <string name="gm.uit.edu.vn">gm.uit.edu.vn</string>
     <string name="Extra">Thu thêm</string>
     <string name="AddNew">Thêm mới</string>
@@ -100,5 +100,15 @@
     <string name="Rating">Đánh giá</string>
     <string name="PriceRange">Khoảng giá</string>
     <string name="Sortby">Lọc theo</string>
+    <string name="Restartapp">Ứng dụng cần phải khởi động lại để cập nhật giao diện</string>
+    <string name="Skip">Bỏ qua</string>
+    <string name="Back">Trở về</string>
+    <string name="Next">Tiếp</string>
+    <string name="FRESHFOOD">TƯƠI NGON</string>
+    <string name="FAST">NHANH CHÓNG</string>
+    <string name="COMFY">TIỆN LỢI</string>
+    <string name="Weprideourselves">Chúng tôi tự hào về chất lượng dịch vụ</string>
+    <string name="Asnatureteachesus">Như tài năng thiên bẩm</string>
+    <string name="experienceityourself">Trải nghiệm bởi chính bạn</string>
 
 </resources>

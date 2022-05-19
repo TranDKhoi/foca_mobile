@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="backgroundColor">#000000</color>
-    <color name="textColorButtonWhite">#FFFFFF</color>
+    <color name="textColorButtonWhite">#FFFFFFFF</color>
     <color name="textColorButtonGreen">#15BE77</color>
     <color name="icon_menu">#15BE77</color>
     <color name="primaryTextColor">#FFFFFF</color>

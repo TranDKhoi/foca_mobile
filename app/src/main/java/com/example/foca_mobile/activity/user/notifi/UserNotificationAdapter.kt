@@ -39,7 +39,7 @@ class UserNotificationAdapter(private val notifyList: MutableList<Notification>)
         holder.binding.root.notifyTitle.text = currentItem.message
 
         holder.binding.notifyDate.text = DateUtils.getRelativeTimeSpanString(
-            currentItem.updatedAt!!.time,
+            currentItem.createdAt!!.time,
             System.currentTimeMillis(),
             0L,
             DateUtils.FORMAT_ABBREV_ALL

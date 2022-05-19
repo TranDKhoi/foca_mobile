@@ -40,6 +40,11 @@ class MyOrderFragment : Fragment() {
         binding = FragmentMyOrdersBinding.bind(view)
     }
 
+    override fun onResume() {
+        super.onResume()
+        getListOrder(this.context)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getListOrder(this.context)
@@ -55,7 +60,14 @@ class MyOrderFragment : Fragment() {
                 "ARRIVED" -> listArrived.add(item)
                 "PENDING" -> listPending.add(item)
                 "PROCESSED" -> listProcessed.add(item)
-                "COMPLETED" -> listCompleted.add(item)
+                "COMPLETED" -> {
+                    if (item.isReviewed){
+                        listCompleted.add(item)
+                    }
+                    else{
+                        listCompleted.add(0,item)
+                    }
+                }
             }
         }
         val tempList : ArrayList<Order> = ArrayList()
@@ -82,11 +94,7 @@ class MyOrderFragment : Fragment() {
                     adapter = RecyclerViewAdapterOrder(listOrder!!)
                     binding.rvOrder.adapter = adapter
                     binding.rvOrder.layoutManager = LinearLayoutManager(activity)
-//                    adapter!!.onItemClick = {
-//                        val intent = Intent(context, UserDetailOrder::class.java)
-//                        intent.putExtra("listOrderDetails", ArrayList(it))
-//                        startActivity(intent)
-//                    }
+
                     adapter!!.onItemClick ={ mutableList: MutableList<OrderDetails>, order: Order ->
                         val intent = Intent(context, UserDetailOrder::class.java)
                         intent.putExtra("listOrderDetails", ArrayList(mutableList))

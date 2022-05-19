@@ -12,9 +12,9 @@ interface ProductService {
     fun getProductList(
         @Query("type") type: String?= null,
         @Query("limit") limit: Int? = null,
-        @Query("price[gte]") price1: Float? = null,
-        @Query("price[lte]") price2: Float?= null,
-        @Query("sort") sort: Float?= null,
+        @Query("price[gte]") price1: Int? = null,
+        @Query("price[lte]") price2: Int?= null,
+        @Query("sort") sort: String?= null,
     ): Call<ApiResponse<MutableList<Product>>>?
 
     @POST("/api/admin/products")

@@ -1,5 +1,7 @@
 package com.example.foca_mobile.activity.user.cart_order.fragment
 
+
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
@@ -46,7 +48,6 @@ class MyCartFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentMyCartBinding.bind(view)
 
-
 //        val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
 //
 //        binding.rvCart.layoutManager = LinearLayoutManager(activity)
@@ -56,8 +57,12 @@ class MyCartFragment : Fragment() {
 //        }
         binding.cartButton.setOnClickListener {
             makeOrder()
+            listCart?.clear()
+                    val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
 
-
+        binding.rvCart.layoutManager = LinearLayoutManager(activity)
+        binding.rvCart.adapter = adapter
+            getListCart(this.context)
         }
         setItemTouchHelper()
     }
@@ -66,17 +71,17 @@ class MyCartFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         createCart()
-
 
         getListCart(this.context)
     }
 
+   
+
     private fun createCart() {
         val jsonObject = JSONObject()
-        jsonObject.put("productId", 3)
-        jsonObject.put("quantity", 3)
+        jsonObject.put("productId", 1)
+        jsonObject.put("quantity", 1)
         val jsonObjectString = jsonObject.toString()
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         val createCartCall = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
@@ -128,6 +133,7 @@ class MyCartFragment : Fragment() {
     private fun getListCart(context: Context?) {
         val listCartCall = ServiceGenerator.buildService(CartService::class.java).getUserCart()
         listCartCall.enqueue(object : Callback<ApiResponse<MutableList<Cart>>> {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ApiResponse<MutableList<Cart>>>,
                 response: Response<ApiResponse<MutableList<Cart>>>
@@ -138,6 +144,7 @@ class MyCartFragment : Fragment() {
                     adapter = RecyclerViewAdapterCart(listCart!!)
                     binding.rvCart.adapter = adapter
                     binding.rvCart.layoutManager = LinearLayoutManager(activity)
+                    adapter!!.notifyDataSetChanged()
 
                 } else {
                     Toast.makeText(context, "Call api else error", Toast.LENGTH_LONG).show()

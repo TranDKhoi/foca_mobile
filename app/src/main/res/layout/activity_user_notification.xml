@@ -36,13 +36,13 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:textColor="@color/primaryTextColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:lineHeight="30dp"
                 android:text="@string/Notification"
                 android:textAlignment="textStart"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 tools:targetApi="p" />
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:reverseLayout="true" />
+                app:reverseLayout="false" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

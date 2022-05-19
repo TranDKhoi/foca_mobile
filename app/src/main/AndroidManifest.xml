@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Foca_mobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.onboarding.OnboardingScreen"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.menu.FilterScreen"
             android:exported="false" />
         <activity

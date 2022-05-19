@@ -1,9 +1,10 @@
 package com.example.foca_mobile.activity.user.profile.generalsetting
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.SplashScreen
 import com.example.foca_mobile.databinding.ActivityGeneralSettingBinding
@@ -11,9 +12,11 @@ import com.example.foca_mobile.utils.GlobalObject
 import com.example.foca_mobile.utils.LanguagePrefs
 import com.example.foca_mobile.utils.NightModePrefs
 
+
 class GeneralSetting : AppCompatActivity() {
 
     private lateinit var binding: ActivityGeneralSettingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -28,23 +31,57 @@ class GeneralSetting : AppCompatActivity() {
             this.finish()
         }
 
+        //SET THE SWITCH BUTTON
+        setSwitchButton()
 
-        val night = NightModePrefs.getNightMode()
-        if (night != "")
-            binding.switchBtn.isChecked = true
-
-        binding.switchBtn.setOnCheckedChangeListener { _, b ->
-            if (b) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                recreate()
-                NightModePrefs.setNightMode("night")
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                recreate()
-                NightModePrefs.setNightMode("")
-            }
+        binding.switchBtn.setOnClickListener {
+            changeNightMode()
         }
 
+    }
+
+    private fun setSwitchButton() {
+        val night = NightModePrefs.getNightMode()
+        binding.switchBtn.isChecked = night != ""
+    }
+
+    private fun changeNightMode() {
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(resources.getString(R.string.Warning))
+        builder.setMessage(resources.getString(R.string.Restartapp))
+        builder.setPositiveButton(resources.getString(R.string.YES)) { dialog, which ->
+            if (binding.switchBtn.isChecked) {
+                NightModePrefs.setNightMode("night")
+                val i =
+                    baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
+                i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(i)
+                finishAffinity()
+            } else {
+                NightModePrefs.setNightMode("")
+                val i =
+                    baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
+                i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(i)
+                finishAffinity()
+            }
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(
+            resources.getString(R.string.NO)
+        ) { dialog, which -> // Do nothing
+            dialog.dismiss()
+            setSwitchButton()
+        }
+        val alert = builder.create()
+
+        alert.setOnShowListener {
+            alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+        }
+
+        alert.show()
     }
 
     private fun buildLanguageDialog() {
@@ -59,14 +96,12 @@ class GeneralSetting : AppCompatActivity() {
                 0 -> {
                     GlobalObject.setLocale(SplashScreen.appContext, "en")
                     LanguagePrefs.setLang("en")
-                    this.finish()
-                    startActivity(intent)
+                    recreate()
                 }
                 1 -> {
                     GlobalObject.setLocale(SplashScreen.appContext, "vi")
                     LanguagePrefs.setLang("vi")
-                    this.finish()
-                    startActivity(intent)
+                    recreate()
                 }
             }
             GlobalObject.isChangeLanguage = true

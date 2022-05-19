@@ -123,7 +123,7 @@ class LoginScreen : AppCompatActivity() {
         val it = Intent(this, MainActivity::class.java)
         GlobalObject.CurrentUser = user
         startActivity(it)
-        this.finish()
+        finishAffinity()
     }
 
     private fun verifyAccessTokenFunc(token: String) {

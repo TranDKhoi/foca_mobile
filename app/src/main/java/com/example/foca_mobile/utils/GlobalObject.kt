@@ -24,9 +24,9 @@ object GlobalObject {
 
     var filterData: Filter = Filter(
         type = "",
-        sort = "price",
+        sort = "-price",
         range = mutableListOf(0f, 500000f),
-        way = false
+        wayUp = false
     )
 
     fun updateNotSeenConversationAdmin(

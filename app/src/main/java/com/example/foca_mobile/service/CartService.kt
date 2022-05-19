@@ -17,6 +17,10 @@ interface CartService {
     @POST("/api/buyer/orders")
     fun createOrder(@Body requestBody: RequestBody) : Call<ApiResponse<Order>>
 
-    @DELETE("/api/me/cart-items/{cartId}")
-    fun deleteCart(@Body requestBody: RequestBody, @Path("cartId") cartId : Int) : Call<ApiResponse<Unit>>
+    @PUT("/api/me/cart-items/{cartId}")
+    fun updateCart(@Body requestBody: RequestBody, @Path("cartId") cartId : Int) : Call<ApiResponse<Cart>>
+
+    @HTTP(method = "DELETE", path = "/api/me/cart-items/{cartId}", hasBody = true)
+    fun deleteCart(@Body requestBody: RequestBody, @Path("cartId") cartId : Int) : Call<ApiResponse<Int>>
+
 }

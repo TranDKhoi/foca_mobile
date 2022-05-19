@@ -51,60 +51,82 @@ class RecyclerViewAdapterCart(private val listProduct: MutableList<Cart>) :
         holder.quantity.text = item.quantity.toString()
 
         holder.onDeleteClick = {
-//            deleteCartItem(item.productId, item.quantity, item.id)
-            val jsonObject = JSONObject()
-            jsonObject.put("productId", item.productId)
-            jsonObject.put("quantity", item.quantity)
-            val jsonObjectString = jsonObject.toString()
-            val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-            val deleteCartItemCall = ServiceGenerator.buildService(CartService::class.java).deleteCart(requestBody,item.id)
-            deleteCartItemCall.enqueue(object: Callback<ApiResponse<Unit>>{
-                override fun onResponse(
-                    call: Call<ApiResponse<Unit>>,
-                    response: Response<ApiResponse<Unit>>
-                ) {
-                    if(response.isSuccessful){
-                        Log.d("SUCCESS delete cart", "YOLOOOOOOOOOOOOOOOOO")
-                    }
-                    else{
-                        val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
-                        Log.d("Error From Api", errorRes.message)
-                    }
-                }
-
-                override fun onFailure(call: Call<ApiResponse<Unit>>, t: Throwable) {
-                    Log.d("onFailure","Call API failure")
-                }
-
-            })
+            deleteCartItem(item.productId, item.quantity, item.id)
             removeItem(it as CartItemViewHolder)
 
         }
         holder.updateView()
         holder.subQuantity.setOnClickListener {
             if (listProduct[position].quantity > 1) {
-                item.quantity--
-//                listProduct[position].quantity--
+                updateCartItem(item, true)
                 notifyDataSetChanged()
             }
 
         }
         holder.addQuantity.setOnClickListener {
-            item.quantity++
-//            listProduct[position].quantity++
+
+            updateCartItem(item, false)
             notifyDataSetChanged()
         }
     }
 
-    private fun deleteCartItem(productId: Int, quantity: Int, cartId: Int) {
-//        val jsonObject = JSONObject()
-//        jsonObject.put("productId", productId)
-//        jsonObject.put("quantity", quantity)
-//        val jsonObjectString = jsonObject.toString()
-//        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-//        val deleteCartItemCall = ServiceGenerator.buildService(CartService::class.java).deleteCart(requestBody,cartId)
-//        with(context)
 
+    private fun updateCartItem(item: Cart, isAdd: Boolean) {
+        if (isAdd) item.quantity-- else item.quantity++
+        val jsonObject = JSONObject()
+        jsonObject.put("quantity", item.quantity)
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val deleteCartItemCall = ServiceGenerator.buildService(CartService::class.java).updateCart( requestBody ,item.id)
+
+        deleteCartItemCall.enqueue(object: Callback<ApiResponse<Cart>>{
+            override fun onResponse(
+                call: Call<ApiResponse<Cart>>,
+                response: Response<ApiResponse<Cart>>
+            ) {
+                if(response.isSuccessful){
+                    Log.d("SUCCESS update cart", "YOLO")
+                }
+                else{
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                    Log.d("Error From Api", errorRes.message)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<Cart>>, t: Throwable) {
+                Log.d("onFailure","Call API failure")
+            }
+
+        })
+    }
+
+    private fun deleteCartItem(productId: Int, quantity: Int, cartId: Int) {
+        val jsonObject = JSONObject()
+        jsonObject.put("productId", productId)
+        jsonObject.put("quantity", quantity)
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val deleteCartItemCall = ServiceGenerator.buildService(CartService::class.java).deleteCart(requestBody,cartId)
+
+        deleteCartItemCall.enqueue(object: Callback<ApiResponse<Int>>{
+            override fun onResponse(
+                call: Call<ApiResponse<Int>>,
+                response: Response<ApiResponse<Int>>
+            ) {
+                if(response.isSuccessful){
+                    Log.d("SUCCESS delete cart", "YOLO")
+                }
+                else{
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                    Log.d("Error From Api", errorRes.message)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<Int>>, t: Throwable) {
+                Log.d("onFailure","Call API failure")
+            }
+
+        })
     }
 
     override fun getItemCount(): Int {

@@ -62,7 +62,6 @@
                     android:layout_height="40dp"
                     android:background="@drawable/radio_button_check"
                     android:button="@android:color/transparent"
-                    android:checked="true"
                     android:gravity="center"
                     android:text="@string/ALL"
                     android:textColor="@android:color/black" />
@@ -120,7 +119,6 @@
                     android:layout_height="40dp"
                     android:background="@drawable/radio_button_check"
                     android:button="@android:color/transparent"
-                    android:checked="true"
                     android:gravity="center"
                     android:text="@string/Price"
                     android:textColor="@android:color/black" />
