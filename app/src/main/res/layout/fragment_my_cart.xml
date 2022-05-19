@@ -23,19 +23,7 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="0dp"
-        app:layout_constraintGuide_percent="0.5" />
-
-
-<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/guideline2"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="1.0"-->
-<!--        android:paddingHorizontal="14dp"-->
-<!--        android:id="@+id/swipeRefreshLayout">-->
-
-<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+        app:layout_constraintGuide_percent="0.62" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cart"
@@ -78,41 +66,15 @@
                 android:id="@+id/linear1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/cartButton"
                 app:layout_constraintHorizontal_bias="0.16"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/linear2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.488">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/bentonsans_medium"
-                    android:text="Sub-Total"
-                    android:textColor="@color/textColorButtonWhite"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/bentonsans_medium"
-                    android:text="Delivery Charge"
-                    android:textColor="@color/textColorButtonWhite"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/bentonsans_medium"
-                    android:text="Discount"
-                    android:textColor="@color/textColorButtonWhite"
-                    android:textSize="14sp" />
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -128,48 +90,20 @@
                 android:id="@+id/linear2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@id/cartButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/linear1"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.48000002">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/totalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:fontFamily="@font/bentonsans_medium"
-                    android:text="120 $"
-                    android:textColor="@color/textColorButtonWhite"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/bentonsans_medium"
-                    android:text="10 $"
-                    android:textColor="@color/textColorButtonWhite"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/bentonsans_medium"
-                    android:text="20 $"
-                    android:textColor="@color/textColorButtonWhite"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:layout_marginTop="21dp"
                     android:fontFamily="@font/bentonsans_bold"
                     android:text="150$"
@@ -182,7 +116,6 @@
                 android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="0dp"
                 android:backgroundTint="@color/textColorButtonWhite"
                 android:fontFamily="@font/bentonsans_bold"
                 android:text="Place My Order"

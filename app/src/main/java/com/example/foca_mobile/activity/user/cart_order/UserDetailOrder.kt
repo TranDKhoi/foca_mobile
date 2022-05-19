@@ -26,9 +26,10 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 
 
-class UserDetailOrder : AppCompatActivity() {
+class UserDetailOrder : AppCompatActivity(){
 
     private lateinit var binding: ActivityUserDetailOrderBinding
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
@@ -39,12 +40,15 @@ class UserDetailOrder : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        val dec = DecimalFormat("#,###")
         val listOrderDetails: ArrayList<OrderDetails> =
             (intent.getSerializableExtra("listOrderDetails") as ArrayList<OrderDetails>?)!!
         val order: Order = intent.getSerializableExtra("order") as Order
 
         val temp: MutableList<OrderDetails> = listOrderDetails
         val adapter = RecyclerViewAdapterOrderDetail(temp)
+
+        binding.totalPriceOrder.text = dec.format(order.totalPrice) + "đ"
 
         binding.rvFood.adapter = adapter
         binding.rvFood.layoutManager =
@@ -85,7 +89,7 @@ class UserDetailOrder : AppCompatActivity() {
 
     private fun deleteOrder(item: Order) {
         val jsonObject = JSONObject()
-        jsonObject.put("status", "CANCELLED")
+        jsonObject.put("status", "COMPLETED")
         val jsonObjectString = jsonObject.toString()
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         val deleteCartItemCall =
@@ -132,4 +136,3 @@ class UserDetailOrder : AppCompatActivity() {
     }
 
 }
-

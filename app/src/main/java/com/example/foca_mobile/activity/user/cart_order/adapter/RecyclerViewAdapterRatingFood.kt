@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.foca_mobile.databinding.ListRatingFoodItemBinding
 import com.example.foca_mobile.model.Review
+import java.text.DecimalFormat
 
 
 class RecyclerViewAdapterRatingFood(private val listOrderDetails: MutableList<Review>) :
@@ -23,12 +24,13 @@ class RecyclerViewAdapterRatingFood(private val listOrderDetails: MutableList<Re
 
     override fun onBindViewHolder(holder: RatingFoodViewHolder, position: Int) {
         val item = listOrderDetails[position]
+        val dec = DecimalFormat("#,###")
         Glide.with(holder.itemView.context)
             .load(item.orderDetail?.product?.image)
             .into(holder.binding.ratingFoodImage)
         holder.binding.ratingFoodName.text = item.orderDetail?.product!!.name
         holder.binding.ratingFoodTitle.text = item.orderDetail?.product!!.description
-        holder.binding.ratingFoodPrice.text = item.orderDetail!!.product?.price.toString()
+        holder.binding.ratingFoodPrice.text = dec.format(item.orderDetail!!.product?.price) + "đ"
         holder.binding.ratingFoodQuantity.text = "x ${item.orderDetail!!.quantity}"
         holder.binding.ratingFoodBar.stepSize = 1f
         holder.binding.ratingFoodBar.rating= 5F

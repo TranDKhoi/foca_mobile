@@ -19,14 +19,6 @@ class CartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var subQuantity : MaterialCardView = itemView.findViewById(R.id.subtractQuantityCard)
     var addQuantity : MaterialCardView = itemView.findViewById(R.id.addQuantityCard)
 
-//    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        var name: TextView = itemView.findViewById(R.id.cartItemName)
-//        var option: TextView = itemView.findViewById(R.id.cartItemOption)
-//        var price: TextView = itemView.findViewById(R.id.cartItemPrice)
-//        var quantity: TextView = itemView.findViewById(R.id.cartItemQuantity)
-//        var img: ImageView = itemView.findViewById(R.id.cartItemImage)
-//    }
-
     var onDeleteClick: ((RecyclerView.ViewHolder) -> Unit)? = null
 
     init {
