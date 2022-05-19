@@ -18,6 +18,9 @@
             android:name=".activity.admin.menu.FilterScreen"
             android:exported="false" />
         <activity
+            android:name=".activity.user.home.infofood.ReviewDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.user.home.recentfood.AllRecentFood_activity"
             android:exported="false" />
         <activity

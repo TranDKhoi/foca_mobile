@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
 import com.example.foca_mobile.activity.user.home.orderfood.PopularMenu
-import com.example.foca_mobile.activity.user.home.recentfood.AllRecentFood_activity
 import com.example.foca_mobile.activity.user.notifi.UserNotification
 import com.example.foca_mobile.databinding.FragmentUserHomeBinding
 import com.example.foca_mobile.model.*
@@ -22,6 +22,9 @@ import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,10 +52,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         createFoodRecyclerView()
         getUnseenNotify()
 
-        binding.txtviewmoreRecentFood.setOnClickListener {
-            val intent = Intent(context, AllRecentFood_activity::class.java)
-            startActivity(intent)
-        }
+        binding.txtviewmoreRecentFood.setOnClickListener {}
         binding.txtViewmorePopularmenu.setOnClickListener {
             val intent = Intent(context, PopularMenu::class.java)
             startActivity(intent)
@@ -86,44 +86,52 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         )
         binding.recentFoodRecyclerView.setHasFixedSize(true)
         newArrayRecentFoodList = mutableListOf()
-        val recentFoodApi = ServiceGenerator.buildService(OrderService::class.java).getRecentOrderList()
-        recentFoodApi?.enqueue(object : Callback<ApiResponse<MutableList<Order>>> {
-            override fun onResponse(
-                call: Call<ApiResponse<MutableList<Order>>>,
-                response: Response<ApiResponse<MutableList<Order>>>
-            ) {
-                val res = response.body()!!
-                val tempOrderDetailsList1 : MutableList<OrderDetails> = mutableListOf()
-                res.data.forEach {
-                    it.orderDetails?.let { it1 -> tempOrderDetailsList1.addAll(it1) }
+        binding.progressBar1.visibility = ProgressBar.VISIBLE
+        GlobalScope.launch(Dispatchers.IO) {
+            val recentFoodApi = ServiceGenerator.buildService(OrderService::class.java).getRecentOrderList()
+            recentFoodApi?.enqueue(object : Callback<ApiResponse<MutableList<Order>>> {
+                override fun onResponse(
+                    call: Call<ApiResponse<MutableList<Order>>>,
+                    response: Response<ApiResponse<MutableList<Order>>>
+                ) {
+                    val res = response.body()!!
+                    val tempOrderDetailsList1 : MutableList<OrderDetails> = mutableListOf()
+                    res.data.forEach {
+                        it.orderDetails?.let { it1 -> tempOrderDetailsList1.addAll(it1) }
+                    }
+                    for (it in tempOrderDetailsList1) {
+                        if(newArrayRecentFoodList.size == 5) break
+                        if (!newArrayRecentFoodList.any { pd -> pd?.id == it.productId }) newArrayRecentFoodList.add(it.product)
+                    }
+                    binding.recentFoodRecyclerView.adapter = context?.let { RecentFoodAdapter(it,newArrayRecentFoodList) }
+                    binding.progressBar1.visibility = ProgressBar.GONE
                 }
-                for (it in tempOrderDetailsList1) {
-                    if(newArrayRecentFoodList.size == 5) break
-                    if (!newArrayRecentFoodList.any { pd -> pd?.id == it.productId }) newArrayRecentFoodList.add(it.product)
-                }
-                binding.recentFoodRecyclerView.adapter = context?.let { RecentFoodAdapter(it,newArrayRecentFoodList) }
-            }
 
-            override fun onFailure(call: Call<ApiResponse<MutableList<Order>>>, t: Throwable) {}
-        })
+                override fun onFailure(call: Call<ApiResponse<MutableList<Order>>>, t: Throwable) {}
+            })
+        }
     }
     private fun createFoodRecyclerView() {
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.foodRecyclerView.setHasFixedSize(true)
         newArrayFoodList = mutableListOf()
-        val productApi = ServiceGenerator.buildService(ProductService::class.java).getUserProduct()
-        productApi?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
-            override fun onResponse(
-                call: Call<ApiResponse<MutableList<Product>>>,
-                response: Response<ApiResponse<MutableList<Product>>>
-            ) {
-                val res = response.body()!!
-                newArrayFoodList = res.data
-                binding.foodRecyclerView.adapter = activity?.let { FoodAdapter(it,newArrayFoodList) }
-            }
+        binding.progressBar2.visibility = ProgressBar.VISIBLE
+        GlobalScope.launch(Dispatchers.IO) {
+            val productApi = ServiceGenerator.buildService(ProductService::class.java).getSizeProduct(5)
+            productApi?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
+                override fun onResponse(
+                    call: Call<ApiResponse<MutableList<Product>>>,
+                    response: Response<ApiResponse<MutableList<Product>>>
+                ) {
+                    val res = response.body()!!
+                    newArrayFoodList = res.data
+                    binding.foodRecyclerView.adapter = activity?.let { FoodAdapter(it,newArrayFoodList) }
+                    binding.progressBar2.visibility = ProgressBar.GONE
+                }
 
-            override fun onFailure(call: Call<ApiResponse<MutableList<Product>>>, t: Throwable) {}
-        })
+                override fun onFailure(call: Call<ApiResponse<MutableList<Product>>>, t: Throwable) {}
+            })
+        }
     }
     private fun getUnseenNotify() {
         //CALL API

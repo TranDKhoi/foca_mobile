@@ -10,6 +10,10 @@ data class Product(
     var image: String?,
     var description: String?,
     var type: String?,
+    var orderCount : Int = 0,
+    var averageRating : Float? = null,
+    var reviewCount : Int? = null,
+    var reviews : MutableList<Review>?,
 //    var createdAt : String?,
 //    var updatedAt : String?,
 //    var deletedAt : String?

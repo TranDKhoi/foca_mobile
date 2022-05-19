@@ -32,24 +32,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp">
-        <TextView
-            android:id="@+id/rateFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:paddingHorizontal="2dp"
-            android:paddingVertical="0.8dp"
-            android:text="Rate Food"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/rBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:numStars="5"
+                android:progressTint="#15BE77"
+                android:rating="4.5"
+                android:theme="@style/Widget.AppCompat.RatingBar" />
 
             <TextView
                 android:id="@+id/numberProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="95dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:text="Đã bán 33,1k"
                 android:textColor="@android:color/black"

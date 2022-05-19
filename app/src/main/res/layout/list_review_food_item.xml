@@ -12,6 +12,7 @@
 
     <ImageView
         android:id="@+id/avatarPerson"
+        android:src="@drawable/advertising"
         android:layout_width="100dp"
         android:layout_height="90dp"
         android:layout_marginStart="10dp"
@@ -19,11 +20,11 @@
 
     <TextView
         android:id="@+id/namePerson"
+        android:text="Lê Hải Phong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginTop="20dp"
-
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -32,18 +33,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="42dp"
-
-        android:textSize="15sp" />
+        android:layout_marginTop="45dp"
+        android:text="20/05/2002"
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/evaluate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="80dp"
-
-        android:textSize="13sp" />
+        android:layout_marginTop="70dp"
+        android:text="Ngon tuyệt vời"
+        android:textSize="18sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="50dp"
@@ -59,18 +60,19 @@
             android:id="@+id/numberStar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_gravity="start"
             android:layout_marginStart="8dp"
+            android:text="5"
             android:textColor="#53E88B"
-            android:textSize="20sp"
+            android:textSize="23sp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imgStar"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="5dp"
             android:src="@drawable/ic_star_full" />
     </androidx.cardview.widget.CardView>
 </androidx.cardview.widget.CardView>

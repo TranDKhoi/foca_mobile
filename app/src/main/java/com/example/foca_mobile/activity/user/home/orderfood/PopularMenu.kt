@@ -4,17 +4,20 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.home.recentfood.AllRecentFoodAdapter
 import com.example.foca_mobile.databinding.ActivityUserPopularMenuBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Product
 import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,7 +32,7 @@ class PopularMenu : AppCompatActivity(){
     private lateinit var newArrayAddFoodList: MutableList<Product?>
     private lateinit var newArrayAddFoodListFilter: MutableList<Product?>
     private var strTypeFood: MutableList<String> = mutableListOf()
-    private lateinit var adapterKT : AllRecentFoodAdapter
+    private lateinit var adapterKT : AllFoodAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +74,11 @@ class PopularMenu : AppCompatActivity(){
 
     private fun notifyAddFoodRecyclerView(filter: String) {
         if (filter == getString(R.string.ALL)) {
-            binding.addFoodRecyclerView.adapter = AllRecentFoodAdapter(newArrayAddFoodList)
+            binding.addFoodRecyclerView.adapter = AllFoodAdapter(appContext,newArrayAddFoodList)
         } else {
             val filteredList: List<Product?> = newArrayAddFoodList.filter { it?.type == filter }
             binding.addFoodRecyclerView.adapter =
-                AllRecentFoodAdapter((filteredList) as MutableList)
+                AllFoodAdapter(appContext,(filteredList) as MutableList)
         }
     }
 
@@ -85,28 +88,31 @@ class PopularMenu : AppCompatActivity(){
 
         newArrayAddFoodList = mutableListOf()
         newArrayAddFoodListFilter = mutableListOf()
+        binding.progressBar.visibility = ProgressBar.VISIBLE
+        GlobalScope.launch(Dispatchers.IO) {
+                val test = ServiceGenerator.buildService(ProductService::class.java).getAllProduct()
+                test?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
+                    override fun onResponse(
+                        call: Call<ApiResponse<MutableList<Product>>>,
+                        response: Response<ApiResponse<MutableList<Product>>>
+                    ) {
+                        val res = response.body()!!
+                        newArrayAddFoodList = res.data.toMutableList()
+                        newArrayAddFoodListFilter.addAll(newArrayAddFoodList)
+                        strTypeFood.add(getString(R.string.ALL))
+                        newArrayAddFoodList.forEach {
+                            if (!strTypeFood.any { s -> s == it?.type }) strTypeFood.add(it?.type!!)
+                        }
+                        adapterKT = AllFoodAdapter(appContext,newArrayAddFoodList)
+                        binding.addFoodRecyclerView.adapter = adapterKT
+                        binding.addFoodRecyclerView.apply {
+                            layoutManager = GridLayoutManager(context, 2)
+                        }
+                    }
 
-        val test = ServiceGenerator.buildService(ProductService::class.java).getUserProduct()
-        test?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
-            override fun onResponse(
-                call: Call<ApiResponse<MutableList<Product>>>,
-                response: Response<ApiResponse<MutableList<Product>>>
-            ) {
-                val res = response.body()!!
-                newArrayAddFoodList = res.data.toMutableList()
-                newArrayAddFoodListFilter.addAll(newArrayAddFoodList)
-                strTypeFood.add(getString(R.string.ALL))
-                newArrayAddFoodList.forEach {
-                    if (!strTypeFood.any { s -> s == it?.type }) strTypeFood.add(it?.type!!)
-                }
-                adapterKT = AllRecentFoodAdapter(newArrayAddFoodList)
-                binding.addFoodRecyclerView.adapter = adapterKT
-                binding.addFoodRecyclerView.apply {
-                    layoutManager = GridLayoutManager(context, 2)
-                }
-            }
-
-            override fun onFailure(call: Call<ApiResponse<MutableList<Product>>>, t: Throwable) {}
-        })
+                    override fun onFailure(call: Call<ApiResponse<MutableList<Product>>>, t: Throwable) {}
+                })
+                binding.progressBar.visibility = ProgressBar.GONE
+        }
     }
 }

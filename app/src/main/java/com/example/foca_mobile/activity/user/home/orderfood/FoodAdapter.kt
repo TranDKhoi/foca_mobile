@@ -10,7 +10,7 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.home.infofood.InfoFood_Activity
 import com.example.foca_mobile.databinding.ListFoodItemBinding
 import com.example.foca_mobile.model.Product
-import java.text.NumberFormat
+import java.text.DecimalFormat
 
 
 class FoodAdapter(private var c: Context, private val arrayList: MutableList<Product>) :
@@ -28,14 +28,13 @@ class FoodAdapter(private var c: Context, private val arrayList: MutableList<Pro
             .load(arrayList[position].image)
             .into(holder.binding.imageFood)
         holder.binding.nameFood.text = arrayList[position].name
-        holder.binding.typeFood.text = arrayList[position].type
-        holder.binding.description.text = arrayList[position].description
-        holder.binding.price.text =
-            NumberFormat.getCurrencyInstance().format(arrayList[position].price)
+        val dec = DecimalFormat("#,###")
+        holder.binding.price.text = dec.format(arrayList[position].price) + "đ"
         holder.binding.iconButton.setBackgroundResource(R.drawable.ic_add)
+        holder.binding.numberProduct.text = "Đã bán " + arrayList[position].orderCount.toString()
         holder.binding.root.setOnClickListener {
             val intent = Intent(c,InfoFood_Activity::class.java)
-            intent.putExtra("Product",arrayList[position])
+            intent.putExtra("id",arrayList[position]?.id)
             c.startActivity(intent)
         }
     }

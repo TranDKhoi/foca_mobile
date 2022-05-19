@@ -1,7 +1,7 @@
 package com.example.foca_mobile.service
 
-import com.example.foca_mobile.model.ApiResponse
-import com.example.foca_mobile.model.Product
+import com.example.foca_mobile.model.*
+import com.google.firebase.inject.Deferred
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -26,6 +26,12 @@ interface ProductService {
     @DELETE("/api/admin/products/{id}")
     fun softDeleteProduct(@Path("id") id: String): Call<ApiResponse<String>>?
 
-    @GET("/api/products")
-    fun getUserProduct(): Call<ApiResponse<MutableList<Product>>>?
+    @GET("/api/products/{id}")
+    fun getProductDetails(@Path("id") id : Int) : Call<ApiResponse<ProductDetails>>?
+
+    @GET("/api/products/{id}/reviews")
+    fun getAllReview(@Path("id") id : Int) : Call<ApiResponse<MutableList<Review>>>?
+
+    @GET("/api/products/{id}/reviews/stats")
+    fun getReviewStatistic(@Path("id") id : Int) : Call<ApiResponse<MutableList<ReviewStatistic>>>?
 }
