@@ -32,7 +32,7 @@ class OnboardingScreen : AppCompatActivity() {
         }
 
         binding.btnSkip.setOnClickListener {
-
+            toLoginScreen()
         }
         binding.loginBtn.setOnClickListener {
             toLoginScreen()
