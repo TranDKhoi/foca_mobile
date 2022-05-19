@@ -28,7 +28,6 @@
                     android:id="@+id/avgRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
                     android:text="4.5"
                     android:textSize="50sp"
                     android:layout_gravity="center"/>
@@ -46,7 +45,6 @@
                     android:id="@+id/numReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="623457"
                     android:textSize="18sp"
                     android:layout_gravity="center"/>
             </LinearLayout>

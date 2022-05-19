@@ -17,6 +17,15 @@ interface ProductService {
         @Query("sort") sort: String?= null,
     ): Call<ApiResponse<MutableList<Product>>>?
 
+    @GET("/api/products")
+    fun getUserProductList(
+        @Query("type") type: String?= null,
+        @Query("limit") limit: Int? = null,
+        @Query("price[gte]") price1: Int? = null,
+        @Query("price[lte]") price2: Int?= null,
+        @Query("sort") sort: String?= null,
+    ): Call<ApiResponse<MutableList<Product>>>?
+
     @POST("/api/admin/products")
     fun createProduct(@Body requestBody: RequestBody): Call<ApiResponse<Product>>?
 

@@ -53,6 +53,8 @@ class AdminOrderDetail : AppCompatActivity() {
         }
         binding.subTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
         binding.priceTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
+        binding.note.text = order.notes ?: "..."
+        binding.note.contentDescription = order.notes
 
         //INIT SPINNER
         initSpinner()

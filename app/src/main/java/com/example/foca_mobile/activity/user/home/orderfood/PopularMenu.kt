@@ -89,8 +89,7 @@ class PopularMenu : AppCompatActivity(){
         newArrayAddFoodList = mutableListOf()
         newArrayAddFoodListFilter = mutableListOf()
         binding.progressBar.visibility = ProgressBar.VISIBLE
-        GlobalScope.launch(Dispatchers.IO) {
-                val test = ServiceGenerator.buildService(ProductService::class.java).getAllProduct()
+                val test = ServiceGenerator.buildService(ProductService::class.java).getUserProductList()
                 test?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
                     override fun onResponse(
                         call: Call<ApiResponse<MutableList<Product>>>,
@@ -113,6 +112,5 @@ class PopularMenu : AppCompatActivity(){
                     override fun onFailure(call: Call<ApiResponse<MutableList<Product>>>, t: Throwable) {}
                 })
                 binding.progressBar.visibility = ProgressBar.GONE
-        }
     }
 }

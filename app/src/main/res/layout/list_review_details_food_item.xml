@@ -12,7 +12,6 @@
         android:layout_height="120dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        app:cardBackgroundColor="#F1EEEE"
         app:cardElevation="0dp">
 
         <LinearLayout
@@ -27,7 +26,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lê Hải Phong"
-                android:textColor="@android:color/black"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -53,7 +51,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="130dp"
                     android:text="20/04/2002"
-                    android:textColor="@android:color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -62,6 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="Đây là đồ án nhóm chung của Lê Hải Phong, Đỗ Thành Đạt, Trần Đình Khôi"
                 android:textSize="18sp" />
         </LinearLayout>

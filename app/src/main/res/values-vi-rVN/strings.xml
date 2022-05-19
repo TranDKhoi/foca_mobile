@@ -110,5 +110,16 @@
     <string name="Weprideourselves">Chúng tôi tự hào về chất lượng dịch vụ</string>
     <string name="Asnatureteachesus">Như tài năng thiên bẩm</string>
     <string name="experienceityourself">Trải nghiệm bởi chính bạn</string>
+    <string name="Youhavenews">Bạn có tin tức về đơn hàng!</string>
+    <string name="Youhavenewmessage">Bạn có tin nhắn mới!</string>
+    <string name="Note">Ghi chú: </string>
+    <string name="Findyourfavoritefood">Tìm kiếm món bạn yêu thích</string>
+    <string name="RecentFood">Vừa Mua</string>
+    <string name="PopularMenu">Thực đơn</string>
+    <string name="Reviews">Đánh giá</string>
+    <string name="viewdetail">Chi tiết</string>
+    <string name="Addtocart">Thêm vào giỏ hàng</string>
+    <string name="PlaceMyOrder">Đặt Hàng</string>
+    <string name="Mycart">Giỏ hàng</string>
 
 </resources>

@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activity.user.home.InfoFood_Activity">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarInfoFood"
@@ -144,7 +143,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Reviews"
+                        android:text="@string/Reviews"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -155,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="170dp"
                         android:background="@android:color/transparent"
-                        android:text="View details"
+                        android:text="@string/viewdetail"
                         android:textAllCaps="false"
                         android:textColor="#FF7C32"
                         android:textSize="15dp" />
@@ -183,7 +182,7 @@
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/light_green_gradient"
-        android:text="Add to cart"
+        android:text="@string/Addtocart"
         android:textColor="@color/textColorButtonWhite"
         android:textSize="16sp" />
 

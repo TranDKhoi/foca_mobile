@@ -117,7 +117,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         newArrayFoodList = mutableListOf()
         binding.progressBar2.visibility = ProgressBar.VISIBLE
         GlobalScope.launch(Dispatchers.IO) {
-            val productApi = ServiceGenerator.buildService(ProductService::class.java).getSizeProduct(5)
+            val productApi = ServiceGenerator.buildService(ProductService::class.java).getUserProductList(limit = 5)
             productApi?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
                 override fun onResponse(
                     call: Call<ApiResponse<MutableList<Product>>>,

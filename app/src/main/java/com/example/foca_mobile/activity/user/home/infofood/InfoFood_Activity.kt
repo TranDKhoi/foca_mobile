@@ -118,7 +118,7 @@ class InfoFood_Activity : AppCompatActivity() {
         binding.description.text = productDetails.description
         binding.rBar.rating = productDetails.averageRating!!.toFloat()
         binding.avgRating.text = ((productDetails.averageRating!!.toFloat() * 100.0).roundToInt() / 100.0).toString()
-        binding.numOrder.text = productDetails.orderCount.toString() + "+ Order"
+        binding.numOrder.text = productDetails.orderCount.toString() + resources.getString(R.string.Order)
     }
 
     private fun initToolBar() {

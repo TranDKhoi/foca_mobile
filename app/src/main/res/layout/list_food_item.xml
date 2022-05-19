@@ -18,7 +18,7 @@
 
         <ImageView
             android:id="@+id/imageFood"
-            android:layout_width="85dp"
+            android:layout_width="100dp"
             android:layout_height="85dp"
             android:scaleType="fitXY"
             android:src="@drawable/advertising"
@@ -33,10 +33,11 @@
             android:layout_height="38dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:text="Tra sua thom ngon bo re tu nhom do an "
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/imageFood"
             app:layout_constraintTop_toTopOf="parent" />
 
