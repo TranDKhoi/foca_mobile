@@ -31,12 +31,39 @@ class UserNotificationAdapter(private val notifyList: MutableList<Notification>)
         val currentItem = notifyList[position]
 
 
-        when (currentItem.iconType) {
-            "SUCCESS" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_success)
-            "ERROR" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_cancel)
-            "MONEY" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_pending)
+        when (currentItem.order!!.status) {
+            "COMPLETED" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_success)
+            "PROCESSED" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_success)
+            "CANCELLED" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_cancel)
+            "PENDING" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_pending)
+            "ARRIVED" -> holder.binding.imageNotify.setImageResource(R.drawable.ic_pending)
         }
-        holder.binding.root.notifyTitle.text = currentItem.message
+        when (currentItem.type) {
+            "NEW_ORDER" -> holder.binding.root.notifyTitle.text =
+                holder.binding.root.resources.getString(R.string.YourOrder)
+                    .plus(currentItem.order!!.id).plus(" ")
+                    .plus(holder.binding.root.resources.getString(R.string.UArrivedorder))
+            "PENDING_ORDER" -> holder.binding.root.notifyTitle.text =
+                holder.binding.root.resources.getString(R.string.YourOrder)
+                    .plus(currentItem.order!!.id).plus(" ")
+                    .plus(holder.binding.root.resources.getString(R.string.UPendingNoti))
+            "PROCESSING_ORDER" -> holder.binding.root.notifyTitle.text =
+                holder.binding.root.resources.getString(R.string.YourOrder)
+                    .plus(currentItem.order!!.id).plus(" ")
+                    .plus(holder.binding.root.resources.getString(R.string.UProcessedNoti))
+            "CANCELLED_ORDER" -> holder.binding.root.notifyTitle.text =
+                holder.binding.root.resources.getString(R.string.YourOrder)
+                    .plus(currentItem.order!!.id).plus(" ")
+                    .plus(holder.binding.root.resources.getString(R.string.UCancelledNoti))
+            "CUSTOMER_CANCELLED_ORDER" -> holder.binding.root.notifyTitle.text =
+                holder.binding.root.resources.getString(R.string.YourOrder)
+                    .plus(currentItem.order!!.id).plus(" ")
+                    .plus(holder.binding.root.resources.getString(R.string.UCancelledNoti))
+            "SUCCESS_ORDER" -> holder.binding.root.notifyTitle.text =
+                holder.binding.root.resources.getString(R.string.YourOrder)
+                    .plus(currentItem.order!!.id).plus(" ")
+                    .plus(holder.binding.root.resources.getString(R.string.UCompletedNoti))
+        }
 
         holder.binding.notifyDate.text = DateUtils.getRelativeTimeSpanString(
             currentItem.createdAt!!.time,

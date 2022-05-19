@@ -39,31 +39,34 @@ class UserDetailOrder : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        val listOrderDetails : ArrayList<OrderDetails> = (intent.getSerializableExtra("listOrderDetails") as ArrayList<OrderDetails>?)!!
-        val order : Order = intent.getSerializableExtra("order") as Order
+        val listOrderDetails: ArrayList<OrderDetails> =
+            (intent.getSerializableExtra("listOrderDetails") as ArrayList<OrderDetails>?)!!
+        val order: Order = intent.getSerializableExtra("order") as Order
 
-        val temp : MutableList<OrderDetails> = listOrderDetails
+        val temp: MutableList<OrderDetails> = listOrderDetails
         val adapter = RecyclerViewAdapterOrderDetail(temp)
 
         binding.rvFood.adapter = adapter
-        binding.rvFood.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvFood.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        if(order.status=="PROCESSED" || order.status=="COMPLETED"){
+        if (order.status == "PROCESSED" || order.status == "COMPLETED") {
             binding.orderDetailBtnDelete.visibility = View.GONE
         }
-        if(order.isReviewed || order.status!="COMPLETED"){
+        if (order.isReviewed || order.status != "COMPLETED") {
             hideReviewBtn()
         }
         binding.orderDetailBack.setOnClickListener { finish() }
-        binding.cartButton.setOnClickListener{
+        binding.cartButton.setOnClickListener {
             val intent = Intent(this, UserRateScreen::class.java)
-            val listReview : ArrayList<Review> = ArrayList()
+            val listReview: ArrayList<Review> = ArrayList()
             listOrderDetails.forEachIndexed { _, item ->
                 val review = Review()
                 review.orderDetail = item
                 review.orderDetailId = item.id
                 review.rating = 5
-                listReview.add(review) }
+                listReview.add(review)
+            }
             intent.putExtra("listReview", listReview)
             intent.putExtra("order", order)
             activityResultLauncher.launch(intent)
@@ -87,33 +90,34 @@ class UserDetailOrder : AppCompatActivity() {
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         val deleteCartItemCall =
             item.id?.let {
-                ServiceGenerator.buildService(OrderService::class.java).deleteOrder( requestBody,
+                ServiceGenerator.buildService(OrderService::class.java).deleteOrder(
+                    requestBody,
                     it
                 )
             }
         binding.bar.visibility = ProgressBar.VISIBLE
-        deleteCartItemCall?.enqueue(object: Callback<ApiResponse<String>> {
+        deleteCartItemCall?.enqueue(object : Callback<ApiResponse<String>> {
             override fun onResponse(
                 call: Call<ApiResponse<String>>,
                 response: Response<ApiResponse<String>>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     Log.d("SUCCESS delete order", "YOLO")
                     binding.bar.visibility = ProgressBar.GONE
-                } else{
+                } else {
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                     Log.d("Error From Api", errorRes.message)
                 }
             }
 
             override fun onFailure(call: Call<ApiResponse<String>>, t: Throwable) {
-                Log.d("onFailure","Call API failure")
+                Log.d("onFailure", "Call API failure")
             }
 
         })
     }
 
-    private fun hideReviewBtn(){
+    private fun hideReviewBtn() {
         val recyclerView = binding.rvFood.layoutParams as ConstraintLayout.LayoutParams
         recyclerView.bottomToTop = binding.guideline3.id
 
@@ -122,8 +126,8 @@ class UserDetailOrder : AppCompatActivity() {
 
         val linear1 = binding.linear1.layoutParams as ConstraintLayout.LayoutParams
         val linear2 = binding.linear2.layoutParams as ConstraintLayout.LayoutParams
-        linear1.setMargins(50, 80, 0 ,0)
-        linear2.setMargins(0, 80, 50 ,0)
+        linear1.setMargins(50, 80, 0, 0)
+        linear2.setMargins(0, 80, 50, 0)
         binding.cartButton.visibility = View.GONE
     }
 
