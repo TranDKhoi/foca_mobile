@@ -72,7 +72,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/bentonsans_medium"
-        android:text="Order details"
+        android:text="@string/order_details"
         android:textSize="25sp"
         app:layout_constraintLeft_toRightOf="@id/orderDetailBack"
         app:layout_constraintTop_toTopOf="parent" />
@@ -162,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="21dp"
                     android:fontFamily="@font/bentonsans_bold"
-                    android:text="Total"
+                    android:text="@string/total"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -196,7 +196,7 @@
                 android:layout_marginHorizontal="12dp"
                 android:backgroundTint="#FFFFFF"
                 android:fontFamily="@font/bentonsans_bold"
-                android:text="Review"
+                android:text="@string/review"
                 android:textAllCaps="false"
                 android:textColor="@color/textColorButtonGreen"
                 app:cornerRadius="15dp"

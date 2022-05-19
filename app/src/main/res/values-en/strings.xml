@@ -121,5 +121,8 @@
     <string name="Addtocart">Add to cart</string>
     <string name="PlaceMyOrder">Place My Order</string>
     <string name="Mycart">My cart</string>
+    <string name="order_details">Order details</string>
+    <string name="total">Total</string>
+    <string name="review">Review</string>
 
 </resources>
