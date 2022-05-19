@@ -35,6 +35,7 @@ class MyCartFragment : Fragment() {
     private var listCart: MutableList<Cart>? = null
     private var adapter: RecyclerViewAdapterCart? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +47,7 @@ class MyCartFragment : Fragment() {
             val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
             binding.rvCart.layoutManager = LinearLayoutManager(activity)
             binding.rvCart.adapter = adapter
-            getListCart(this.context)
+            adapter?.notifyDataSetChanged()
         }
         setItemTouchHelper()
         createCart()
