@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,6 +73,7 @@ class UserRateScreen : AppCompatActivity() {
                         body, it1
                     )
                 }
+            binding.bar.visibility = ProgressBar.VISIBLE
             createReviewCall?.enqueue(object : Callback<ApiResponse<MutableList<Review>>> {
                 override fun onResponse(
                     call: Call<ApiResponse<MutableList<Review>>>,
@@ -79,6 +81,7 @@ class UserRateScreen : AppCompatActivity() {
                 ) {
                     if(response.isSuccessful){
                         Log.d("SUCCESS","review success")
+                        binding.bar.visibility = ProgressBar.GONE
                         goBack()
                     } else{
                         val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)

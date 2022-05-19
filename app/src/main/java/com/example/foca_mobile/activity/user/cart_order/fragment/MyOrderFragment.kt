@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.cart_order.UserDetailOrder
 import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterOrder
 import com.example.foca_mobile.databinding.FragmentMyOrdersBinding
@@ -23,30 +23,24 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MyOrderFragment : Fragment() {
-    private lateinit var binding: FragmentMyOrdersBinding
+    private var _binding: FragmentMyOrdersBinding? = null
+    private val binding get() = _binding!!
     private var listOrder: MutableList<Order>? = null
     private var adapter: RecyclerViewAdapterOrder? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        super.onCreate(savedInstanceState)
-        return inflater.inflate(R.layout.fragment_my_orders, container, false)
-    }
+    ): View {
+        _binding = FragmentMyOrdersBinding.inflate(inflater, container, false)
+        getListOrder(this.context)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = FragmentMyOrdersBinding.bind(view)
+
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        getListOrder(this.context)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         getListOrder(this.context)
     }
 
@@ -82,6 +76,7 @@ class MyOrderFragment : Fragment() {
 
     private fun getListOrder(context: Context?) {
         val listOrderCall = ServiceGenerator.buildService(OrderService::class.java).getUserOrder()
+        binding.bar.visibility = ProgressBar.VISIBLE
         listOrderCall.enqueue(object : Callback<ApiResponse<MutableList<Order>>> {
             override fun onResponse(
                 call: Call<ApiResponse<MutableList<Order>>>,
@@ -94,6 +89,7 @@ class MyOrderFragment : Fragment() {
                     adapter = RecyclerViewAdapterOrder(listOrder!!)
                     binding.rvOrder.adapter = adapter
                     binding.rvOrder.layoutManager = LinearLayoutManager(activity)
+                    binding.bar.visibility = ProgressBar.GONE
 
                     adapter!!.onItemClick ={ mutableList: MutableList<OrderDetails>, order: Order ->
                         val intent = Intent(context, UserDetailOrder::class.java)

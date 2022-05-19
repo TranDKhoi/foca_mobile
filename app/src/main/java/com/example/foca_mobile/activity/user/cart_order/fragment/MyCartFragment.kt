@@ -1,6 +1,5 @@
 package com.example.foca_mobile.activity.user.cart_order.fragment
 
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
@@ -9,12 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterCart
 import com.example.foca_mobile.databinding.FragmentMyCartBinding
 import com.example.foca_mobile.model.ApiResponse
@@ -30,53 +29,30 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class MyCartFragment : Fragment() {
-    private lateinit var binding: FragmentMyCartBinding
+    private var _binding: FragmentMyCartBinding? = null
+    private val binding get() = _binding!!
     private var listCart: MutableList<Cart>? = null
     private var adapter: RecyclerViewAdapterCart? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        super.onCreate(savedInstanceState)
-        return inflater.inflate(R.layout.fragment_my_cart, container, true)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = FragmentMyCartBinding.bind(view)
-
-//        val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
-//
-//        binding.rvCart.layoutManager = LinearLayoutManager(activity)
-//        binding.rvCart.adapter = adapter
-//        binding.swipeRefreshLayout.setOnRefreshListener {
-//            binding.swipeRefreshLayout.isRefreshing = false
-//        }
+    ): View {
+        _binding = FragmentMyCartBinding.inflate(inflater, container, false)
         binding.cartButton.setOnClickListener {
             makeOrder()
             listCart?.clear()
-                    val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
-
-        binding.rvCart.layoutManager = LinearLayoutManager(activity)
-        binding.rvCart.adapter = adapter
+            val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
+            binding.rvCart.layoutManager = LinearLayoutManager(activity)
+            binding.rvCart.adapter = adapter
             getListCart(this.context)
         }
         setItemTouchHelper()
-    }
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         createCart()
-
         getListCart(this.context)
+        return binding.root
     }
-
-   
 
     private fun createCart() {
         val jsonObject = JSONObject()
@@ -85,6 +61,7 @@ class MyCartFragment : Fragment() {
         val jsonObjectString = jsonObject.toString()
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         val createCartCall = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
+        binding.bar.visibility = ProgressBar.VISIBLE
         createCartCall.enqueue(object: Callback<ApiResponse<Cart>>{
             override fun onResponse(
                 call: Call<ApiResponse<Cart>>,
@@ -92,6 +69,7 @@ class MyCartFragment : Fragment() {
             ) {
                 if(response.isSuccessful){
                 Log.d("SUCCESS create cart", "YOLOOOOOOOOOOOOOOOOO")
+                    binding.bar.visibility = ProgressBar.GONE
                 }
                 else{
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
@@ -111,6 +89,7 @@ class MyCartFragment : Fragment() {
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         val createOrderCall = ServiceGenerator.buildService(CartService::class.java).createOrder(
             requestBody = requestBody)
+        binding.bar.visibility = ProgressBar.VISIBLE
         createOrderCall.enqueue(object : Callback<ApiResponse<Order>>{
             override fun onResponse(
                 call: Call<ApiResponse<Order>>,
@@ -118,6 +97,7 @@ class MyCartFragment : Fragment() {
             ) {
                 if(response.isSuccessful){
                     Log.d("SUCCESS create order", "YOLOOOOOOOOOOOOOOOOO")
+                    binding.bar.visibility = ProgressBar.GONE
                 }
                 else{
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
@@ -132,6 +112,7 @@ class MyCartFragment : Fragment() {
 
     private fun getListCart(context: Context?) {
         val listCartCall = ServiceGenerator.buildService(CartService::class.java).getUserCart()
+        binding.bar.visibility = ProgressBar.VISIBLE
         listCartCall.enqueue(object : Callback<ApiResponse<MutableList<Cart>>> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
@@ -145,6 +126,7 @@ class MyCartFragment : Fragment() {
                     binding.rvCart.adapter = adapter
                     binding.rvCart.layoutManager = LinearLayoutManager(activity)
                     adapter!!.notifyDataSetChanged()
+                    binding.bar.visibility = ProgressBar.GONE
 
                 } else {
                     Toast.makeText(context, "Call api else error", Toast.LENGTH_LONG).show()

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -90,6 +91,7 @@ class UserDetailOrder : AppCompatActivity() {
                     it
                 )
             }
+        binding.bar.visibility = ProgressBar.VISIBLE
         deleteCartItemCall?.enqueue(object: Callback<ApiResponse<String>> {
             override fun onResponse(
                 call: Call<ApiResponse<String>>,
@@ -97,6 +99,7 @@ class UserDetailOrder : AppCompatActivity() {
             ) {
                 if(response.isSuccessful){
                     Log.d("SUCCESS delete order", "YOLO")
+                    binding.bar.visibility = ProgressBar.GONE
                 } else{
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                     Log.d("Error From Api", errorRes.message)
