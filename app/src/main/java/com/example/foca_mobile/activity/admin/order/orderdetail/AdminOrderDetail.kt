@@ -53,6 +53,8 @@ class AdminOrderDetail : AppCompatActivity() {
         }
         binding.subTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
         binding.priceTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
+        binding.note.text = order.notes ?: "..."
+        binding.note.contentDescription = order.notes
 
         //INIT SPINNER
         initSpinner()
@@ -82,7 +84,6 @@ class AdminOrderDetail : AppCompatActivity() {
 
     private fun initSpinner() {
         when (order.status) {
-            "ARRIVED" -> binding.spinner.text = resources.getString(R.string.ARRIVED)
             "PENDING" -> binding.spinner.text = resources.getString(R.string.PENDING)
             "PROCESSED" -> binding.spinner.text = resources.getString(R.string.PROCESSED)
             "COMPLETED" -> binding.spinner.text = resources.getString(R.string.COMPLETED)
@@ -96,7 +97,6 @@ class AdminOrderDetail : AppCompatActivity() {
 
             // add a list
             val status = arrayOf(
-                resources.getString(R.string.ARRIVED),
                 resources.getString(R.string.PENDING),
                 resources.getString(R.string.PROCESSED),
                 resources.getString(R.string.COMPLETED),
@@ -105,22 +105,18 @@ class AdminOrderDetail : AppCompatActivity() {
             builder.setItems(status) { _, which ->
                 when (which) {
                     0 -> {
-                        selectedStatus.value = "ARRIVED"
-                        binding.spinner.text = resources.getString(R.string.ARRIVED)
-                    }
-                    1 -> {
                         selectedStatus.value = "PENDING"
                         binding.spinner.text = resources.getString(R.string.PENDING)
                     }
-                    2 -> {
+                    1 -> {
                         selectedStatus.value = "PROCESSED"
                         binding.spinner.text = resources.getString(R.string.PROCESSED)
                     }
-                    3 -> {
+                    2 -> {
                         selectedStatus.value = "COMPLETED"
                         binding.spinner.text = resources.getString(R.string.COMPLETED)
                     }
-                    4 -> {
+                    3 -> {
                         selectedStatus.value = "CANCELLED"
                         binding.spinner.text = resources.getString(R.string.CANCELLED)
                     }

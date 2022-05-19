@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="20dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/imageFood"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="85dp"
             android:scaleType="fitXY"
             android:src="@drawable/advertising"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,48 +29,30 @@
 
         <TextView
             android:id="@+id/nameFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="38dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:text="Tra sua"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageFood"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/description"
-            android:layout_width="160dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@+id/imageFood"
-            app:layout_constraintTop_toBottomOf="@+id/nameFood" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardTypeFood"
+            android:id="@+id/numberProduct"
             android:layout_width="wrap_content"
-            app:strokeColor="@android:color/holo_red_light"
-            app:strokeWidth="0.5dp"
-            app:cardCornerRadius="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
+            android:text="Đã bán 33,1k"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/imageFood"
-            app:layout_constraintTop_toBottomOf="@+id/description" >
+            app:layout_constraintTop_toBottomOf="@+id/nameFood" />
 
-            <TextView
-                android:id="@+id/typeFood"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="2dp"
-                android:paddingVertical="0.8dp"
-                android:text="Drink"
-                android:textColor="@android:color/holo_red_light"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/price"
@@ -78,11 +60,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="200000vnd"
+            android:textColor="#15BE77"
             android:textSize="15sp"
             android:textStyle="bold|italic"
-            android:textColor="#15BE77"
             app:layout_constraintStart_toEndOf="@+id/imageFood"
-            app:layout_constraintTop_toBottomOf="@+id/cardTypeFood" />
+            app:layout_constraintTop_toBottomOf="@+id/numberProduct" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
@@ -101,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

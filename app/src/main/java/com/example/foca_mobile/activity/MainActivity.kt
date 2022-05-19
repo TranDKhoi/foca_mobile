@@ -243,7 +243,7 @@ class MainActivity : AppCompatActivity() {
         val builder = NotificationCompat.Builder(this, strCHANNEL_ID1)
             .setSmallIcon(R.drawable.ic_message)
             .setLargeIcon(bmLargeIcon)
-            .setContentTitle(sender ?: "You have a new message!")
+            .setContentTitle(sender ?: resources.getString(R.string.Youhavenewmessage))
             .setContentText(mess)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
@@ -258,36 +258,40 @@ class MainActivity : AppCompatActivity() {
     private fun sendOrderNotification(item: Notification) {
 
         var bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_order)
+        var message = ""
 
         when (item.order!!.status) {
-            "PENDING" -> bmLargeIcon =
-                BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
-            "CANCELLED" -> bmLargeIcon =
-                BitmapFactory.decodeResource(resources, R.drawable.ic_cancel)
-            "COMPLETED" -> bmLargeIcon =
-                BitmapFactory.decodeResource(resources, R.drawable.ic_success)
-            "PROCESSED" -> bmLargeIcon =
-                BitmapFactory.decodeResource(resources, R.drawable.ic_success)
-            "ARRIVED" -> bmLargeIcon =
-                BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
-        }
-        var message = ""
-        when (item.type) {
-            "NEW_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
-                .plus(resources.getString(R.string.UArrivedorder))
-            "PENDING_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
-                .plus(resources.getString(R.string.UPendingNoti))
-            "PROCESSING_ORDER" -> resources.getString(R.string.YourOrder).plus(" ")
-                .plus(resources.getString(R.string.UProcessedNoti))
-            "CANCELLED_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
-                .plus(resources.getString(R.string.UCancelledNoti))
-            "CUSTOMER_CANCELLED_ORDER" -> message =
-                resources.getString(R.string.YourOrder).plus(" ")
+            "PENDING" -> {
+                bmLargeIcon =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
+                message = resources.getString(R.string.YourOrder).plus(" ")
+                    .plus(resources.getString(R.string.UPendingNoti))
+            }
+            "CANCELLED" -> {
+                bmLargeIcon =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_cancel)
+                message = resources.getString(R.string.YourOrder).plus(" ")
                     .plus(resources.getString(R.string.UCancelledNoti))
-            "SUCCESS_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
-                .plus(resources.getString(R.string.UCompletedNoti))
+            }
+            "COMPLETED" -> {
+                bmLargeIcon =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_success)
+                message = resources.getString(R.string.YourOrder).plus(" ")
+                    .plus(resources.getString(R.string.UCompletedNoti))
+            }
+            "PROCESSED" -> {
+                bmLargeIcon =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_success)
+                message = resources.getString(R.string.YourOrder).plus(" ")
+                    .plus(resources.getString(R.string.UProcessedNoti))
+            }
+            "ARRIVED" -> {
+                bmLargeIcon =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
+                message = resources.getString(R.string.YourOrder).plus(" ")
+                    .plus(resources.getString(R.string.UArrivedorder))
+            }
         }
-
 
         val name = "Order Notification"
         val descriptionText = "This channel is defined in Main Admin"
@@ -311,7 +315,7 @@ class MainActivity : AppCompatActivity() {
         val builder = NotificationCompat.Builder(this, strCHANNEL_ID2)
             .setSmallIcon(R.drawable.ic_order)
             .setLargeIcon(bmLargeIcon)
-            .setContentTitle("You have news about your order!")
+            .setContentTitle(resources.getString(R.string.Youhavenews))
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(resultPendingIntent)

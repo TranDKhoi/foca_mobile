@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -24,10 +24,10 @@
 
             <ImageView
                 android:id="@+id/foodItemImage"
-                android:layout_width="62dp"
-                android:layout_height="62dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
+                android:scaleType="fitXY"
                 tools:ignore="ContentDescription" />
 
             <LinearLayout
@@ -41,6 +41,9 @@
                     android:id="@+id/foodItemName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:maxWidth="180dp"
+                    android:maxLines="2"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -49,7 +52,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="14sp"
+                    android:ellipsize="end"
+                    android:maxWidth="200dp"
+                    android:maxLines="2"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -58,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textColor="#11FF00"
-                    android:textSize="19sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -67,12 +73,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-                <TextView
-                    android:layout_marginEnd="20dp"
-                    android:id="@+id/foodItemQuantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/foodItemQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:text="Find Your Favorite Food"
+                android:text="@string/Findyourfavoritefood"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/ic_search"
-                    android:hint="What do you want to order?"
+                    android:hint="@string/Whatdoyouwanttofind"
                     android:textColorHint="#DA6317" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +96,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="Recent Food"
+                android:text="@string/RecentFood"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -113,10 +113,22 @@
                 android:textSize="15dp" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recentFoodRecyclerView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recentFoodRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -127,7 +139,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="Popular Menu"
+                android:text="@string/PopularMenu"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -138,16 +150,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:background="@android:color/transparent"
-                android:text="View more"
+                android:text="@string/Viewmore"
                 android:textAllCaps="false"
                 android:textColor="#FF7C32"
                 android:textSize="15dp" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/foodRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progress_bar2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foodRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="80dp" />
+        </RelativeLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

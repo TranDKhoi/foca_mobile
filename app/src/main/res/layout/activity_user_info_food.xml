@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activity.user.home.InfoFood_Activity">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarInfoFood"
@@ -19,27 +19,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:expandedTitleMarginStart="15dp"
-                app:expandedTitleMarginBottom="20dp"
                 app:contentScrim="#15BE77"
-                app:title="Review Food"
-                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
+                app:expandedTitleMarginBottom="20dp"
+                app:expandedTitleMarginStart="15dp"
+                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+                app:title="Review Food">
+
                 <ImageView
                     android:id="@+id/imageFood"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/favorite_4"
+                    android:src="@drawable/favorite_1"
                     app:layout_collapseMode="parallax" />
+
                 <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
                     android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
                     app:contentInsetStart="0dp"
                     app:contentInsetStartWithNavigation="0dp"
-                    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
-                    app:layout_collapseMode="pin"/>
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -53,7 +55,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="30dp"
+                android:layout_marginVertical="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="15dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -62,19 +66,22 @@
 
                     <TextView
                         android:id="@+id/nameFood"
-                        android:layout_width="260dp"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="400"
-                        android:textColor="@color/primaryTextColor"
                         android:text="Rainbow Sandwich Sugarless"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
                     <ImageButton
+                        android:id="@+id/favoriteFood"
                         android:layout_width="34dp"
                         android:layout_height="34dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_love" />
                 </LinearLayout>
 
@@ -83,30 +90,41 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
 
-                    <ImageView
+                    <RatingBar
+                        android:id="@+id/rBar"
+                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_star" />
+                        android:layout_marginTop="5dp"
+                        android:numStars="5"
+                        android:progressTint="#15BE77"
+                        android:rating="4.5"
+                        android:theme="@style/Widget.AppCompat.RatingBar" />
 
                     <TextView
+                        android:id="@+id/avgRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="3dp"
                         android:text="4.8 Rating"
-                        android:textColor="@color/primaryTextColor"/>
+                        android:textColor="@color/primaryTextColor" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="150dp"
+                        android:layout_marginStart="140dp"
+                        android:layout_marginTop="3dp"
                         android:src="@drawable/ic_bag" />
 
                     <TextView
+                        android:id="@+id/numOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
                         android:text="2000+ Order"
-                        android:textColor="@color/primaryTextColor"/>
+                        android:textColor="@color/primaryTextColor" />
                 </LinearLayout>
 
                 <TextView
@@ -116,18 +134,41 @@
                     android:layout_marginTop="20dp"
                     android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reviews"
-                    android:layout_marginTop="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primaryTextColor"
-                    android:textSize="18sp"/>
-                <androidx.recyclerview.widget.RecyclerView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/reviewRecycleview"/>
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Reviews"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/txtViewDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="170dp"
+                        android:background="@android:color/transparent"
+                        android:text="@string/viewdetail"
+                        android:textAllCaps="false"
+                        android:textColor="#FF7C32"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/reviewRecycleview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -141,7 +182,16 @@
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/light_green_gradient"
-        android:text="Add to cart"
+        android:text="@string/Addtocart"
         android:textColor="@color/textColorButtonWhite"
         android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="visible" />
 </RelativeLayout>

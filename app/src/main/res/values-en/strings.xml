@@ -38,7 +38,7 @@
     <string name="NewestFoods">Newest Foods</string>
     <string name="NewPassword">New Password</string>
     <string name="Onemorestep">One more step to finish and don\'t \nforget your account :)</string>
-    <string name="Order">Order</string>
+    <string name="Order">Orders</string>
     <string name="Orderdetails">Order details</string>
     <string name="Password">Password</string>
     <string name="Passwordresetsuccessful">Password reset successful</string>
@@ -110,5 +110,16 @@
     <string name="Weprideourselves">We pride ourselves on quality service</string>
     <string name="Asnatureteachesus">As nature teaches us</string>
     <string name="experienceityourself">Experience it yourself</string>
+    <string name="Youhavenews">You have news about your order!</string>
+    <string name="Youhavenewmessage">You have a new message!</string>
+    <string name="Note">Note: </string>
+    <string name="Findyourfavoritefood">Find your favorite food</string>
+    <string name="RecentFood">Recent Food</string>
+    <string name="PopularMenu">Popular Menu</string>
+    <string name="Reviews">Reviews</string>
+    <string name="viewdetail">View details</string>
+    <string name="Addtocart">Add to cart</string>
+    <string name="PlaceMyOrder">Place My Order</string>
+    <string name="Mycart">My cart</string>
 
 </resources>
