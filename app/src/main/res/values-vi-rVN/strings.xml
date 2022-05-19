@@ -90,12 +90,12 @@
     <string name="Notification">Thông báo</string>
     <string name="Selectone">Nhấn chọn</string>
     <string name="Nightmode">Ban đêm</string>
-
     <string name="YourOrder">Đơn hàng: #</string>
     <string name="UPendingNoti">cần bạn xác nhận chi phí tăng thêm</string>
     <string name="UCancelledNoti">đã bị hủy</string>
     <string name="UProcessedNoti">đang được làm và sẽ giao trong ít phút</string>
     <string name="UCompletedNoti">đã thành công!</string>
+    <string name="UArrivedorder">vừa đến. Tốt lắm!</string>
     <string name="filter">Bộ lọc</string>
     <string name="Rating">Đánh giá</string>
     <string name="PriceRange">Khoảng giá</string>

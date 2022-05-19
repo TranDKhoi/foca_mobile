@@ -15,7 +15,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityAdminOrderDetailBinding
 import com.example.foca_mobile.model.ApiResponse
-import com.example.foca_mobile.model.Notification
 import com.example.foca_mobile.model.Order
 import com.example.foca_mobile.model.OrderDetails
 import com.example.foca_mobile.service.OrderService
@@ -165,45 +164,16 @@ class AdminOrderDetail : AppCompatActivity() {
             ) {
                 Log.d("response.isSuccessful", response.isSuccessful.toString())
                 if (response.isSuccessful) {
-                    kotlin.runCatching {
+                    runOnUiThread {
                         Toast.makeText(
                             applicationContext,
                             "Update Successfully!",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    val noti = Notification(userId = order.buyerId)
 
-                    val yourOrderStr = resources.getString(R.string.YourOrder)
-                    when (status) {
-                        "PENDING" -> {
-                            noti.message =
-                                yourOrderStr + order.id + resources.getString(R.string.UPendingNoti)
-                            noti.iconType = "MONEY"
-                        }
-                        "COMPLETED" -> {
-                            noti.message =
-                                yourOrderStr + order.id + resources.getString(R.string.UCompletedNoti)
-                            noti.iconType = "SUCCESS"
-                        }
-                        "CANCELLED" -> {
-                            noti.message =
-                                yourOrderStr + order.id + resources.getString(R.string.UCancelledNoti)
-                            noti.iconType = "CANCELLED"
-                        }
-                        "PROCESSED" -> {
-                            noti.message =
-                                yourOrderStr + order.id + resources.getString(R.string.UProcessedNoti)
-                            noti.iconType = "SUCCESS"
-                        }
-                        else -> {
-                            return
-                        }
-                    }
-
-//                    SocketHandler.getSocket().emit("send_notification", Gson().toJson(noti))
                 } else {
-                    kotlin.runCatching {
+                    runOnUiThread {
                         val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                         Toast.makeText(
                             applicationContext,

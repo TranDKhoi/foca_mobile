@@ -89,20 +89,18 @@
     <string name="Notification">Notification</string>
     <string name="Selectone">Select one</string>
     <string name="Nightmode">Night mode</string>
-
     <string name="YourOrder">Your order: #</string>
-    <string name="UPendingNoti">needs to be confirmed because of the extra cost</string>
-    <string name="UCancelledNoti">has been cancelled</string>
-    <string name="UProcessedNoti">is in progress and will be delivered in a few minutes</string>
-    <string name="UCompletedNoti">is successful!</string>
+    <string name="UPendingNoti"> needs to be confirmed because of the extra cost</string>
+    <string name="UCancelledNoti"> has been cancelled</string>
+    <string name="UProcessedNoti"> is in progress and will be delivered in a few minutes</string>
+    <string name="UCompletedNoti"> is successful!</string>
+    <string name="UArrivedorder"> is arrived. Well done!</string>
     <string name="filter">Filter</string>
     <string name="Rating">Rating</string>
     <string name="PriceRange">Price range</string>
     <string name="Sortby">Sort by</string>
     <string name="Restartapp">Your app needs to be restarted for this change to take effect</string>
     <string name="Skip">Skip</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Back">Back</string>
     <string name="Next">Next</string>
     <string name="FRESHFOOD">FRESH FOOD</string>

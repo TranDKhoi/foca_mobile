@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             val dataJson = it[0] as JSONObject
             val noti = Gson().fromJson(dataJson.toString(), Notification::class.java)
             Log.d("Check received_notification", noti.toString())
-            sendOrderNotification(noti.iconType, noti.message!!)
+            sendOrderNotification(noti)
         }
 
         //THIS IS WHERE WE DECIDE WHO IS LOGIN
@@ -255,11 +255,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     //NOTIFY NOTIFY AREA
-    private fun sendOrderNotification(status: String?, mess: String) {
+    private fun sendOrderNotification(item: Notification) {
 
         var bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_order)
 
-        when (status) {
+        when (item.order!!.status) {
             "PENDING" -> bmLargeIcon =
                 BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
             "CANCELLED" -> bmLargeIcon =
@@ -268,6 +268,24 @@ class MainActivity : AppCompatActivity() {
                 BitmapFactory.decodeResource(resources, R.drawable.ic_success)
             "PROCESSED" -> bmLargeIcon =
                 BitmapFactory.decodeResource(resources, R.drawable.ic_success)
+            "ARRIVED" -> bmLargeIcon =
+                BitmapFactory.decodeResource(resources, R.drawable.ic_pending)
+        }
+        var message = ""
+        when (item.type) {
+            "NEW_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
+                .plus(resources.getString(R.string.UArrivedorder))
+            "PENDING_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
+                .plus(resources.getString(R.string.UPendingNoti))
+            "PROCESSING_ORDER" -> resources.getString(R.string.YourOrder).plus(" ")
+                .plus(resources.getString(R.string.UProcessedNoti))
+            "CANCELLED_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
+                .plus(resources.getString(R.string.UCancelledNoti))
+            "CUSTOMER_CANCELLED_ORDER" -> message =
+                resources.getString(R.string.YourOrder).plus(" ")
+                    .plus(resources.getString(R.string.UCancelledNoti))
+            "SUCCESS_ORDER" -> message = resources.getString(R.string.YourOrder).plus(" ")
+                .plus(resources.getString(R.string.UCompletedNoti))
         }
 
 
@@ -293,9 +311,8 @@ class MainActivity : AppCompatActivity() {
         val builder = NotificationCompat.Builder(this, strCHANNEL_ID2)
             .setSmallIcon(R.drawable.ic_order)
             .setLargeIcon(bmLargeIcon)
-//            .setContentTitle(status ?: "You just got news about your order!")
-            .setContentTitle("You just got news about your order!")
-            .setContentText(mess)
+            .setContentTitle("You have news about your order!")
+            .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(resultPendingIntent)
             .setAutoCancel(true)
