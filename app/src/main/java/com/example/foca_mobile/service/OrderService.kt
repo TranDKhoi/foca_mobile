@@ -2,8 +2,8 @@ package com.example.foca_mobile.service
 
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
-import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.model.OrderDetails
+import com.example.foca_mobile.model.Review
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -30,4 +30,7 @@ interface OrderService {
 
     @GET("/api/buyer/orders/recent")
     fun getRecentOrderList(): Call<ApiResponse<MutableList<Order>>>?
+
+    @PUT("/api/buyer/orders/{orderId}")
+    fun deleteOrder(@Body requestBody: RequestBody, @Path("orderId") orderId: Int) : Call<ApiResponse<String>>
 }
