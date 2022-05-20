@@ -8,13 +8,21 @@ import com.example.foca_mobile.databinding.ListReviewDetailsFoodItemBinding
 import com.example.foca_mobile.model.Review
 import java.text.SimpleDateFormat
 
-class ReviewDetailsFoodAdapter(private val arrayList : MutableList<Review>) :
-        RecyclerView.Adapter<ReviewDetailsFoodAdapter.ViewHolder> () {
+class ReviewDetailsFoodAdapter(private val arrayList: MutableList<Review>) :
+    RecyclerView.Adapter<ReviewDetailsFoodAdapter.ViewHolder>() {
 
-    inner class ViewHolder (val binding : ListReviewDetailsFoodItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ListReviewDetailsFoodItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): ReviewDetailsFoodAdapter.ViewHolder {
-        val v = ListReviewDetailsFoodItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ReviewDetailsFoodAdapter.ViewHolder {
+        val v = ListReviewDetailsFoodItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return ViewHolder(v)
     }
 

@@ -21,7 +21,8 @@
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="110dp"
         android:text="@string/FAST"
-        android:textSize="40sp"
+        android:textAlignment="center"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <TextView
@@ -29,8 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="50dp"
         android:text="@string/Weprideourselves"
+        android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
 </FrameLayout>

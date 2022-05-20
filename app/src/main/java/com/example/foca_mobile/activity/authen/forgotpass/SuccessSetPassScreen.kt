@@ -5,14 +5,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.authen.login.LoginScreen
-import kotlinx.android.synthetic.main.activity_success_set_pass_screen.*
+import com.example.foca_mobile.databinding.ActivitySuccessSetPassScreenBinding
 
 class SuccessSetPassScreen : AppCompatActivity() {
+    private lateinit var binding:ActivitySuccessSetPassScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_success_set_pass_screen)
 
-        loginBtn.setOnClickListener {
+        binding.loginBtn.setOnClickListener {
             toLoginScreen()
         }
     }

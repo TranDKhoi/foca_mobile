@@ -11,8 +11,6 @@
     <string name="Chat">Tin nhắn</string>
     <string name="Chooseyourlanguage">Chọn ngôn ngữ</string>
     <string name="DeliverFavoriteFood">Deliver Favorite Food</string>
-    <string name="DeliveryCharge">Vận chuyển</string>
-    <string name="Discount">Giảm giá</string>
     <string name="Enter4digit">Nhập mã bảo mật \ngồm 4 ký tự</string>
     <string name="Entermessage">Nhập tin nhắn</string>
     <string name="EnteryourstudentIDtoresetyourpassword">Nhập mã số sinh viên để khôi phục</string>
@@ -52,7 +50,6 @@
     <string name="sending...">đang gửi…</string>
     <string name="SignupforFREE">Đăng ý MIỄN PHÍ</string>
     <string name="Signupnow">Đăng ký ngay!</string>
-    <string name="Status">Trạng thái</string>
     <string name="Student">Sinh viên</string>
     <string name="StudentID">Mã sinh viên</string>
     <string name="SubTotal">Tiền hàng</string>
@@ -85,7 +82,6 @@
     <string name="Category">Danh mục</string>
     <string name="Description">Mô tả</string>
     <string name="ARRIVED">VỪA ĐẾN</string>
-    <string name="Filterthemenu">Lọc thực đơn</string>
     <string name="ALL">TOÀN BỘ</string>
     <string name="Notification">Thông báo</string>
     <string name="Selectone">Nhấn chọn</string>
@@ -125,5 +121,7 @@
     <string name="total">Tổng đơn</string>
     <string name="review">Đánh giá</string>
     <string name="buyagain">Mua lại</string>
+    <string name="Favorite">Ưa thích</string>
+    <string name="Myaccount">Tài khoản của tôi</string>
 
 </resources>

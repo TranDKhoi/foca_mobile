@@ -125,7 +125,7 @@
                 </androidx.recyclerview.widget.RecyclerView>
 
                 <ImageView
-                    android:id="@+id/logo_done"
+                    android:id="@+id/logoDone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/image_nicely_done"

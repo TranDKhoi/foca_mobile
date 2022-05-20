@@ -25,7 +25,6 @@
                 android:id="@+id/namePerson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lê Hải Phong"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -42,7 +41,6 @@
                     android:layout_marginTop="5dp"
                     android:numStars="5"
                     android:progressTint="#15BE77"
-                    android:rating="4.5"
                     android:theme="@style/Widget.AppCompat.RatingBar" />
 
                 <TextView
@@ -50,7 +48,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="130dp"
-                    android:text="20/04/2002"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -61,7 +58,6 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Đây là đồ án nhóm chung của Lê Hải Phong, Đỗ Thành Đạt, Trần Đình Khôi"
                 android:textSize="18sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -75,7 +71,6 @@
             android:id="@+id/imagePerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/favorite_1" />
+            android:scaleType="fitXY" />
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

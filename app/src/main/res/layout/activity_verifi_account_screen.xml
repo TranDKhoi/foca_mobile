@@ -46,7 +46,8 @@
             <TextView
                 android:id="@+id/subText"
                 android:layout_width="wrap_content"
-                android:layout_height="26dp"
+                android:layout_height="wrap_content"
+                android:maxWidth="250dp"
                 android:layout_marginTop="50dp"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -58,11 +59,11 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext_normal"
                 android:cursorVisible="false"
-                android:textColor="@color/primaryTextColor"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:letterSpacing="2.5"
                 android:maxLength="4"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="30sp"
                 tools:ignore="LabelFor" />
 

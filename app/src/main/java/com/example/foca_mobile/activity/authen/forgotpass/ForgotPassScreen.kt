@@ -16,7 +16,6 @@ import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.service.AuthService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
-import kotlinx.android.synthetic.main.activity_forgot_pass_screen.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -33,10 +32,10 @@ class ForgotPassScreen : AppCompatActivity() {
         binding = ActivityForgotPassScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        backBtn.setOnClickListener {
+        binding.backBtn.setOnClickListener {
             this.finish()
         }
-        sendBtn.setOnClickListener {
+        binding.sendBtn.setOnClickListener {
             toVerifyPassScreen()
         }
     }

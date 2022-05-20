@@ -45,8 +45,8 @@ class FavoriteAdapter(private var c: Context, private val arrayList:List<Product
             jsonObject.put("productId",arrayList[position].id)
             jsonObject.put("quantity",1)
             val requestBody = jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
-            val creatCartAgainAPI = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
-            creatCartAgainAPI.enqueue(object: Callback<ApiResponse<Cart>> {
+            val createCartAgainAPI = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
+            createCartAgainAPI.enqueue(object: Callback<ApiResponse<Cart>> {
                 override fun onResponse(
                     call: Call<ApiResponse<Cart>>,
                     response: Response<ApiResponse<Cart>>

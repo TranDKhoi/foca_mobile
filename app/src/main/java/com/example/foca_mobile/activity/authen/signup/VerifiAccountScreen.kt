@@ -40,7 +40,7 @@ class VerifiAccountScreen : AppCompatActivity() {
 
         val subText: TextView = findViewById(R.id.subText)
         subText.text =
-            resources.getString(R.string.Codesendto).plus(userName)
+            resources.getString(R.string.Codesendto).plus("\n").plus(userName)
                 .plus(resources.getString(R.string.gm_uit_edu_vn))
 
         binding.confirmBtn.setOnClickListener {

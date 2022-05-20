@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ListNotifyItemBinding
 import com.example.foca_mobile.model.Notification
-import kotlinx.android.synthetic.main.list_notify_item.view.*
 
 class UserNotificationAdapter(private val notifyList: MutableList<Notification>) :
     RecyclerView.Adapter<UserNotificationAdapter.ViewHolder>() {
@@ -34,35 +33,35 @@ class UserNotificationAdapter(private val notifyList: MutableList<Notification>)
         when (currentItem.order!!.status) {
             "COMPLETED" -> {
                 holder.binding.imageNotify.setImageResource(R.drawable.ic_success)
-                holder.binding.root.notifyTitle.text =
+                holder.binding.notifyTitle.text =
                     holder.binding.root.resources.getString(R.string.YourOrder)
                         .plus(currentItem.order!!.id).plus(" ")
                         .plus(holder.binding.root.resources.getString(R.string.UCompletedNoti))
             }
             "PROCESSED" -> {
                 holder.binding.imageNotify.setImageResource(R.drawable.ic_success)
-                holder.binding.root.notifyTitle.text =
+                holder.binding.notifyTitle.text =
                     holder.binding.root.resources.getString(R.string.YourOrder)
                         .plus(currentItem.order!!.id).plus(" ")
                         .plus(holder.binding.root.resources.getString(R.string.UProcessedNoti))
             }
             "CANCELLED" -> {
                 holder.binding.imageNotify.setImageResource(R.drawable.ic_cancel)
-                holder.binding.root.notifyTitle.text =
+                holder.binding.notifyTitle.text =
                     holder.binding.root.resources.getString(R.string.YourOrder)
                         .plus(currentItem.order!!.id).plus(" ")
                         .plus(holder.binding.root.resources.getString(R.string.UCancelledNoti))
             }
             "PENDING" -> {
                 holder.binding.imageNotify.setImageResource(R.drawable.ic_pending)
-                holder.binding.root.notifyTitle.text =
+                holder.binding.notifyTitle.text =
                     holder.binding.root.resources.getString(R.string.YourOrder)
                         .plus(currentItem.order!!.id).plus(" ")
                         .plus(holder.binding.root.resources.getString(R.string.UPendingNoti))
             }
             "ARRIVED" -> {
                 holder.binding.imageNotify.setImageResource(R.drawable.ic_pending)
-                holder.binding.root.notifyTitle.text =
+                holder.binding.notifyTitle.text =
                     holder.binding.root.resources.getString(R.string.YourOrder)
                         .plus(currentItem.order!!.id).plus(" ")
                         .plus(holder.binding.root.resources.getString(R.string.UArrivedorder))

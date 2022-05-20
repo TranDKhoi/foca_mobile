@@ -1,10 +1,8 @@
 package com.example.foca_mobile.activity.user.home.infofood
 
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.databinding.ActivityUserReviewDetailsBinding
 import com.example.foca_mobile.model.*
