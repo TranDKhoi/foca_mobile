@@ -121,5 +121,8 @@
     <string name="Addtocart">Thêm vào giỏ hàng</string>
     <string name="PlaceMyOrder">Đặt Hàng</string>
     <string name="Mycart">Giỏ hàng</string>
+    <string name="order_details">Chi tiết hóa đơn</string>
+    <string name="total">Tổng đơn</string>
+    <string name="review">Đánh giá</string>
 
 </resources>

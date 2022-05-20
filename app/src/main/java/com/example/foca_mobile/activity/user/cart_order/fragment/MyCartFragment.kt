@@ -28,8 +28,9 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 
-class MyCartFragment : Fragment() {
+class MyCartFragment : Fragment(){
     private var _binding: FragmentMyCartBinding? = null
     private val binding get() = _binding!!
     private var listCart: MutableList<Cart>? = null
@@ -44,7 +45,7 @@ class MyCartFragment : Fragment() {
         binding.cartButton.setOnClickListener {
             makeOrder()
             listCart?.clear()
-            val adapter = listCart?.let { RecyclerViewAdapterCart(it) }
+            val adapter = listCart?.let { RecyclerViewAdapterCart(it, this)}
             binding.rvCart.layoutManager = LinearLayoutManager(activity)
             binding.rvCart.adapter = adapter
             adapter?.notifyDataSetChanged()
@@ -69,7 +70,7 @@ class MyCartFragment : Fragment() {
                 response: Response<ApiResponse<Cart>>
             ) {
                 if(response.isSuccessful){
-                Log.d("SUCCESS create cart", "YOLOOOOOOOOOOOOOOOOO")
+                Log.d("SUCCESS create cart", "Yolo")
                     binding.bar.visibility = ProgressBar.GONE
                 }
                 else{
@@ -97,7 +98,8 @@ class MyCartFragment : Fragment() {
                 response: Response<ApiResponse<Order>>
             ) {
                 if(response.isSuccessful){
-                    Log.d("SUCCESS create order", "YOLOOOOOOOOOOOOOOOOO")
+                    binding.totalPrice.text = "0đ"
+                    Log.d("SUCCESS create order", "Yolo")
                     binding.bar.visibility = ProgressBar.GONE
                 }
                 else{
@@ -123,34 +125,29 @@ class MyCartFragment : Fragment() {
                 if (response.isSuccessful) {
                     val res: ApiResponse<MutableList<Cart>> = response.body()!!
                     listCart = res.data
-                    adapter = RecyclerViewAdapterCart(listCart!!)
+                    adapter = RecyclerViewAdapterCart(listCart!!, this@MyCartFragment)
                     binding.rvCart.adapter = adapter
                     binding.rvCart.layoutManager = LinearLayoutManager(activity)
                     adapter!!.notifyDataSetChanged()
                     binding.bar.visibility = ProgressBar.GONE
-
+                    calculatePrice(listCart, this@MyCartFragment)
                 } else {
                     Toast.makeText(context, "Call api else error", Toast.LENGTH_LONG).show()
                 }
             }
-
             override fun onFailure(call: Call<ApiResponse<MutableList<Cart>>>, t: Throwable) {
                 Toast.makeText(context, "Call api else error", Toast.LENGTH_LONG).show()
             }
-
         })
     }
 
     private fun setItemTouchHelper(){
         ItemTouchHelper(object : ItemTouchHelper.Callback(){
-
-            private val limitScrollX = dipToPx(60f, this@MyCartFragment)
+            private val limitScrollX = 60
             private var currentScrollX = 0
             private var currentScrollWhenActive = 0
             private var initXWhenActive = 0f
             private var firstInActive = false
-
-
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
@@ -159,7 +156,6 @@ class MyCartFragment : Fragment() {
                 val swipeFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
                 return makeMovementFlags(dragFlags, swipeFlags)
             }
-
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -167,17 +163,13 @@ class MyCartFragment : Fragment() {
             ): Boolean {
                 return true
             }
-
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
-
             override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
                 return Integer.MAX_VALUE.toFloat()
             }
-
             override fun getSwipeEscapeVelocity(defaultValue: Float): Float {
                 return Integer.MAX_VALUE.toFloat()
             }
-
             override fun onChildDraw(
                 c: Canvas,
                 recyclerView: RecyclerView,
@@ -192,7 +184,6 @@ class MyCartFragment : Fragment() {
                         currentScrollX = viewHolder.itemView.scrollX
                         firstInActive=true
                     }
-
                     if (isCurrentlyActive){
                         var scrollOffset = currentScrollX + (-dX).toInt()
                         if(scrollOffset > limitScrollX){
@@ -209,14 +200,12 @@ class MyCartFragment : Fragment() {
                             currentScrollWhenActive = viewHolder.itemView.scrollX
                             initXWhenActive = dX
                         }
-
                         if(viewHolder.itemView.scrollX<limitScrollX){
                             viewHolder.itemView.scrollTo((currentScrollWhenActive*dX/initXWhenActive).toInt(), 0)
                         }
                     }
                 }
             }
-
             override fun clearView(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
@@ -229,15 +218,22 @@ class MyCartFragment : Fragment() {
                     viewHolder.itemView.scrollTo(0, 0)
                 }
             }
-
         }).apply {
-
             attachToRecyclerView(binding.rvCart)
         }
     }
 
-    private fun dipToPx(dipValue: Float, context: MyCartFragment): Int{
-        return (dipValue * context.resources.displayMetrics.density).toInt()
+    companion object Calculate{
+        fun calculatePrice(listCart: MutableList<Cart>?, context: MyCartFragment){
+            var totalPrice = 0
+            for(item in listCart!!){
+                totalPrice += item.quantity* item.product!!.price
+            }
+            val dec = DecimalFormat("#,###")
+            context.binding.totalPrice.text = dec.format(totalPrice) + "đ"
+        }
     }
 
+
 }
+
