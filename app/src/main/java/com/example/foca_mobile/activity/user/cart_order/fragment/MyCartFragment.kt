@@ -143,7 +143,7 @@ class MyCartFragment : Fragment(){
 
     private fun setItemTouchHelper(){
         ItemTouchHelper(object : ItemTouchHelper.Callback(){
-            private val limitScrollX = 60
+            private val limitScrollX = dipToPx(60f, this@MyCartFragment)
             private var currentScrollX = 0
             private var currentScrollWhenActive = 0
             private var initXWhenActive = 0f
@@ -232,6 +232,10 @@ class MyCartFragment : Fragment(){
             val dec = DecimalFormat("#,###")
             context.binding.totalPrice.text = dec.format(totalPrice) + "đ"
         }
+    }
+
+    private fun dipToPx(dipValue: Float, context: MyCartFragment): Int{
+        return (dipValue * context.resources.displayMetrics.density).toInt()
     }
 
 
