@@ -134,11 +134,10 @@
                     android:layout_marginTop="20dp"
                     android:textSize="15sp" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -146,19 +145,22 @@
                         android:text="@string/Reviews"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginTop="15dp"/>
 
                     <Button
                         android:id="@+id/txtViewDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="170dp"
                         android:background="@android:color/transparent"
                         android:text="@string/viewdetail"
                         android:textAllCaps="false"
                         android:textColor="#FF7C32"
+                        android:textDirection="anyRtl"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
                         android:textSize="15dp" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"

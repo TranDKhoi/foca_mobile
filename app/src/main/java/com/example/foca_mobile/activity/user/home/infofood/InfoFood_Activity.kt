@@ -53,7 +53,7 @@ class InfoFood_Activity : AppCompatActivity() {
                     call: Call<ApiResponse<Cart>>,
                     response: Response<ApiResponse<Cart>>
                 ) {
-                    Toast.makeText(applicationContext, "Đã thêm đồ ăn vào giỏi hàng", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "Đã thêm đồ ăn vào giỏ hàng", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onFailure(call: Call<ApiResponse<Cart>>, t: Throwable) {}

@@ -124,5 +124,6 @@
     <string name="order_details">Chi tiết hóa đơn</string>
     <string name="total">Tổng đơn</string>
     <string name="review">Đánh giá</string>
+    <string name="buyagain">Mua lại</string>
 
 </resources>
