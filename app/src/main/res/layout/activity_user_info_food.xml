@@ -31,7 +31,6 @@
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/favorite_1"
                     app:layout_collapseMode="parallax" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -98,7 +97,7 @@
                         android:layout_marginTop="5dp"
                         android:numStars="5"
                         android:progressTint="#15BE77"
-                        android:rating="4.5"
+                        android:rating="0"
                         android:theme="@style/Widget.AppCompat.RatingBar" />
 
                     <TextView
@@ -107,23 +106,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="3dp"
-                        android:text="4.8 Rating"
+                        android:text="0"
                         android:textColor="@color/primaryTextColor" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="140dp"
+                        android:layout_marginStart="125dp"
                         android:layout_marginTop="3dp"
                         android:src="@drawable/ic_bag" />
 
                     <TextView
                         android:id="@+id/numOrder"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="20dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="4dp"
-                        android:text="2000+ Order"
                         android:textColor="@color/primaryTextColor" />
                 </LinearLayout>
 
@@ -134,15 +132,15 @@
                     android:layout_marginTop="20dp"
                     android:textSize="15sp" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:text="@string/Reviews"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="16sp"
@@ -152,17 +150,25 @@
                         android:id="@+id/txtViewDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="170dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
                         android:background="@android:color/transparent"
                         android:text="@string/viewdetail"
                         android:textAllCaps="false"
                         android:textColor="#FF7C32"
                         android:textSize="15dp" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/emptyReview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="250dp"
+                        android:src="@drawable/image_empty_review"
+                        android:visibility="gone" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/reviewRecycleview"
@@ -188,7 +194,6 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyle"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true"

@@ -1,5 +1,6 @@
 package com.example.foca_mobile.model
 
+import android.widget.Button
 import java.io.Serializable
 
 
@@ -13,8 +14,7 @@ data class Product(
     var orderCount : Int = 0,
     var averageRating : Float? = null,
     var reviewCount : Int? = null,
-    var reviews : MutableList<Review>?,
-//    var createdAt : String?,
-//    var updatedAt : String?,
-//    var deletedAt : String?
+    var createdAt : String? = null,
+    var updatedAt : String? = null,
+    var deletedAt : String? = null
 ) : Serializable

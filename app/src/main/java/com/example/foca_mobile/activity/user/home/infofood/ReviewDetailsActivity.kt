@@ -1,10 +1,8 @@
 package com.example.foca_mobile.activity.user.home.infofood
 
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.databinding.ActivityUserReviewDetailsBinding
 import com.example.foca_mobile.model.*
@@ -79,21 +77,21 @@ class ReviewDetailsActivity : AppCompatActivity() {
                         sumReview += it.quantity!!
                         sumNumberStar += it.rating!! * it.quantity!!
                         when(it.rating!!){
-                            1 -> num1 += it.quantity!!
-                            2 -> num2 += it.quantity!!
-                            3 -> num3 += it.quantity!!
-                            4 -> num4 += it.quantity!!
-                            5 -> num5 += it.quantity!!
+                            1 -> num1 += it.rating!! * it.quantity!!
+                            2 -> num2 += it.rating!! * it.quantity!!
+                            3 -> num3 += it.rating!! * it.quantity!!
+                            4 -> num4 += it.rating!! * it.quantity!!
+                            5 -> num5 += it.rating!! * it.quantity!!
                         }
                     }
                     binding.numReview.text = sumReview.toString()
                     binding.avgRating.text = (((sumNumberStar / sumReview) * 100.0).roundToInt() / 100.0).toString()
                     binding.rBar.rating = (((sumNumberStar / sumReview) * 100.0).roundToInt() / 100.0).toFloat()
-                    binding.prg1.progress = num1
-                    binding.prg2.progress = num2
-                    binding.prg3.progress = num3
-                    binding.prg4.progress = num4
-                    binding.prg5.progress = num5
+                    binding.prg1.progress = num1 * 100 / sumNumberStar
+                    binding.prg2.progress = num2 * 100 / sumNumberStar
+                    binding.prg3.progress = num3 * 100 / sumNumberStar
+                    binding.prg4.progress = num4 * 100 / sumNumberStar
+                    binding.prg5.progress = num5 * 100 / sumNumberStar
                     binding.View.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
                 }

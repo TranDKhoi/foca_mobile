@@ -18,10 +18,12 @@ class AllFoodAdapter(private var c: Context, private var arrList: MutableList<Pr
 
     private var newArrayAddFoodListFilter = arrList
 
-    inner class ViewHolder(val binding: ListAllRecentFoodItemBinding):RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ListAllRecentFoodItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = ListAllRecentFoodItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val v =
+            ListAllRecentFoodItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(v)
     }
 
@@ -31,12 +33,12 @@ class AllFoodAdapter(private var c: Context, private var arrList: MutableList<Pr
             .into(holder.binding.imageFood)
         holder.binding.nameFood.text = arrList[position]?.name
         val dec = DecimalFormat("#,###")
-        holder.binding.price.text = dec.format(arrList[position]?.price) +"đ"
+        holder.binding.price.text = dec.format(arrList[position]?.price) + "đ"
         holder.binding.numberProduct.text = "Đã bán " + arrList[position]?.orderCount.toString()
         holder.binding.rBar.rating = arrList[position]?.averageRating!!.toFloat()
         holder.binding.root.setOnClickListener {
             val intent = Intent(c, InfoFood_Activity::class.java)
-            intent.putExtra("id",arrList[position]?.id)
+            intent.putExtra("id", arrList[position]?.id)
             c.startActivity(intent)
         }
     }
@@ -49,15 +51,16 @@ class AllFoodAdapter(private var c: Context, private var arrList: MutableList<Pr
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults? {
                 val filterResult = FilterResults()
-                if(constraint == null || constraint.isEmpty()){
+                if (constraint == null || constraint.isEmpty()) {
                     filterResult.count = newArrayAddFoodListFilter.size
                     filterResult.values = newArrayAddFoodListFilter
                 } else {
-                    val searchCh : String = constraint.toString().toLowerCase()
+                    val searchCh: String = constraint.toString().toLowerCase()
                     val itemFoodList = ArrayList<Product>()
-                    for(item in newArrayAddFoodListFilter) {
-                        if(item?.name?.toLowerCase()?.contains(searchCh) == true ||
-                            item?.description?.toLowerCase()?.contains(searchCh) == true) {
+                    for (item in newArrayAddFoodListFilter) {
+                        if (item?.name?.toLowerCase()?.contains(searchCh) == true ||
+                            item?.description?.toLowerCase()?.contains(searchCh) == true
+                        ) {
                             itemFoodList.add(item)
                         }
                     }

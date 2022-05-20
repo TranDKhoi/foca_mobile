@@ -30,7 +30,6 @@ import com.example.foca_mobile.utils.LoginPrefs
 import com.google.gson.Gson
 import io.socket.client.Ack
 import io.socket.client.Socket
-import kotlinx.android.synthetic.main.activity_chat_screen.*
 import org.json.JSONObject
 
 interface OnKeyboardVisibilityListener {
@@ -72,9 +71,9 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
         partner = conversation.members?.find {
             it.id != user.id
         }!!
-        messName.text = partner.fullName
-        messStatus.text = "Online"
-        Glide.with(applicationContext).load(partner.photoUrl!!).into(messImage)
+        binding.messName.text = partner.fullName
+        binding.messStatus.text = "Online"
+        Glide.with(applicationContext).load(partner.photoUrl!!).into(binding.messImage)
 
         if (!conversation.isSeen) {
             socket.emit("seen_new_message", conversation.id, Ack {
@@ -86,11 +85,11 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
         }
 
         //CHANGE SEND BTN VISIBILITY
-        inputText.doOnTextChanged { text, _, _, _ ->
+        binding.inputText.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty()) {
-                sendBtn.visibility = View.GONE
+                binding.sendBtn.visibility = View.GONE
             } else
-                sendBtn.visibility = View.VISIBLE
+                binding.sendBtn.visibility = View.VISIBLE
         }
 
         //Socket
@@ -127,7 +126,7 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
             runOnUiThread {
                 listMessage.add(message)
                 conversationAdapter.notifyDataSetChanged()
-                conversationRCV.scrollToPosition(listMessage.size - 1)
+                binding.conversationRCV.scrollToPosition(listMessage.size - 1)
             }
         }
     }
@@ -149,10 +148,10 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
 
     @SuppressLint("NotifyDataSetChanged")
     fun sendMessageFunc(view: View) {
-        if (!inputText.text.isNullOrEmpty()) {
+        if (!binding.inputText.text.isNullOrEmpty()) {
             binding.txtSending.visibility = TextView.VISIBLE
             val message =
-                Message(inputText.text.toString().trim(), user.id, roomId = conversation.id)
+                Message(binding.inputText.text.toString().trim(), user.id, roomId = conversation.id)
             val messageJson = Gson().toJson(message)
             listMessage.add(message)
             conversationAdapter.notifyDataSetChanged()
@@ -168,7 +167,7 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
                     Log.d("Error get_room_with_admin", error)
                 }
             })
-            conversationRCV.scrollToPosition(listMessage.size - 1)
+            binding.conversationRCV.scrollToPosition(listMessage.size - 1)
             binding.inputText.text.clear()
             binding.inputText.onEditorAction(EditorInfo.IME_ACTION_DONE)
         }
@@ -176,14 +175,13 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
 
     override fun onVisibilityChanged(visible: Boolean) {
         if (visible)
-            conversationRCV.smoothScrollToPosition(conversationAdapter.itemCount - 1)
+            binding.conversationRCV.smoothScrollToPosition(conversationAdapter.itemCount - 1)
     }
 
     private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
         val parentView = (findViewById<View>(R.id.content) as ViewGroup).getChildAt(0)
         parentView.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
-            private var alreadyOpen = false
             private val defaultKeyboardHeightDP = 100
             private val EstimatedKeyboardDP =
                 defaultKeyboardHeightDP + if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) 48 else 0

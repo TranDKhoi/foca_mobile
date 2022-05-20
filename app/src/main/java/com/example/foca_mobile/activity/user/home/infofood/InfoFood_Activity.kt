@@ -3,14 +3,19 @@ package com.example.foca_mobile.activity.user.home.infofood
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityUserInfoFoodBinding
-import com.example.foca_mobile.model.*
+import com.example.foca_mobile.model.ApiResponse
+import com.example.foca_mobile.model.Cart
+import com.example.foca_mobile.model.ProductDetails
+import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.service.CartService
 import com.example.foca_mobile.service.InterestedProductService
 import com.example.foca_mobile.service.ProductService
@@ -32,7 +37,7 @@ class InfoFood_Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserInfoFoodBinding
     private lateinit var newArrayReviewFoodList: MutableList<Review>
-    private lateinit var productDetails : ProductDetails
+    private lateinit var productDetails: ProductDetails
     private var id by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,16 +49,22 @@ class InfoFood_Activity : AppCompatActivity() {
         initToolBar()
         binding.addFood.setOnClickListener {
             val jsonObject = JSONObject()
-            jsonObject.put("productId",productDetails.id)
-            jsonObject.put("quantity",1)
-            val requestBody = jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
-            val creatCartAPI = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
-            creatCartAPI.enqueue(object: Callback<ApiResponse<Cart>>{
+            jsonObject.put("productId", productDetails.id)
+            jsonObject.put("quantity", 1)
+            val requestBody =
+                jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
+            val creatCartAPI =
+                ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
+            creatCartAPI.enqueue(object : Callback<ApiResponse<Cart>> {
                 override fun onResponse(
                     call: Call<ApiResponse<Cart>>,
                     response: Response<ApiResponse<Cart>>
                 ) {
-                    Toast.makeText(applicationContext, "Đã thêm đồ ăn vào giỏi hàng", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Đã thêm đồ ăn vào giỏ hàng",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 override fun onFailure(call: Call<ApiResponse<Cart>>, t: Throwable) {}
@@ -63,27 +74,33 @@ class InfoFood_Activity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             this.finish()
         }
-        id = intent.getIntExtra("id",0)
+        id = intent.getIntExtra("id", 0)
         creatReviewRecycleview()
         binding.reviewRecycleview.adapter = ReviewFoodAdapter(newArrayReviewFoodList)
         binding.txtViewDetails.setOnClickListener {
-            val intent = Intent(this,ReviewDetailsActivity::class.java)
-            intent.putExtra("id",id)
+            val intent = Intent(this, ReviewDetailsActivity::class.java)
+            intent.putExtra("id", id)
             startActivity(intent)
         }
         binding.favoriteFood.setOnClickListener {
-            if(productDetails.isFavorited == true) {
+            if (productDetails.isFavorited == true) {
                 binding.favoriteFood.setImageResource(R.drawable.ic_love_defaut)
                 val deleteFavoriteAPI = productDetails.id?.let { it1 ->
-                    ServiceGenerator.buildService(InterestedProductService::class.java).deleteInterestedProduct(it1)
+                    ServiceGenerator.buildService(InterestedProductService::class.java)
+                        .deleteInterestedProduct(it1)
                 }
-                deleteFavoriteAPI?.enqueue(object : Callback<ApiResponse<Int>>{
+                deleteFavoriteAPI?.enqueue(object : Callback<ApiResponse<Int>> {
                     override fun onResponse(
                         call: Call<ApiResponse<Int>>,
                         response: Response<ApiResponse<Int>>
                     ) {
-                        Toast.makeText(applicationContext, "Đã xóa đồ ăn khỏi mục yêu thích", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            applicationContext,
+                            "Đã xóa đồ ăn khỏi mục yêu thích",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
+
                     override fun onFailure(call: Call<ApiResponse<Int>>, t: Throwable) {}
 
                 })
@@ -91,15 +108,22 @@ class InfoFood_Activity : AppCompatActivity() {
             } else {
                 binding.favoriteFood.setImageResource(R.drawable.ic_love)
                 val jsonObject = JSONObject()
-                jsonObject.put("productId",productDetails.id)
-                val requestBody = jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
-                val addFavoriteAPI = ServiceGenerator.buildService(InterestedProductService::class.java).addInterestedProduct(requestBody)
-                addFavoriteAPI?.enqueue(object : Callback<ApiResponse<Int>>{
+                jsonObject.put("productId", productDetails.id)
+                val requestBody =
+                    jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
+                val addFavoriteAPI =
+                    ServiceGenerator.buildService(InterestedProductService::class.java)
+                        .addInterestedProduct(requestBody)
+                addFavoriteAPI?.enqueue(object : Callback<ApiResponse<Int>> {
                     override fun onResponse(
                         call: Call<ApiResponse<Int>>,
                         response: Response<ApiResponse<Int>>
                     ) {
-                        Toast.makeText(applicationContext, "Đã thêm đồ ăn vào mục yêu thích", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            applicationContext,
+                            "Đã thêm đồ ăn vào mục yêu thích",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
 
                     override fun onFailure(call: Call<ApiResponse<Int>>, t: Throwable) {}
@@ -116,9 +140,13 @@ class InfoFood_Activity : AppCompatActivity() {
             .into(binding.imageFood)
         binding.nameFood.text = productDetails.name
         binding.description.text = productDetails.description
-        binding.rBar.rating = productDetails.averageRating!!.toFloat()
-        binding.avgRating.text = ((productDetails.averageRating!!.toFloat() * 100.0).roundToInt() / 100.0).toString()
-        binding.numOrder.text = productDetails.orderCount.toString() + resources.getString(R.string.Order)
+        if (productDetails.averageRating != null) {
+            binding.rBar.rating = (productDetails.averageRating!!.toFloat())
+            binding.avgRating.text =
+                ((productDetails.averageRating!!.toFloat() * 100.0).roundToInt() / 100.0).toString()
+        }
+        binding.numOrder.text =
+            productDetails.orderCount.toString().plus(" ").plus(resources.getString(R.string.Order))
     }
 
     private fun initToolBar() {
@@ -136,14 +164,15 @@ class InfoFood_Activity : AppCompatActivity() {
         newArrayReviewFoodList = arrayListOf()
         binding.progressBar.visibility = ProgressBar.VISIBLE
         GlobalScope.launch(Dispatchers.IO) {
-            val getReviewAPI = ServiceGenerator.buildService(ProductService::class.java).getProductDetails(id)
+            val getReviewAPI =
+                ServiceGenerator.buildService(ProductService::class.java).getProductDetails(id)
             getReviewAPI?.enqueue(object : Callback<ApiResponse<ProductDetails>> {
                 override fun onResponse(
                     call: Call<ApiResponse<ProductDetails>>,
                     response: Response<ApiResponse<ProductDetails>>
                 ) {
                     val res = response.body()!!
-                    if(res.data.isFavorited == true) {
+                    if (res.data.isFavorited == true) {
                         binding.favoriteFood.setImageResource(R.drawable.ic_love)
                     } else {
                         binding.favoriteFood.setImageResource(R.drawable.ic_love_defaut)
@@ -151,6 +180,10 @@ class InfoFood_Activity : AppCompatActivity() {
                     productDetails = res.data
                     res.data.reviews?.let { newArrayReviewFoodList.addAll(it) }
                     binding.reviewRecycleview.adapter = ReviewFoodAdapter(newArrayReviewFoodList)
+                    if (newArrayReviewFoodList.size == 0) {
+                        binding.emptyReview.visibility = ImageView.VISIBLE
+                        binding.txtViewDetails.visibility = TextView.GONE
+                    }
                     initValueView()
                     binding.progressBar.visibility = ProgressBar.GONE
                     binding.view1.visibility = View.VISIBLE

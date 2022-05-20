@@ -11,8 +11,6 @@
     <string name="Chat">Chat</string>
     <string name="Chooseyourlanguage">Choose your language</string>
     <string name="DeliverFavoriteFood">Deliver Favorite Food</string>
-    <string name="DeliveryCharge">Delivery Charge</string>
-    <string name="Discount">Discount</string>
     <string name="Enter4digit">Enter 4-digit \nVerification code</string>
     <string name="Entermessage">Enter message</string>
     <string name="EnteryourstudentIDtoresetyourpassword">Enter your student ID to reset your password</string>
@@ -52,7 +50,6 @@
     <string name="sending...">sending…</string>
     <string name="SignupforFREE">Sign up for FREE</string>
     <string name="Signupnow">Sign up now!</string>
-    <string name="Status">Status</string>
     <string name="Student">Student</string>
     <string name="StudentID">Student ID</string>
     <string name="SubTotal">Sub-Total</string>
@@ -85,7 +82,6 @@
     <string name="Category">Category</string>
     <string name="Description">Description</string>
     <string name="ARRIVED">ARRIVED</string>
-    <string name="Filterthemenu">Filter the menu</string>
     <string name="ALL">ALL</string>
     <string name="Notification">Notification</string>
     <string name="Selectone">Select one</string>
@@ -124,5 +120,8 @@
     <string name="order_details">Order details</string>
     <string name="total">Total</string>
     <string name="review">Review</string>
+    <string name="buyagain">Buy again</string>
+    <string name="Favorite">Favorite</string>
+    <string name="Myaccount">My account</string>
 
 </resources>

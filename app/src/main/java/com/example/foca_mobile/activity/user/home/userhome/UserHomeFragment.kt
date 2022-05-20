@@ -78,6 +78,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         super.onDestroyView()
         _binding = null
     }
+
     private fun createRecentFoodRecyclerView() {
         binding.recentFoodRecyclerView.layoutManager = LinearLayoutManager(
             activity,
@@ -88,22 +89,26 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         newArrayRecentFoodList = mutableListOf()
         binding.progressBar1.visibility = ProgressBar.VISIBLE
         GlobalScope.launch(Dispatchers.IO) {
-            val recentFoodApi = ServiceGenerator.buildService(OrderService::class.java).getRecentOrderList()
+            val recentFoodApi =
+                ServiceGenerator.buildService(OrderService::class.java).getRecentOrderList()
             recentFoodApi?.enqueue(object : Callback<ApiResponse<MutableList<Order>>> {
                 override fun onResponse(
                     call: Call<ApiResponse<MutableList<Order>>>,
                     response: Response<ApiResponse<MutableList<Order>>>
                 ) {
                     val res = response.body()!!
-                    val tempOrderDetailsList1 : MutableList<OrderDetails> = mutableListOf()
+                    val tempOrderDetailsList1: MutableList<OrderDetails> = mutableListOf()
                     res.data.forEach {
                         it.orderDetails?.let { it1 -> tempOrderDetailsList1.addAll(it1) }
                     }
                     for (it in tempOrderDetailsList1) {
-                        if(newArrayRecentFoodList.size == 5) break
-                        if (!newArrayRecentFoodList.any { pd -> pd?.id == it.productId }) newArrayRecentFoodList.add(it.product)
+                        if (newArrayRecentFoodList.size == 5) break
+                        if (!newArrayRecentFoodList.any { pd -> pd?.id == it.productId }) newArrayRecentFoodList.add(
+                            it.product
+                        )
                     }
-                    binding.recentFoodRecyclerView.adapter = context?.let { RecentFoodAdapter(it,newArrayRecentFoodList) }
+                    binding.recentFoodRecyclerView.adapter =
+                        context?.let { RecentFoodAdapter(it, newArrayRecentFoodList) }
                     binding.progressBar1.visibility = ProgressBar.GONE
                 }
 
@@ -111,13 +116,15 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
             })
         }
     }
+
     private fun createFoodRecyclerView() {
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.foodRecyclerView.setHasFixedSize(true)
         newArrayFoodList = mutableListOf()
         binding.progressBar2.visibility = ProgressBar.VISIBLE
         GlobalScope.launch(Dispatchers.IO) {
-            val productApi = ServiceGenerator.buildService(ProductService::class.java).getUserProductList(limit = 5)
+            val productApi = ServiceGenerator.buildService(ProductService::class.java)
+                .getUserProductList(limit = 5)
             productApi?.enqueue(object : Callback<ApiResponse<MutableList<Product>>> {
                 override fun onResponse(
                     call: Call<ApiResponse<MutableList<Product>>>,
@@ -125,14 +132,20 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
                 ) {
                     val res = response.body()!!
                     newArrayFoodList = res.data
-                    binding.foodRecyclerView.adapter = activity?.let { FoodAdapter(it,newArrayFoodList) }
+                    binding.foodRecyclerView.adapter =
+                        activity?.let { FoodAdapter(it, newArrayFoodList) }
                     binding.progressBar2.visibility = ProgressBar.GONE
                 }
 
-                override fun onFailure(call: Call<ApiResponse<MutableList<Product>>>, t: Throwable) {}
+                override fun onFailure(
+                    call: Call<ApiResponse<MutableList<Product>>>,
+                    t: Throwable
+                ) {
+                }
             })
         }
     }
+
     private fun getUnseenNotify() {
         //CALL API
         val getNotificationCall = ServiceGenerator.buildService(NotificationService::class.java)

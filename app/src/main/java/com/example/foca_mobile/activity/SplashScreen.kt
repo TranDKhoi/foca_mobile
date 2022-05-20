@@ -32,7 +32,7 @@ class SplashScreen : AppCompatActivity() {
 
         val lang = LanguagePrefs.getLang()
         if (lang == "")
-            setLocale(this, "vi")
+            setLocale(this, "en")
         else
             setLocale(this, lang)
 

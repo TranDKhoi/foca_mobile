@@ -6,17 +6,14 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.example.foca_mobile.databinding.ActivityUserNotificationBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Notification
-import com.example.foca_mobile.model.Room
 import com.example.foca_mobile.service.NotificationService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_chat_screen.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback

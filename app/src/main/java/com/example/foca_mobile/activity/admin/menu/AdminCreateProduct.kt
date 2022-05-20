@@ -89,7 +89,7 @@ class AdminCreateProduct : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(resources.getString(R.string.Warning))
         builder.setMessage(resources.getString(R.string.Areyousure))
-        builder.setPositiveButton(resources.getString(R.string.YES)) { dialog, which ->
+        builder.setPositiveButton(resources.getString(R.string.YES)) { dialog, _ ->
             confirmDelete()
             dialog.dismiss()
         }
