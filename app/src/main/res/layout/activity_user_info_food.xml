@@ -150,13 +150,13 @@
                         android:id="@+id/txtViewDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:background="@android:color/transparent"
                         android:text="@string/viewdetail"
                         android:textAllCaps="false"
                         android:textColor="#FF7C32"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout

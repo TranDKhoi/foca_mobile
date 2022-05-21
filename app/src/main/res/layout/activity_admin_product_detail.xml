@@ -9,6 +9,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/view1"
         tools:context=".activity.user.home.InfoFood_Activity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -72,14 +73,6 @@
                         android:textColor="@color/primaryTextColor"
                         android:textSize="30sp"
                         android:textStyle="bold" />
-
-                    <!--                    <ImageButton-->
-                    <!--                        android:layout_width="34dp"-->
-                    <!--                        android:layout_height="34dp"-->
-                    <!--                        android:layout_gravity="center|end"-->
-                    <!--                        android:layout_marginStart="50dp"-->
-                    <!--                        android:src="@drawable/ic_love"-->
-                    <!--                        tools:ignore="ContentDescription" />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -87,30 +80,40 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
 
-                    <ImageView
+                    <RatingBar
+                        android:id="@+id/rBar"
+                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_star"
-                        tools:ignore="ContentDescription" />
+                        android:layout_marginTop="5dp"
+                        android:numStars="5"
+                        android:progressTint="#15BE77"
+                        android:rating="0"
+                        android:theme="@style/Widget.AppCompat.RatingBar" />
 
                     <TextView
+                        android:id="@+id/avgRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="4.8 Rating" />
+                        android:layout_marginTop="3dp"
+                        android:text="0"
+                        android:textColor="@color/primaryTextColor" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="150dp"
-                        android:src="@drawable/ic_bag"
-                        tools:ignore="ContentDescription" />
+                        android:layout_marginStart="125dp"
+                        android:layout_marginTop="3dp"
+                        android:src="@drawable/ic_bag" />
 
                     <TextView
+                        android:id="@+id/numOrder"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="20dp"
                         android:layout_marginStart="10dp"
-                        android:text="2000+ Order" />
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/primaryTextColor" />
                 </LinearLayout>
 
                 <TextView
@@ -121,15 +124,32 @@
                     android:textColor="@color/primaryTextColor"
                     android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Reviews"
+                    android:layout_marginTop="5dp">
 
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/Reviews"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
+                    <Button
+                        android:id="@+id/txtViewDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@android:color/transparent"
+                        android:text="@string/viewdetail"
+                        android:textAllCaps="false"
+                        android:textColor="#FF7C32"
+                        android:textSize="15sp" />
+                </RelativeLayout>
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -152,16 +172,9 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/light_green_gradient"
-        android:text="Edit"
-        android:textColor="@color/textColorButtonWhite"
-        android:textSize="16sp" />
+        android:id="@+id/progressBar"/>
 
 </RelativeLayout>

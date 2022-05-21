@@ -32,6 +32,7 @@ class ListConversationFragment : Fragment() {
 
     private lateinit var binding: FragmentAdminListConversationBinding
     private lateinit var socket: Socket
+    private var roomId: Int = 0
 
     @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -61,6 +62,7 @@ class ListConversationFragment : Fragment() {
             val message = Gson().fromJson(messageJson.toString(), Message::class.java)
 
             GlobalObject.updateNotSeenConversationAdmin(requireActivity(), message.roomId!!)
+            roomId = message.roomId
             socket.emit("get_rooms", Ack { ack ->
                 val dataJson = ack[0] as JSONObject
                 val dataConversation =
@@ -92,6 +94,7 @@ class ListConversationFragment : Fragment() {
         data: Intent?
     ) {
         getRooms()
+        GlobalObject.updateNotSeenConversationAdmin(requireActivity(), roomId)
     }
 
     @SuppressLint("NotifyDataSetChanged")

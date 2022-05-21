@@ -14,9 +14,10 @@ import java.text.DecimalFormat
 
 
 class FoodAdapter(private var c: Context, private val arrayList: MutableList<Product>) :
-    RecyclerView.Adapter<FoodAdapter.FoodViewHolder> (){
+    RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
-    inner class FoodViewHolder(val binding: ListFoodItemBinding):RecyclerView.ViewHolder(binding.root)
+    inner class FoodViewHolder(val binding: ListFoodItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val v = ListFoodItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,10 +32,12 @@ class FoodAdapter(private var c: Context, private val arrayList: MutableList<Pro
         val dec = DecimalFormat("#,###")
         holder.binding.price.text = dec.format(arrayList[position].price) + "đ"
         holder.binding.iconButton.setBackgroundResource(R.drawable.ic_add)
-        holder.binding.numberProduct.text = "Đã bán " + arrayList[position].orderCount.toString()
+        holder.binding.numberProduct.text =
+            holder.binding.root.resources.getString(R.string.Sold).plus(" ")
+                .plus(arrayList[position].orderCount.toString())
         holder.binding.root.setOnClickListener {
-            val intent = Intent(c,InfoFood_Activity::class.java)
-            intent.putExtra("id",arrayList[position]?.id)
+            val intent = Intent(c, InfoFood_Activity::class.java)
+            intent.putExtra("id", arrayList[position]?.id)
             c.startActivity(intent)
         }
     }

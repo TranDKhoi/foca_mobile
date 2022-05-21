@@ -122,4 +122,5 @@
     <string name="buyagain">Buy again</string>
     <string name="Favorite">Favorite</string>
     <string name="Myaccount">My account</string>
+    <string name="Sold">Sold:</string>
 </resources>
