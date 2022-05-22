@@ -3,6 +3,7 @@ package com.example.foca_mobile.activity.user.cart_order.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterCart
 import com.example.foca_mobile.databinding.FragmentMyCartBinding
 import com.example.foca_mobile.model.ApiResponse
@@ -43,12 +46,29 @@ class MyCartFragment : Fragment(){
     ): View {
         _binding = FragmentMyCartBinding.inflate(inflater, container, false)
         binding.cartButton.setOnClickListener {
-            makeOrder()
-            listCart?.clear()
-            val adapter = listCart?.let { RecyclerViewAdapterCart(it, this)}
-            binding.rvCart.layoutManager = LinearLayoutManager(activity)
-            binding.rvCart.adapter = adapter
-            adapter?.notifyDataSetChanged()
+            val builder = AlertDialog.Builder(this.requireContext())
+            builder.setMessage(resources.getString(R.string.CreateOrderMessage))
+            builder.setPositiveButton(resources.getString(R.string.YES)) { dialog, _ -> // Update process
+                makeOrder()
+                listCart?.clear()
+                val adapter = listCart?.let { RecyclerViewAdapterCart(it, this)}
+                binding.rvCart.layoutManager = LinearLayoutManager(activity)
+                binding.rvCart.adapter = adapter
+                adapter?.notifyDataSetChanged()
+                binding.cartNote.text.clear()
+                dialog.dismiss()
+            }
+            builder.setNegativeButton(
+                resources.getString(R.string.NO)
+            ) { dialog, _ -> // Do nothing
+                dialog.dismiss()
+            }
+            val alert = builder.create()
+            alert.setOnShowListener {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+            }
+            alert.show()
         }
         setItemTouchHelper()
         createCart()

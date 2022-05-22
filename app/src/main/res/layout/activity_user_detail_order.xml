@@ -59,7 +59,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
         </FrameLayout>
 
 
@@ -76,6 +77,20 @@
         android:textSize="25sp"
         app:layout_constraintLeft_toRightOf="@id/orderDetailBack"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/pendingBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginTop="27.5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_notification_badge"
+        tools:ignore="ContentDescription">
+
+
+    </ImageView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/orderDetailBtnDelete"
@@ -97,7 +112,8 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_trash"
-                app:tint="#DA6317" />
+                app:tint="#DA6317"
+                tools:ignore="ContentDescription" />
         </FrameLayout>
 
 
@@ -182,10 +198,9 @@
                     android:id="@+id/totalPriceOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:layout_marginTop="21dp"
                     android:fontFamily="@font/bentonsans_bold"
-                    android:text="150$"
                     android:textSize="18sp" />
             </LinearLayout>
 

@@ -124,5 +124,8 @@
     <string name="Favorite">Ưa thích</string>
     <string name="Myaccount">Tài khoản của tôi</string>
     <string name="Sold">Đã bán:</string>
+    <string name="DeleteOrderMessage">Bạn thực sự muốn xóa đơn này?</string>
+    <string name="CreateOrderMessage">Bạn muốn tạo đơn?</string>
+    <string name="ReviewOrderMessage">Bạn muốn đánh giá hóa đơn này?</string>
 
 </resources>
