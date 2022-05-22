@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity.user.cart_order
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -12,7 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterOrderDetail
 import com.example.foca_mobile.databinding.ActivityUserDetailOrderBinding
@@ -43,26 +43,10 @@ class UserDetailOrder : AppCompatActivity() {
         binding = ActivityUserDetailOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-
         val orderId = intent.getIntExtra("orderid", 0)
 
-        getOrderDetail(orderId.toString().toInt())
+        getOrderDetail(orderId)
 
-        binding.totalPriceOrder.text = dec.format(order.totalPrice) + "đ"
-
-        binding.rvFood.adapter = adapter
-        binding.rvFood.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        if (order.status != "PENDING"){
-            binding.pendingBtn.visibility = View.GONE
-        }
-        if (order.status == "PROCESSED" || order.status == "COMPLETED") {
-            binding.orderDetailBtnDelete.visibility = View.GONE
-        }
-        if (order.isReviewed || order.status != "COMPLETED") {
-            hideReviewBtn()
-        }
         binding.orderDetailBack.setOnClickListener { finish() }
 
         binding.cartButton.setOnClickListener {
@@ -139,6 +123,7 @@ class UserDetailOrder : AppCompatActivity() {
             .getOrderDetail(id)
 
         getCall.enqueue(object : Callback<ApiResponse<Order>> {
+            @SuppressLint("SetTextI18n")
             override fun onResponse(
                 call: Call<ApiResponse<Order>>,
                 response: Response<ApiResponse<Order>>
@@ -150,14 +135,18 @@ class UserDetailOrder : AppCompatActivity() {
                     val dec = DecimalFormat("#,###")
                     binding.totalPriceOrder.text = dec.format(order.totalPrice) + "đ"
                     binding.rvFood.adapter = adapter
+                    if (order.status != "PENDING"){
+                        binding.pendingBtn.visibility = View.GONE
+                    }
                     if (order.status == "PROCESSED" || order.status == "COMPLETED") {
                         binding.orderDetailBtnDelete.visibility = View.GONE
                     }
                     if (order.isReviewed || order.status != "COMPLETED") {
                         hideReviewBtn()
                     }
+
                 } else {
-                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                     Log.d("Error From Api", errorRes.message)
                 }
             }

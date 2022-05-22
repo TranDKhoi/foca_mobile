@@ -91,10 +91,9 @@ class MyOrderFragment : Fragment() {
                     binding.rvOrder.layoutManager = LinearLayoutManager(activity)
                     binding.bar.visibility = ProgressBar.GONE
 
-                    adapter!!.onItemClick ={ mutableList: MutableList<OrderDetails>, order: Order ->
+                    adapter!!.onItemClick ={ mutableList: MutableList<OrderDetails>, _: Order ->
                         val intent = Intent(context, UserDetailOrder::class.java)
                         intent.putExtra("listOrderDetails", ArrayList(mutableList))
-                        intent.putExtra("order", order)
                         startActivity(intent)
                     }
 
