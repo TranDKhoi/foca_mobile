@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Foca_mobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.user.home.orderfood.SearchScreen"
+            android:exported="false" />
+        <activity
             android:name=".activity.onboarding.OnboardingScreen"
             android:exported="false" />
         <activity

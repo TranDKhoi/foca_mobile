@@ -124,5 +124,6 @@
     <string name="Favorite">Ưa thích</string>
     <string name="Myaccount">Tài khoản của tôi</string>
     <string name="Sold">Đã bán:</string>
+    <string name="Searchresultfor">Kết quả cho:</string>
 
 </resources>

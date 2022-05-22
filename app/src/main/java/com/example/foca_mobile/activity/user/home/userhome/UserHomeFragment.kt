@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.user.cart_order.UserMyCart
 import com.example.foca_mobile.activity.user.home.orderfood.FoodAdapter
 import com.example.foca_mobile.activity.user.home.orderfood.PopularMenu
 import com.example.foca_mobile.activity.user.notifi.UserNotification
@@ -22,6 +23,7 @@ import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
+import com.example.foca_mobile.utils.GlobalObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -52,7 +54,13 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         createFoodRecyclerView()
         getUnseenNotify()
 
-        binding.txtviewmoreRecentFood.setOnClickListener {}
+        binding.txtviewmoreRecentFood.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.wrapper, UserMyCart())
+                commit()
+                GlobalObject.bottomNavigation.setItemSelected(R.id.cart)
+            }
+        }
         binding.txtViewmorePopularmenu.setOnClickListener {
             val intent = Intent(context, PopularMenu::class.java)
             startActivity(intent)
@@ -73,6 +81,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
 
         return binding.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -10,7 +10,6 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.order.orderdetail.AdminOrderDetail
 import com.example.foca_mobile.databinding.ListOrderItemBinding
 import com.example.foca_mobile.model.Order
-import com.google.gson.Gson
 import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -77,7 +76,7 @@ class AllOrderAdapter(private val listOrder: MutableList<Order>) :
 
         holder.binding.root.setOnClickListener {
             val intent = Intent(holder.itemView.context, AdminOrderDetail::class.java)
-            intent.putExtra("order", Gson().toJson(item))
+            intent.putExtra("orderid", item.id)
             holder.itemView.context.startActivity(intent)
         }
     }

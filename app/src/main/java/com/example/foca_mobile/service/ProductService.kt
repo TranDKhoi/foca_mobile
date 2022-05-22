@@ -24,6 +24,7 @@ interface ProductService {
         @Query("price[gte]") price1: Int? = null,
         @Query("price[lte]") price2: Int?= null,
         @Query("sort") sort: String?= null,
+        @Query("q") q: String?= null,
     ): Call<ApiResponse<MutableList<Product>>>?
 
     @POST("/api/admin/products")

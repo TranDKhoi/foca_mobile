@@ -123,4 +123,5 @@
     <string name="Favorite">Favorite</string>
     <string name="Myaccount">My account</string>
     <string name="Sold">Sold:</string>
+    <string name="Searchresultfor">Search result for:</string>
 </resources>

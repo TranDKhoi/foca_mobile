@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.MutableLiveData
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterOrderDetail
 import com.example.foca_mobile.databinding.ActivityAdminOrderDetailBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
@@ -20,19 +22,19 @@ import com.example.foca_mobile.model.OrderDetails
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
-import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class AdminOrderDetail : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminOrderDetailBinding
-    private lateinit var order: Order
+    private var order: Order = Order()
     private lateinit var orderDetailList: MutableList<OrderDetails>
     private var selectedStatus: MutableLiveData<String> = MutableLiveData()
 
@@ -41,13 +43,9 @@ class AdminOrderDetail : AppCompatActivity() {
         binding = ActivityAdminOrderDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val orderDetailString = intent.getStringExtra("order")
-        order = Gson().fromJson(orderDetailString, Order::class.java)
-        orderDetailList = order.orderDetails!!
-        selectedStatus.value = order.status!!
+        val orderID = intent.getIntExtra("orderid", 0)
+        getOrderDetail(orderID)
 
-        binding.orderDetailRCV.adapter =
-            AdminOrderDetailAdapter(orderDetailList)
         binding.orderDetailBack.setOnClickListener {
             this.finish()
         }
@@ -80,6 +78,35 @@ class AdminOrderDetail : AppCompatActivity() {
                         .format((order.totalPrice!! + it.toString().toInt()))
         }
 
+    }
+
+    private fun getOrderDetail(id: Int) {
+        //CALL API
+        val getCall = ServiceGenerator.buildService(OrderService::class.java)
+            .getOrderDetail(id)
+
+        getCall.enqueue(object : Callback<ApiResponse<Order>> {
+            override fun onResponse(
+                call: Call<ApiResponse<Order>>,
+                response: Response<ApiResponse<Order>>
+            ) {
+                if (response.isSuccessful) {
+                    val res: ApiResponse<Order> = response.body()!!
+                    order = res.data
+                    orderDetailList = order.orderDetails!!
+                    selectedStatus.value = order.status!!
+
+                    binding.orderDetailRCV.adapter =
+                        AdminOrderDetailAdapter(orderDetailList)
+                } else {
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+                    Log.d("Error From Api", errorRes.message)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<Order>>, t: Throwable) {
+            }
+        })
     }
 
     private fun initSpinner() {

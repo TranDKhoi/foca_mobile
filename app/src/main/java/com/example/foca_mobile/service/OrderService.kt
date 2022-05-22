@@ -26,11 +26,20 @@ interface OrderService {
     fun getUserOrder(): Call<ApiResponse<MutableList<Order>>>
 
     @POST("/api/buyer/orders/{orderId}/reviews")
-    fun createReview(@Body requestBody: RequestBody, @Path("orderId") orderId: Int ) : Call<ApiResponse<MutableList<Review>>>
+    fun createReview(
+        @Body requestBody: RequestBody,
+        @Path("orderId") orderId: Int
+    ): Call<ApiResponse<MutableList<Review>>>
 
     @GET("/api/buyer/orders/recent")
     fun getRecentOrderList(): Call<ApiResponse<MutableList<Order>>>?
 
     @PUT("/api/buyer/orders/{orderId}")
-    fun deleteOrder(@Body requestBody: RequestBody, @Path("orderId") orderId: Int) : Call<ApiResponse<String>>
+    fun deleteOrder(
+        @Body requestBody: RequestBody,
+        @Path("orderId") orderId: Int
+    ): Call<ApiResponse<String>>
+
+    @GET("/api/buyer/orders/{id}")
+    fun getOrderDetail(@Path("id") id: Int): Call<ApiResponse<Order>>
 }

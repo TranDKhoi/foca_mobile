@@ -18,6 +18,7 @@ import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
+import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import org.json.JSONArray
@@ -40,17 +41,19 @@ class UserRateScreen : AppCompatActivity() {
             finish()
         }
 
-        val listReview: ArrayList<Review> = intent.getSerializableExtra("listReview") as ArrayList<Review>
-        val order : Order = intent.getSerializableExtra("order") as Order
-        val temp : MutableList<Review> = listReview
-        val adapter = RecyclerViewAdapterRatingFood(temp)
+        val listReview: ArrayList<Review> =
+            intent.getSerializableExtra("listReview") as ArrayList<Review>
+        val order: Order =
+            Gson().fromJson(intent.getStringExtra("order").toString(), Order::class.java)
+        val adapter = RecyclerViewAdapterRatingFood(listReview)
 
         binding.rvRatingFood.adapter = adapter
-        binding.rvRatingFood.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvRatingFood.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.submitBtn.setOnClickListener {
             val jsonArray = JSONArray()
-            val listReviewApi : ArrayList<Review> = ArrayList()
+            val listReviewApi: ArrayList<Review> = ArrayList()
             listReview.forEachIndexed { _, item ->
                 val review = Review()
                 review.orderDetailId = item.orderDetailId
@@ -58,14 +61,15 @@ class UserRateScreen : AppCompatActivity() {
                 review.content = item.content
                 listReviewApi.add(review)
                 val jsonObject = JSONObject()
-                jsonObject.put("orderDetailId",item.orderDetailId)
-                jsonObject.put("rating",item.rating)
-                jsonObject.put("content",item.content)
+                jsonObject.put("orderDetailId", item.orderDetailId)
+                jsonObject.put("rating", item.rating)
+                jsonObject.put("content", item.content)
                 jsonArray.put(jsonObject)
             }
             val jsonObject = JSONObject()
-            jsonObject.put("reviews",jsonArray)
-            val body: RequestBody = RequestBody.create("application/json; charset=utf-8".toMediaType(),jsonObject.toString()
+            jsonObject.put("reviews", jsonArray)
+            val body: RequestBody = RequestBody.create(
+                "application/json; charset=utf-8".toMediaType(), jsonObject.toString()
             )
             val createReviewCall =
                 order.id?.let { it1 ->
@@ -79,19 +83,20 @@ class UserRateScreen : AppCompatActivity() {
                     call: Call<ApiResponse<MutableList<Review>>>,
                     response: Response<ApiResponse<MutableList<Review>>>
                 ) {
-                    if(response.isSuccessful){
-                        Log.d("SUCCESS","review success")
+                    if (response.isSuccessful) {
+                        Log.d("SUCCESS", "review success")
                         binding.bar.visibility = ProgressBar.GONE
                         goBack()
-                    } else{
+                    } else {
                         val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                         Log.d("Error From Api", errorRes.message)
                         Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG)
                             .show()
                     }
                 }
+
                 override fun onFailure(call: Call<ApiResponse<MutableList<Review>>>, t: Throwable) {
-                    Log.d("onFailure","Call API failure")
+                    Log.d("onFailure", "Call API failure")
                 }
             })
         }

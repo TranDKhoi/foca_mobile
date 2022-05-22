@@ -1,13 +1,17 @@
 package com.example.foca_mobile.activity.user.notifi
 
+import android.content.Intent
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.admin.order.orderdetail.AdminOrderDetail
+import com.example.foca_mobile.activity.user.cart_order.UserDetailOrder
 import com.example.foca_mobile.databinding.ListNotifyItemBinding
 import com.example.foca_mobile.model.Notification
+import com.example.foca_mobile.utils.GlobalObject
 
 class UserNotificationAdapter(private val notifyList: MutableList<Notification>) :
     RecyclerView.Adapter<UserNotificationAdapter.ViewHolder>() {
@@ -79,6 +83,15 @@ class UserNotificationAdapter(private val notifyList: MutableList<Notification>)
             if (currentItem.isSeen!!) CardView.GONE else CardView.VISIBLE
 
         holder.binding.root.setOnClickListener {
+            if (GlobalObject.CurrentUser.role == "USER") {
+                val intent = Intent(holder.binding.root.context, UserDetailOrder::class.java)
+                intent.putExtra("orderid", currentItem.order!!.id)
+                holder.binding.root.context.startActivity(intent)
+            } else {
+                val intent = Intent(holder.binding.root.context, AdminOrderDetail::class.java)
+                intent.putExtra("orderid", currentItem.order!!.id)
+                holder.binding.root.context.startActivity(intent)
+            }
         }
     }
 
