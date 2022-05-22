@@ -127,5 +127,6 @@
     <string name="DeleteOrderMessage">Bạn thực sự muốn xóa đơn này?</string>
     <string name="CreateOrderMessage">Bạn muốn tạo đơn?</string>
     <string name="ReviewOrderMessage">Bạn muốn đánh giá hóa đơn này?</string>
+    <string name="Searchresultfor">Kết quả cho:</string>
 
 </resources>

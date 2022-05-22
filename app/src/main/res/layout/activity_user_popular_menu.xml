@@ -71,6 +71,7 @@
                 android:textSize="30sp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
                 app:hintTextColor="#DA6317">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -79,6 +80,8 @@
                     android:layout_height="match_parent"
                     android:drawableStart="@drawable/ic_search"
                     android:hint="@string/Whatdoyouwanttofind"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
                     android:textColor="#DA6317"
                     android:textColorHint="#DA6317" />
             </com.google.android.material.textfield.TextInputLayout>

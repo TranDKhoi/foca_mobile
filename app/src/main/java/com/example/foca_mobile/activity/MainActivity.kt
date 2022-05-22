@@ -19,10 +19,11 @@ import com.example.foca_mobile.activity.admin.chat.listconversation.ListConversa
 import com.example.foca_mobile.activity.admin.home.AdminHomeFragment
 import com.example.foca_mobile.activity.admin.menu.AdminMenu
 import com.example.foca_mobile.activity.admin.order.allorder.AdminOrderManagement
+import com.example.foca_mobile.activity.admin.order.orderdetail.AdminOrderDetail
+import com.example.foca_mobile.activity.user.cart_order.UserDetailOrder
 import com.example.foca_mobile.activity.user.cart_order.UserMyCart
 import com.example.foca_mobile.activity.user.chat.UserChatScreen
 import com.example.foca_mobile.activity.user.home.userhome.UserHomeFragment
-import com.example.foca_mobile.activity.user.notifi.UserNotification
 import com.example.foca_mobile.activity.user.profile.UserProfileFragment
 import com.example.foca_mobile.databinding.ActivityMainBinding
 import com.example.foca_mobile.model.Message
@@ -306,7 +307,14 @@ class MainActivity : AppCompatActivity() {
 
 
         // Create an Intent for the activity you want to start
-        val resultIntent = Intent(this, UserNotification::class.java)
+        var resultIntent = Intent()
+        if (GlobalObject.CurrentUser.role == "ADMIN") {
+            resultIntent = Intent(this, AdminOrderDetail::class.java)
+            resultIntent.putExtra("orderid", item.order!!.id)
+        } else {
+            resultIntent = Intent(this, UserDetailOrder::class.java)
+            resultIntent.putExtra("orderid", item.order!!.id)
+        }
         val resultPendingIntent = PendingIntent.getActivity(
             applicationContext, 0,
             resultIntent, 0

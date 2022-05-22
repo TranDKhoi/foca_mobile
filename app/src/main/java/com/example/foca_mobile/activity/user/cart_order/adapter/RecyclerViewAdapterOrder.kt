@@ -1,21 +1,25 @@
 package com.example.foca_mobile.activity.user.cart_order.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.user.cart_order.UserDetailOrder
 import com.example.foca_mobile.databinding.ListOrderItemBinding
 import com.example.foca_mobile.model.Order
 import com.example.foca_mobile.model.OrderDetails
 import com.google.android.material.button.MaterialButton
 import java.text.DecimalFormat
 
-class RecyclerViewAdapterOrder(private val listOrder: MutableList<Order>) : RecyclerView.Adapter<RecyclerViewAdapterOrder.OrderViewHolder>() {
+class RecyclerViewAdapterOrder(private val listOrder: MutableList<Order>) :
+    RecyclerView.Adapter<RecyclerViewAdapterOrder.OrderViewHolder>() {
 
-    var onItemClick : ((MutableList<OrderDetails>, Order)-> Unit)? = null
+    var onItemClick: ((MutableList<OrderDetails>, Order) -> Unit)? = null
+
     inner class OrderViewHolder(val binding: ListOrderItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -37,8 +41,10 @@ class RecyclerViewAdapterOrder(private val listOrder: MutableList<Order>) : Recy
         holder.binding.orderItemPrice.text = dec.format(item.orderDetails?.get(0)?.product?.price) + "đ"
         holder.binding.orderItemQuantity.text = "x"+ item.orderDetails?.get(0)?.quantity.toString()
         holder.binding.orderTotalPrice.text = dec.format(item.totalPrice) + "đ"
-        holder.itemView.setOnClickListener{
-            onItemClick?.invoke(item.orderDetails!!, item)
+        holder.binding.root.setOnClickListener {
+            val intent = Intent(holder.binding.root.context, UserDetailOrder::class.java)
+            intent.putExtra("orderid", item.id)
+            holder.binding.root.context.startActivity(intent)
         }
     }
 

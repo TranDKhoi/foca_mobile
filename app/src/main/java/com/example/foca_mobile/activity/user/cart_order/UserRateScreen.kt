@@ -21,6 +21,7 @@ import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
+import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import org.json.JSONArray
@@ -43,13 +44,15 @@ class UserRateScreen : AppCompatActivity() {
             finish()
         }
 
-        val listReview: ArrayList<Review> = intent.getSerializableExtra("listReview") as ArrayList<Review>
-        val order : Order = intent.getSerializableExtra("order") as Order
-        val temp : MutableList<Review> = listReview
-        val adapter = RecyclerViewAdapterRatingFood(temp)
+        val listReview: ArrayList<Review> =
+            intent.getSerializableExtra("listReview") as ArrayList<Review>
+        val order: Order =
+            Gson().fromJson(intent.getStringExtra("order").toString(), Order::class.java)
+        val adapter = RecyclerViewAdapterRatingFood(listReview)
 
         binding.rvRatingFood.adapter = adapter
-        binding.rvRatingFood.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvRatingFood.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.submitBtn.setOnClickListener {
             val builder = AlertDialog.Builder(this)

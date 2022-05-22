@@ -18,11 +18,11 @@ import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdap
 import com.example.foca_mobile.databinding.ActivityUserDetailOrderBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
-import com.example.foca_mobile.model.OrderDetails
 import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
+import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -32,10 +32,11 @@ import retrofit2.Response
 import java.text.DecimalFormat
 
 
-class UserDetailOrder : AppCompatActivity(){
+class UserDetailOrder : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserDetailOrderBinding
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+    private var order: Order = Order()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +44,9 @@ class UserDetailOrder : AppCompatActivity(){
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        val dec = DecimalFormat("#,###")
-        val listOrderDetails: ArrayList<OrderDetails> =
-            (intent.getSerializableExtra("listOrderDetails") as ArrayList<OrderDetails>?)!!
-        val order: Order = intent.getSerializableExtra("order") as Order
+        val orderId = intent.getIntExtra("orderid", 0)
 
-        val temp: MutableList<OrderDetails> = listOrderDetails
-        val adapter = RecyclerViewAdapterOrderDetail(temp)
+        getOrderDetail(orderId.toString().toInt())
 
         binding.totalPriceOrder.text = dec.format(order.totalPrice) + "đ"
 
@@ -69,9 +66,9 @@ class UserDetailOrder : AppCompatActivity(){
         binding.orderDetailBack.setOnClickListener { finish() }
 
         binding.cartButton.setOnClickListener {
-            val intent = Intent(this, UserRateScreen::class.java)
+            val intent = Intent(this@UserDetailOrder, UserRateScreen::class.java)
             val listReview: ArrayList<Review> = ArrayList()
-            listOrderDetails.forEachIndexed { _, item ->
+            order.orderDetails!!.forEachIndexed { _, item ->
                 val review = Review()
                 review.orderDetail = item
                 review.orderDetailId = item.id
@@ -79,7 +76,7 @@ class UserDetailOrder : AppCompatActivity(){
                 listReview.add(review)
             }
             intent.putExtra("listReview", listReview)
-            intent.putExtra("order", order)
+            intent.putExtra("order", Gson().toJson(order))
             activityResultLauncher.launch(intent)
         }
 
@@ -134,6 +131,40 @@ class UserDetailOrder : AppCompatActivity(){
             }
             alert.show()
         }
+    }
+
+    private fun getOrderDetail(id: Int) {
+        //CALL API
+        val getCall = ServiceGenerator.buildService(OrderService::class.java)
+            .getOrderDetail(id)
+
+        getCall.enqueue(object : Callback<ApiResponse<Order>> {
+            override fun onResponse(
+                call: Call<ApiResponse<Order>>,
+                response: Response<ApiResponse<Order>>
+            ) {
+                if (response.isSuccessful) {
+                    val res: ApiResponse<Order> = response.body()!!
+                    order = res.data
+                    val adapter = RecyclerViewAdapterOrderDetail(order.orderDetails!!)
+                    val dec = DecimalFormat("#,###")
+                    binding.totalPriceOrder.text = dec.format(order.totalPrice) + "đ"
+                    binding.rvFood.adapter = adapter
+                    if (order.status == "PROCESSED" || order.status == "COMPLETED") {
+                        binding.orderDetailBtnDelete.visibility = View.GONE
+                    }
+                    if (order.isReviewed || order.status != "COMPLETED") {
+                        hideReviewBtn()
+                    }
+                } else {
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+                    Log.d("Error From Api", errorRes.message)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<Order>>, t: Throwable) {
+            }
+        })
     }
 
     private fun updateOrder(item: Order, status: String) {

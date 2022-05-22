@@ -5,11 +5,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.MotionEvent
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
+import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,6 +35,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class PopularMenu : AppCompatActivity() {
 
     companion object {
@@ -59,14 +60,12 @@ class PopularMenu : AppCompatActivity() {
         binding.buttonBack.setOnClickListener {
             this.finish()
         }
-        binding.filterText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                adapterKT.filter.filter(s)
+        binding.filterText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                return@OnEditorActionListener true
             }
+            false
         })
 
         binding.notifyBtn.setOnClickListener {
@@ -94,6 +93,12 @@ class PopularMenu : AppCompatActivity() {
                     createAddFoodRecyclerView(GlobalObject.filterData)
                 }
             }
+    }
+
+    private fun performSearch() {
+        val intent = Intent(this, SearchScreen::class.java)
+        intent.putExtra("searchstring", binding.filterText.text.toString())
+        startActivity(intent)
     }
 
     private fun createAddFoodRecyclerView(type: Filter? = null) {
