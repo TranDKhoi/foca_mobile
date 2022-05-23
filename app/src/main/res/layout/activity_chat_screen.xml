@@ -19,12 +19,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:onClick="toListMessScreen">
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/back_button">
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -32,8 +30,6 @@
                 android:src="@drawable/ic_back"
                 tools:ignore="ContentDescription" />
         </FrameLayout>
-
-
     </androidx.cardview.widget.CardView>
 
     <ImageView

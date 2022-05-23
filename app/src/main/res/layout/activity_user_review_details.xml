@@ -15,14 +15,11 @@
             android:layout_height="45dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            app:cardElevation="0dp"
-            android:onClick="toListMessScreen">
-
+            app:cardElevation="0dp">
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/back_button">
-
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -30,9 +27,8 @@
                     android:src="@drawable/ic_back"
                     tools:ignore="ContentDescription" />
             </FrameLayout>
-
-
         </androidx.cardview.widget.CardView>
+
         <LinearLayout android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
