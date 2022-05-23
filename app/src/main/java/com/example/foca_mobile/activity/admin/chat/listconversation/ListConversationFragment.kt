@@ -11,9 +11,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.foca_mobile.R
+import com.example.foca_mobile.activity.MainActivity
 import com.example.foca_mobile.activity.admin.chat.conversation.AdminChatScreen
 import com.example.foca_mobile.databinding.FragmentAdminListConversationBinding
 import com.example.foca_mobile.model.Message
@@ -26,11 +24,12 @@ import org.json.JSONObject
 
 
 class ListConversationFragment : Fragment() {
-    private lateinit var messRecyclerView: RecyclerView
     private lateinit var conversationList: ArrayList<Conversation>
     private lateinit var conversationListAdapter: ListConversationAdapter
 
-    private lateinit var binding: FragmentAdminListConversationBinding
+    private var _binding: FragmentAdminListConversationBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var socket: Socket
     private var roomId: Int = 0
 
@@ -40,28 +39,21 @@ class ListConversationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View =
-            inflater.inflate(R.layout.fragment_admin_list_conversation, container, false)
-        binding = FragmentAdminListConversationBinding.bind(view)
+        _binding = FragmentAdminListConversationBinding.inflate(layoutInflater)
         socket = SocketHandler.getSocket()
-
-        //ÁNH XẠ RCV VÀ  SET LAYOUT CHO NÓ
-        messRecyclerView = view.findViewById(R.id.messRcV)
-        messRecyclerView.layoutManager = LinearLayoutManager(activity)
-        messRecyclerView.setHasFixedSize(true)
 
         conversationList = ArrayList()
 
         getRooms()
         //SET ADAPTER CHO RCV
         conversationListAdapter = ListConversationAdapter(conversationList)
-        messRecyclerView.adapter = conversationListAdapter
+        binding.messRcV.adapter = conversationListAdapter
 
         socket.on("received_message") {
             val messageJson = it[0] as JSONObject
             val message = Gson().fromJson(messageJson.toString(), Message::class.java)
 
-            GlobalObject.updateNotSeenConversationAdmin(requireActivity(), message.roomId!!)
+            GlobalObject.updateNotSeenConversationAdmin(message.roomId!!)
             roomId = message.roomId
             socket.emit("get_rooms", Ack { ack ->
                 val dataJson = ack[0] as JSONObject
@@ -86,7 +78,7 @@ class ListConversationFragment : Fragment() {
             Log.d("send_message event: ", args[0].toString())
         }
         // Inflate the layout for this fragment
-        return view
+        return binding.root
     }
 
     override fun onActivityResult(
@@ -94,7 +86,7 @@ class ListConversationFragment : Fragment() {
         data: Intent?
     ) {
         getRooms()
-        GlobalObject.updateNotSeenConversationAdmin(requireActivity(), roomId)
+        GlobalObject.updateNotSeenConversationAdmin(roomId)
     }
 
     @SuppressLint("NotifyDataSetChanged")

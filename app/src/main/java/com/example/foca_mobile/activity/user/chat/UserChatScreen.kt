@@ -71,7 +71,6 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
         listMessage = ArrayList()
 
         conversationAdapter = ConversationAdapter(this, listMessage);
-        binding.conversationRCV.layoutManager = LinearLayoutManager(this)
         binding.conversationRCV.adapter = conversationAdapter
         binding.conversationRCV.scrollToPosition(listMessage.size - 1)
 

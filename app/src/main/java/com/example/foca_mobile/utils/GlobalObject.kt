@@ -2,6 +2,7 @@ package com.example.foca_mobile.utils
 
 import android.app.Activity
 import android.content.Context
+import androidx.core.app.NotificationCompat
 import com.example.foca_mobile.R
 import com.example.foca_mobile.model.Filter
 import com.example.foca_mobile.model.User
@@ -30,7 +31,6 @@ object GlobalObject {
     )
 
     fun updateNotSeenConversationAdmin(
-        activity: Activity,
         roomId: Int,
         isRemove: Boolean = false
     ) {
@@ -43,9 +43,7 @@ object GlobalObject {
         }
         val badgeNum = notSeenConversationListIdsAdmin.size
         if (badgeNum > 0)
-            activity.runOnUiThread {
                 bottomNavigation.showBadge(R.id.message, badgeNum)
-            }
         else {
             bottomNavigation.setMenuResource(R.menu.admin_menu)
             bottomNavigation.setItemSelected(R.id.message)

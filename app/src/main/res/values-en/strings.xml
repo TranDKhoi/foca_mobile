@@ -127,5 +127,7 @@
     <string name="CreateOrderMessage">Do you want to create order?</string>
     <string name="ReviewOrderMessage">Do you want to review this order?</string>
     <string name="Searchresultfor">Search result for:</string>
+    <string name="Mesagetone">Mesage tone</string>
+    <string name="Ordertone">Order tone</string>
 
 </resources>

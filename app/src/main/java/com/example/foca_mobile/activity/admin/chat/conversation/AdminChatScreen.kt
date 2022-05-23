@@ -133,7 +133,7 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
 
     override fun onDestroy() {
         GlobalObject.isOpenActivity = false
-        GlobalObject.updateNotSeenConversationAdmin(this, conversation.id!!, true)
+        GlobalObject.updateNotSeenConversationAdmin(conversation.id!!, true)
         super.onDestroy()
     }
 

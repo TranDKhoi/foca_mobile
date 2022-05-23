@@ -6,13 +6,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.app.NotificationCompat
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.onboarding.OnboardingScreen
 import com.example.foca_mobile.activity.authen.login.LoginScreen
+import com.example.foca_mobile.activity.onboarding.OnboardingScreen
+import com.example.foca_mobile.utils.*
 import com.example.foca_mobile.utils.GlobalObject.setLocale
-import com.example.foca_mobile.utils.LanguagePrefs
-import com.example.foca_mobile.utils.NightModePrefs
-import com.example.foca_mobile.utils.OnboardingPrefs
 
 class SplashScreen : AppCompatActivity() {
 

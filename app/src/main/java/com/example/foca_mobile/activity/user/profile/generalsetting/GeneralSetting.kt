@@ -11,6 +11,7 @@ import com.example.foca_mobile.databinding.ActivityGeneralSettingBinding
 import com.example.foca_mobile.utils.GlobalObject
 import com.example.foca_mobile.utils.LanguagePrefs
 import com.example.foca_mobile.utils.NightModePrefs
+import com.example.foca_mobile.utils.NotifyLevelPrefs
 
 
 class GeneralSetting : AppCompatActivity() {
@@ -37,12 +38,31 @@ class GeneralSetting : AppCompatActivity() {
         binding.switchBtn.setOnClickListener {
             changeNightMode()
         }
-
+        binding.switchMess.setOnClickListener {
+            if (binding.switchMess.isChecked) {
+                NotifyLevelPrefs.setLevel1("")
+            } else {
+                NotifyLevelPrefs.setLevel1("low")
+            }
+        }
+        binding.switchOrder.setOnClickListener {
+            if (binding.switchOrder.isChecked) {
+                NotifyLevelPrefs.setLevel2("")
+            } else {
+                NotifyLevelPrefs.setLevel2("low")
+            }
+        }
     }
 
     private fun setSwitchButton() {
         val night = NightModePrefs.getNightMode()
         binding.switchBtn.isChecked = night != ""
+
+        val lv1 = NotifyLevelPrefs.getLevel1()
+        binding.switchMess.isChecked = lv1 == ""
+
+        val lv2 = NotifyLevelPrefs.getLevel2()
+        binding.switchOrder.isChecked = lv2 == ""
     }
 
     private fun changeNightMode() {

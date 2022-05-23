@@ -128,5 +128,7 @@
     <string name="CreateOrderMessage">Bạn muốn tạo đơn?</string>
     <string name="ReviewOrderMessage">Bạn muốn đánh giá hóa đơn này?</string>
     <string name="Searchresultfor">Kết quả cho:</string>
+    <string name="Mesagetone">Âm báo tin nhắn</string>
+    <string name="Ordertone">Âm báo đơn hàng</string>
 
 </resources>

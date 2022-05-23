@@ -30,6 +30,7 @@ import com.example.foca_mobile.model.Message
 import com.example.foca_mobile.model.Notification
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.GlobalObject
+import com.example.foca_mobile.utils.NotifyLevelPrefs
 import com.example.foca_mobile.utils.OnboardingPrefs
 import com.google.gson.Gson
 import io.socket.client.Ack
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity() {
             val dataJson = it[0] as JSONObject
             val noti = Gson().fromJson(dataJson.toString(), Notification::class.java)
             Log.d("Check received_notification", noti.toString())
-            sendOrderNotification(noti)
+            if (NotifyLevelPrefs.getLevel2() == "")
+                sendOrderNotification(noti)
         }
 
         //THIS IS WHERE WE DECIDE WHO IS LOGIN
@@ -96,7 +98,8 @@ class MainActivity : AppCompatActivity() {
                 val message = Gson().fromJson(messageJson.toString(), Message::class.java)
                 binding.bottomNavigation.showBadge(R.id.message)
                 if (!GlobalObject.isOpenActivity)
-                    sendMessageNotification(message.sender!!.fullName, message.text!!)
+                    if (NotifyLevelPrefs.getLevel1() == "")
+                        sendMessageNotification(message.sender!!.fullName, message.text!!)
             }
             binding.bottomNavigation.setOnItemSelectedListener { id ->
                 when (id) {
@@ -152,11 +155,11 @@ class MainActivity : AppCompatActivity() {
                 message =
                     Gson().fromJson(messageJson.toString(), Message::class.java)
                 GlobalObject.updateNotSeenConversationAdmin(
-                    this@MainActivity,
                     message.roomId!!
                 )
                 if (!GlobalObject.isOpenActivity)
-                    sendMessageNotification(message.sender!!.fullName, message.text!!)
+                    if (NotifyLevelPrefs.getLevel1() == "")
+                        sendMessageNotification(message.sender!!.fullName, message.text!!)
             }
 
             binding.bottomNavigation.setOnItemSelectedListener { id ->
@@ -321,7 +324,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // Create an Intent for the activity you want to start
-        var resultIntent: Intent
+        val resultIntent: Intent
         if (GlobalObject.CurrentUser.role == "ADMIN") {
             resultIntent = Intent(this, AdminOrderDetail::class.java)
             resultIntent.putExtra("orderid", item.order!!.id)
@@ -351,7 +354,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val intNOTIFY_ID1 = 1
-        private const val intNOTIFY_ID2 = 1
+        private const val intNOTIFY_ID2 = 2
         private const val strCHANNEL_ID1 = "Message channel"
         private const val strCHANNEL_ID2 = "Order channel"
         lateinit var appContext: Context
