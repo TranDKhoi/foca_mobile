@@ -24,5 +24,11 @@ interface AuthService {
     fun registerUser(@Body requestBody: RequestBody): Call<ApiResponse<User>>?
 
     @GET("/api/auth")
-    fun verifyAccessToken(@Header("Authorization")token: String): Call<ApiResponse<User>>?
+    fun verifyAccessToken(@Header("Authorization") token: String): Call<ApiResponse<User>>?
+
+    @POST("/api/email/reset-password")
+    fun sendEmailResetPassword(@Body requestBody: RequestBody): Call<ApiResponse<String>>?
+
+    @POST("/api/auth/reset-password")
+    fun resetPassword(@Body requestBody: RequestBody): Call<ApiResponse<String>>?
 }

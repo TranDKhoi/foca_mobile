@@ -1,8 +1,8 @@
 package com.example.foca_mobile.utils
 
-import android.app.Activity
 import android.content.Context
 import com.example.foca_mobile.R
+import com.example.foca_mobile.model.Filter
 import com.example.foca_mobile.model.User
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import java.util.*
@@ -15,13 +15,20 @@ object GlobalObject {
     var currentSelectedPage = R.id.home
 
     var isOpenActivity: Boolean = false
+    var isChangeLanguage: Boolean = false
 
     lateinit var locale: Locale
 
     lateinit var CurrentUser: User
 
+    var filterData: Filter = Filter(
+        type = "",
+        sort = "-price",
+        range = mutableListOf(0f, 500000f),
+        wayUp = false
+    )
+
     fun updateNotSeenConversationAdmin(
-        activity: Activity,
         roomId: Int,
         isRemove: Boolean = false
     ) {
@@ -34,9 +41,7 @@ object GlobalObject {
         }
         val badgeNum = notSeenConversationListIdsAdmin.size
         if (badgeNum > 0)
-            activity.runOnUiThread {
                 bottomNavigation.showBadge(R.id.message, badgeNum)
-            }
         else {
             bottomNavigation.setMenuResource(R.menu.admin_menu)
             bottomNavigation.setItemSelected(R.id.message)

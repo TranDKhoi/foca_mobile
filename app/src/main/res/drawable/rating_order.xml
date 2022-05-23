@@ -2,5 +2,5 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@android:id/background" android:drawable="@drawable/ic_yellow_star_non"/>
-    <item android:id="@android:id/progress" android:drawable="@drawable/ic_yellow_start"/>
+    <item android:id="@android:id/progress" android:drawable="@drawable/ic_yellow_star"/>
 </layer-list>

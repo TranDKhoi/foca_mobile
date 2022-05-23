@@ -8,14 +8,15 @@
     android:layout_marginStart="2dp"
     android:background="@drawable/cart_item_border">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/btnDelete"
         style="@style/CustomCardViewStyle"
         android:layout_width="60dp"
         android:layout_height="103dp"
         android:layout_gravity="end"
         android:layout_marginEnd="-60dp"
-        android:backgroundTint="#FEAD1D">
+        android:backgroundTint="#FEAD1D"
+        >
 
         <ImageView
             android:layout_width="24dp"
@@ -24,7 +25,7 @@
             android:layout_marginEnd="14dp"
             android:src="@drawable/ic_trash"
             tools:ignore="ContentDescription" />
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCart"
@@ -65,10 +66,11 @@
                     tools:ignore="ContentDescription" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="21dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    >
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/cartItemName"
@@ -90,7 +92,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textColor="#26FF00"
                         android:textSize="19sp" />
 
                 </LinearLayout>
@@ -108,20 +109,21 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/textColorButtonWhite"
+                    android:background="#1653E88B"
                     android:padding="8dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="8dp"
+                    android:id="@+id/subtractQuantityCard">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="#1653E88B"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_minus"
-                        app:tint="#36FF00"
+                        app:tint="@color/textColorButtonGreen"
                         tools:ignore="ContentDescription" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -134,17 +136,20 @@
                     android:textSize="16sp" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="#11FF00"
+                    android:backgroundTint="@color/textColorButtonGreen"
                     android:padding="8dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="8dp"
+                    android:id="@+id/addQuantityCard"
+                    >
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_add"
                         tools:ignore="ContentDescription" />
                 </com.google.android.material.card.MaterialCardView>

@@ -9,14 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.authen.login.LoginScreen
-import com.example.foca_mobile.activity.user.profile.generalsetting.GeneralSetting
 import com.example.foca_mobile.activity.user.profile.profilesetting.UserProfileActivity
 import com.example.foca_mobile.databinding.FragmentUserProfileBinding
-import com.example.foca_mobile.utils.GlobalObject
 import com.example.foca_mobile.utils.LoginPrefs
+import com.bumptech.glide.Glide
+import com.example.foca_mobile.activity.user.profile.generalsetting.GeneralSetting
+import com.example.foca_mobile.utils.GlobalObject
 
 @Suppress("DEPRECATION")
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
@@ -57,7 +57,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             binding.userRole.text = resources.getString(R.string.Student)
         else
             binding.userRole.text = "Admin"
-
         return binding.root
     }
 

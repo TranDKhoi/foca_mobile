@@ -2,6 +2,7 @@ package com.example.foca_mobile.activity.admin.order.orderdetail
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -19,7 +20,6 @@ import com.example.foca_mobile.model.OrderDetails
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
-import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -31,7 +31,7 @@ import java.text.NumberFormat
 class AdminOrderDetail : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminOrderDetailBinding
-    private lateinit var order: Order
+    private var order: Order = Order()
     private lateinit var orderDetailList: MutableList<OrderDetails>
     private var selectedStatus: MutableLiveData<String> = MutableLiveData()
 
@@ -40,18 +40,16 @@ class AdminOrderDetail : AppCompatActivity() {
         binding = ActivityAdminOrderDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val orderDetailString = intent.getStringExtra("order")
-        order = Gson().fromJson(orderDetailString, Order::class.java)
-        orderDetailList = order.orderDetails!!
-        selectedStatus.value = order.status!!
+        val orderID = intent.getIntExtra("orderid", 0)
+        getOrderDetail(orderID)
 
-        binding.orderDetailRCV.adapter =
-            AdminOrderDetailAdapter(orderDetailList)
         binding.orderDetailBack.setOnClickListener {
             this.finish()
         }
         binding.subTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
         binding.priceTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
+        binding.note.text = order.notes ?: "..."
+        binding.note.contentDescription = order.notes
 
         //INIT SPINNER
         initSpinner()
@@ -75,14 +73,41 @@ class AdminOrderDetail : AppCompatActivity() {
                 binding.priceTotal.text =
                     NumberFormat.getCurrencyInstance()
                         .format((order.totalPrice!! + it.toString().toInt()))
-
         }
 
     }
 
+    private fun getOrderDetail(id: Int) {
+        //CALL API
+        val getCall = ServiceGenerator.buildService(OrderService::class.java)
+            .getOrderDetail(id)
+
+        getCall.enqueue(object : Callback<ApiResponse<Order>> {
+            override fun onResponse(
+                call: Call<ApiResponse<Order>>,
+                response: Response<ApiResponse<Order>>
+            ) {
+                if (response.isSuccessful) {
+                    val res: ApiResponse<Order> = response.body()!!
+                    order = res.data
+                    orderDetailList = order.orderDetails!!
+                    selectedStatus.value = order.status!!
+
+                    binding.orderDetailRCV.adapter =
+                        AdminOrderDetailAdapter(orderDetailList)
+                } else {
+                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
+                    Log.d("Error From Api", errorRes.message)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<Order>>, t: Throwable) {
+            }
+        })
+    }
+
     private fun initSpinner() {
         when (order.status) {
-            "ARRIVED" -> binding.spinner.text = resources.getString(R.string.ARRIVED)
             "PENDING" -> binding.spinner.text = resources.getString(R.string.PENDING)
             "PROCESSED" -> binding.spinner.text = resources.getString(R.string.PROCESSED)
             "COMPLETED" -> binding.spinner.text = resources.getString(R.string.COMPLETED)
@@ -96,7 +121,6 @@ class AdminOrderDetail : AppCompatActivity() {
 
             // add a list
             val status = arrayOf(
-                resources.getString(R.string.ARRIVED),
                 resources.getString(R.string.PENDING),
                 resources.getString(R.string.PROCESSED),
                 resources.getString(R.string.COMPLETED),
@@ -105,22 +129,18 @@ class AdminOrderDetail : AppCompatActivity() {
             builder.setItems(status) { _, which ->
                 when (which) {
                     0 -> {
-                        selectedStatus.value = "ARRIVED"
-                        binding.spinner.text = resources.getString(R.string.ARRIVED)
-                    }
-                    1 -> {
                         selectedStatus.value = "PENDING"
                         binding.spinner.text = resources.getString(R.string.PENDING)
                     }
-                    2 -> {
+                    1 -> {
                         selectedStatus.value = "PROCESSED"
                         binding.spinner.text = resources.getString(R.string.PROCESSED)
                     }
-                    3 -> {
+                    2 -> {
                         selectedStatus.value = "COMPLETED"
                         binding.spinner.text = resources.getString(R.string.COMPLETED)
                     }
-                    4 -> {
+                    3 -> {
                         selectedStatus.value = "CANCELLED"
                         binding.spinner.text = resources.getString(R.string.CANCELLED)
                     }
@@ -136,7 +156,7 @@ class AdminOrderDetail : AppCompatActivity() {
     private fun updateOrderStatus(status: String) {
 
         if (selectedStatus.value == "PENDING" && binding.surcharge.text.isEmpty()) {
-            Toast.makeText(this, "Surcharge can not be empty!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getString(R.string.Surchargecannotbeempty), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -144,36 +164,36 @@ class AdminOrderDetail : AppCompatActivity() {
         val jsonObject = JSONObject()
         if (selectedStatus.value == "PENDING") {
             jsonObject.put("status", status)
-            jsonObject.put("surcharge", binding.surcharge.text)
+            jsonObject.put("surcharge", binding.surcharge.text.toString().toInt())
         } else
             jsonObject.put("status", status)
 
 
         // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
-
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
         //CALL API
         val updateOrderCall = ServiceGenerator.buildService(OrderService::class.java)
             .updateOrderStatus(order.id.toString(), requestBody)
 
-        updateOrderCall?.enqueue(object : Callback<ApiResponse<String>> {
-
+        updateOrderCall?.enqueue(object : Callback<ApiResponse<OrderDetails>> {
             override fun onResponse(
-                call: Call<ApiResponse<String>>,
-                response: Response<ApiResponse<String>>
+                call: Call<ApiResponse<OrderDetails>>,
+                response: Response<ApiResponse<OrderDetails>>
             ) {
-                if (!response.isSuccessful) {
-                    kotlin.runCatching {
+                Log.d("response.isSuccessful", response.isSuccessful.toString())
+                if (response.isSuccessful) {
+                    runOnUiThread {
                         Toast.makeText(
                             applicationContext,
-                            "Update Successfully!",
+                            resources.getString(R.string.Updateordersuccessfully),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                 } else {
-                    kotlin.runCatching {
+                    runOnUiThread {
                         val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
                         Toast.makeText(
                             applicationContext,
@@ -184,10 +204,10 @@ class AdminOrderDetail : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<String>>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<OrderDetails>>, t: Throwable) {
                 Toast.makeText(
                     applicationContext,
-                    "Update Successfully!",
+                    resources.getString(R.string.ErrorNetwork),
                     Toast.LENGTH_SHORT
                 ).show()
             }

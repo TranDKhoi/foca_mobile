@@ -40,7 +40,7 @@ class VerifiAccountScreen : AppCompatActivity() {
 
         val subText: TextView = findViewById(R.id.subText)
         subText.text =
-            resources.getString(R.string.Codesendto).plus(userName)
+            resources.getString(R.string.Codesendto).plus("\n").plus(userName)
                 .plus(resources.getString(R.string.gm_uit_edu_vn))
 
         binding.confirmBtn.setOnClickListener {
@@ -89,7 +89,7 @@ class VerifiAccountScreen : AppCompatActivity() {
                     binding.bar.visibility = ProgressBar.GONE
                     Toast.makeText(
                         applicationContext,
-                        "We have resend the code!",
+                        resources.getString(R.string.Wehaveresendthecode),
                         Toast.LENGTH_LONG
                     )
                         .show()

@@ -40,6 +40,9 @@ class MyMenuAdapter(private val productList: MutableList<Product>) :
             intent.putExtra("product", Gson().toJson(productList[position]))
             holder.itemView.context.startActivity(intent)
         }
+        holder.binding.numberProduct.text =
+            holder.binding.root.resources.getString(R.string.Sold).plus(" ")
+                .plus(productList[position].orderCount.toString())
         holder.binding.cardView3.setOnClickListener {
             val intent = Intent(holder.itemView.context, AdminCreateProduct::class.java)
             intent.putExtra("product", Gson().toJson(productList[position]))

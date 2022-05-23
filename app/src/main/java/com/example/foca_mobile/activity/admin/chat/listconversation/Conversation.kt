@@ -10,5 +10,6 @@ data class Conversation(
     val lastMessage: Message? = null,
     var isSeen: Boolean = false,
     val members: List<User>? = null,
-    val updatedAt: Date? = null
+    val updatedAt: Date? = null,
+    val messages: List<Message>? = null
 )

@@ -42,6 +42,7 @@ class AdminOrderManagement : Fragment() {
         orderList = arrayListOf()
         adapter = AllOrderAdapter(orderList)
         binding.orderRCV.adapter = adapter
+        binding.filterBtn.text = resources.getString(R.string.ALL)
 
         getOrder()
 
@@ -49,7 +50,7 @@ class AdminOrderManagement : Fragment() {
         binding.filterBtn.setOnClickListener {
             // setup the alert builder
             val builder = AlertDialog.Builder(binding.root.context)
-            builder.setTitle("Filter the orders")
+            builder.setTitle(resources.getString(R.string.Filtertheorders))
 
             // add a list
             val status = arrayOf(
@@ -65,26 +66,32 @@ class AdminOrderManagement : Fragment() {
                     0 -> {
                         getOrder()
                         currentFilter = ""
+                        binding.filterBtn.text = resources.getString(R.string.ALL)
                     }
                     1 -> {
                         getOrderByStatus("ARRIVED")
                         currentFilter = "ARRIVED"
+                        binding.filterBtn.text = resources.getString(R.string.ARRIVED)
                     }
                     2 -> {
                         getOrderByStatus("PENDING")
                         currentFilter = "PENDING"
+                        binding.filterBtn.text = resources.getString(R.string.PENDING)
                     }
                     3 -> {
                         getOrderByStatus("PROCESSED")
                         currentFilter = "PROCESSED"
+                        binding.filterBtn.text = resources.getString(R.string.PROCESSED)
                     }
                     4 -> {
                         getOrderByStatus("COMPLETED")
                         currentFilter = "COMPLETED"
+                        binding.filterBtn.text = resources.getString(R.string.COMPLETED)
                     }
                     5 -> {
                         getOrderByStatus("CANCELLED")
                         currentFilter = "CANCELLED"
+                        binding.filterBtn.text = resources.getString(R.string.CANCELLED)
                     }
                 }
             }

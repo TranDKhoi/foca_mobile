@@ -1,10 +1,8 @@
 package com.example.foca_mobile.service
 
-import android.util.Log
 import com.example.foca_mobile.utils.LoginPrefs
 import okhttp3.Interceptor
 import okhttp3.Response
-
 
 class RequestInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {

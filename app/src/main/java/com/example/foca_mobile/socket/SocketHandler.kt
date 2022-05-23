@@ -19,6 +19,7 @@ object SocketHandler {
                 .setAuth(singletonMap("token", token.toString()))
                 .build()
             mSocket = IO.socket("https://foca-backend.herokuapp.com", options)
+//            mSocket = IO.socket("http://10.0.2.2:5000", options)
             Log.d("mSocket.connect()", "RUNNING")
             mSocket.connect()
 

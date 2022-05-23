@@ -7,7 +7,6 @@ import okhttp3.ResponseBody
 
 object ErrorUtils {
     fun parseHttpError(error: ResponseBody): ErrorResponse {
-        var errorObject = Gson().fromJson(error.charStream(), ErrorResponse::class.java)
-        return errorObject
+        return Gson().fromJson(error.charStream(), ErrorResponse::class.java)
     }
 }

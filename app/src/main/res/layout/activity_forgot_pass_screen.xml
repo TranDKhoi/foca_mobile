@@ -49,11 +49,10 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="26dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:fontFamily="@font/bentonsans_book"
+                android:maxWidth="250dp"
                 android:text="@string/EnteryourstudentIDtoresetyourpassword"
-                android:textColor="@color/primaryTextColor"
                 android:textSize="15sp" />
 
 
@@ -90,6 +89,13 @@
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <ProgressBar
+            android:id="@+id/bar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

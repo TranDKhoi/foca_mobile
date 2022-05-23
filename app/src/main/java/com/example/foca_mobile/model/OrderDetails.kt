@@ -1,5 +1,6 @@
 package com.example.foca_mobile.model
 
+
 data class OrderDetails(
     var id: Int? = null,
     var orderId: Int? = null,
