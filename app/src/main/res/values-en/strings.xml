@@ -123,6 +123,9 @@
     <string name="buyagain">Buy again</string>
     <string name="Favorite">Favorite</string>
     <string name="Myaccount">My account</string>
+    <string name="DeleteOrderMessage">Do you really want to delete this order?</string>
+    <string name="CreateOrderMessage">Do you want to create order?</string>
+    <string name="ReviewOrderMessage">Do you want to review this order?</string>
     <string name="Searchresultfor">Search result for:</string>
 
 </resources>

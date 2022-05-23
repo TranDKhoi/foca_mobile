@@ -2,14 +2,17 @@ package com.example.foca_mobile.activity.user.cart_order
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterRatingFood
 import com.example.foca_mobile.databinding.ActivityUserRateScreenBinding
 import com.example.foca_mobile.model.ApiResponse
@@ -52,53 +55,67 @@ class UserRateScreen : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.submitBtn.setOnClickListener {
-            val jsonArray = JSONArray()
-            val listReviewApi: ArrayList<Review> = ArrayList()
-            listReview.forEachIndexed { _, item ->
-                val review = Review()
-                review.orderDetailId = item.orderDetailId
-                review.rating = item.rating
-                review.content = item.content
-                listReviewApi.add(review)
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage(resources.getString(R.string.ReviewOrderMessage))
+            builder.setPositiveButton(resources.getString(R.string.YES)) { dialog, _ -> //
+                val jsonArray = JSONArray()
+                val listReviewApi : ArrayList<Review> = ArrayList()
+                listReview.forEachIndexed { _, item ->
+                    val review = Review()
+                    review.orderDetailId = item.orderDetailId
+                    review.rating = item.rating
+                    review.content = item.content
+                    listReviewApi.add(review)
+                    val jsonObject = JSONObject()
+                    jsonObject.put("orderDetailId",item.orderDetailId)
+                    jsonObject.put("rating",item.rating)
+                    jsonObject.put("content",item.content)
+                    jsonArray.put(jsonObject)
+                }
                 val jsonObject = JSONObject()
-                jsonObject.put("orderDetailId", item.orderDetailId)
-                jsonObject.put("rating", item.rating)
-                jsonObject.put("content", item.content)
-                jsonArray.put(jsonObject)
-            }
-            val jsonObject = JSONObject()
-            jsonObject.put("reviews", jsonArray)
-            val body: RequestBody = RequestBody.create(
-                "application/json; charset=utf-8".toMediaType(), jsonObject.toString()
-            )
-            val createReviewCall =
-                order.id?.let { it1 ->
-                    ServiceGenerator.buildService(OrderService::class.java).createReview(
-                        body, it1
-                    )
-                }
-            binding.bar.visibility = ProgressBar.VISIBLE
-            createReviewCall?.enqueue(object : Callback<ApiResponse<MutableList<Review>>> {
-                override fun onResponse(
-                    call: Call<ApiResponse<MutableList<Review>>>,
-                    response: Response<ApiResponse<MutableList<Review>>>
-                ) {
-                    if (response.isSuccessful) {
-                        Log.d("SUCCESS", "review success")
-                        binding.bar.visibility = ProgressBar.GONE
-                        goBack()
-                    } else {
-                        val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
-                        Log.d("Error From Api", errorRes.message)
-                        Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG)
-                            .show()
+                jsonObject.put("reviews",jsonArray)
+                val body: RequestBody = RequestBody.create("application/json; charset=utf-8".toMediaType(),jsonObject.toString()
+                )
+                val createReviewCall =
+                    order.id?.let { it1 ->
+                        ServiceGenerator.buildService(OrderService::class.java).createReview(
+                            body, it1
+                        )
                     }
-                }
-
-                override fun onFailure(call: Call<ApiResponse<MutableList<Review>>>, t: Throwable) {
-                    Log.d("onFailure", "Call API failure")
-                }
-            })
+                binding.bar.visibility = ProgressBar.VISIBLE
+                createReviewCall?.enqueue(object : Callback<ApiResponse<MutableList<Review>>> {
+                    override fun onResponse(
+                        call: Call<ApiResponse<MutableList<Review>>>,
+                        response: Response<ApiResponse<MutableList<Review>>>
+                    ) {
+                        if(response.isSuccessful){
+                            Log.d("SUCCESS","review success")
+                            binding.bar.visibility = ProgressBar.GONE
+                            goBack()
+                        } else{
+                            val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+                            Log.d("Error From Api", errorRes.message)
+                            Toast.makeText(applicationContext, response.message(), Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    }
+                    override fun onFailure(call: Call<ApiResponse<MutableList<Review>>>, t: Throwable) {
+                        Log.d("onFailure","Call API failure")
+                    }
+                })
+                dialog.dismiss()
+            }
+            builder.setNegativeButton(
+                resources.getString(R.string.NO)
+            ) { dialog, _ -> // Do nothing
+                dialog.dismiss()
+            }
+            val alert = builder.create()
+            alert.setOnShowListener {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+            }
+            alert.show()
         }
     }
 
