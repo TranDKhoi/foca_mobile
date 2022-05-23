@@ -22,6 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textSize="14sp"
         android:textStyle="bold" />
 

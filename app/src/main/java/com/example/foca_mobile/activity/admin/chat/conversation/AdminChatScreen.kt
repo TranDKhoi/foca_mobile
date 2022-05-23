@@ -1,6 +1,5 @@
 package com.example.foca_mobile.activity.admin.chat.conversation
 
-import MessageListObj
 import android.R
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -55,8 +54,7 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
         setKeyboardVisibilityListener(this)
         socket = SocketHandler.getSocket()
         user = LoginPrefs.getUser()
-        val conversationString = intent.getStringExtra("conversation")!!
-        conversation = Gson().fromJson(conversationString, Conversation::class.java)
+        val conversationId = intent.getIntExtra("conversationId", 0)
         GlobalObject.isOpenActivity = true
         //CREATE RECYCLERVIEW
         listMessage = ArrayList()
@@ -68,45 +66,39 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
         binding.conversationRCV.scrollToPosition(listMessage.size - 1)
 
 
-        partner = conversation.members?.find {
-            it.id != user.id
-        }!!
-        binding.messName.text = partner.fullName
-        binding.messStatus.text = "Online"
-        Glide.with(applicationContext).load(partner.photoUrl!!).into(binding.messImage)
-
-        if (!conversation.isSeen) {
-            socket.emit("seen_new_message", conversation.id, Ack {
-                val success = it[0] as Boolean
-                if (success) {
-                    conversation.isSeen = true
-                }
-            })
-        }
-
-        //CHANGE SEND BTN VISIBILITY
-        binding.inputText.doOnTextChanged { text, _, _, _ ->
-            if (text.isNullOrEmpty()) {
-                binding.sendBtn.visibility = View.GONE
-            } else
-                binding.sendBtn.visibility = View.VISIBLE
-        }
-
         //Socket
         binding.progressBar.visibility = ProgressBar.VISIBLE
-        socket.emit("get_messages", conversation.id, Ack {
+        socket.emit("get_room_info", conversationId, Ack {
             val dataJson = it[0] as JSONObject
-            val messageListObj = Gson().fromJson(dataJson.toString(), MessageListObj::class.java)
-            if (messageListObj.error == null) {
+
+            if (dataJson["error"].toString() == "null") {
+                conversation =
+                    Gson().fromJson(dataJson["data"].toString(), Conversation::class.java)
                 runOnUiThread {
                     listMessage.clear()
-                    listMessage.addAll(messageListObj.data ?: ArrayList())
+                    listMessage.addAll(conversation.messages ?: ArrayList())
                     conversationAdapter.notifyDataSetChanged()
                     binding.conversationRCV.scrollToPosition(listMessage.size - 1)
                     binding.progressBar.visibility = ProgressBar.GONE
+
+                    partner = conversation.members?.find { user ->
+                        user.id != user.id
+                    }!!
+                    binding.messName.text = partner.fullName
+                    binding.messStatus.text = "Online"
+                    Glide.with(applicationContext).load(partner.photoUrl!!).into(binding.messImage)
+
+                    if (!conversation.isSeen) {
+                        socket.emit("seen_new_message", conversation.id, Ack {
+                            val success = it[0] as Boolean
+                            if (success) {
+                                conversation.isSeen = true
+                            }
+                        })
+                    }
                 }
             } else {
-                Log.d("Error get_room_with_admin", messageListObj.error)
+                Log.d("Error get_room_with_user", dataJson["error"].toString())
             }
         })
 
@@ -129,11 +121,22 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
                 binding.conversationRCV.scrollToPosition(listMessage.size - 1)
             }
         }
+
+
+        //CHANGE SEND BTN VISIBILITY
+        binding.inputText.doOnTextChanged { text, _, _, _ ->
+            if (text.isNullOrEmpty()) {
+                binding.sendBtn.visibility = View.GONE
+            } else
+                binding.sendBtn.visibility = View.VISIBLE
+        }
     }
 
     override fun onDestroy() {
         GlobalObject.isOpenActivity = false
-        GlobalObject.updateNotSeenConversationAdmin(conversation.id!!, true)
+        if(conversation.id != null){
+            GlobalObject.updateNotSeenConversationAdmin(conversation.id!!, true)
+        }
         super.onDestroy()
     }
 

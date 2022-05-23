@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.bumptech.glide.Glide
+import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ListFavoriteItemBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Cart
@@ -51,7 +52,7 @@ class FavoriteAdapter(private var c: Context, private val arrayList:List<Product
                     call: Call<ApiResponse<Cart>>,
                     response: Response<ApiResponse<Cart>>
                 ) {
-                    Toast.makeText(c, "Đã thêm đồ ăn vào giỏ hàng", Toast.LENGTH_LONG).show()
+                    Toast.makeText(c, c.resources.getString(R.string.Addedtocart), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onFailure(call: Call<ApiResponse<Cart>>, t: Throwable) {}

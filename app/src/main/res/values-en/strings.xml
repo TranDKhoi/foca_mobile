@@ -123,11 +123,22 @@
     <string name="buyagain">Buy again</string>
     <string name="Favorite">Favorite</string>
     <string name="Myaccount">My account</string>
+    <string name="Sold">Sold:</string>
     <string name="DeleteOrderMessage">Do you really want to delete this order?</string>
     <string name="CreateOrderMessage">Do you want to create order?</string>
     <string name="ReviewOrderMessage">Do you want to review this order?</string>
     <string name="Searchresultfor">Search result for:</string>
-    <string name="Mesagetone">Mesage tone</string>
-    <string name="Ordertone">Order tone</string>
+    <string name="Mesagetone">Mesage notification</string>
+    <string name="Ordertone">Order notification</string>
+    <string name="Updateordersuccessfully">Update order successfully!</string>
+    <string name="Addedtocart">Added to cart!</string>
+    <string name="Createproductsuccessfully">Create product successfully!</string>
+    <string name="Imagecannot">Image can not be null</string>
+    <string name="Surchargecannotbeempty">Surcharge can not be empty!</string>
+    <string name="ErrorNetwork">Error Network!</string>
+    <string name="Paswordnotmatch">The password does not match!</string>
+    <string name="Wehaveresendthecode">We have resend the code!</string>
+    <string name="Deletefromfavorite">Deleted from favorite!</string>
+    <string name="Addedtofavorite">Added to favorite!</string>
 
 </resources>

@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigation.showBadge(R.id.message)
                 if (!GlobalObject.isOpenActivity)
                     if (NotifyLevelPrefs.getLevel1() == "")
-                        sendMessageNotification(message.sender!!.fullName, message.text!!)
+                        sendMessageNotification(message)
             }
             binding.bottomNavigation.setOnItemSelectedListener { id ->
                 when (id) {
@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 if (!GlobalObject.isOpenActivity)
                     if (NotifyLevelPrefs.getLevel1() == "")
-                        sendMessageNotification(message.sender!!.fullName, message.text!!)
+                        sendMessageNotification(message)
             }
 
             binding.bottomNavigation.setOnItemSelectedListener { id ->
@@ -229,7 +229,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //NOTIFY MESSAGE AREA
-    private fun sendMessageNotification(sender: String?, mess: String) {
+    private fun sendMessageNotification(message: Message) {
 
         val bmLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_message)
 
@@ -244,24 +244,26 @@ class MainActivity : AppCompatActivity() {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notifyChannel)
 
-        // Create an Intent for the activity you want to start
-//        var resultIntent: Intent
-//        if (GlobalObject.CurrentUser.role == "ADMIN") {
-//            resultIntent = Intent(this, AdminOrderDetail::class.java)
-//            resultIntent.putExtra("conversation", Gson().toJson())
-//        } else {
-//            resultIntent = Intent(this, UserChatScreen::class.java)
-//        }
-//        val resultPendingIntent = PendingIntent.getActivity(
-//            applicationContext, 0,
-//            resultIntent, 0
-//        )
+        //Create an Intent for the activity you want to start
+        val resultIntent: Intent
+        if (GlobalObject.CurrentUser.role == "ADMIN") {
+            resultIntent = Intent(this, AdminOrderDetail::class.java)
+            resultIntent.putExtra("conversationId", message.roomId)
+        } else {
+            resultIntent = Intent(this, UserChatScreen::class.java)
+        }
+        val resultPendingIntent = PendingIntent.getActivity(
+            applicationContext, 0,
+            resultIntent, 0
+        )
 
         val builder = NotificationCompat.Builder(this, strCHANNEL_ID1)
             .setSmallIcon(R.drawable.ic_message)
             .setLargeIcon(bmLargeIcon)
-            .setContentTitle(sender ?: resources.getString(R.string.Youhavenewmessage))
-            .setContentText(mess)
+            .setContentTitle(
+                message.sender!!.fullName ?: resources.getString(R.string.Youhavenewmessage)
+            )
+            .setContentText(message.text)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             //.setContentIntent(resultPendingIntent)
             .setAutoCancel(true)

@@ -62,7 +62,7 @@ class InfoFood_Activity : AppCompatActivity() {
                 ) {
                     Toast.makeText(
                         applicationContext,
-                        "Đã thêm đồ ăn vào giỏ hàng",
+                        resources.getString(R.string.Addedtocart),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -96,7 +96,7 @@ class InfoFood_Activity : AppCompatActivity() {
                     ) {
                         Toast.makeText(
                             applicationContext,
-                            "Đã xóa đồ ăn khỏi mục yêu thích",
+                            resources.getString(R.string.Deletefromfavorite),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -121,7 +121,7 @@ class InfoFood_Activity : AppCompatActivity() {
                     ) {
                         Toast.makeText(
                             applicationContext,
-                            "Đã thêm đồ ăn vào mục yêu thích",
+                            resources.getString(R.string.Addedtofavorite),
                             Toast.LENGTH_LONG
                         ).show()
                     }

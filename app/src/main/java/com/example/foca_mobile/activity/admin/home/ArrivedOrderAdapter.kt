@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.foca_mobile.activity.admin.order.orderdetail.AdminOrderDetail
 import com.example.foca_mobile.databinding.ListRecentFoodItemBinding
 import com.example.foca_mobile.model.Order
-import com.google.gson.Gson
 import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

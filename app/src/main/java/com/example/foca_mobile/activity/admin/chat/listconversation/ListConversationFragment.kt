@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.example.foca_mobile.activity.MainActivity
 import com.example.foca_mobile.activity.admin.chat.conversation.AdminChatScreen
 import com.example.foca_mobile.databinding.FragmentAdminListConversationBinding
 import com.example.foca_mobile.model.Message
@@ -71,7 +70,7 @@ class ListConversationFragment : Fragment() {
 
         conversationListAdapter.onItemClick = {
             val intent = Intent(activity, AdminChatScreen::class.java)
-            intent.putExtra("conversation", Gson().toJson(it))
+            intent.putExtra("conversationId", it.id)
             startActivityForResult(intent, 1)
         }
         SocketHandler.getSocket().on("send_message") { args ->
@@ -86,7 +85,7 @@ class ListConversationFragment : Fragment() {
         data: Intent?
     ) {
         getRooms()
-        GlobalObject.updateNotSeenConversationAdmin(roomId)
+//        GlobalObject.updateNotSeenConversationAdmin(roomId, true)
     }
 
     @SuppressLint("NotifyDataSetChanged")

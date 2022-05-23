@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
@@ -14,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.MutableLiveData
 import com.example.foca_mobile.R
-import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterOrderDetail
 import com.example.foca_mobile.databinding.ActivityAdminOrderDetailBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
@@ -28,7 +26,6 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class AdminOrderDetail : AppCompatActivity() {
@@ -159,7 +156,7 @@ class AdminOrderDetail : AppCompatActivity() {
     private fun updateOrderStatus(status: String) {
 
         if (selectedStatus.value == "PENDING" && binding.surcharge.text.isEmpty()) {
-            Toast.makeText(this, "Surcharge can not be empty!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getString(R.string.Surchargecannotbeempty), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -190,7 +187,7 @@ class AdminOrderDetail : AppCompatActivity() {
                     runOnUiThread {
                         Toast.makeText(
                             applicationContext,
-                            "Update Successfully!",
+                            resources.getString(R.string.Updateordersuccessfully),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -210,7 +207,7 @@ class AdminOrderDetail : AppCompatActivity() {
             override fun onFailure(call: Call<ApiResponse<OrderDetails>>, t: Throwable) {
                 Toast.makeText(
                     applicationContext,
-                    "Error Network!",
+                    resources.getString(R.string.ErrorNetwork),
                     Toast.LENGTH_SHORT
                 ).show()
             }

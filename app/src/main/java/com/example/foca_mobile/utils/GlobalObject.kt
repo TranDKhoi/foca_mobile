@@ -1,8 +1,6 @@
 package com.example.foca_mobile.utils
 
-import android.app.Activity
 import android.content.Context
-import androidx.core.app.NotificationCompat
 import com.example.foca_mobile.R
 import com.example.foca_mobile.model.Filter
 import com.example.foca_mobile.model.User

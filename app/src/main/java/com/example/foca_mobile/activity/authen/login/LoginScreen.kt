@@ -22,7 +22,6 @@ import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.socket.SocketHandler
 import com.example.foca_mobile.utils.ErrorUtils
 import com.example.foca_mobile.utils.GlobalObject
-import com.example.foca_mobile.utils.LanguagePrefs
 import com.example.foca_mobile.utils.LoginPrefs
 import retrofit2.Call
 import retrofit2.Callback

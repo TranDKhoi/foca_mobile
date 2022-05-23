@@ -130,5 +130,15 @@
     <string name="Searchresultfor">Kết quả cho:</string>
     <string name="Mesagetone">Âm báo tin nhắn</string>
     <string name="Ordertone">Âm báo đơn hàng</string>
+    <string name="Updateordersuccessfully">Update order successfully!</string>
+    <string name="Addedtocart">Đã thêm vào giỏ!</string>
+    <string name="Createproductsuccessfully">Thêm sản phẩm thành công!</string>
+    <string name="Imagecannot">Ảnh không được trống</string>
+    <string name="Surchargecannotbeempty">Thu thêm không được rỗng!</string>
+    <string name="ErrorNetwork">Lỗi mạng!</string>
+    <string name="Paswordnotmatch">Mật khẩu không khớp!</string>
+    <string name="Wehaveresendthecode">Đã gửi lại mã!</string>
+    <string name="Deletefromfavorite">Đã xóa đồ ăn khỏi mục yêu thích!</string>
+    <string name="Addedtofavorite">Đã thêm vào mục yêu thích!</string>
 
 </resources>

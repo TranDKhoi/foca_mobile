@@ -1,11 +1,10 @@
 package com.example.foca_mobile.activity.user.profile.profilesetting
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foca_mobile.R
-import com.example.foca_mobile.databinding.ActivityUserProfileBinding
 import com.bumptech.glide.Glide
+import com.example.foca_mobile.databinding.ActivityUserProfileBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Product
 import com.example.foca_mobile.service.InterestedProductService

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -17,7 +16,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.foca_mobile.databinding.ActivityChatScreenBinding
 import com.example.foca_mobile.model.Message
@@ -70,7 +68,7 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
 
         listMessage = ArrayList()
 
-        conversationAdapter = ConversationAdapter(this, listMessage);
+        conversationAdapter = ConversationAdapter(this, listMessage)
         binding.conversationRCV.adapter = conversationAdapter
         binding.conversationRCV.scrollToPosition(listMessage.size - 1)
 
@@ -83,8 +81,8 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
             if (error == null) {
                 room = Gson().fromJson(dataJson["data"].toString(), Room::class.java)
                 if (room != null) {
-                    partner = room.members?.find {
-                        it.id != user.id
+                    partner = room.members?.find { user ->
+                        user.id != user.id
                     }!!
                     runOnUiThread {
                         binding.messName.text = partner.fullName
@@ -115,7 +113,7 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
     }
 
     fun toListMessScreen(view: View) {
-        this.finish();
+        this.finish()
     }
 
     fun callUserFunc(view: View) {
@@ -135,8 +133,6 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
                 val dataJson = it[0] as JSONObject
                 val error = Gson().fromJson(dataJson["error"].toString(), String::class.java)
                 if (error == null) {
-                    val createdMessage =
-                        Gson().fromJson(dataJson["data"].toString(), Message::class.java)
                     runOnUiThread {
                         binding.txtSending.visibility = TextView.GONE
                     }
@@ -159,10 +155,9 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
     private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
         val parentView = (findViewById<View>(R.id.content) as ViewGroup).getChildAt(0)
         parentView.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-            private var alreadyOpen = false
             private val defaultKeyboardHeightDP = 100
             private val EstimatedKeyboardDP =
-                defaultKeyboardHeightDP + if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) 48 else 0
+                defaultKeyboardHeightDP + 48
             private val rect: Rect = Rect()
             override fun onGlobalLayout() {
                 val estimatedKeyboardHeight = TypedValue.applyDimension(

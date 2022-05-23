@@ -62,7 +62,6 @@ class ConversationAdapter(
         return messageList.size
     }
 
-
     override fun getItemViewType(position: Int): Int {
 
         val currentMess = messageList[position]

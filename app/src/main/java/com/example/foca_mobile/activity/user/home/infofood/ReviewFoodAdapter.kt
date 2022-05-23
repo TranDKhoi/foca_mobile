@@ -7,9 +7,6 @@ import com.bumptech.glide.Glide
 import com.example.foca_mobile.databinding.ListReviewFoodItemBinding
 import com.example.foca_mobile.model.Review
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.collections.ArrayList
 
 class ReviewFoodAdapter(private val arrayList: MutableList<Review>) :
     RecyclerView.Adapter<ReviewFoodAdapter.ViewHolder> (){

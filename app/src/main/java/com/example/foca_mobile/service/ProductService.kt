@@ -1,7 +1,6 @@
 package com.example.foca_mobile.service
 
 import com.example.foca_mobile.model.*
-import com.google.firebase.inject.Deferred
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*

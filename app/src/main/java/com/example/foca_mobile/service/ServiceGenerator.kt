@@ -1,7 +1,5 @@
 package com.example.foca_mobile.service
 
-//import com.example.foca_mobile.utils.LoginPrefs
-
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

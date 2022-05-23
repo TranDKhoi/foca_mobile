@@ -63,7 +63,7 @@ class SetNewPassScreen : AppCompatActivity() {
             return
 
         if (newPass.text.toString() != rePass.text.toString()) {
-            Toast.makeText(this, "The password does not match!", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, resources.getString(R.string.Paswordnotmatch), Toast.LENGTH_LONG).show()
             return
         }
 

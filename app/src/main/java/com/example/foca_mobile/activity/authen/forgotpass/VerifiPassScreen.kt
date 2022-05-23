@@ -130,7 +130,7 @@ class VerifiPassScreen : AppCompatActivity() {
                     binding.bar.visibility = ProgressBar.GONE
                     Toast.makeText(
                         applicationContext,
-                        "We have resend the code!",
+                        resources.getString(R.string.Wehaveresendthecode),
                         Toast.LENGTH_LONG
                     )
                         .show()

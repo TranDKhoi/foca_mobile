@@ -7,7 +7,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -59,7 +61,7 @@ class UserDetailOrder : AppCompatActivity() {
                 review.rating = 5
                 listReview.add(review)
             }
-            intent.putExtra("listReview",  Gson().toJson(listReview))
+            intent.putExtra("listReview", Gson().toJson(listReview))
             intent.putExtra("order", Gson().toJson(order))
             activityResultLauncher.launch(intent)
         }
@@ -96,10 +98,19 @@ class UserDetailOrder : AppCompatActivity() {
         binding.pendingBtn.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle(resources.getString(R.string.PENDING))
-            val message = resources.getString(R.string.YourOrder) + order.id.toString() + " " + resources.getString(R.string.UPendingNoti)
+            val message =
+                resources.getString(R.string.YourOrder) + order.id.toString() + " " + resources.getString(
+                    R.string.UPendingNoti
+                )
             builder.setMessage(message)
             builder.setPositiveButton(resources.getString(R.string.YES)) { dialog, _ -> // Update process
                 updateOrder(order, "PROCESSED")
+                binding.pendingBtn.visibility = ImageButton.GONE
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.Updateordersuccessfully),
+                    Toast.LENGTH_SHORT
+                ).show()
                 dialog.dismiss()
             }
             builder.setNegativeButton(
@@ -135,7 +146,7 @@ class UserDetailOrder : AppCompatActivity() {
                     val dec = DecimalFormat("#,###")
                     binding.totalPriceOrder.text = dec.format(order.totalPrice) + "đ"
                     binding.rvFood.adapter = adapter
-                    if (order.status != "PENDING"){
+                    if (order.status != "PENDING") {
                         binding.pendingBtn.visibility = View.GONE
                     }
                     if (order.status == "PROCESSED" || order.status == "COMPLETED") {

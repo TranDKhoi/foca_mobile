@@ -150,7 +150,7 @@ class AdminCreateProduct : AppCompatActivity() {
                     })
                     Toast.makeText(
                         applicationContext,
-                        "Update product successfully!",
+                        resources.getString(R.string.Updateordersuccessfully),
                         Toast.LENGTH_SHORT
                     ).show()
                     binding.bar.visibility = ProgressBar.GONE
@@ -202,7 +202,7 @@ class AdminCreateProduct : AppCompatActivity() {
                                 runOnUiThread {
                                     Toast.makeText(
                                         applicationContext,
-                                        "Create product successfully!",
+                                        resources.getString(R.string.Createproductsuccessfully),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
@@ -247,7 +247,7 @@ class AdminCreateProduct : AppCompatActivity() {
             binding.productDes.setBackgroundResource(R.drawable.rounded_edittext_normal)
         if (!isUpdate)
             if (imagePath.toString().isEmpty())
-                Toast.makeText(this, "Image can not be null", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, resources.getString(R.string.Imagecannot), Toast.LENGTH_SHORT).show()
         if (!isUpdate) {
             if (binding.productName.text.isEmpty() ||
                 binding.productPrice.text.isEmpty() ||
