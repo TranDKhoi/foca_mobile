@@ -1,7 +1,6 @@
 package com.example.foca_mobile.activity.user.cart_order.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,10 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foca_mobile.activity.user.cart_order.UserDetailOrder
 import com.example.foca_mobile.activity.user.cart_order.adapter.RecyclerViewAdapterOrder
 import com.example.foca_mobile.databinding.FragmentMyOrdersBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Order
-import com.example.foca_mobile.model.OrderDetails
 import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
 import retrofit2.Call
@@ -90,12 +87,6 @@ class MyOrderFragment : Fragment() {
                     binding.rvOrder.adapter = adapter
                     binding.rvOrder.layoutManager = LinearLayoutManager(activity)
                     binding.bar.visibility = ProgressBar.GONE
-
-                    adapter!!.onItemClick ={ mutableList: MutableList<OrderDetails>, _: Order ->
-                        val intent = Intent(context, UserDetailOrder::class.java)
-                        intent.putExtra("listOrderDetails", ArrayList(mutableList))
-                        startActivity(intent)
-                    }
 
                 } else {
                     Toast.makeText(context, "Call api else error", Toast.LENGTH_LONG).show()

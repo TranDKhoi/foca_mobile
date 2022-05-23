@@ -22,18 +22,22 @@ import com.example.foca_mobile.service.OrderService
 import com.example.foca_mobile.service.ServiceGenerator
 import com.example.foca_mobile.utils.ErrorUtils
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.reflect.Type
 
 
 class UserRateScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserRateScreenBinding
+    private lateinit var listReview : ArrayList<Review>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +47,16 @@ class UserRateScreen : AppCompatActivity() {
         binding.btnSkip.setOnClickListener {
             finish()
         }
-
-        val listReview: ArrayList<Review> =
-            intent.getSerializableExtra("listReview") as ArrayList<Review>
+        intent.hasExtra("listReview").let {
+            if (it) {
+                val listType: Type =
+                    object : TypeToken<ArrayList<Review>>() {}.type
+                listReview = Gson().fromJson(
+                    intent.getStringExtra("listReview"),
+                    listType
+                ) as ArrayList<Review>
+            }
+        }
         val order: Order =
             Gson().fromJson(intent.getStringExtra("order").toString(), Order::class.java)
         val adapter = RecyclerViewAdapterRatingFood(listReview)
@@ -74,8 +85,8 @@ class UserRateScreen : AppCompatActivity() {
                 }
                 val jsonObject = JSONObject()
                 jsonObject.put("reviews",jsonArray)
-                val body: RequestBody = RequestBody.create("application/json; charset=utf-8".toMediaType(),jsonObject.toString()
-                )
+                val body: RequestBody = jsonObject.toString()
+                    .toRequestBody("application/json; charset=utf-8".toMediaType())
                 val createReviewCall =
                     order.id?.let { it1 ->
                         ServiceGenerator.buildService(OrderService::class.java).createReview(
