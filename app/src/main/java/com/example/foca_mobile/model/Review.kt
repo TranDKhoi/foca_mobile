@@ -1,7 +1,5 @@
 package com.example.foca_mobile.model
 
-import java.io.Serializable
-
 data class Review(
     var id: Int? = null,
     var userId: Int? = null,
@@ -14,4 +12,4 @@ data class Review(
     var deletedAt: String? = null,
     var reviews: Review? = null,
     var user: User? = null
-) : Serializable
+)

@@ -59,7 +59,7 @@ class UserDetailOrder : AppCompatActivity() {
                 review.rating = 5
                 listReview.add(review)
             }
-            intent.putExtra("listReview", listReview)
+            intent.putExtra("listReview",  Gson().toJson(listReview))
             intent.putExtra("order", Gson().toJson(order))
             activityResultLauncher.launch(intent)
         }
