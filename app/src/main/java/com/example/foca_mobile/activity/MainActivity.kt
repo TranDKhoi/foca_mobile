@@ -241,12 +241,26 @@ class MainActivity : AppCompatActivity() {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notifyChannel)
 
+        // Create an Intent for the activity you want to start
+//        var resultIntent: Intent
+//        if (GlobalObject.CurrentUser.role == "ADMIN") {
+//            resultIntent = Intent(this, AdminOrderDetail::class.java)
+//            resultIntent.putExtra("conversation", Gson().toJson())
+//        } else {
+//            resultIntent = Intent(this, UserChatScreen::class.java)
+//        }
+//        val resultPendingIntent = PendingIntent.getActivity(
+//            applicationContext, 0,
+//            resultIntent, 0
+//        )
+
         val builder = NotificationCompat.Builder(this, strCHANNEL_ID1)
             .setSmallIcon(R.drawable.ic_message)
             .setLargeIcon(bmLargeIcon)
             .setContentTitle(sender ?: resources.getString(R.string.Youhavenewmessage))
             .setContentText(mess)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            //.setContentIntent(resultPendingIntent)
             .setAutoCancel(true)
 
         with(NotificationManagerCompat.from(this)) {
@@ -307,7 +321,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // Create an Intent for the activity you want to start
-        var resultIntent = Intent()
+        var resultIntent: Intent
         if (GlobalObject.CurrentUser.role == "ADMIN") {
             resultIntent = Intent(this, AdminOrderDetail::class.java)
             resultIntent.putExtra("orderid", item.order!!.id)
