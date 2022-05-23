@@ -41,7 +41,7 @@ class ArrivedOrderAdapter(private val orderList: MutableList<Order>) :
         holder.binding.createAtTxt.text = formattedDate
         holder.binding.root.setOnClickListener {
             val intent = Intent(holder.itemView.context, AdminOrderDetail::class.java)
-            intent.putExtra("order", Gson().toJson(orderList[position]))
+            intent.putExtra("orderid", orderList[position].id)
             holder.itemView.context.startActivity(intent)
         }
     }
