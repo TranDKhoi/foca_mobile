@@ -81,8 +81,8 @@ class AdminChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
                     binding.conversationRCV.scrollToPosition(listMessage.size - 1)
                     binding.progressBar.visibility = ProgressBar.GONE
 
-                    partner = conversation.members?.find { it ->
-                        it.id != user.id
+                    partner = conversation.members?.find { u ->
+                        u.id != user.id
                     }!!
                     binding.messName.text = partner.fullName
                     binding.messStatus.text = "Online"
