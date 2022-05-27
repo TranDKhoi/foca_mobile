@@ -65,10 +65,9 @@
 
                     <TextView
                         android:id="@+id/nameFood"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="400"
-                        android:text="Rainbow Sandwich Sugarless"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="30sp"
                         android:textStyle="bold" />

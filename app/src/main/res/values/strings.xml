@@ -109,7 +109,7 @@
     <string name="Youhavenewmessage">You have a new message!</string>
     <string name="Note">Note: </string>
     <string name="Findyourfavoritefood">Find your favorite food</string>
-    <string name="RecentFood">Recent Food</string>
+    <string name="RecentOrder">Recent Order</string>
     <string name="PopularMenu">Popular Menu</string>
     <string name="Reviews">Reviews</string>
     <string name="viewdetail">View details</string>
@@ -139,4 +139,8 @@
     <string name="Wehaveresendthecode">We have resend the code!</string>
     <string name="Deletefromfavorite">Deleted from favorite!</string>
     <string name="Addedtofavorite">Added to favorite!</string>
+    <string name="Thankyou">Thank you!</string>
+    <string name="Pleaserate">Please rate your orders!</string>
+    <string name="Submit">Submit</string>
+    <string name="Feedback">Leave Feedback</string>
 </resources>

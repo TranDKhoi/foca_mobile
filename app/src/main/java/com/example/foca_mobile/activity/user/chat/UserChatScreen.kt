@@ -39,7 +39,7 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
 
     private lateinit var conversationAdapter: ConversationAdapter
     private lateinit var listMessage: ArrayList<Message>
-    private lateinit var user: User
+    private lateinit var User: User
     private lateinit var socket: Socket
     private lateinit var room: Room
     private lateinit var partner: User
@@ -52,7 +52,7 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
         setContentView(binding.root)
         setKeyboardVisibilityListener(this)
 
-        user = LoginPrefs.getUser()
+        User = LoginPrefs.getUser()
         binding.messName.text = "Admin"
         binding.messStatus.text = "Online"
         binding.messImage.setImageURI(null)
@@ -81,9 +81,11 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
             if (error == null) {
                 room = Gson().fromJson(dataJson["data"].toString(), Room::class.java)
                 if (room != null) {
+                    Log.d("ROOM",room.toString())
                     partner = room.members?.find { user ->
-                        user.id != user.id
+                        user.id != User.id
                     }!!
+                    Log.d("partner",partner.toString())
                     runOnUiThread {
                         binding.messName.text = partner.fullName
                         binding.messStatus.text = "Online"
@@ -125,7 +127,7 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
     fun sendMessageFunc(view: View) {
         if (!binding.inputText.text.isNullOrEmpty()) {
             binding.txtSending.visibility = TextView.VISIBLE
-            val message = Message(binding.inputText.text.toString().trim(), user.id, roomId = room.id)
+            val message = Message(binding.inputText.text.toString().trim(), User.id, roomId = room.id)
             val messageJson = Gson().toJson(message)
             listMessage.add(message)
             conversationAdapter.notifyDataSetChanged()

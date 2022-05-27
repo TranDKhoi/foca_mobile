@@ -101,8 +101,6 @@
                     android:maxWidth="140dp"
                     android:maxHeight="30dp"
                     android:maxLines="2"
-                    android:text=""
-
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/cardView"
                     app:layout_constraintTop_toTopOf="parent" />

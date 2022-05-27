@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -70,7 +71,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/bentonsans_medium"
-                        android:text="Spacy fresh crab"
                         android:textSize="15sp" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -79,7 +79,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/bentonsans_regular"
-                        android:text="Waroenk kita"
                         android:textSize="14sp" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -87,8 +86,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/bentonsans_bold"
-                        android:text="$ 35"
                         android:textColor="@color/textColorButtonGreen"
                         android:textSize="19sp" />
 
@@ -106,7 +103,6 @@
                 app:layout_constraintBottom_toBottomOf="@id/guideline2"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="center_vertical"
-                android:text="1"
                 android:textSize="15sp"
                 android:fontFamily="@font/bentonsans_regular"/>
 
@@ -151,11 +147,12 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/bentonsans_regular"
-                    android:hint="Leave feedback"
+                    android:hint="@string/Feedback"
                     android:inputType="textMultiLine"
                     android:minHeight="50dp"
                     android:textColorHint="#483B3B3B"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
 
 
             </LinearLayout>

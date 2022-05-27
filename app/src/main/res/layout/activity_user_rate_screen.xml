@@ -52,9 +52,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
-                    android:fontFamily="@font/bentonsans_bold"
-                    android:text="Thank you!"
-                    android:textColor="#09051C"
+                    android:text="@string/Thankyou"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="25sp" />
 
                 <TextView
@@ -63,8 +62,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/bentonsans_regular"
-                    android:text="Please rate your order"
-                    android:textColor="#483B3B3B"
+                    android:text="@string/Pleaserate"
                     android:textSize="14sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -91,12 +89,11 @@
             android:layout_width="250dp"
             android:layout_height="57dp"
             android:layout_gravity="start|bottom"
-            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/light_green_gradient"
-            android:fontFamily="@font/bentonsans_bold"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:textAllCaps="false"
-            android:textColor="#FEFEFF"
+            android:textColor="@color/textColorButtonWhite"
             android:textSize="14sp"
             app:backgroundTint="@null" />
 
@@ -110,10 +107,9 @@
             android:layout_width="100dp"
             android:layout_height="57dp"
             android:layout_gravity="end|bottom"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
             android:background="@drawable/white_background"
-            android:fontFamily="@font/bentonsans_bold"
-            android:text="Skip"
+            android:text="@string/Skip"
             android:textAllCaps="false"
             android:textColor="@color/textColorButtonGreen"
             android:textSize="14sp"

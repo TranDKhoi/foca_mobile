@@ -16,6 +16,7 @@ object GlobalObject {
 
     var isOpenActivity: Boolean = false
     var isChangeLanguage: Boolean = false
+    var isUserOpenRecentOrder: Boolean = false
 
     lateinit var locale: Locale
 

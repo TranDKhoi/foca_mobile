@@ -110,7 +110,7 @@
     <string name="Youhavenewmessage">Bạn có tin nhắn mới!</string>
     <string name="Note">Ghi chú: </string>
     <string name="Findyourfavoritefood">Tìm kiếm món bạn yêu thích</string>
-    <string name="RecentFood">Vừa Mua</string>
+    <string name="RecentOrder">Vừa Mua</string>
     <string name="PopularMenu">Thực đơn</string>
     <string name="Reviews">Đánh giá</string>
     <string name="viewdetail">Chi tiết</string>
@@ -140,5 +140,9 @@
     <string name="Wehaveresendthecode">Đã gửi lại mã!</string>
     <string name="Deletefromfavorite">Đã xóa đồ ăn khỏi mục yêu thích!</string>
     <string name="Addedtofavorite">Đã thêm vào mục yêu thích!</string>
+    <string name="Thankyou">Thật tuyệt!</string>
+    <string name="Pleaserate">Hãy đánh giá các đơn hàng!</string>
+    <string name="Submit">Gửi</string>
+    <string name="Feedback">Đánh giá</string>
 
 </resources>
