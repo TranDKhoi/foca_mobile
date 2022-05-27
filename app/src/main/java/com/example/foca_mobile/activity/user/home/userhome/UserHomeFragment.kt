@@ -56,6 +56,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
 
         binding.txtviewmoreRecentFood.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()?.apply {
+                GlobalObject.isUserOpenRecentOrder = true
                 replace(R.id.wrapper, UserMyCart())
                 commit()
                 GlobalObject.bottomNavigation.setItemSelected(R.id.cart)

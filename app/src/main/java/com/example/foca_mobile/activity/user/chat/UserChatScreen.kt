@@ -81,11 +81,9 @@ class UserChatScreen : AppCompatActivity(), OnKeyboardVisibilityListener {
             if (error == null) {
                 room = Gson().fromJson(dataJson["data"].toString(), Room::class.java)
                 if (room != null) {
-                    Log.d("ROOM",room.toString())
                     partner = room.members?.find { user ->
                         user.id != User.id
                     }!!
-                    Log.d("partner",partner.toString())
                     runOnUiThread {
                         binding.messName.text = partner.fullName
                         binding.messStatus.text = "Online"
