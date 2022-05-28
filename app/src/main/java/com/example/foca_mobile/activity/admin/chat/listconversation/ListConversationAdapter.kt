@@ -1,5 +1,6 @@
 package com.example.foca_mobile.activity.admin.chat.listconversation
 
+import android.graphics.Typeface
 import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.foca_mobile.R
+import com.example.foca_mobile.utils.GlobalObject
 import com.example.foca_mobile.utils.LoginPrefs
 
 class ListConversationAdapter(
@@ -40,6 +42,12 @@ class ListConversationAdapter(
             0L,
             DateUtils.FORMAT_ABBREV_ALL
         ) ?: ""
+        if (!currentItem.isSeen) {
+            if (currentItem.lastMessage.senderId != GlobalObject.CurrentUser.id)
+                holder.messLast.setTypeface(null, Typeface.BOLD_ITALIC)
+        } else {
+            holder.messLast.setTypeface(null, Typeface.NORMAL)
+        }
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(currentItem)

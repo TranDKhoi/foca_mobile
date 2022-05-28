@@ -12,6 +12,7 @@ import com.example.foca_mobile.databinding.ActivityFilterScreenBinding
 import com.example.foca_mobile.model.Filter
 import com.example.foca_mobile.utils.GlobalObject
 import com.google.gson.Gson
+import java.text.DecimalFormat
 import java.text.NumberFormat
 
 
@@ -101,7 +102,8 @@ class FilterScreen : AppCompatActivity() {
         binding.priceRange.values.clear()
         binding.priceRange.values = GlobalObject.filterData.range
         binding.priceRange.setLabelFormatter {
-            NumberFormat.getCurrencyInstance().format(it)
+            val dec = DecimalFormat("#,###")
+            dec.format(it).plus("đ")
         }
         binding.priceRange.addOnChangeListener { _, _, _ ->
 

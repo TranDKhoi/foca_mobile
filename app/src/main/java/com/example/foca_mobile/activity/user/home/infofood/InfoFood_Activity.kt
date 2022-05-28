@@ -14,6 +14,7 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityUserInfoFoodBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Cart
+import com.example.foca_mobile.model.Product
 import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.service.CartService
 import com.example.foca_mobile.service.InterestedProductService
@@ -28,6 +29,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
 
@@ -35,7 +37,7 @@ class InfoFood_Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserInfoFoodBinding
     private lateinit var newArrayReviewFoodList: MutableList<Review>
-    private lateinit var productDetails: ProductDetails
+    private lateinit var productDetails: Product
     private var id by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -164,10 +166,10 @@ class InfoFood_Activity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO) {
             val getReviewAPI =
                 ServiceGenerator.buildService(ProductService::class.java).getProductDetails(id)
-            getReviewAPI?.enqueue(object : Callback<ApiResponse<ProductDetails>> {
+            getReviewAPI?.enqueue(object : Callback<ApiResponse<Product>> {
                 override fun onResponse(
-                    call: Call<ApiResponse<ProductDetails>>,
-                    response: Response<ApiResponse<ProductDetails>>
+                    call: Call<ApiResponse<Product>>,
+                    response: Response<ApiResponse<Product>>
                 ) {
                     val res = response.body()!!
                     if (res.data.isFavorited == true) {
@@ -188,7 +190,7 @@ class InfoFood_Activity : AppCompatActivity() {
                     binding.addFood.visibility = View.VISIBLE
                 }
 
-                override fun onFailure(call: Call<ApiResponse<ProductDetails>>, t: Throwable) {}
+                override fun onFailure(call: Call<ApiResponse<Product>>, t: Throwable) {}
             })
         }
     }

@@ -10,6 +10,7 @@ import com.example.foca_mobile.activity.admin.menu.productdetail.AdminProductDet
 import com.example.foca_mobile.databinding.ListFoodItemBinding
 import com.example.foca_mobile.model.Product
 import com.google.gson.Gson
+import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class MyMenuAdapter(private val productList: MutableList<Product>) :
@@ -30,8 +31,9 @@ class MyMenuAdapter(private val productList: MutableList<Product>) :
             .load(productList[position].image)
             .into(holder.binding.imageFood)
         holder.binding.nameFood.text = productList[position].name
+        val dec = DecimalFormat("#,###")
         holder.binding.price.text =
-            NumberFormat.getCurrencyInstance().format(productList[position].price)
+            dec.format(productList[position].price!!.toInt()).plus("đ")
         holder.binding.iconButton.setBackgroundResource(R.drawable.ic_edit)
         holder.binding.iconButton.scaleX = 0.5f
         holder.binding.iconButton.scaleY = 0.5f

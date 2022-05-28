@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.foca_mobile.activity.admin.order.orderdetail.AdminOrderDetail
 import com.example.foca_mobile.databinding.ListRecentFoodItemBinding
 import com.example.foca_mobile.model.Order
+import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -30,9 +31,8 @@ class ArrivedOrderAdapter(private val orderList: MutableList<Order>) :
             .load(orderList[position].orderDetails?.get(0)?.product?.image)
             .into(holder.binding.imageRecentFood)
         holder.binding.nameRecentFood.text = orderList[position].buyer?.fullName
-
-        val numberCurrency = NumberFormat.getCurrencyInstance()
-        holder.binding.priceRecentFood.text = numberCurrency.format(orderList[position].totalPrice)
+        val dec = DecimalFormat("#,###")
+        holder.binding.priceRecentFood.text = dec.format(orderList[position].totalPrice).plus("đ")
 
         val parsedDate =
             LocalDateTime.parse(orderList[position].createdAt, DateTimeFormatter.ISO_DATE_TIME)

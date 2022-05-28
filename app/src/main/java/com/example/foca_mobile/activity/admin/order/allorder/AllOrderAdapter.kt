@@ -10,6 +10,7 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.activity.admin.order.orderdetail.AdminOrderDetail
 import com.example.foca_mobile.databinding.ListOrderItemBinding
 import com.example.foca_mobile.model.Order
+import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -71,8 +72,8 @@ class AllOrderAdapter(private val listOrder: MutableList<Order>) :
         holder.binding.orderQuantity.text =
             "${item.orderDetails?.size} ${holder.binding.root.context.resources.getString(R.string.item)}"
 
-        val numberCurrency = NumberFormat.getCurrencyInstance()
-        holder.binding.orderTotalPrice.text = numberCurrency.format(item.totalPrice)
+        val dec = DecimalFormat("#,###")
+        holder.binding.orderTotalPrice.text = dec.format(item.totalPrice).plus("đ")
 
         holder.binding.root.setOnClickListener {
             val intent = Intent(holder.itemView.context, AdminOrderDetail::class.java)

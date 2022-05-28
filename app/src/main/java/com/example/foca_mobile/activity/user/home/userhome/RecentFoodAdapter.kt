@@ -29,7 +29,7 @@ class RecentFoodAdapter(private var c: Context, private val arrList: MutableList
         holder.binding.nameRecentFood.text  = arrList[position]?.name
         holder.binding.createAtTxt.text = arrList[position]?.description
         val dec = DecimalFormat("#,###")
-        holder.binding.priceRecentFood.text = dec.format(arrList[position]?.price) + "đ"
+        holder.binding.priceRecentFood.text = dec.format(arrList[position]?.price!!.toInt()) + "đ"
         holder.binding.root.setOnClickListener {
             var intent = Intent(c, InfoFood_Activity::class.java)
             intent.putExtra("id",arrList[position]?.id)

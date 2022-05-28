@@ -22,12 +22,13 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 class AdminProductDetail : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminProductDetailBinding
     private lateinit var product: Product
-    private lateinit var productDetails: ProductDetails
+    private lateinit var productDetails: Product
     private lateinit var reviewArray: MutableList<Review>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,10 +76,10 @@ class AdminProductDetail : AppCompatActivity() {
         val getReviewAPI =
             ServiceGenerator.buildService(ProductService::class.java)
                 .getProductDetails(product.id!!)
-        getReviewAPI?.enqueue(object : Callback<ApiResponse<ProductDetails>> {
+        getReviewAPI?.enqueue(object : Callback<ApiResponse<Product>> {
             override fun onResponse(
-                call: Call<ApiResponse<ProductDetails>>,
-                response: Response<ApiResponse<ProductDetails>>
+                call: Call<ApiResponse<Product>>,
+                response: Response<ApiResponse<Product>>
             ) {
                 if (response.isSuccessful) {
                     val res = response.body()!!
@@ -95,7 +96,7 @@ class AdminProductDetail : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<ProductDetails>>, t: Throwable) {}
+            override fun onFailure(call: Call<ApiResponse<Product>>, t: Throwable) {}
         })
     }
 

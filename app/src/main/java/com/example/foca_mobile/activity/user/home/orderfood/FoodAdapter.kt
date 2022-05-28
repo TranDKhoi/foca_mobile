@@ -30,14 +30,14 @@ class FoodAdapter(private var c: Context, private val arrayList: MutableList<Pro
             .into(holder.binding.imageFood)
         holder.binding.nameFood.text = arrayList[position].name
         val dec = DecimalFormat("#,###")
-        holder.binding.price.text = dec.format(arrayList[position].price) + "đ"
+        holder.binding.price.text = dec.format(arrayList[position].price!!.toInt()).plus("đ")
         holder.binding.iconButton.setBackgroundResource(R.drawable.ic_add)
         holder.binding.numberProduct.text =
             holder.binding.root.resources.getString(R.string.Sold).plus(" ")
                 .plus(arrayList[position].orderCount.toString())
         holder.binding.root.setOnClickListener {
             val intent = Intent(c, InfoFood_Activity::class.java)
-            intent.putExtra("id", arrayList[position]?.id)
+            intent.putExtra("id", arrayList[position].id)
             c.startActivity(intent)
         }
     }

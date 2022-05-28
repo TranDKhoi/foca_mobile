@@ -36,7 +36,7 @@ interface ProductService {
     fun softDeleteProduct(@Path("id") id: String): Call<ApiResponse<String>>?
 
     @GET("/api/products/{id}")
-    fun getProductDetails(@Path("id") id : Int) : Call<ApiResponse<ProductDetails>>?
+    fun getProductDetails(@Path("id") id : Int) : Call<ApiResponse<Product>>?
 
     @GET("/api/products/{id}/reviews")
     fun getAllReview(@Path("id") id : Int) : Call<ApiResponse<MutableList<Review>>>?

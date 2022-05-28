@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ListAdminOrderDetailBinding
 import com.example.foca_mobile.model.OrderDetails
+import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class AdminOrderDetailAdapter(
@@ -33,8 +34,8 @@ class AdminOrderDetailAdapter(
         holder.binding.foodItemName.text = item.product?.name
         holder.binding.foodItemTitle.text = item.product?.description
 
-        val numberCurrency = NumberFormat.getCurrencyInstance()
-        holder.binding.foodItemPrice.text = numberCurrency.format(item.product?.price)
+        val dec = DecimalFormat("#,###")
+        holder.binding.foodItemPrice.text = dec.format(item.product?.price).plus("đ")
         holder.binding.foodItemQuantity.text = holder.binding.root.resources.getString(R.string.Qty).plus(item.quantity)
     }
 

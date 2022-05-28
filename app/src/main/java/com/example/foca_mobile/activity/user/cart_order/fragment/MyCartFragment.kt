@@ -247,7 +247,7 @@ class MyCartFragment : Fragment(){
         fun calculatePrice(listCart: MutableList<Cart>?, context: MyCartFragment){
             var totalPrice = 0
             for(item in listCart!!){
-                totalPrice += item.quantity* item.product!!.price
+                totalPrice += item.quantity * item.product!!.price!!.toInt()
             }
             val dec = DecimalFormat("#,###")
             context.binding.totalPrice.text = dec.format(totalPrice) + "đ"

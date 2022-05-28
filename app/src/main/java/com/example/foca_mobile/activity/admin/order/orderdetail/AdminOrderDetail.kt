@@ -26,6 +26,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class AdminOrderDetail : AppCompatActivity() {
@@ -46,8 +47,9 @@ class AdminOrderDetail : AppCompatActivity() {
         binding.orderDetailBack.setOnClickListener {
             this.finish()
         }
-        binding.subTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
-        binding.priceTotal.text = NumberFormat.getCurrencyInstance().format(order.totalPrice)
+        val dec = DecimalFormat("#,###")
+        binding.subTotal.text = dec.format(order.totalPrice).plus("đ")
+        binding.priceTotal.text = dec.format(order.totalPrice).plus("đ")
         binding.note.text = order.notes ?: "..."
         binding.note.contentDescription = order.notes
 
@@ -69,10 +71,11 @@ class AdminOrderDetail : AppCompatActivity() {
 
         }
         binding.surcharge.addTextChangedListener {
-            if (!it.isNullOrEmpty())
+            if (!it.isNullOrEmpty()) {
+                val dec = DecimalFormat("#,###")
                 binding.priceTotal.text =
-                    NumberFormat.getCurrencyInstance()
-                        .format((order.totalPrice!! + it.toString().toInt()))
+                    dec.format((order.totalPrice!! + it.toString().toInt())).plus("đ")
+            }
         }
 
     }
@@ -156,7 +159,11 @@ class AdminOrderDetail : AppCompatActivity() {
     private fun updateOrderStatus(status: String) {
 
         if (selectedStatus.value == "PENDING" && binding.surcharge.text.isEmpty()) {
-            Toast.makeText(this, resources.getString(R.string.Surchargecannotbeempty), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                resources.getString(R.string.Surchargecannotbeempty),
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
