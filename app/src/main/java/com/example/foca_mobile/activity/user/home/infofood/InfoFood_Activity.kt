@@ -14,7 +14,6 @@ import com.example.foca_mobile.R
 import com.example.foca_mobile.databinding.ActivityUserInfoFoodBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Cart
-import com.example.foca_mobile.model.ProductDetails
 import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.service.CartService
 import com.example.foca_mobile.service.InterestedProductService
@@ -29,7 +28,6 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
 

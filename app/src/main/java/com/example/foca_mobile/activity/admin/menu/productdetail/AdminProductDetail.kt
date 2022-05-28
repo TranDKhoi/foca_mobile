@@ -15,7 +15,6 @@ import com.example.foca_mobile.activity.user.home.infofood.ReviewFoodAdapter
 import com.example.foca_mobile.databinding.ActivityAdminProductDetailBinding
 import com.example.foca_mobile.model.ApiResponse
 import com.example.foca_mobile.model.Product
-import com.example.foca_mobile.model.ProductDetails
 import com.example.foca_mobile.model.Review
 import com.example.foca_mobile.service.ProductService
 import com.example.foca_mobile.service.ServiceGenerator
@@ -23,7 +22,6 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.roundToInt
 
 class AdminProductDetail : AppCompatActivity() {
 
