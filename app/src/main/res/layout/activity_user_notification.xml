@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.user.notifi.UserNotification">
 
     <RelativeLayout
@@ -25,25 +25,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <FrameLayout
                 android:id="@+id/backBtn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:cardElevation="0dp">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/back_button">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_back"
-                        tools:ignore="ContentDescription" />
-                </FrameLayout>
-            </androidx.cardview.widget.CardView>
+                android:background="@drawable/back_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_back"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,7 +71,7 @@
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="300dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
 
 </ScrollView>

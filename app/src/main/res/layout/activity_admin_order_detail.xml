@@ -25,31 +25,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
+            <FrameLayout
                 android:id="@+id/orderDetailBack"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:cardElevation="0dp"
-                app:layout_constraintLeft_toLeftOf="parent"
+                android:background="@drawable/back_button"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/back_button">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_back"
-                        tools:ignore="ContentDescription" />
-                </FrameLayout>
-
-
-            </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_back"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textOrderDetail"

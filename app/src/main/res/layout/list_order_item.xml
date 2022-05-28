@@ -84,7 +84,6 @@
                 android:id="@+id/orderItemPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bentonsans_medium"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/orderItemQuantity" />
@@ -96,7 +95,6 @@
             android:layout_width="110dp"
             android:layout_height="30dp"
             android:background="@drawable/light_green_gradient"
-            android:fontFamily="@font/bentonsans_medium"
             android:padding="0dp"
             android:textAllCaps="false"
             android:textColor="@color/textColorButtonWhite"
@@ -146,7 +144,6 @@
                 android:id="@+id/orderTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bentonsans_medium"
                 android:textColor="#44FF00"
                 android:textSize="19sp" />
 

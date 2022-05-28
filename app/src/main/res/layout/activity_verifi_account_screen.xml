@@ -78,7 +78,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:clickable="true"
-                    android:fontFamily="@font/bentonsans_medium"
                     android:text="@string/Resendcode"
                     android:textColor="#15BE77" />
 

@@ -70,7 +70,6 @@
                         android:id="@+id/ratingFoodName"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/bentonsans_medium"
                         android:textSize="15sp" />
 
                     <com.google.android.material.textview.MaterialTextView

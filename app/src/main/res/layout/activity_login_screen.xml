@@ -97,7 +97,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:clickable="true"
-                    android:fontFamily="@font/bentonsans_medium"
                     android:text="@string/Signupnow"
                     android:textColor="#15BE77" />
 
@@ -111,7 +110,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:fontFamily="@font/bentonsans_medium"
                     android:text="@string/Forgotpassword"
                     android:textColor="#15BE77" />
             </LinearLayout>
