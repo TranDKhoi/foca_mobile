@@ -26,14 +26,20 @@
             android:layout_marginRight="20dp"
             android:orientation="vertical">
 
-            <ImageButton
+            <FrameLayout
                 android:id="@+id/backBtn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/back_button"
-                android:src="@drawable/ic_back"
-                tools:ignore="ContentDescription" />
+                android:background="@drawable/back_button">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_back"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"

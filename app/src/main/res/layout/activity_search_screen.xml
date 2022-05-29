@@ -11,14 +11,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageButton
+        <FrameLayout
             android:id="@+id/buttonBack"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/back_button"
-            android:src="@drawable/ic_back" />
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

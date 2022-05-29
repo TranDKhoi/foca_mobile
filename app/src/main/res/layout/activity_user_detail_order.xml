@@ -40,19 +40,14 @@
         app:layout_constraintGuide_begin="0dp"
         app:layout_constraintGuide_percent="0.8" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/orderDetailBack"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        app:cardElevation="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/orderDetailBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/back_button">
 
             <ImageView
@@ -62,9 +57,6 @@
                 android:src="@drawable/ic_back"
                 tools:ignore="ContentDescription" />
         </FrameLayout>
-
-
-    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textOrderDetail"
@@ -91,19 +83,14 @@
 
     </ImageView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/orderDetailBtnDelete"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:cardElevation="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/orderDetailBtnDelete"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/back_button">
 
             <ImageView
@@ -114,9 +101,6 @@
                 app:tint="#DA6317"
                 tools:ignore="ContentDescription" />
         </FrameLayout>
-
-
-    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_food"

@@ -13,14 +13,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageButton
+        <FrameLayout
             android:id="@+id/buttonBack"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/back_button"
-            android:src="@drawable/ic_back" />
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,7 +101,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="3dp"
                 android:alpha="0.5"
-                android:background="@drawable/custom_spiner_combobox" />
+                android:background="@drawable/custom_spiner_combobox"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <TextView

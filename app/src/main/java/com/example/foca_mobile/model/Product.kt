@@ -1,7 +1,5 @@
 package com.example.foca_mobile.model
 
-import java.io.Serializable
-
 
 data class Product(
     var createdAt: String?,
@@ -18,4 +16,4 @@ data class Product(
     var averageRating: Float? = null,
     var reviewCount: Int? = null,
     var isFavorited: Boolean? = null
-) : Serializable
+)

@@ -45,11 +45,7 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentUserHomeBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        _binding = FragmentUserHomeBinding.inflate(layoutInflater)
         createRecentFoodRecyclerView()
         createFoodRecyclerView()
         getUnseenNotify()
@@ -81,12 +77,6 @@ class UserHomeFragment : Fragment(R.layout.fragment_user_home) {
         }
 
         return binding.root
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun createRecentFoodRecyclerView() {

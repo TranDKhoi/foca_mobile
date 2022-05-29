@@ -9,18 +9,24 @@
     tools:context=".activity.admin.chat.conversation.AdminChatScreen">
 
     <!--BACK BUTTON-->
-    <ImageButton
+    <FrameLayout
         android:id="@+id/imageButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:background="@drawable/back_button"
-        android:onClick="toListMessScreen"
-        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        android:onClick="toListMessScreen">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
 
     <ImageView
         android:layout_width="match_parent"

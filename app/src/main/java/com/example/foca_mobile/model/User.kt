@@ -1,7 +1,5 @@
 package com.example.foca_mobile.model
 
-import java.io.Serializable
-
 
 data class User(
     val username: String,
@@ -15,4 +13,4 @@ data class User(
     val fullName: String? = null,
     val accessToken: String? = null,
     val email: String? = null,
-) : Serializable
+)

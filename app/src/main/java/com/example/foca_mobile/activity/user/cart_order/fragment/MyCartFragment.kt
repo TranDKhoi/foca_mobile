@@ -71,38 +71,37 @@ class MyCartFragment : Fragment(){
             alert.show()
         }
         setItemTouchHelper()
-        createCart()
         getListCart(this.context)
         return binding.root
     }
 
-    private fun createCart() {
-        val jsonObject = JSONObject()
-        jsonObject.put("productId", 1)
-        jsonObject.put("quantity", 1)
-        val jsonObjectString = jsonObject.toString()
-        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-        val createCartCall = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
-        binding.bar.visibility = ProgressBar.VISIBLE
-        createCartCall.enqueue(object: Callback<ApiResponse<Cart>>{
-            override fun onResponse(
-                call: Call<ApiResponse<Cart>>,
-                response: Response<ApiResponse<Cart>>
-            ) {
-                if(response.isSuccessful){
-                Log.d("SUCCESS create cart", "Yolo")
-                    binding.bar.visibility = ProgressBar.GONE
-                }
-                else{
-                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
-                    Log.d("Error From Api", errorRes.message)
-                }
-            }
-            override fun onFailure(call: Call<ApiResponse<Cart>>, t: Throwable) {
-                Log.d("onFailure","Call API failure")
-            }
-        })
-    }
+//    private fun createCart() {
+//        val jsonObject = JSONObject()
+//        jsonObject.put("productId", 1)
+//        jsonObject.put("quantity", 1)
+//        val jsonObjectString = jsonObject.toString()
+//        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+//        val createCartCall = ServiceGenerator.buildService(CartService::class.java).createCart(requestBody)
+//        binding.bar.visibility = ProgressBar.VISIBLE
+//        createCartCall.enqueue(object: Callback<ApiResponse<Cart>>{
+//            override fun onResponse(
+//                call: Call<ApiResponse<Cart>>,
+//                response: Response<ApiResponse<Cart>>
+//            ) {
+//                if(response.isSuccessful){
+//                Log.d("SUCCESS create cart", "Yolo")
+//                    binding.bar.visibility = ProgressBar.GONE
+//                }
+//                else{
+//                    val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!)
+//                    Log.d("Error From Api", errorRes.message)
+//                }
+//            }
+//            override fun onFailure(call: Call<ApiResponse<Cart>>, t: Throwable) {
+//                Log.d("onFailure","Call API failure")
+//            }
+//        })
+//    }
 
     private fun makeOrder() {
         val jsonObject = JSONObject()
