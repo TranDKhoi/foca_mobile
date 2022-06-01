@@ -65,7 +65,7 @@
 ### Backend
 Source code: Nhờ Đạt add nhé
 ### Sơ đồ ERD
-![image](https://user-images.githubusercontent.com/90909489/171360215-6a27cc62-7467-4dfd-9346-f8ba7189ccea.png)
+Đạt thêm nhé
 
 
 ## II. Tổng kết
