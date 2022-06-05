@@ -47,11 +47,6 @@ class AdminOrderDetail : AppCompatActivity() {
         binding.orderDetailBack.setOnClickListener {
             this.finish()
         }
-        val dec = DecimalFormat("#,###")
-        binding.subTotal.text = dec.format(order.totalPrice).plus("đ")
-        binding.priceTotal.text = dec.format(order.totalPrice).plus("đ")
-        binding.note.text = order.notes ?: "..."
-        binding.note.contentDescription = order.notes
 
         //INIT SPINNER
         initSpinner()
@@ -98,6 +93,12 @@ class AdminOrderDetail : AppCompatActivity() {
 
                     binding.orderDetailRCV.adapter =
                         AdminOrderDetailAdapter(orderDetailList)
+
+                    val dec = DecimalFormat("#,###")
+                    binding.subTotal.text = dec.format(order.totalPrice).plus("đ")
+                    binding.priceTotal.text = dec.format(order.totalPrice).plus("đ")
+                    binding.note.text = " ".plus(order.notes)
+                    binding.note.contentDescription = order.notes
                 } else {
                     val errorRes = ErrorUtils.parseHttpError(response.errorBody()!!);
                     Log.d("Error From Api", errorRes.message)
