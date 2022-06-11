@@ -1,19 +1,48 @@
 # Foca-mobile - Ứng dụng đặt đồ ăn từ canteen nhà trường <p id="Top"/>
+
 ## I. Tổng quan ứng dụng
 
 ### Yêu cầu thiết bị
+
 - Android:
   - minSdkVersion: 26.0
   - targetSdkVersion: 32.0
   - Gradle: 7.2
+
 ### Công nghệ và thư viện
-- Còn trống nhờ Đạt add nhé
+
+- Front end:
+  - Ngôn ngữ: Kotlin
+  - Công nghệ
+  - Thư viện
+    - firebase-storage-ktx
+    - retrofit2
+    - socket.io-client
+- Backend:
+  - Ngôn ngữ: Javasript
+  - Công nghệ
+    - Backend Platform: [Node.js](https://nodejs.org/en/)
+    - Framework: Express
+    - Database: Postgresql
+  - Thư viện
+    - sequelize
+    - cors
+    - joi
+    - jsonwebtoken
+    - nodemailer
+    - pg
+    - pg-hstore
+    - socket.io
+
 ### Chức năng ứng dụng
+
 1. Đối tượng sử dụng
+
    - Người bán (chủ quầy)
    - Người mua (sinh viên)
 
 2. Vai trò người bán
+
    1. Trang chủ
       - Cung cấp tổng quan tình trạng đơn hàng mới, các món trong thực đơn
         - <img src="https://user-images.githubusercontent.com/90909489/171345876-9bb9e834-584a-4531-a205-760ae0b6b10a.png" width="337" height="600"/>
@@ -29,6 +58,7 @@
         - <span><img src="https://user-images.githubusercontent.com/90909489/171350629-5c835c17-9807-4797-85d3-05bacfb14e42.png" width="337" height="600"/> <img src="https://user-images.githubusercontent.com/90909489/171350864-8fb399b3-0570-40d3-a8be-9fa29d285dc4.png" width="337" height="600"/> </span>
 
 3. Vai trò người mua
+
    1. Trang chủ
       - Gợi ý các đơn hàng đã mua, các món trong thực đơn
         - <img src="https://user-images.githubusercontent.com/90909489/171352208-026ed8ac-d37b-41d9-86ab-a6d470f348da.png" width="337" height="600"/>
@@ -50,7 +80,7 @@
 4. Một số tính năng khác
    1. Xác thực người dùng
       - Đăng nhập, tạo tài khoản, khôi phục tài khoản
-      > Gồm nhiều bước xác thực
+        > Gồm nhiều bước xác thực
         - <span><img src="https://user-images.githubusercontent.com/90909489/171355277-a2e7c153-f2f9-46ac-9fee-e3e88ff5bc9d.png" width="282" height="500"/> <img src="https://user-images.githubusercontent.com/90909489/171356259-c2111225-99d2-4e95-88e7-430ca74c169f.png" width="282" height="500"/> <img src="https://user-images.githubusercontent.com/90909489/171355788-62f5dd58-5392-492f-b44a-0a3055a52ce3.png" width="282" height="500"/> </span>
    2. Cài đặt hệ thống
       - Song ngữ Anh - Việt
@@ -63,27 +93,33 @@
    4. Và còn nữa...
 
 ### Backend
-Source code: Nhờ Đạt add nhé
-### Sơ đồ ERD
-Đạt thêm nhé
 
+Source code: [Foca-api](https://github.com/ddatdt12/foca-api)
+
+### Sơ đồ ERD
+
+<p align="center">
+  <img src="./assets/ERD_Foca.drawio.png" width="100%" title="hover text">
+</p>
 
 ## II. Tổng kết
 
 ### Tác giả
 
-* [Trần Đình Khôi](https://github.com/TranDKhoi) (Team lead)
+- [Trần Đình Khôi](https://github.com/TranDKhoi) (Team lead)
 
-* [Đỗ Thành Đạt](https://github.com/ddatdt12) (BE)
+- [Đỗ Thành Đạt](https://github.com/ddatdt12) (BE)
 
-* [Lê Hải Phong](https://github.com/HaiPhong146) (FE)
+- [Lê Hải Phong](https://github.com/HaiPhong146) (FE)
 
-* [Kiều Bá Dương](https://github.com/kieubaduong) (FE)
+- [Kiều Bá Dương](https://github.com/kieubaduong) (FE)
 
 ### Giảng viên hướng dẫn
-* Giảng viên: Huỳnh Tuấn Anh
+
+- Giảng viên: Huỳnh Tuấn Anh
 
 ### Lời cảm ơn
+
 Sản phẩm là kết quả sau quá trình cùng nhau thực hiện đồ án của những thành viên trong nhóm. Thông qua quá trình này, các thành viên đã có cho mình những lượng kiến thức và kỹ năng chuyên môn nhất định về quy trình lập trình thực tế, hiểu hơn về lập trình ứng dụng di động và có riêng cho mình những bài học quý giá làm hành trang cho công việc sau này.
 
 Ngoài ra, nhóm cũng muốn gửi lời cảm ơn chân thành và sự tri ân sâu sắc đến giảng viên giảng dạy, thầy **Huỳnh Tuấn Anh** đã cùng đồng hành với nhóm trong suốt quá trình thực hiện đồ án để có được thành quả như hôm nay.
