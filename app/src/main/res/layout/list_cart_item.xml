@@ -15,8 +15,7 @@
         android:layout_height="103dp"
         android:layout_gravity="end"
         android:layout_marginEnd="-60dp"
-        android:backgroundTint="#FEAD1D"
-        >
+        android:backgroundTint="#FEAD1D">
 
         <ImageView
             android:layout_width="24dp"
@@ -69,8 +68,7 @@
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="21dp"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/cartItemName"
@@ -85,6 +83,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:textSize="14sp" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -109,14 +109,14 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/subtractQuantityCard"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
                     android:background="#1653E88B"
                     android:padding="8dp"
-                    app:cardCornerRadius="8dp"
-                    android:id="@+id/subtractQuantityCard">
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="18dp"
@@ -136,15 +136,14 @@
                     android:textSize="16sp" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/addQuantityCard"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
                     android:backgroundTint="@color/textColorButtonGreen"
                     android:padding="8dp"
-                    app:cardCornerRadius="8dp"
-                    android:id="@+id/addQuantityCard"
-                    >
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="18dp"
